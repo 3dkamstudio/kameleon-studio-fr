@@ -4,18 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
+/* ─── Design tokens : Kaméléon Studio ─────────────────────────────────── */
 @layer base {
-  .theme {
-    --font-heading: var(--font-sans);
-    --font-sans: var(--font-sans);
-  }
   :root {
+    /* Brand rainbow palette */
+    --brand-rose: #f43f5e;
+    --brand-orange: #f97316;
+    --brand-yellow: #eab308;
+    --brand-green: #22c55e;
+    --brand-cyan: #06b6d4;
+    --brand-violet: #8b5cf6;
+
+    /* Surface scale */
+    --surface: #0a0a0f;
+    --surface-1: #0f0f17;
+    --surface-2: #16161f;
+    --surface-3: #1e1e2a;
+
+    /* shadcn light defaults (unused — dark class is always applied) */
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -31,64 +37,146 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.985 0 0);
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
   }
+
+  /* ── Dark theme : Kaméléon design system ──────────────────────────── */
   .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    /* Background : #0a0a0f — noir profond avec légère teinte violet */
+    --background: oklch(0.068 0.012 285);
+    --foreground: oklch(0.96 0.005 280);
+
+    /* Cards / surfaces */
+    --card: oklch(0.095 0.012 285);
+    --card-foreground: oklch(0.96 0.005 280);
+    --popover: oklch(0.095 0.012 285);
+    --popover-foreground: oklch(0.96 0.005 280);
+
+    /* Primary : blanc pour les CTA principaux */
+    --primary: oklch(0.96 0.005 280);
+    --primary-foreground: oklch(0.068 0.012 285);
+
+    /* Secondary / Muted : surface-2 */
+    --secondary: oklch(0.13 0.012 285);
+    --secondary-foreground: oklch(0.96 0.005 280);
+    --muted: oklch(0.13 0.012 285);
+    --muted-foreground: oklch(0.58 0.008 275);
+
+    /* Accent : surface-2 avec teinte violet subtile */
+    --accent: oklch(0.16 0.015 285);
+    --accent-foreground: oklch(0.96 0.005 280);
+
+    /* Destructive */
+    --destructive: oklch(0.65 0.22 25);
+    --destructive-foreground: oklch(0.96 0.005 280);
+
+    /* Borders & inputs : blanc très transparent */
+    --border: oklch(1 0 0 / 7%);
+    --input: oklch(1 0 0 / 10%);
+
+    /* Ring : violet brand */
+    --ring: oklch(0.62 0.22 297);
+
+    --radius: 0.625rem;
   }
+
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
   }
-  body {
-    @apply bg-background text-foreground;
+
+  *:focus-visible {
+    outline: 2px solid color-mix(in oklch, var(--ring), transparent 50%);
+    outline-offset: 2px;
   }
+
   html {
-    @apply font-sans;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+/* ─── Utility classes Kaméléon ─────────────────────────────────────────── */
+@layer utilities {
+  /* Texte dégradé arc-en-ciel */
+  .text-rainbow {
+    background: linear-gradient(
+      135deg,
+      #f43f5e,
+      #f97316,
+      #eab308,
+      #22c55e,
+      #06b6d4,
+      #8b5cf6
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Dégradé arc-en-ciel animé (background-size: 300%) */
+  .text-rainbow-animated {
+    background: linear-gradient(
+      135deg,
+      #f43f5e,
+      #f97316,
+      #eab308,
+      #22c55e,
+      #06b6d4,
+      #8b5cf6,
+      #f43f5e
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  /* Bordure dégradé */
+  .border-gradient {
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      #f43f5e,
+      #f97316,
+      #eab308,
+      #22c55e,
+      #06b6d4,
+      #8b5cf6
+    );
+    z-index: -1;
+  }
+
+  /* Halo / glow générique */
+  .glow-violet {
+    box-shadow: 0 0 60px rgba(139, 92, 246, 0.25);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 60px rgba(6, 182, 212, 0.25);
+  }
+  .glow-rose {
+    box-shadow: 0 0 60px rgba(244, 63, 94, 0.25);
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 }
