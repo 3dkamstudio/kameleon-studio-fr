@@ -54,3 +54,6 @@ next-env.d.ts
 
 # claude
 .claude/
+
+# Design references (assets binaires, non versionnés)
+/design-references/
