@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const LINKS = [
   { label: "Services",     href: "#services" },
@@ -65,15 +66,18 @@ export default function Navbar() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4">
 
           {/* ── Logo ───────────────────────────────────────────────────── */}
-          <a href="#" className="group flex items-center gap-2.5">
+          <a href="#" className="group flex items-center gap-2">
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-xl font-display text-sm font-black text-white transition-transform duration-200 group-hover:scale-105"
-              style={{
-                background: "linear-gradient(135deg, #d946ef, #8b5cf6)",
-                boxShadow: "0 0 20px rgba(217,70,239,0.45)",
-              }}
+              className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-200 group-hover:scale-105"
+              style={{ boxShadow: "0 0 18px rgba(217,70,239,0.35)" }}
             >
-              KS
+              <Image
+                src="/ks-logo.png"
+                alt="Kaméléon Studio"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
             <span className="hidden font-display text-[0.95rem] font-black tracking-tight text-white sm:block">
               Kaméléon{" "}

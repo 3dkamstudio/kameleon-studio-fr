@@ -486,8 +486,8 @@
 }
 /* scan — pulsation douce de la ligne arc-en-ciel */
 @keyframes div-scan-pulse {
-  0%, 100% { opacity: 0.50; }
-  50%       { opacity: 1.00; }
+  0%, 100% { opacity: 0.22; }
+  50%       { opacity: 0.45; }
 }
 
 /* wave — le rect de dégradé défile d'une longueur de viewBox */
@@ -508,8 +508,8 @@
 
 /* chevron — pulsation néon sur le trait et l'apex */
 @keyframes div-chevron-pulse {
-  0%, 100% { opacity: 0.65; }
-  50%       { opacity: 1.00; }
+  0%, 100% { opacity: 0.28; }
+  50%       { opacity: 0.55; }
 }
 .div-chevron-line {
   animation: div-chevron-pulse 3s ease-in-out infinite;
