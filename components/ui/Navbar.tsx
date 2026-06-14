@@ -64,31 +64,6 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4">
 
-          {/* ── Logo ───────────────────────────────────────────────────── */}
-          <a href="#" className="group flex items-center gap-2.5">
-            {/* Emblème KS */}
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-xl font-display text-sm font-black text-white transition-transform duration-200 group-hover:scale-105"
-              style={{
-                background: "linear-gradient(135deg, #d946ef, #8b5cf6)",
-                boxShadow: "0 0 20px rgba(217,70,239,0.45)",
-              }}
-            >
-              KS
-            </div>
-            {/* Texte */}
-            <span className="hidden font-display text-[0.95rem] font-black tracking-tight text-white sm:block">
-              Kaméléon{" "}
-              <span style={{
-                background: "linear-gradient(90deg, #d946ef, #8b5cf6, #06b6d4)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}>
-                Studio
-              </span>
-            </span>
-          </a>
-
           {/* ── Liens desktop ──────────────────────────────────────────── */}
           <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
             {LINKS.map(({ label, href }) => {
