@@ -44,7 +44,8 @@ const stagger: Variants = {
 // ── Data ──────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Services",     href: "#services"     },
-  { label: "Tarifs",       href: "#tarifs"       },
+  { label: "Tarifs",       href: "#tarifs-video" },
+  { label: "Maintenance",  href: "#maintenance"  },
   { label: "Réalisations", href: "#showreel"     },
   { label: "Contact",      href: "#contact"      },
 ];
@@ -111,8 +112,8 @@ export default function Footer() {
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl"
                 style={{ boxShadow: "0 0 20px rgba(217,70,239,0.3)" }}>
                 <Image
-                  src="/kame.png"
-                  alt="Kame mascotte Kaméléon Studio"
+                  src="/ks-logo.png"
+                  alt="Logo Kaméléon Studio"
                   fill
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />

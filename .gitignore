@@ -57,3 +57,4 @@ next-env.d.ts
 
 # Design references (assets binaires, non versionnés)
 /design-references/
+dev-server.log
