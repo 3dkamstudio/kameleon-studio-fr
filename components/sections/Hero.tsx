@@ -1,153 +1,223 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import { ArrowRight, Play } from "lucide-react";
+import { useRef, useEffect } from "react";
+import Image from "next/image";
+import Sparkles from "@/components/ui/Sparkles";
+import Kame from "@/components/ui/Kame";
 
-// ── Service tags ──────────────────────────────────────────────────────────────
-const SERVICES = [
-  "Avatars & animation 3D",
-  "Voix-off & motion design",
-  "Storytelling sur mesure",
-  "Vidéos pédagogiques & commerciales",
-  "Livraison multi-formats",
+const STATS = [
+  { value: "7j",   label: "Délai de livraison",      sub: "maximum",               color: "#06b6d4" },
+  { value: "7+",   label: "Types de contenus",        sub: "au catalogue",          color: "#8b5cf6" },
+  { value: "100%", label: "Sur mesure",               sub: "du script au rendu",    color: "#d946ef" },
+  { value: "0",    label: "Compétence technique",     sub: "requise de votre côté", color: "#22c55e" },
 ] as const;
 
-// ── Animation variants ────────────────────────────────────────────────────────
-// Type 1 — Apparition : fade + translateY staggeré
-const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.13, delayChildren: 0.05 },
-  },
+const container: Variants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.11, delayChildren: 0.05 } },
+};
+const fadeUp: Variants = {
+  hidden:  { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.21, 0.47, 0.32, 0.98] } },
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] as const },
-  },
-};
-
-// ── Component ─────────────────────────────────────────────────────────────────
 export default function Hero() {
+  const sectionRef      = useRef<HTMLElement>(null);
+  const prefersReduced  = useReducedMotion();
+
+  // ── Valeurs brutes → springs amorties ──────────────────────────────────────
+  const rawX   = useMotionValue(0);
+  const rawY   = useMotionValue(0);
+  const springX = useSpring(rawX, { stiffness: 80, damping: 20 });
+  const springY = useSpring(rawY, { stiffness: 80, damping: 20 });
+
+  useEffect(() => {
+    // Désactivé si reduced-motion ou device tactile (hover: none)
+    if (prefersReduced || window.matchMedia("(hover: none)").matches) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let lastCall = 0;
+
+    function onMouseMove(e: MouseEvent) {
+      const now = Date.now();
+      if (now - lastCall < 16) return; // throttle 60 fps
+      lastCall = now;
+
+      const rect = section!.getBoundingClientRect();
+      // Position normalisée [-1, 1] par rapport au centre de la section
+      const nx = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
+      const ny = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
+
+      rawX.set(nx * 20);  // ±20 px
+      rawY.set(ny * 15);  // ±15 px
+    }
+
+    function onMouseLeave() {
+      rawX.set(0);
+      rawY.set(0);
+    }
+
+    section.addEventListener("mousemove",  onMouseMove,  { passive: true });
+    section.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      section.removeEventListener("mousemove",  onMouseMove);
+      section.removeEventListener("mouseleave", onMouseLeave);
+    };
+  }, [prefersReduced, rawX, rawY]);
+
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-surface px-6 pb-20 pt-28">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden"
+    >
 
-      {/* ── Arrière-plan décoratif ──────────────────────────────────────────── */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        {/* Orbes de lumière colorées */}
-        <div className="absolute -left-48 -top-24 h-[700px] w-[700px] rounded-full bg-brand-rose/[0.07] blur-[160px] animate-glow-pulse" />
-        <div className="absolute -bottom-24 -right-48 h-[750px] w-[750px] rounded-full bg-brand-violet/[0.09] blur-[160px] animate-glow-pulse [animation-delay:1.8s]" />
-        <div className="absolute left-1/2 top-2/5 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-cyan/[0.05] blur-[130px] animate-glow-pulse [animation-delay:3.6s]" />
-
-        {/* Grille subtile */}
-        <div
-          className="absolute inset-0 opacity-[0.022]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgb(255 255 255) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
+      {/* ══════════════════════════════════════════════════════════════════
+          IMAGE PLEIN-CADRE — DA Kaméléon Studio
+      ══════════════════════════════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/banner-wide.png"
+          alt="Kaméléon Studio — Studio de production créative par IA"
+          fill
+          priority
+          quality={90}
+          className="object-cover"
+          style={{ objectPosition: "62% center" }}
         />
-
-        {/* Vignette radiale — fond se fond vers les bords */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_85%_85%_at_50%_45%,transparent_25%,#0a0a0f_100%)]" />
       </div>
 
-      {/* ── Contenu principal ──────────────────────────────────────────────── */}
+      {/* ── Calques d'overlay pour lisibilité et immersion ───────────── */}
+      <div className="absolute inset-0 z-[1]"
+        style={{ background: "rgba(5, 5, 18, 0.28)" }} />
+
+      <div className="absolute inset-y-0 left-0 z-[2] w-full lg:w-[65%]"
+        style={{
+          background: "linear-gradient(to right, rgba(5,5,18,0.94) 0%, rgba(5,5,18,0.82) 22%, rgba(5,5,18,0.55) 48%, rgba(5,5,18,0.18) 72%, transparent 100%)",
+        }} />
+
+      <div className="absolute inset-x-0 top-0 z-[2] h-44"
+        style={{ background: "linear-gradient(to bottom, rgba(5,5,18,0.75) 0%, rgba(5,5,18,0.25) 60%, transparent 100%)" }} />
+
+      <div className="absolute inset-x-0 bottom-0 z-[2] h-56"
+        style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.75) 50%, transparent 100%)" }} />
+
+      <div className="pointer-events-none absolute -left-24 top-20 z-[2] h-[400px] w-[400px] rounded-full blur-[80px]"
+        style={{ background: "rgba(217,70,239,0.12)" }} />
+
+      <div className="pointer-events-none absolute right-0 top-0 z-[2] h-[320px] w-[320px] rounded-full blur-[70px]"
+        style={{ background: "rgba(6,182,212,0.08)" }} />
+
+      <Sparkles className="z-[3]" />
+
+      {/* ══════════════════════════════════════════════════════════════════
+          KAME — guide mascotte avec parallax souris (desktop uniquement)
+      ══════════════════════════════════════════════════════════════════ */}
       <motion.div
-        className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center"
-        variants={container}
-        initial="hidden"
-        animate="visible"
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-12 right-[5%] z-[8] hidden lg:block xl:right-[8%]"
+        style={{ x: springX, y: springY }}
       >
-        {/* Eyebrow */}
-        <motion.div variants={fadeUp}>
-          <span className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.05] px-4 py-1.5 text-sm font-medium text-white/60 backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5 text-brand-violet" />
-            Studio de production vidéo IA
-          </span>
-        </motion.div>
-
-        {/* H1 */}
-        <motion.h1
-          className="mb-6 font-display text-[2.6rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]"
-          variants={fadeUp}
-        >
-          Des vidéos premium,{" "}
-          <span className="text-rainbow">créées par l&apos;IA</span>,
-          <br className="hidden sm:block" />
-          pensées pour votre marque
-        </motion.h1>
-
-        {/* Sous-titre — affiné depuis la présentation complète */}
-        <motion.p
-          className="mb-10 max-w-2xl text-base leading-relaxed text-white/45 sm:text-[1.1rem]"
-          variants={fadeUp}
-        >
-          Vidéos pédagogiques, commerciales, animées et institutionnelles
-          &mdash; du script à la livraison,{" "}
-          <span className="font-medium text-white/75">
-            en jours, pas en semaines
-          </span>
-          .
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          className="mb-12 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
-          variants={fadeUp}
-        >
-          {/* Type 2 — Hover : scale sur les CTA */}
-          <motion.a
-            href="#contact"
-            className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-sm font-semibold text-[#0a0a0f] shadow-lg transition-shadow duration-300 hover:shadow-[0_0_48px_rgba(139,92,246,0.35)] sm:w-auto"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            Demander un devis
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-          </motion.a>
-
-          <motion.a
-            href="#realisations"
-            className="group inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/[0.14] bg-white/[0.05] px-8 py-4 text-sm font-semibold text-white/80 backdrop-blur-sm transition-colors duration-200 hover:border-white/[0.28] hover:bg-white/[0.1] hover:text-white sm:w-auto"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <Play className="h-4 w-4 fill-white/80 transition-colors group-hover:fill-white" />
-            Voir nos réalisations
-          </motion.a>
-        </motion.div>
-
-        {/* Tags de services — extraits de la présentation complète */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-2"
-          variants={fadeUp}
-        >
-          {SERVICES.map((service) => (
-            <span
-              key={service}
-              className="rounded-full border border-white/[0.07] bg-white/[0.03] px-3.5 py-1 text-xs text-white/35"
-            >
-              {service}
-            </span>
-          ))}
-        </motion.div>
+        <Kame context="hero" size={240} priority />
       </motion.div>
 
-      {/* Placeholder mascotte Kame — sera remplacé par l'image fournie */}
-      {/* <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden xl:block">
-        <Image src="/kame.png" alt="Kame, mascotte Kaméléon Studio" width={320} height={400} priority />
-      </div> */}
+      {/* ══════════════════════════════════════════════════════════════════
+          CONTENU HÉRO
+      ══════════════════════════════════════════════════════════════════ */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-32 sm:py-40">
+        <motion.div
+          className="flex w-full max-w-2xl flex-col items-start"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Badge */}
+          <motion.div variants={fadeUp}>
+            <span className="badge-pill badge-cyan mb-8">
+              ★ Studio créatif propulsé par l&apos;IA
+            </span>
+          </motion.div>
 
-      {/* Fondu bas vers la section suivante */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface to-transparent"
-      />
+          {/* H1 */}
+          <motion.h1 className="mb-6 tracking-tight" variants={fadeUp}>
+            <span className="block font-display font-black leading-[1.04] text-white"
+              style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.8rem)" }}>
+              On s&apos;adapte à vous.
+            </span>
+            <span className="block font-display font-black leading-[1.04] text-gradient-warm"
+              style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.8rem)" }}>
+              On crée ce que vous imaginez.
+            </span>
+          </motion.h1>
+
+          {/* Sous-titre */}
+          <motion.p
+            className="mb-10 max-w-lg text-base leading-relaxed text-white/60 sm:text-[1.08rem]"
+            variants={fadeUp}
+          >
+            Vidéo, BD, site web — quel que soit votre style, votre marque ou votre projet,{" "}
+            <span className="font-semibold text-white/88">
+              on le réalise de A à Z, en quelques jours.
+            </span>
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="mb-14 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
+            variants={fadeUp}
+          >
+            <motion.a
+              href="#contact"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl px-8 py-4 text-sm font-bold text-white"
+              style={{
+                background: "linear-gradient(135deg, #8b5cf6, #d946ef)",
+                boxShadow: "0 4px 28px rgba(139,92,246,0.50)",
+              }}
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 48px rgba(139,92,246,0.70)" }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Demander un devis
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </motion.a>
+
+            <motion.a
+              href="#showreel"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.22] bg-white/[0.07] px-8 py-4 text-sm font-semibold text-white/85 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/[0.13] hover:text-white"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Play className="h-4 w-4 fill-white/65 group-hover:fill-white" />
+              Voir nos réalisations
+            </motion.a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            className="flex w-full flex-wrap items-start gap-x-8 gap-y-5 border-t border-white/[0.10] pt-10"
+            variants={fadeUp}
+          >
+            {STATS.map(({ value, label, sub, color }) => (
+              <div key={label} className="flex flex-col items-start">
+                <span
+                  className="block font-display text-3xl font-black leading-none sm:text-[2.2rem]"
+                  style={{ color }}
+                >
+                  {value}
+                </span>
+                <span className="mt-1.5 block text-[0.68rem] font-bold uppercase tracking-widest text-white/55">
+                  {label}
+                </span>
+                <span className="block text-[0.62rem] text-white/30">{sub}</span>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }
