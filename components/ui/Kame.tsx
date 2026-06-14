@@ -6,114 +6,134 @@ import type { Transition, TargetAndTransition } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
-export type KameContext = "hero" | "point" | "thumbsup" | "default";
+export type KameContext = "hero" | "point" | "thumbsup" | "celebrate" | "default";
 
 interface KameProps {
-  /** Pose simulée par CSS/Framer Motion selon le contexte de la section */
+  src?: string;
   context?: KameContext;
-  /** Classes Tailwind pour le positionnement externe */
   className?: string;
-  /** Taille en pixels (largeur — hauteur auto) */
   size?: number;
-  /** Charger en priorité (sections above the fold) */
   priority?: boolean;
+  speech?: string;
+  flip?: boolean;
+  isStatic?: boolean;
 }
 
-// ── Animation configs ─────────────────────────────────────────────────────────
+type EntryConfig = { initial: TargetAndTransition; animate: TargetAndTransition; transition: Transition };
+type IdleConfig  = { animate: TargetAndTransition; transition: Transition };
 
-type EntryConfig = {
-  initial: TargetAndTransition;
-  animate: TargetAndTransition;
-  transition: Transition;
-};
-
-type IdleConfig = {
-  animate: TargetAndTransition;
-  transition: Transition;
-};
-
-// Type 1 — Apparition : animation d'entrée selon le contexte
+// ── Entrée ────────────────────────────────────────────────────────────────────
+// Toutes les animations d'entrée se terminent avec rotate: 0 (droit)
 const entryConfig: Record<KameContext, EntryConfig> = {
   hero: {
-    initial: { opacity: 0, y: 36, scale: 0.92 },
-    animate: { opacity: 1, y: 0, scale: 1 },
-    transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] },
+    initial:    { opacity: 0, y: 48, scale: 0.88 },
+    animate:    { opacity: 1, y: 0,  scale: 1 },
+    transition: { duration: 0.9, ease: [0.21, 0.47, 0.32, 0.98] },
   },
   point: {
-    initial: { opacity: 0, x: 40, rotate: 0 },
-    animate: { opacity: 1, x: 0, rotate: 12 },
-    transition: { duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] },
+    initial:    { opacity: 0, x: -40 },
+    animate:    { opacity: 1, x: 0 },
+    transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] },
   },
   thumbsup: {
-    initial: { opacity: 0, scale: 0.7, y: 20 },
-    animate: { opacity: 1, scale: 1, y: 0 },
-    transition: { type: "spring", stiffness: 300, damping: 14, delay: 0.1 },
+    initial:    { opacity: 0, scale: 0.65, y: 24 },
+    animate:    { opacity: 1, scale: 1,    y: 0 },
+    transition: { type: "spring", stiffness: 320, damping: 14, delay: 0.1 },
+  },
+  celebrate: {
+    initial:    { opacity: 0, scale: 0.7 },
+    animate:    { opacity: 1, scale: 1 },
+    transition: { type: "spring", stiffness: 400, damping: 12 },
   },
   default: {
-    initial: { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
+    initial:    { opacity: 0, y: 24 },
+    animate:    { opacity: 1, y: 0 },
     transition: { duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] },
   },
 };
 
-// Type 3 — Transition : animation idle continue (flottement, oscillation, pulse)
+// ── Idle — aucune rotation pour garder Kame droit ─────────────────────────────
 const idleConfig: Record<KameContext, IdleConfig> = {
-  // Flottement doux + légère bascule gauche/droite
   hero: {
-    animate: { y: [0, -14, 0], rotate: [-2, 2, -2] },
+    animate:    { y: [0, -18, 0] },
     transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
   },
-  // Oscillation vers le haut/bas + légère rotation pour "regarder" vers un élément
   point: {
-    animate: { y: [0, -7, 0], rotate: [12, 15, 12] },
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+    animate:    { y: [0, -10, 0] },
+    transition: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
   },
-  // Pulse scale + légère lévitation — célébration
   thumbsup: {
-    animate: { scale: [1, 1.06, 1], y: [0, -9, 0] },
-    transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" },
+    animate:    { scale: [1, 1.07, 1], y: [0, -10, 0] },
+    transition: { duration: 2.2, repeat: Infinity, ease: "easeInOut" },
   },
-  // Flottement neutre
+  celebrate: {
+    animate:    { y: [0, -20, 0], scale: [1, 1.06, 1] },
+    transition: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+  },
   default: {
-    animate: { y: [0, -10, 0] },
-    transition: { duration: 3.8, repeat: Infinity, ease: "easeInOut" },
+    animate:    { y: [0, -12, 0] },
+    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
   },
 };
 
-// Drop-shadow coloré selon le contexte — renforce l'ambiance lumière de studio
+// ── Glow ──────────────────────────────────────────────────────────────────────
 const glowStyle: Record<KameContext, string> = {
-  hero:      "drop-shadow(0 24px 48px rgba(139, 92, 246, 0.45)) drop-shadow(0 8px 16px rgba(6, 182, 212, 0.3))",
-  point:     "drop-shadow(0 20px 40px rgba(217, 70, 239, 0.4)) drop-shadow(0 6px 12px rgba(244, 63, 94, 0.25))",
-  thumbsup:  "drop-shadow(0 20px 40px rgba(34, 197, 94, 0.35)) drop-shadow(0 6px 12px rgba(6, 182, 212, 0.3))",
-  default:   "drop-shadow(0 16px 32px rgba(139, 92, 246, 0.3))",
+  hero:      "drop-shadow(0 28px 56px rgba(139,92,246,0.5))  drop-shadow(0 8px 18px rgba(6,182,212,0.35))",
+  point:     "drop-shadow(0 24px 48px rgba(217,70,239,0.45)) drop-shadow(0 6px 14px rgba(244,63,94,0.3))",
+  thumbsup:  "drop-shadow(0 24px 48px rgba(34,197,94,0.40))  drop-shadow(0 6px 14px rgba(6,182,212,0.35))",
+  celebrate: "drop-shadow(0 24px 56px rgba(234,179,8,0.45))  drop-shadow(0 8px 18px rgba(249,115,22,0.4))",
+  default:   "drop-shadow(0 20px 40px rgba(139,92,246,0.35))",
 };
 
 // ── Composant ─────────────────────────────────────────────────────────────────
 export default function Kame({
+  src,
   context = "default",
   className,
   size = 200,
   priority = false,
+  speech,
+  flip = false,
+  isStatic = false,
 }: KameProps) {
   const prefersReduced = useReducedMotion();
   const entry = entryConfig[context];
-  const idle = idleConfig[context];
+  const idle  = idleConfig[context];
+
+  const skipIdle = isStatic || prefersReduced;
 
   return (
-    // Conteneur de positionnement + entrée
     <motion.div
-      className={cn("pointer-events-none select-none", className)}
+      className={cn("pointer-events-none select-none relative", className)}
+      style={{ width: size }}
       initial={entry.initial}
       animate={entry.animate}
       transition={entry.transition}
     >
-      {/* Animation idle continue (désactivée si prefers-reduced-motion) */}
+      {/* Speech bubble optionnelle */}
+      {speech && (
+        <motion.div
+          className="absolute -top-14 left-1/2 z-20"
+          style={{ transform: "translateX(-50%)" }}
+          initial={{ opacity: 0, scale: 0.7, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.4, type: "spring" }}
+        >
+          <div className="relative rounded-2xl border border-white/15 bg-surface-2/90 px-4 py-2 text-xs font-semibold text-white/80 backdrop-blur-md whitespace-nowrap shadow-xl">
+            {speech}
+            <div className="absolute -bottom-2 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r border-white/15 bg-surface-2/90" />
+          </div>
+        </motion.div>
+      )}
+
+      {/* Animation idle — désactivée si isStatic ou prefers-reduced-motion */}
       <motion.div
-        animate={prefersReduced ? {} : idle.animate}
-        transition={prefersReduced ? {} : idle.transition}
+        animate={skipIdle ? {} : idle.animate}
+        transition={skipIdle ? {} : idle.transition}
+        style={{ transform: flip ? "scaleX(-1)" : undefined }}
       >
         <Image
-          src="/kame.png"
+          src={src ?? "/kame.png"}
           alt="Kame, mascotte Kaméléon Studio"
           width={size}
           height={size}

@@ -7,6 +7,13 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
+import KameSpeech from "@/components/ui/KameSpeech";
+
+const HERO_SPEECH = [
+  "Studio créatif, c'est nous — de la vidéo aux BD, on donne vie à vos idées !",
+  "En quelques jours, votre contenu est prêt. Clic sur Devis pour qu'on démarre !",
+  "Chaque projet est unique. Décrivez-moi le vôtre !",
+];
 
 const STATS = [
   { value: "7j",   label: "Délai de livraison",      sub: "maximum",               color: "#06b6d4" },
@@ -117,11 +124,12 @@ export default function Hero() {
           KAME — guide mascotte avec parallax souris (desktop uniquement)
       ══════════════════════════════════════════════════════════════════ */}
       <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[4%] z-20"
+        className="absolute right-[4%] z-20"
         style={{ x: springX, y: springY, top: "calc(50% - 130px)" }}
       >
-        <Kame context="hero" size={240} priority />
+        <KameSpeech variants={HERO_SPEECH}>
+          <Kame context="hero" size={240} priority />
+        </KameSpeech>
       </motion.div>
 
       {/* ══════════════════════════════════════════════════════════════════

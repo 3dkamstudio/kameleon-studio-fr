@@ -7,6 +7,14 @@ import {
   GraduationCap, ExternalLink,
 } from "lucide-react";
 import Sparkles from "@/components/ui/Sparkles";
+import Kame from "@/components/ui/Kame";
+import KameSpeech from "@/components/ui/KameSpeech";
+
+const SHOWREEL_SPEECH = [
+  "Voilà ce qu'on est capables de faire — rien que pour vous !",
+  "Chaque vidéo ici a été créée pour un vrai client. La prochaine, c'est la vôtre 🎬",
+  "Cliquez sur un projet pour voir les détails !",
+];
 
 // ── Catalogue ──────────────────────────────────────────────────────────────────
 type CatKey = "all" | "animation" | "biblique" | "recette" | "podcast" | "pedagogique";
@@ -469,6 +477,13 @@ export default function Showreel() {
             Voir toute la chaîne YouTube
           </a>
         </motion.div>
+      </div>
+
+      {/* ── Kame guide ─────────────────────────────────────────────────────── */}
+      <div className="pointer-events-none absolute bottom-10 right-8 z-20 hidden lg:flex">
+        <KameSpeech variants={SHOWREEL_SPEECH}>
+          <Kame context="default" src="/kame-cameraman.png" size={155} />
+        </KameSpeech>
       </div>
 
       {/* Fondu bas */}

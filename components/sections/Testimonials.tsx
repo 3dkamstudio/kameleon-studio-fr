@@ -4,8 +4,15 @@ import { motion, useInView, useMotionValue, useSpring, animate } from "framer-mo
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Kame from "@/components/ui/Kame";
+import KameSpeech from "@/components/ui/KameSpeech";
 import Sparkles from "@/components/ui/Sparkles";
 import { ExternalLink } from "lucide-react";
+
+const TESTIMONIALS_SPEECH = [
+  "Plus de 20 clients satisfaits — et ça continue ! 🎉",
+  "Nos clients reviennent — preuve que la qualité est au rendez-vous !",
+  "Rejoignez nos partenaires et donnez vie à votre projet !",
+];
 
 // ── Clients réels ─────────────────────────────────────────────────────────────
 const CLIENTS = [
@@ -212,11 +219,13 @@ export default function Testimonials() {
             viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.25 }}
           >
-            <Kame
-              context="thumbsup"
-              size={180}
-              speech="Des projets qui claquent, livrés dans les temps !"
-            />
+            <KameSpeech variants={TESTIMONIALS_SPEECH}>
+              <Kame
+                context="celebrate"
+                src="/kame-celebrate.png"
+                size={180}
+              />
+            </KameSpeech>
 
             {/* CTA Google */}
             <motion.a
