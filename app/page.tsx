@@ -16,7 +16,7 @@ import SectionDivider from "@/components/ui/SectionDivider";
 
 export default function Home() {
   return (
-    <main className="relative overflow-x-hidden" style={{ background: "#0a0a0f" }}>
+    <main className="relative overflow-x-hidden">
       <CelestialBackground />
 
       <div className="relative z-[1]">

@@ -170,7 +170,7 @@ export default function ConstellationCanvas() {
       ref={ref}
       aria-hidden="true"
       className="pointer-events-none fixed inset-0"
-      style={{ zIndex: -1 }}
+      style={{ zIndex: 0 }}
     />
   );
 }
