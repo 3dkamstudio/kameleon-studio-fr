@@ -20,24 +20,28 @@ export default function KameSpeech({
   delay = 700,
   className,
 }: KameSpeechProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(wrapperRef, { once: false, margin: "-5% 0px -5% 0px" });
+  const wrapperRef  = useRef<HTMLDivElement>(null);
+  const inView      = useInView(wrapperRef, { once: false, margin: "-5% 0px -5% 0px" });
 
   const [visible,   setVisible]   = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [idx,       setIdx]       = useState(0);
 
-  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const showTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cycleRef  = useRef<ReturnType<typeof setInterval>  | null>(null);
+  const showRef   = useRef<ReturnType<typeof setTimeout>   | null>(null);
+  const lenRef    = useRef(variants.length);
+  lenRef.current  = variants.length;
 
   function clearAll() {
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-    if (showTimer.current) clearTimeout(showTimer.current);
+    if (cycleRef.current) clearInterval(cycleRef.current);
+    if (showRef.current)  clearTimeout(showRef.current);
   }
 
-  function startHide() {
-    clearAll();
-    hideTimer.current = setTimeout(() => setVisible(false), 4000);
+  function startCycle() {
+    if (cycleRef.current) clearInterval(cycleRef.current);
+    cycleRef.current = setInterval(() => {
+      setIdx(i => (i + 1) % lenRef.current);
+    }, 10_000);
   }
 
   useEffect(() => {
@@ -48,21 +52,19 @@ export default function KameSpeech({
       return;
     }
     if (dismissed) return;
-    clearAll();
-    showTimer.current = setTimeout(() => {
+
+    showRef.current = setTimeout(() => {
       setVisible(true);
-      startHide();
+      startCycle();
     }, delay);
+
     return clearAll;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, dismissed]);
 
   function cycleBubble() {
-    clearAll();
-    setIdx(i => (i + 1) % variants.length);
-    setVisible(true);
-    setDismissed(false);
-    startHide();
+    setIdx(i => (i + 1) % lenRef.current);
+    startCycle(); // reset le timer de 10s
   }
 
   function closeBubble(e: React.MouseEvent) {
@@ -82,37 +84,22 @@ export default function KameSpeech({
   const tailStyle: React.CSSProperties =
     position === "above"
       ? {
-          position: "absolute",
-          bottom: -7,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 0,
-          height: 0,
-          borderLeft: "6px solid transparent",
-          borderRight: "6px solid transparent",
+          position: "absolute", bottom: -7, left: "50%",
+          transform: "translateX(-50%)", width: 0, height: 0,
+          borderLeft: "6px solid transparent", borderRight: "6px solid transparent",
           borderTop: "8px solid rgba(6,6,18,0.94)",
         }
       : position === "left"
       ? {
-          position: "absolute",
-          right: -7,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: 0,
-          height: 0,
-          borderTop: "6px solid transparent",
-          borderBottom: "6px solid transparent",
+          position: "absolute", right: -7, top: "50%",
+          transform: "translateY(-50%)", width: 0, height: 0,
+          borderTop: "6px solid transparent", borderBottom: "6px solid transparent",
           borderLeft: "8px solid rgba(6,6,18,0.94)",
         }
       : {
-          position: "absolute",
-          left: -7,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: 0,
-          height: 0,
-          borderTop: "6px solid transparent",
-          borderBottom: "6px solid transparent",
+          position: "absolute", left: -7, top: "50%",
+          transform: "translateY(-50%)", width: 0, height: 0,
+          borderTop: "6px solid transparent", borderBottom: "6px solid transparent",
           borderRight: "8px solid rgba(6,6,18,0.94)",
         };
 
@@ -131,26 +118,20 @@ export default function KameSpeech({
               "absolute z-30 w-max max-w-[210px] cursor-pointer pointer-events-auto",
               bubblePlacement,
             )}
-            initial={{ opacity: 0, scale: 0.6, y: position === "above" ? 10 : 0 }}
+            initial={{ opacity: 0, scale: 0.65, y: position === "above" ? 10 : 0 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.75 }}
+            exit={{ opacity: 0, scale: 0.8 }}
             transition={{ type: "spring", stiffness: 380, damping: 18 }}
             onClick={cycleBubble}
           >
             {/* Rainbow gradient border */}
             <div
               className="rounded-2xl p-px"
-              style={{
-                background:
-                  "linear-gradient(135deg, #d946ef, #8b5cf6, #06b6d4, #22c55e)",
-              }}
+              style={{ background: "linear-gradient(135deg, #d946ef, #8b5cf6, #06b6d4, #22c55e)" }}
             >
               <div
                 className="relative rounded-[14px] px-4 py-3"
-                style={{
-                  background: "rgba(6,6,18,0.94)",
-                  backdropFilter: "blur(16px)",
-                }}
+                style={{ background: "rgba(6,6,18,0.94)", backdropFilter: "blur(16px)" }}
               >
                 <button
                   onClick={closeBubble}
