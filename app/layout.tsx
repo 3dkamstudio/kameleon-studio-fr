@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/components/ui/Navbar";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import ConstellationCanvas from "@/components/ui/ConstellationCanvas";
 import "./globals.css";
 
 const inter = Inter({
@@ -67,6 +68,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground antialiased font-sans">
+        <ConstellationCanvas />
         <Navbar />
         {children}
         <ScrollToTop />
