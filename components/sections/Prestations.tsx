@@ -326,8 +326,8 @@ export default function Prestations() {
 
         {/* ── Kame guide ─────────────────────────────────────────────────── */}
         <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-          <KameSpeech variants={PRESTATIONS_SPEECH}>
-            <Kame context="default" src="/kame-scientist.png" size={155} />
+          <KameSpeech variants={PRESTATIONS_SPEECH} position="left">
+            <Kame context="default" src="/kame-scientist.png" size={185} />
           </KameSpeech>
         </div>
 

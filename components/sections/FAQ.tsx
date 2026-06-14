@@ -324,8 +324,8 @@ export default function FAQ() {
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={FAQ_SPEECH}>
-          <Kame context="default" src="/kame-welcome.png" size={155} />
+        <KameSpeech variants={FAQ_SPEECH} position="left">
+          <Kame context="default" src="/kame-welcome.png" size={185} />
         </KameSpeech>
       </div>
     </section>

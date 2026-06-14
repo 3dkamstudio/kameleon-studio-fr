@@ -492,8 +492,8 @@ export default function Process() {
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={PROCESS_SPEECH}>
-          <Kame context="default" src="/kame-robot.png" size={155} />
+        <KameSpeech variants={PROCESS_SPEECH} position="left">
+          <Kame context="default" src="/kame-robot.png" size={185} />
         </KameSpeech>
       </div>
     </section>

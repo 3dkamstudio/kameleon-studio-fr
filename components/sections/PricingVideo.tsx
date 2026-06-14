@@ -309,8 +309,8 @@ export default function PricingVideo() {
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={PRICING_SPEECH}>
-          <Kame context="point" src="/kame-cyberpunk.png" size={155} />
+        <KameSpeech variants={PRICING_SPEECH} position="left">
+          <Kame context="point" src="/kame-cyberpunk.png" size={185} />
         </KameSpeech>
       </div>
     </section>

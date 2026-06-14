@@ -478,8 +478,8 @@ export default function Contact() {
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute bottom-8 right-6 z-20 hidden lg:flex">
-        <KameSpeech variants={CONTACT_SPEECH}>
-          <Kame context="default" src="/kame-closeup.png" size={155} />
+        <KameSpeech variants={CONTACT_SPEECH} position="left">
+          <Kame context="default" src="/kame-closeup.png" size={185} />
         </KameSpeech>
       </div>
     </section>

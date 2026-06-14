@@ -223,7 +223,7 @@ export default function Testimonials() {
               <Kame
                 context="celebrate"
                 src="/kame-celebrate.png"
-                size={180}
+                size={200}
               />
             </KameSpeech>
 

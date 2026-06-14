@@ -243,7 +243,283 @@
     opacity: 0.4;
   }
 
+  /* ── Gradient flow animé (horizontal) — titre ligne 2, style KingOfIA ── */
+  /* Variante froide : cyan → violet → fuchsia (Hero) */
+  .text-gradient-cool {
+    background: linear-gradient(90deg, #06b6d4, #8b5cf6, #d946ef, #f43f5e, #06b6d4);
+    background-size: 250% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-x-flow 5s linear infinite;
+  }
+  /* Variante chaude : fuchsia → rose → orange (Services, Tarifs) */
+  .text-gradient-warm {
+    background: linear-gradient(90deg, #d946ef, #f43f5e, #f97316, #eab308, #d946ef);
+    background-size: 250% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-x-flow 5s linear infinite;
+  }
+  /* Variante vert → cyan → violet (Process, Stats) */
+  .text-gradient-tech {
+    background: linear-gradient(90deg, #22c55e, #06b6d4, #8b5cf6, #22c55e);
+    background-size: 250% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-x-flow 5s linear infinite;
+  }
+
+  /* ── Badges pill — style KingOfIA uppercase ─────────────────────────── */
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+  .badge-cyan {
+    border: 1px solid rgba(6, 182, 212, 0.38);
+    background: rgba(6, 182, 212, 0.07);
+    color: rgba(6, 182, 212, 0.9);
+    animation: badge-glow-cyan 2.8s ease-in-out infinite;
+  }
+  .badge-violet {
+    border: 1px solid rgba(139, 92, 246, 0.38);
+    background: rgba(139, 92, 246, 0.07);
+    color: rgba(139, 92, 246, 0.9);
+    animation: badge-glow-violet 2.8s ease-in-out infinite;
+  }
+  .badge-fuchsia {
+    border: 1px solid rgba(217, 70, 239, 0.38);
+    background: rgba(217, 70, 239, 0.07);
+    color: rgba(217, 70, 239, 0.9);
+    animation: badge-glow-fuchsia 2.8s ease-in-out infinite;
+  }
+  .badge-green {
+    border: 1px solid rgba(34, 197, 94, 0.38);
+    background: rgba(34, 197, 94, 0.07);
+    color: rgba(34, 197, 94, 0.9);
+    animation: badge-glow-green 2.8s ease-in-out infinite;
+  }
+  .badge-orange {
+    border: 1px solid rgba(249, 115, 22, 0.38);
+    background: rgba(249, 115, 22, 0.07);
+    color: rgba(249, 115, 22, 0.9);
+    animation: badge-glow-orange 2.8s ease-in-out infinite;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
+
+  /* ── Icône 3D flottante ─────────────────────────────────────────── */
+  .icon-3d {
+    position: relative;
+    transform: perspective(380px) rotateX(-8deg) rotateY(10deg);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .icon-3d::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 55%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  .group:hover .icon-3d {
+    transform: perspective(380px) rotateX(-4deg) rotateY(5deg) scale(1.08) translateY(-3px);
+  }
+
+  /* ── Bord lumineux animé (futuriste) ────────────────────────────── */
+  .border-glow-animated {
+    position: relative;
+  }
+  .border-glow-animated::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(var(--angle, 0deg), #8b5cf6, #06b6d4, #d946ef, #f97316, #8b5cf6);
+    z-index: -1;
+    animation: border-rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .group:hover .border-glow-animated::before,
+  .border-glow-animated:hover::before { opacity: 0.7; }
+
+  /* ── Scan line haute-technologie ────────────────────────────────── */
+  .scanline {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.012) 3px,
+      rgba(255,255,255,0.012) 4px
+    );
+  }
+
+  /* ── Grille hexagonale futuriste ────────────────────────────────── */
+  .hex-grid {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V17L28 1l28 16v33L28 66zm0 34L0 84V51l28 16 28-16v33L28 100z' fill='none' stroke='rgba(139,92,246,0.07)' stroke-width='1'/%3E%3C/svg%3E");
+  }
+
+  /* ── Rayon lumineux cône ────────────────────────────────────────── */
+  .light-beam {
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(217,70,239,0.5), transparent);
+    filter: blur(1px);
+  }
 }
+
+/* ── Keyframes globaux supplémentaires ───────────────────────────────── */
+@keyframes border-rotate {
+  to { --angle: 360deg; }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ── Keyframes globaux ───────────────────────────────────────────────────── */
+@keyframes gradient-x-flow {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+
+@keyframes badge-glow-cyan {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+  50%       { box-shadow: 0 0 14px 2px rgba(6, 182, 212, 0.22); }
+}
+@keyframes badge-glow-violet {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+  50%       { box-shadow: 0 0 14px 2px rgba(139, 92, 246, 0.22); }
+}
+@keyframes badge-glow-fuchsia {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 70, 239, 0); }
+  50%       { box-shadow: 0 0 14px 2px rgba(217, 70, 239, 0.22); }
+}
+@keyframes badge-glow-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  50%       { box-shadow: 0 0 14px 2px rgba(34, 197, 94, 0.22); }
+}
+@keyframes badge-glow-orange {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+  50%       { box-shadow: 0 0 14px 2px rgba(249, 115, 22, 0.22); }
+}
+
+/* ── Fonds de section — transparents pour laisser passer le CelestialBackground ── */
+.bg-section   { background: transparent; }
+.bg-section-1 { background: transparent; }
+
+/* ── Scintillement des étoiles célestes ─────────────────────────────────── */
+@keyframes celestial-twinkle {
+  from { opacity: 0.04; transform: scale(0.75); }
+  to   { opacity: 0.70; transform: scale(1.35); }
+}
+
+/* ── Barre de progression Process auto-play ────────────────────────────── */
+@keyframes scaleProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── Orbes CelestialBackground — 4 trajectoires CSS (compositor thread) ── */
+@keyframes orb-float-a {
+  0%   { transform: translate(0px, 0px); }
+  33%  { transform: translate(80px, -70px); }
+  66%  { transform: translate(-45px, 40px); }
+  100% { transform: translate(60px, -80px); }
+}
+@keyframes orb-float-b {
+  0%   { transform: translate(0px, 0px); }
+  33%  { transform: translate(-70px, 55px); }
+  66%  { transform: translate(50px, -40px); }
+  100% { transform: translate(-40px, 70px); }
+}
+@keyframes orb-float-c {
+  0%   { transform: translate(0px, 0px); }
+  33%  { transform: translate(-60px, -50px); }
+  66%  { transform: translate(40px, 65px); }
+  100% { transform: translate(-65px, -30px); }
+}
+@keyframes orb-float-d {
+  0%   { transform: translate(0px, 0px); }
+  33%  { transform: translate(65px, 40px); }
+  66%  { transform: translate(-30px, -55px); }
+  100% { transform: translate(45px, 30px); }
+}
+
+/* ── Sparkles — particules de sections ──────────────────────────────────── */
+@keyframes spark-pulse {
+  0%, 100% { opacity: 0;   transform: scale(0.3) translateY(0px); }
+  30%       { opacity: 1;   transform: scale(1.4) translateY(-12px); }
+  60%       { opacity: 0.3; transform: scale(0.8) translateY(-6px); }
+  80%       { opacity: 0.9; transform: scale(1.1) translateY(-15px); }
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.1; }
+  50%       { opacity: 0.6; }
+}
+
+/* ── Section Dividers ───────────────────────────────────────────────────── */
+
+/* scan — faisceau qui traverse la ligne holographique */
+@keyframes div-scan-beam {
+  from { transform: translateX(0); opacity: 0; }
+  4%   {                            opacity: 1; }
+  96%  {                            opacity: 1; }
+  to   { transform: translateX(calc(100vw + 560px)); opacity: 0; }
+}
+/* scan — pulsation douce de la ligne arc-en-ciel */
+@keyframes div-scan-pulse {
+  0%, 100% { opacity: 0.50; }
+  50%       { opacity: 1.00; }
+}
+
+/* wave — le rect de dégradé défile d'une longueur de viewBox */
+@keyframes div-wave-rect {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-1440px); }
+}
+/* Classe appliquée sur le <rect> SVG */
+.div-wave-rect {
+  animation: div-wave-rect 10s linear infinite;
+}
+
+/* circuit — nœuds actifs qui s'allument */
+@keyframes div-circuit-blink {
+  0%, 35%, 100% { opacity: 0.12; }
+  50%           { opacity: 1.00; }
+}
+
+/* chevron — pulsation néon sur le trait et l'apex */
+@keyframes div-chevron-pulse {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 1.00; }
+}
+.div-chevron-line {
+  animation: div-chevron-pulse 3s ease-in-out infinite;
+}
+.div-chevron-apex {
+  animation: div-chevron-pulse 3s ease-in-out infinite;
+}
+
+/* ── Showreel playlist scrollbar ────────────────────────────────────────── */
+.showreel-playlist::-webkit-scrollbar        { width: 3px; }
+.showreel-playlist::-webkit-scrollbar-track  { background: transparent; }
+.showreel-playlist::-webkit-scrollbar-thumb  { background: rgba(139,92,246,0.35); border-radius: 4px; }
+.showreel-playlist::-webkit-scrollbar-thumb:hover { background: rgba(217,70,239,0.55); }

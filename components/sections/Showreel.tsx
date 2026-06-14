@@ -481,8 +481,8 @@ export default function Showreel() {
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute bottom-10 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={SHOWREEL_SPEECH}>
-          <Kame context="default" src="/kame-cameraman.png" size={155} />
+        <KameSpeech variants={SHOWREEL_SPEECH} position="left">
+          <Kame context="default" src="/kame-cameraman.png" size={185} />
         </KameSpeech>
       </div>
 
