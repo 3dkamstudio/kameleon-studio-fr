@@ -314,7 +314,7 @@ export default function Services() {
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute bottom-10 right-8 z-20 hidden lg:flex">
         <KameSpeech variants={SERVICES_SPEECH} position="left">
-          <Kame context="point" src="/kame-pro.png" size={185} />
+          <Kame context="point" src="/kame-services.png" size={185} />
         </KameSpeech>
       </div>
 
