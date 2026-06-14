@@ -6,13 +6,13 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 const LINKS = [
-  { label: "Services",     href: "#services" },
-  { label: "Prestations",  href: "#prestations" },
-  { label: "Réalisations", href: "#showreel" },
-  { label: "Process",      href: "#processus" },
-  { label: "Tarifs",       href: "#tarifs-video" },
-  { label: "FAQ",          href: "#faq" },
-  { label: "Contact",      href: "#contact" },
+  { label: "Services",     href: "#services"    },
+  { label: "Réalisations", href: "#showreel"    },
+  { label: "Process",      href: "#processus"   },
+  { label: "Tarifs",       href: "#tarifs-video"},
+  { label: "Maintenance",  href: "#maintenance" },
+  { label: "FAQ",          href: "#faq"         },
+  { label: "Contact",      href: "#contact"     },
 ];
 
 export default function Navbar() {
