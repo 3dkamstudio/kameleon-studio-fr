@@ -523,3 +523,30 @@
 .showreel-playlist::-webkit-scrollbar-track  { background: transparent; }
 .showreel-playlist::-webkit-scrollbar-thumb  { background: rgba(139,92,246,0.35); border-radius: 4px; }
 .showreel-playlist::-webkit-scrollbar-thumb:hover { background: rgba(217,70,239,0.55); }
+
+/* ── WebStudio — animated borders & data stream ──────────────────────────── */
+@property --ws-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes ws-border-rotate {
+  to { --ws-angle: 360deg; }
+}
+.ws-border-premium {
+  background: conic-gradient(from var(--ws-angle), #d946ef, #8b5cf6, #06b6d4, #22c55e, #f97316, #f43f5e, #d946ef);
+  animation: ws-border-rotate 5s linear infinite;
+}
+.ws-border-maintenance {
+  background: conic-gradient(from var(--ws-angle), #8a6dff, #ff5e7e, #d946ef, #06b6d4, #8a6dff);
+  animation: ws-border-rotate 4s linear infinite;
+}
+.ws-data-stream {
+  background: linear-gradient(to bottom, #4dd9ff 0%, #d946ef 33%, #8b5cf6 66%, #5eff9d 100%);
+  background-size: 100% 300%;
+  animation: ws-stream 2.5s linear infinite;
+}
+@keyframes ws-stream {
+  0%   { background-position: 0% -100%; }
+  100% { background-position: 0% 100%; }
+}

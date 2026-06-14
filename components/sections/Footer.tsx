@@ -45,7 +45,7 @@ const stagger: Variants = {
 const NAV_LINKS = [
   { label: "Services",     href: "#services"     },
   { label: "Tarifs",       href: "#tarifs-video" },
-  { label: "Maintenance",  href: "#maintenance"  },
+  { label: "Sites Web",    href: "#sites-web"    },
   { label: "Réalisations", href: "#showreel"     },
   { label: "Contact",      href: "#contact"      },
 ];

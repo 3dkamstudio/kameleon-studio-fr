@@ -6,8 +6,7 @@ import Process from "@/components/sections/Process";
 import Testimonials from "@/components/sections/Testimonials";
 import PricingVideo from "@/components/sections/PricingVideo";
 import PricingBD from "@/components/sections/PricingBD";
-import Pricing from "@/components/sections/Pricing";
-import MaintenanceWeb from "@/components/sections/MaintenanceWeb";
+import WebStudio from "@/components/sections/WebStudio";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -60,14 +59,9 @@ export default function Home() {
 
         <SectionDivider variant="circuit" />
 
-        <SectionWrapper><Pricing /></SectionWrapper>
+        <SectionWrapper><WebStudio /></SectionWrapper>
 
-        {/* Pricing → Maintenance : scan */}
-        <SectionDivider variant="scan" />
-
-        <SectionWrapper><MaintenanceWeb /></SectionWrapper>
-
-        {/* Maintenance → FAQ : wave */}
+        {/* WebStudio → FAQ : wave */}
         <SectionDivider variant="wave" />
 
         <SectionWrapper><FAQ /></SectionWrapper>

@@ -10,7 +10,7 @@ const LINKS = [
   { label: "Réalisations", href: "#showreel"    },
   { label: "Process",      href: "#processus"   },
   { label: "Tarifs",       href: "#tarifs-video"},
-  { label: "Maintenance",  href: "#maintenance" },
+  { label: "Sites Web",    href: "#sites-web"   },
   { label: "FAQ",          href: "#faq"         },
   { label: "Contact",      href: "#contact"     },
 ];
