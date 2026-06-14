@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/ui/Navbar";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import "./globals.css";
 
 const inter = Inter({
@@ -69,6 +70,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <ScrollToTop />
+        <WhatsAppButton />
       </body>
     </html>
   );
