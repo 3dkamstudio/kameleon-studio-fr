@@ -136,14 +136,13 @@ const VIDEOS: Video[] = [
 ];
 
 // ── Composant miniature ────────────────────────────────────────────────────────
-function Thumbnail({ id, title, size = "md" }: { id: string; title: string; size?: "sm" | "md" }) {
-  const h = size === "sm" ? "h-[72px]" : "h-[90px]";
+function Thumbnail({ id, title }: { id: string; title: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
       alt={`Miniature : ${title}`}
-      className={`w-full ${h} object-cover`}
+      className="h-full w-full object-cover"
       loading="lazy"
     />
   );
@@ -363,7 +362,7 @@ export default function Showreel() {
                       exit={{ opacity: 0, scale: 0.96 }}
                       transition={{ duration: 0.25, delay: i * 0.05 }}
                       onClick={() => pickVideo(video.id)}
-                      className="group flex w-full items-stretch gap-0 overflow-hidden rounded-xl text-left transition-all duration-200"
+                      className="group flex min-h-[84px] w-full items-stretch gap-0 overflow-hidden rounded-xl text-left transition-all duration-200"
                       style={isActive
                         ? {
                             background: `${vcat.color}12`,
@@ -383,8 +382,8 @@ export default function Showreel() {
                       />
 
                       {/* Thumbnail */}
-                      <div className="relative w-[120px] shrink-0 overflow-hidden">
-                        <Thumbnail id={video.id} title={video.title} size="sm" />
+                      <div className="relative h-[84px] w-[120px] shrink-0 overflow-hidden">
+                        <Thumbnail id={video.id} title={video.title} />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/45 transition-opacity duration-200 group-hover:bg-black/25">
                           <div
                             className="flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-110"
