@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Syne } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/ui/Navbar";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,10 +11,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const syne = Syne({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-syne",
-  weight: ["600", "700", "800"],
+  weight: ["600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -61,12 +62,13 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={cn("dark", inter.variable, syne.variable)}
+      className={cn("dark", inter.variable, outfit.variable)}
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground antialiased font-sans">
         <Navbar />
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );

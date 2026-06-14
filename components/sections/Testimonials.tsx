@@ -9,41 +9,16 @@ import { ExternalLink } from "lucide-react";
 
 // ── Clients réels ─────────────────────────────────────────────────────────────
 const CLIENTS = [
-  {
-    name: "Paillette Academy",
-    logo: "/logo-paillette-academy.png",
-    cardBg: "#0d1b2e",
-    description: "Vidéos pédagogiques",
-  },
-  {
-    name: "BLR Conseil Formation",
-    logo: "/logo-blr-conseils.png",
-    cardBg: "#f0fafa",
-    description: "Conseil & formation",
-  },
-  {
-    name: "Gabi",
-    logo: "/logo-gabi.png",
-    cardBg: "#080808",
-    description: "Littérature jeunesse",
-  },
-  {
-    name: "JL Conseils",
-    logo: "/logo-jl-conseils.png",
-    cardBg: "#080808",
-    description: "Conseil bien-être",
-  },
-  {
-    name: "Les Pépites de Lylou",
-    logo: "/logo-pepites-lylou.png",
-    cardBg: "#ffffff",
-    description: "Créations chrétiennes",
-  },
+  { name: "Paillette Academy",    logo: "/logo-paillette-academy.png", description: "Vidéos pédagogiques" },
+  { name: "BLR Conseil Formation",logo: "/logo-blr-conseils.png",      description: "Conseil & formation" },
+  { name: "Gabi",                 logo: "/logo-gabi.png",              description: "Littérature jeunesse" },
+  { name: "JL Conseils",          logo: "/logo-jl-conseils.png",       description: "Conseil bien-être" },
+  { name: "Les Pépites de Lylou", logo: "/logo-pepites-lylou.png",     description: "Créations chrétiennes" },
 ];
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
 const STATS = [
-  { value: 3,   suffix: "+",  label: "Projets livrés",          color: "#d946ef" },
+  { value: 20,  suffix: "+",  label: "Clients accompagnés",      color: "#d946ef" },
   { value: 2,   suffix: "",   label: "Formats par vidéo",        color: "#06b6d4" },
   { value: 48,  suffix: "h",  label: "Délai de réponse",         color: "#22c55e" },
   { value: 100, suffix: "%",  label: "Livré dans les délais",    color: "#f97316" },
@@ -138,7 +113,7 @@ export default function Testimonials() {
 
         {/* ── Logos clients ─────────────────────────────────────────────────── */}
         <motion.div
-          className="mb-20 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
+          className="mb-20 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
@@ -151,36 +126,43 @@ export default function Testimonials() {
                 hidden: { opacity: 0, scale: 0.88, y: 16 },
                 visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 0.61, 0.36, 1] } },
               }}
-              whileHover={{ scale: 1.04, y: -3 }}
-              className="group flex flex-col items-center gap-3 rounded-2xl p-5"
+              whileHover={{ scale: 1.05, y: -4 }}
+              className="group flex flex-col items-center gap-3 rounded-2xl p-4"
               style={{
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.07)",
                 backdropFilter: "blur(12px)",
-                transition: "box-shadow 0.25s ease",
+                transition: "box-shadow 0.25s ease, border-color 0.25s ease",
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(217,70,239,0.12)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.boxShadow = "0 0 32px rgba(217,70,239,0.18)";
+                el.style.borderColor = "rgba(217,70,239,0.30)";
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.boxShadow = "none";
+                el.style.borderColor = "rgba(255,255,255,0.07)";
+              }}
             >
-              {/* Logo dans sa couleur de fond */}
-              <div
-                className="relative flex h-20 w-full items-center justify-center overflow-hidden rounded-xl"
-                style={{ background: client.cardBg }}
-              >
+              {/* Logo sans fond — image en pleine valeur */}
+              <div className="relative h-28 w-full">
                 <Image
                   src={client.logo}
                   alt={`Logo ${client.name}`}
                   fill
-                  className="object-contain p-2"
+                  className="object-contain drop-shadow-[0_2px_12px_rgba(255,255,255,0.12)]"
                   sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 180px"
                 />
               </div>
-              <p className="text-center text-[0.68rem] font-semibold text-white/40 leading-tight">
-                {client.name}
-              </p>
-              <p className="text-center text-[0.58rem] text-white/22">
-                {client.description}
-              </p>
+              <div className="text-center">
+                <p className="text-[0.70rem] font-bold text-white/60 leading-tight">
+                  {client.name}
+                </p>
+                <p className="text-[0.60rem] text-white/28 mt-0.5">
+                  {client.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
