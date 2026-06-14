@@ -35,8 +35,7 @@ export default function Hero() {
   const springY = useSpring(rawY, { stiffness: 80, damping: 20 });
 
   useEffect(() => {
-    // Désactivé si reduced-motion ou device tactile (hover: none)
-    if (prefersReduced || window.matchMedia("(hover: none)").matches) return;
+    if (prefersReduced) return;
 
     const section = sectionRef.current;
     if (!section) return;
@@ -45,16 +44,15 @@ export default function Hero() {
 
     function onMouseMove(e: MouseEvent) {
       const now = Date.now();
-      if (now - lastCall < 16) return; // throttle 60 fps
+      if (now - lastCall < 16) return;
       lastCall = now;
 
       const rect = section!.getBoundingClientRect();
-      // Position normalisée [-1, 1] par rapport au centre de la section
       const nx = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
       const ny = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
 
-      rawX.set(nx * 20);  // ±20 px
-      rawY.set(ny * 15);  // ±15 px
+      rawX.set(nx * 28);  // ±28 px
+      rawY.set(ny * 18);  // ±18 px
     }
 
     function onMouseLeave() {
@@ -120,8 +118,8 @@ export default function Hero() {
       ══════════════════════════════════════════════════════════════════ */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-12 right-[5%] z-[8] hidden lg:block xl:right-[8%]"
-        style={{ x: springX, y: springY }}
+        className="pointer-events-none absolute right-[4%] z-20"
+        style={{ x: springX, y: springY, top: "calc(50% - 130px)" }}
       >
         <Kame context="hero" size={240} priority />
       </motion.div>
