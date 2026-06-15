@@ -10,21 +10,20 @@ const BASE = {
 };
 
 // ── NEBULA FADE ("scan") ─────────────────────────────────────────────────────
+// Halo radial fuchsia/violet pleine largeur centré
 function NebulaDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 140 }}>
       <div style={{
-        position: "absolute", left: "50%", top: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 900, height: 180,
-        background: "radial-gradient(ellipse at center, rgba(217,70,239,0.12) 0%, rgba(139,92,246,0.06) 40%, transparent 70%)",
-        filter: "blur(28px)",
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(217,70,239,0.12) 0%, rgba(139,92,246,0.06) 45%, transparent 70%)",
       }} />
     </div>
   );
 }
 
 // ── AURORA FLOW ("wave") ─────────────────────────────────────────────────────
+// Bande cyan horizontale pleine largeur qui dérive doucement
 function AuroraDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 140 }}>
@@ -33,10 +32,9 @@ function AuroraDivider() {
         style={{
           position: "absolute", inset: 0,
           background: [
-            "radial-gradient(ellipse 60% 70% at 20% 50%, rgba(77,217,255,0.10) 0%, transparent 100%)",
-            "radial-gradient(ellipse 50% 60% at 70% 50%, rgba(6,182,212,0.07)  0%, transparent 100%)",
+            "radial-gradient(ellipse 60% 100% at 20% 50%, rgba(77,217,255,0.10) 0%, transparent 70%)",
+            "radial-gradient(ellipse 50% 100% at 75% 50%, rgba(6,182,212,0.07)  0%, transparent 70%)",
           ].join(", "),
-          filter: "blur(14px)",
         }}
       />
     </div>
@@ -44,17 +42,23 @@ function AuroraDivider() {
 }
 
 // ── PARTICLE DRIFT ("circuit") ───────────────────────────────────────────────
+// Fond violet très doux + 5 points qui tombent
 const PARTICLES = [
-  { left: "11%", top: 15, size: 3, color: "rgba(139,92,246,0.20)", dur: "9s",  del: "0s"   },
+  { left: "11%", top: 15, size: 3, color: "rgba(139,92,246,0.22)", dur: "9s",  del: "0s"   },
   { left: "27%", top: 58, size: 3, color: "rgba(217,70,239,0.18)", dur: "12s", del: "2.8s" },
-  { left: "44%", top: 28, size: 4, color: "rgba(139,92,246,0.22)", dur: "10s", del: "1.2s" },
-  { left: "64%", top: 78, size: 3, color: "rgba(217,70,239,0.19)", dur: "14s", del: "4.1s" },
+  { left: "44%", top: 28, size: 4, color: "rgba(139,92,246,0.20)", dur: "10s", del: "1.2s" },
+  { left: "64%", top: 78, size: 3, color: "rgba(217,70,239,0.22)", dur: "14s", del: "4.1s" },
   { left: "82%", top: 42, size: 3, color: "rgba(139,92,246,0.18)", dur: "11s", del: "0.6s" },
 ] as const;
 
 function ParticleDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 140 }}>
+      {/* Fond atmosphérique pleine largeur */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 100% 100% at 50% 50%, rgba(139,92,246,0.06) 0%, transparent 70%)",
+      }} />
       {PARTICLES.map((p, i) => (
         <div
           key={i}
@@ -75,28 +79,23 @@ function ParticleDivider() {
 }
 
 // ── DEEP SPACE ("chevron") ───────────────────────────────────────────────────
+// Deux halos pleine hauteur répartis gauche/droite
 function DeepSpaceDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 160 }}>
       <div style={{
-        position: "absolute", left: "10%", top: "50%",
-        transform: "translateY(-50%)",
-        width: 400, height: 200,
-        background: "radial-gradient(ellipse at center, rgba(217,70,239,0.10) 0%, transparent 65%)",
-        filter: "blur(30px)",
-      }} />
-      <div style={{
-        position: "absolute", right: "10%", top: "50%",
-        transform: "translateY(-50%)",
-        width: 350, height: 180,
-        background: "radial-gradient(ellipse at center, rgba(138,109,255,0.12) 0%, transparent 65%)",
-        filter: "blur(30px)",
+        position: "absolute", inset: 0,
+        background: [
+          "radial-gradient(ellipse 55% 100% at 15% 50%, rgba(217,70,239,0.10) 0%, transparent 70%)",
+          "radial-gradient(ellipse 50% 100% at 85% 50%, rgba(138,109,255,0.12) 0%, transparent 70%)",
+        ].join(", "),
       }} />
     </div>
   );
 }
 
 // ── SIGNAL PULSE ("signal") ──────────────────────────────────────────────────
+// Ligne 0.5px fuchsia pleine largeur avec pulse lent
 function SignalDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 120 }}>
