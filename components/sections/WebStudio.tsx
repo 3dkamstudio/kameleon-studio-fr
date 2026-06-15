@@ -104,16 +104,14 @@ const OPTIONS = [
     label: "Paiement en ligne",
     price: "+120€",
     color: "#22c55e",
-    badgeColor: "#22c55e",
-    tooltip: "Intégration Stripe ou équivalent — disponible sur l'offre Essentiel uniquement (déjà inclus dans le Premium)",
+    tooltip: "Intégration Stripe ou équivalent",
   },
   {
     icon: "🎨",
     label: "Visuels IA custom",
     price: "+150€",
     color: "#ff9d4d",
-    badgeColor: "#ff9d4d",
-    tooltip: "Images, backgrounds et illustrations générées par IA, adaptées à votre univers de marque — disponible en supplément sur l'offre Essentiel (déjà inclus dans le Premium)",
+    tooltip: "Images, backgrounds et illustrations générées par IA, adaptées à votre univers de marque",
   },
 ] as const;
 
@@ -575,8 +573,11 @@ export default function WebStudio() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="mb-4 text-center text-[0.63rem] font-black uppercase tracking-widest text-white/28">
-              ✦ Options à la carte (compatibles avec les 2 offres)
+            <p className="mb-1.5 text-center text-[0.63rem] font-black uppercase tracking-widest text-white/28">
+              ✦ Options à la carte — Offre Essentiel uniquement
+            </p>
+            <p className="mb-5 text-center text-[0.60rem] text-white/30">
+              Ces options sont déjà incluses dans l&apos;offre Premium à 1 600€
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {OPTIONS.map((opt) => (
@@ -587,22 +588,14 @@ export default function WebStudio() {
                   onMouseLeave={() => setHoveredOption(null)}
                 >
                   <motion.div
-                    className="flex cursor-default flex-col gap-1.5 rounded-2xl px-5 py-3"
+                    className="flex cursor-default items-center gap-2.5 rounded-2xl px-5 py-3"
                     style={{ background: `${opt.color}09`, border: `1px solid ${opt.color}25` }}
                     whileHover={{ scale: 1.04, boxShadow: `0 0 20px ${opt.color}35`, borderColor: `${opt.color}50` }}
                     transition={{ duration: 0.14 }}
                   >
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-base">{opt.icon}</span>
-                      <span className="text-sm font-semibold text-white/58">{opt.label}</span>
-                      <span className="font-display text-sm font-black" style={{ color: opt.color }}>{opt.price}</span>
-                    </div>
-                    <span
-                      className="self-start rounded-full px-2 py-0.5 text-[0.55rem] font-black uppercase tracking-wider"
-                      style={{ background: `${opt.badgeColor}15`, border: `1px solid ${opt.badgeColor}35`, color: opt.badgeColor }}
-                    >
-                      ✓ Inclus dans le Premium
-                    </span>
+                    <span className="text-base">{opt.icon}</span>
+                    <span className="text-sm font-semibold text-white/58">{opt.label}</span>
+                    <span className="font-display text-sm font-black" style={{ color: opt.color }}>{opt.price}</span>
                   </motion.div>
                   <AnimatePresence>
                     {hoveredOption === opt.label && (
