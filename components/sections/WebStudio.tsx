@@ -131,13 +131,15 @@ const MAINTENANCE_PLANS = [
     highlight: false,
     cta: "Démarrer la maintenance",
     includes: [
-      "Mises à jour techniques mensuelles",
+      "Jusqu'à 2 demandes de modification/mois (texte, image, lien, contenu)",
+      "Réponse sous 48h ouvrées",
+      "Mises à jour techniques",
       "Sauvegarde mensuelle",
       "Vérification sécurité",
       "Vérification formulaire / contact",
       "Correction bug mineur",
-      "30 min de modifications / mois",
-      "Mise à jour contenus légaux (fournis client)",
+      "Vérification pages légales",
+      "Mise à jour contenus légaux (fournis par le client)",
     ],
   },
   {
@@ -153,17 +155,20 @@ const MAINTENANCE_PLANS = [
     highlightBadge: "LE PLUS CHOISI",
     cta: "Démarrer la maintenance",
     includes: [
-      "Tout le plan Landing Page",
-      "1h d'intervention / mois",
-      "Contrôle SEO mensuel",
+      "Jusqu'à 4 demandes de modification/mois (texte, image, contenu, liens…)",
+      "Réponse sous 24h ouvrées",
+      "Tout ce qui est dans Landing Page",
+      "Interventions techniques incluses (bugs, sécurité, mises à jour)",
+      "Mini contrôle SEO mensuel",
       "Surveillance sécurité avancée",
-      "Sauvegardes mensuelles renforcées",
+      "Sauvegardes mensuelles",
       "Mise à jour infos contact / entreprise",
     ],
   },
 ] as const;
 
 const HORS_FORFAIT = [
+  "Toute demande au-delà des modifications incluses dans l'abonnement",
   "Ajout de nouvelles sections ou pages",
   "Développement de nouvelles fonctionnalités",
   "Refonte partielle ou complète du site",
@@ -911,6 +916,25 @@ export default function WebStudio() {
                 );
               })()}
             </motion.div>
+          </motion.div>
+
+          {/* ── Callout tarif hors forfait ─────────────────────────────── */}
+          <motion.div
+            className="mt-6 rounded-2xl px-5 py-4"
+            style={{
+              background: "rgba(255,255,255,0.025)",
+              border: "1px solid rgba(255,255,255,0.07)",
+            }}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            <p className="text-xs leading-relaxed text-white/38">
+              Toute demande dépassant le cadre de l&apos;abonnement est traitée comme intervention hors forfait,
+              après validation préalable du client.{" "}
+              <strong className="font-black text-white/58">Tarif hors forfait&nbsp;: 50€/h</strong>
+            </p>
           </motion.div>
 
           {/* ── Hors forfait accordion ───────────────────────────────────── */}
