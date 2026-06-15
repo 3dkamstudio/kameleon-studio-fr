@@ -25,20 +25,30 @@ const fadeUp: Variants = {
 export default function Hero() {
   return (
     <section
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden"
+      className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden md:min-h-screen"
     >
 
       {/* ══════════════════════════════════════════════════════════════════
           IMAGE PLEIN-CADRE — DA Kaméléon Studio
       ══════════════════════════════════════════════════════════════════ */}
       <div className="absolute inset-0 z-0">
+        {/* Mobile : bannière verticale 9:16 */}
+        <Image
+          src="/banner-mobile.webp"
+          alt="Kaméléon Studio — Studio de production créative par IA"
+          fill
+          priority
+          quality={90}
+          className="object-cover object-center md:hidden"
+        />
+        {/* Desktop : bannière horizontale */}
         <Image
           src="/banner-wide.webp"
           alt="Kaméléon Studio — Studio de production créative par IA"
           fill
           priority
           quality={90}
-          className="object-cover"
+          className="hidden object-cover md:block"
           style={{ objectPosition: "62% center" }}
         />
       </div>
