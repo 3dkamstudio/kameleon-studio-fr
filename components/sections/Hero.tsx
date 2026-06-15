@@ -5,7 +5,6 @@ import type { Variants } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
 import Sparkles from "@/components/ui/Sparkles";
-import Kame from "@/components/ui/Kame";
 
 const STATS = [
   { value: "7j",   label: "Délai de livraison",      sub: "maximum",               color: "#06b6d4" },
@@ -67,16 +66,6 @@ export default function Hero() {
 
       <Sparkles className="z-[3]" />
 
-      {/* ══════════════════════════════════════════════════════════════════
-          KAME — guide mascotte
-      ══════════════════════════════════════════════════════════════════ */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[4%] z-20"
-        style={{ top: "calc(50% - 130px)" }}
-      >
-        <Kame context="hero" size={240} priority />
-      </div>
 
       {/* ══════════════════════════════════════════════════════════════════
           CONTENU HÉRO
