@@ -33,7 +33,7 @@ export default function Hero() {
       ══════════════════════════════════════════════════════════════════ */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/banner-wide.png"
+          src="/banner-wide.webp"
           alt="Kaméléon Studio — Studio de production créative par IA"
           fill
           priority

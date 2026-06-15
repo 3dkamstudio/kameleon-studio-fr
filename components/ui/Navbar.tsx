@@ -6,8 +6,9 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 const LINKS = [
-  { label: "Services",     href: "#services"    },
-  { label: "Réalisations", href: "#showreel"    },
+  { label: "Services",     href: "#services"     },
+  { label: "Prestations",  href: "#prestations"  },
+  { label: "Réalisations", href: "#showreel"     },
   { label: "Process",      href: "#processus"   },
   { label: "Tarifs",       href: "#tarifs-video"},
   { label: "Sites Web",    href: "#sites-web"   },
@@ -34,9 +35,9 @@ export default function Navbar() {
 
     ids.forEach(id => {
       const el = document.getElementById(id);
-      if (!el) return;
+      if (!el) { return; }
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveHash(`#${id}`); },
+        ([entry]) => { if (entry.isIntersecting) { setActiveHash(`#${id}`); } },
         { rootMargin: "-40% 0px -55% 0px" },
       );
       obs.observe(el);
@@ -101,8 +102,8 @@ export default function Navbar() {
                   href={href}
                   className="relative rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors duration-200"
                   style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.50)" }}
-                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = "rgba(255,255,255,0.85)"; }}
-                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = "rgba(255,255,255,0.50)"; }}
+                  onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; } }}
+                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.50)"; } }}
                 >
                   {label}
                   {/* Indicateur actif */}

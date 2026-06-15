@@ -6,7 +6,6 @@ import Image from "next/image";
 import Kame from "@/components/ui/Kame";
 import KameSpeech from "@/components/ui/KameSpeech";
 import Sparkles from "@/components/ui/Sparkles";
-import { ExternalLink } from "lucide-react";
 
 const TESTIMONIALS_SPEECH = [
   "Plus de 20 clients satisfaits — et ça continue ! 🎉",
@@ -17,7 +16,7 @@ const TESTIMONIALS_SPEECH = [
 const CLIENTS = [
   { name: "Paillette Academy",     logo: "/logo-paillette-academy.png", description: "Vidéos pédagogiques",    glow: "#4dd9ff" },
   { name: "BLR Conseil Formation", logo: "/logo-blr-conseils.png",      description: "Conseil & formation",    glow: "#8a6dff" },
-  { name: "Gabi",                  logo: "/logo-gabi.png",              description: "Littérature jeunesse",   glow: "#d946ef" },
+  { name: "Gabi",                  logo: "/logo-gabi.webp",              description: "Littérature jeunesse",   glow: "#d946ef" },
   { name: "JL Conseils",           logo: "/logo-jl-conseils.png",       description: "Conseil bien-être",      glow: "#5eff9d" },
   { name: "Les Pépites de Lylou",  logo: "/logo-pepites-lylou.png",     description: "Créations chrétiennes",  glow: "#ff9d4d" },
 ] as const;
@@ -37,14 +36,14 @@ function AnimatedCount({ value, suffix, color }: { value: number; suffix: string
   const spring = useSpring(motionVal, { stiffness: 60, damping: 15 });
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView) { return; }
     const ctrl = animate(motionVal, value, { duration: 1.8, ease: "easeOut" });
     return () => ctrl.stop();
   }, [inView, motionVal, value]);
 
   useEffect(() => {
     const unsub = spring.on("change", v => {
-      if (ref.current) ref.current.textContent = Math.round(v).toString();
+      if (ref.current) { ref.current.textContent = Math.round(v).toString(); }
     });
     return unsub;
   }, [spring]);
@@ -64,65 +63,96 @@ function AnimatedCount({ value, suffix, color }: { value: number; suffix: string
   );
 }
 
-// ── Carte logo client ──────────────────────────────────────────────────────────
+// ── Carte logo premium ─────────────────────────────────────────────────────────
 type Client = (typeof CLIENTS)[number];
 
-function ClientCard({ client }: { client: Client }) {
+function ClientCard({ client, index }: { client: Client; index: number }) {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, scale: 0.9, y: 20 },
+        hidden: { opacity: 0, scale: 0.88, y: 28 },
         visible: {
           opacity: 1, scale: 1, y: 0,
-          transition: { duration: 0.5, ease: [0.22, 0.61, 0.36, 1] },
+          transition: { duration: 0.55, ease: [0.22, 0.61, 0.36, 1] },
         },
       }}
-      whileHover={{ scale: 1.05, y: -4 }}
-      className="group relative flex flex-col items-center gap-4 rounded-2xl p-6 w-full sm:w-56 lg:w-64"
+      whileHover={{ scale: 1.05, y: -8 }}
+      className="group relative flex flex-col overflow-hidden rounded-3xl
+        w-full sm:w-[260px] lg:w-[280px]"
       style={{
-        background: "rgba(6,6,18,0.70)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        transition: "box-shadow 0.3s ease, border-color 0.3s ease",
+        background: "rgba(5,5,16,0.88)",
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
+        border: `1px solid ${client.glow}38`,
+        boxShadow: `0 0 36px ${client.glow}18, 0 4px 24px rgba(0,0,0,0.45)`,
+        transition: "box-shadow 0.35s ease, border-color 0.35s ease",
       }}
       onMouseEnter={e => {
         const el = e.currentTarget as HTMLElement;
-        el.style.boxShadow = `0 0 40px ${client.glow}30, 0 0 80px ${client.glow}12, 0 12px 40px rgba(0,0,0,0.5)`;
-        el.style.borderColor = `${client.glow}55`;
+        el.style.boxShadow = `0 0 70px ${client.glow}50, 0 0 130px ${client.glow}20, 0 20px 60px rgba(0,0,0,0.65)`;
+        el.style.borderColor = `${client.glow}75`;
       }}
       onMouseLeave={e => {
         const el = e.currentTarget as HTMLElement;
-        el.style.boxShadow = `0 0 20px ${client.glow}08`;
-        el.style.borderColor = "rgba(255,255,255,0.08)";
+        el.style.boxShadow = `0 0 36px ${client.glow}18, 0 4px 24px rgba(0,0,0,0.45)`;
+        el.style.borderColor = `${client.glow}38`;
       }}
     >
-      {/* Idle glow subtil */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-2xl"
-        style={{
-          boxShadow: `0 0 20px ${client.glow}08`,
-          animation: "clientGlowPulse 3s ease-in-out infinite",
-          animationDelay: `${Math.random() * 2}s`,
-        }}
-      />
+      {/* Barre d'accent colorée en haut */}
+      <div style={{
+        height: 3,
+        background: `linear-gradient(90deg, transparent 0%, ${client.glow}cc 40%, ${client.glow} 50%, ${client.glow}cc 60%, transparent 100%)`,
+        flexShrink: 0,
+      }} />
 
-      {/* Logo — drop-shadow épouse la forme */}
-      <div className="relative w-full" style={{ height: 140 }}>
-        <Image
-          src={client.logo}
-          alt={`Logo ${client.name}`}
-          fill
-          className="object-contain"
-          style={{ filter: `drop-shadow(0 4px 18px ${client.glow}50)` }}
-          sizes="(max-width: 640px) 90vw, (max-width: 1024px) 224px, 256px"
-        />
+      {/* Zone logo avec halo radial */}
+      <div
+        className="relative flex items-center justify-center"
+        style={{ height: 210, padding: "20px 28px", flexShrink: 0 }}
+      >
+        {/* Halo ambiant derrière le logo */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <div style={{
+            width: 220, height: 220, borderRadius: "50%",
+            background: `radial-gradient(circle, ${client.glow}28 0%, ${client.glow}0c 45%, transparent 72%)`,
+            animation: "haloPulse 3.5s ease-in-out infinite",
+            animationDelay: `${index * 0.6}s`,
+          }} />
+        </div>
+
+        {/* Image */}
+        <div className="relative h-full w-full z-10">
+          <Image
+            src={client.logo}
+            alt={`Logo ${client.name}`}
+            fill
+            className="object-contain"
+            style={{
+              filter: `drop-shadow(0 0 28px ${client.glow}70) drop-shadow(0 6px 16px rgba(0,0,0,0.45))`,
+            }}
+            sizes="(max-width: 640px) 90vw, 280px"
+          />
+        </div>
       </div>
 
-      <div className="text-center">
-        <p className="text-xs font-bold text-white/70 leading-tight">{client.name}</p>
-        <p className="text-[0.63rem] text-white/35 mt-0.5">{client.description}</p>
+      {/* Footer de carte */}
+      <div
+        className="flex flex-col items-center gap-1.5 px-6 pb-6 pt-4 text-center"
+        style={{ borderTop: `1px solid ${client.glow}22` }}
+      >
+        <p
+          className="text-sm font-bold leading-tight"
+          style={{
+            color: client.glow,
+            textShadow: `0 0 14px ${client.glow}70`,
+          }}
+        >
+          {client.name}
+        </p>
+        <p className="text-[0.64rem] text-white/38">{client.description}</p>
       </div>
     </motion.div>
   );
@@ -137,16 +167,16 @@ export default function Testimonials() {
       style={{ background: "transparent" }}
     >
       <style>{`
-        @keyframes clientGlowPulse {
-          0%, 100% { opacity: 0.5; }
-          50%       { opacity: 1; }
+        @keyframes haloPulse {
+          0%, 100% { transform: scale(0.95); opacity: 0.7; }
+          50%       { transform: scale(1.08); opacity: 1; }
         }
       `}</style>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div
-          className="absolute left-1/2 top-0 h-[600px] w-[1000px] -translate-x-1/2 rounded-full blur-[160px]"
-          style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, rgba(217,70,239,0.07) 50%, transparent 70%)" }}
+          className="absolute left-1/2 top-0 h-[600px] w-[1100px] -translate-x-1/2 rounded-full blur-[180px]"
+          style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.13) 0%, rgba(217,70,239,0.08) 50%, transparent 70%)" }}
         />
       </div>
       <Sparkles />
@@ -194,7 +224,7 @@ export default function Testimonials() {
 
         {/* ── Logos clients ───────────────────────────────────────────────── */}
         <motion.div
-          className="mb-24 flex flex-wrap justify-center gap-8"
+          className="mb-24 flex flex-wrap justify-center gap-6 sm:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
@@ -203,16 +233,16 @@ export default function Testimonials() {
             visible: { transition: { staggerChildren: 0.12 } },
           }}
         >
-          {CLIENTS.map(client => (
-            <ClientCard key={client.name} client={client} />
+          {CLIENTS.map((client, i) => (
+            <ClientCard key={client.name} client={client} index={i} />
           ))}
         </motion.div>
 
         {/* ── Stats + Kame ─────────────────────────────────────────────────── */}
         <div className="relative flex flex-col items-center gap-16 lg:flex-row lg:items-start lg:gap-12">
 
-          {/* Stats desktop : flex row avec séparateurs */}
           <div className="flex-1 w-full">
+            {/* Stats desktop */}
             <motion.div
               className="hidden sm:flex items-stretch rounded-2xl overflow-hidden"
               initial={{ opacity: 0, y: 24 }}
@@ -239,7 +269,7 @@ export default function Testimonials() {
               ))}
             </motion.div>
 
-            {/* Stats mobile : grille 2 colonnes */}
+            {/* Stats mobile */}
             <motion.div
               className="grid grid-cols-2 gap-4 sm:hidden"
               initial="hidden"
@@ -281,23 +311,6 @@ export default function Testimonials() {
               <Kame context="celebrate" src="/kame-celebrate.png" size={200} />
             </KameSpeech>
 
-            <motion.a
-              href="#google-reviews"
-              className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white/80"
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.10)",
-              }}
-              whileHover={{
-                scale: 1.04,
-                background: "rgba(217,70,239,0.10)",
-                borderColor: "rgba(217,70,239,0.35)",
-              }}
-              whileTap={{ scale: 0.97 }}
-            >
-              ⭐ Laisser un avis Google
-              <ExternalLink className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
-            </motion.a>
           </motion.div>
 
         </div>

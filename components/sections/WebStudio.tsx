@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   Check, ArrowRight, ChevronDown, Clock,
-  Shield, AlertCircle, Minus, X,
+  Shield, AlertCircle, X,
 } from "lucide-react";
 import Kame from "@/components/ui/Kame";
 import KameSpeech from "@/components/ui/KameSpeech";

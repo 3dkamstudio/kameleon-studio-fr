@@ -160,7 +160,7 @@ export default function Showreel() {
   function pickCategory(key: CatKey) {
     setActiveCat(key);
     const pool = key === "all" ? VIDEOS : VIDEOS.filter(v => v.cat === key);
-    if (pool.length && !pool.find(v => v.id === activeId)) setActiveId(pool[0].id);
+    if (pool.length && !pool.find(v => v.id === activeId)) { setActiveId(pool[0].id); }
   }
 
   function pickVideo(id: string) {

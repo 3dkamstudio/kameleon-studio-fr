@@ -75,12 +75,14 @@ const COMPARE = [
 ];
 
 function Tick({ ok, color }: { ok: boolean | string; color: string }) {
-  if (typeof ok === "string") return <span className="text-sm font-bold" style={{ color }}>{ok}</span>;
-  if (ok) return (
-    <span className="flex h-6 w-6 items-center justify-center rounded-full" style={{ background: `${color}20`, border: `1px solid ${color}40` }}>
-      <Check className="h-3.5 w-3.5" style={{ color }} />
-    </span>
-  );
+  if (typeof ok === "string") { return <span className="text-sm font-bold" style={{ color }}>{ok}</span>; }
+  if (ok) {
+    return (
+      <span className="flex h-6 w-6 items-center justify-center rounded-full" style={{ background: `${color}20`, border: `1px solid ${color}40` }}>
+        <Check className="h-3.5 w-3.5" style={{ color }} />
+      </span>
+    );
+  }
   return <Minus className="h-4 w-4 text-white/20" />;
 }
 

@@ -33,12 +33,12 @@ export default function KameSpeech({
   lenRef.current  = variants.length;
 
   function clearAll() {
-    if (cycleRef.current) clearInterval(cycleRef.current);
-    if (showRef.current)  clearTimeout(showRef.current);
+    if (cycleRef.current) { clearInterval(cycleRef.current); }
+    if (showRef.current)  { clearTimeout(showRef.current); }
   }
 
   function startCycle() {
-    if (cycleRef.current) clearInterval(cycleRef.current);
+    if (cycleRef.current) { clearInterval(cycleRef.current); }
     cycleRef.current = setInterval(() => {
       setIdx(i => (i + 1) % lenRef.current);
     }, 10_000);
@@ -51,7 +51,7 @@ export default function KameSpeech({
       setDismissed(false);
       return;
     }
-    if (dismissed) return;
+    if (dismissed) { return; }
 
     showRef.current = setTimeout(() => {
       setVisible(true);

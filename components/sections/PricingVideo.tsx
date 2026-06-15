@@ -42,10 +42,6 @@ const STATS = [
   { label: "Délai livraison", value: "7 jours", color: "#06b6d4" },
 ];
 
-const fadeUp = {
-  hidden:  { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] } },
-};
 
 export default function PricingVideo() {
   return (
@@ -88,7 +84,7 @@ export default function PricingVideo() {
           </h2>
           <p className="max-w-xl text-base text-white/45">
             Chaque vidéo inclut script, montage premium et voix-off IA professionnelle.
-            Tarif dégressif jusqu'à −20% dès 10 vidéos.
+            Tarif dégressif jusqu&rsquo;à −20% dès 10 vidéos.
           </p>
         </motion.div>
 
@@ -159,7 +155,7 @@ export default function PricingVideo() {
               </div>
               <div className="mb-7 flex items-center gap-2">
                 <TrendingDown className="h-3.5 w-3.5" style={{ color: "#22c55e" }} />
-                <span className="text-xs font-semibold" style={{ color: "#22c55e" }}>Dégressif jusqu'à 200€ dès 10 vidéos</span>
+                <span className="text-xs font-semibold" style={{ color: "#22c55e" }}>Dégressif jusqu&rsquo;à 200€ dès 10 vidéos</span>
               </div>
 
               {/* Features */}
@@ -218,13 +214,13 @@ export default function PricingVideo() {
                     Grille tarifaire <span style={{ color: "#f97316" }}>dégressive</span>
                   </h3>
                   <p className="mt-1 text-xs text-white/35">
-                    Le tarif le plus bas s'applique automatiquement à toutes les vidéos de la commande.
+                    Le tarif le plus bas s&rsquo;applique automatiquement à toutes les vidéos de la commande.
                   </p>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl px-3 py-2"
                   style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)" }}>
                   <TrendingDown className="h-4 w-4" style={{ color: "#22c55e" }} />
-                  <span className="font-display text-sm font-black" style={{ color: "#22c55e" }}>Jusqu'à −20%</span>
+                  <span className="font-display text-sm font-black" style={{ color: "#22c55e" }}>Jusqu&rsquo;à −20%</span>
                 </div>
               </div>
 

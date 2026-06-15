@@ -127,7 +127,7 @@ export default function Process() {
 
   // Auto-avancement
   useEffect(() => {
-    if (paused) return;
+    if (paused) { return; }
     const t = setTimeout(() => {
       setDir(1);
       setActive(i => (i + 1) % STEPS.length);
@@ -418,7 +418,7 @@ export default function Process() {
                         </div>
                         <div>
                           <p className="mb-0.5 text-[0.6rem] font-black uppercase tracking-widest" style={{ color: `${step.color}80` }}>
-                            On s'occupe de
+                            On s&rsquo;occupe de
                           </p>
                           <p className="text-xs leading-snug text-white/55">{step.we}</p>
                         </div>

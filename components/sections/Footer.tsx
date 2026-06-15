@@ -44,6 +44,7 @@ const stagger: Variants = {
 // ── Data ──────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Services",     href: "#services"     },
+  { label: "Prestations",  href: "#prestations"  },
   { label: "Tarifs",       href: "#tarifs-video" },
   { label: "Sites Web",    href: "#sites-web"    },
   { label: "Réalisations", href: "#showreel"     },
@@ -161,7 +162,7 @@ export default function Footer() {
 
           {/* ── Colonne 2 : Navigation ────────────────────────────────────── */}
           <motion.div variants={fadeUp} className="flex flex-col gap-4">
-            <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/25">
+            <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/55">
               Navigation
             </p>
             <nav className="flex flex-col gap-2.5">
@@ -183,7 +184,7 @@ export default function Footer() {
 
           {/* ── Colonne 3 : Légal + contact rapide ───────────────────────── */}
           <motion.div variants={fadeUp} className="flex flex-col gap-4">
-            <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/25">
+            <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/55">
               Légal
             </p>
             <nav className="flex flex-col gap-2.5">
@@ -201,7 +202,7 @@ export default function Footer() {
 
             {/* Contact email direct */}
             <div className="mt-2">
-              <p className="mb-1.5 text-[0.65rem] font-black uppercase tracking-widest text-white/25">
+              <p className="mb-1.5 text-[0.65rem] font-black uppercase tracking-widest text-white/55">
                 Contact direct
               </p>
               <a
@@ -222,10 +223,10 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="text-[0.72rem] text-white/22">
+          <p className="text-[0.72rem] text-white/60">
             © 2026 Kaméléon Studio — Tous droits réservés
           </p>
-          <p className="text-[0.65rem] text-white/15">
+          <p className="text-[0.65rem] text-white/50">
             Fait avec ✦ et beaucoup de caféine par Kame
           </p>
         </motion.div>

@@ -297,7 +297,7 @@ export default function MaintenanceWeb() {
                 <p className="text-[0.72rem] leading-relaxed text-white/38">
                   Toute rédaction juridique complète, mise en conformité RGPD avancée, génération de CGV/CGU,
                   gestion complète du bandeau cookies ou audit juridique approfondi relève du hors forfait
-                  et peut faire l'objet d'un devis complémentaire.
+                  et peut faire l&rsquo;objet d&rsquo;un devis complémentaire.
                 </p>
               </div>
             </div>
@@ -318,14 +318,14 @@ export default function MaintenanceWeb() {
                 <h4 className="font-display text-base font-black text-white">Reprise après interruption</h4>
               </div>
               <p className="mb-4 text-sm leading-relaxed text-white/55">
-                La maintenance est un service préventif continu. En cas d'interruption de l'abonnement,
-                Kaméléon Studio ne peut garantir l'état technique, la sécurité ou le bon fonctionnement
+                La maintenance est un service préventif continu. En cas d&rsquo;interruption de l&rsquo;abonnement,
+                Kaméléon Studio ne peut garantir l&rsquo;état technique, la sécurité ou le bon fonctionnement
                 du site pendant la période non couverte.
               </p>
               <div className="rounded-xl p-3.5" style={{ background: "rgba(234,179,8,0.06)", border: "1px solid rgba(234,179,8,0.15)" }}>
                 <p className="text-[0.72rem] leading-relaxed text-white/38">
-                  Une reprise d'abonnement après interruption peut nécessiter un audit préalable de l'état du site,
-                  facturable selon l'ampleur des vérifications nécessaires.
+                  Une reprise d&rsquo;abonnement après interruption peut nécessiter un audit préalable de l&rsquo;état du site,
+                  facturable selon l&rsquo;ampleur des vérifications nécessaires.
                 </p>
               </div>
             </div>
@@ -347,7 +347,7 @@ export default function MaintenanceWeb() {
               </div>
               <p className="mb-3 text-sm leading-relaxed text-white/55">
                 Les améliorations majeures, modifications importantes, ajouts de nouvelles sections, nouvelles pages,
-                nouvelles fonctionnalités ou nouveaux éléments graphiques ne sont pas inclus dans l'abonnement de maintenance.
+                nouvelles fonctionnalités ou nouveaux éléments graphiques ne sont pas inclus dans l&rsquo;abonnement de maintenance.
               </p>
               <p className="text-sm font-semibold leading-relaxed" style={{ color: "#f43f5e88" }}>
                 Ces demandes relèvent du hors forfait et nécessitent une validation préalable du client avant toute intervention.
@@ -382,7 +382,7 @@ export default function MaintenanceWeb() {
               </ul>
               <div className="rounded-xl p-3.5" style={{ background: "rgba(139,92,246,0.07)", border: "1px solid rgba(139,92,246,0.18)" }}>
                 <p className="text-[0.72rem] leading-relaxed text-white/40">
-                  Ces interventions font l'objet d'un devis complémentaire ou sont facturées au tarif horaire de{" "}
+                  Ces interventions font l&rsquo;objet d&rsquo;un devis complémentaire ou sont facturées au tarif horaire de{" "}
                   <span className="font-bold" style={{ color: "#8b5cf6" }}>50 €/h</span>{" "}
                   après validation préalable du client.
                 </p>

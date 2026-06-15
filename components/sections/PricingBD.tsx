@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ArrowRight, BookOpen, Clock, Zap, TrendingDown, Layers } from "lucide-react";
+import { Check, ArrowRight, BookOpen, Clock, TrendingDown, Layers } from "lucide-react";
 import Sparkles from "@/components/ui/Sparkles";
 
 // ── Grille dégressive BD ──────────────────────────────────────────────────────
@@ -69,12 +69,12 @@ export default function PricingBD() {
             </span>
             <span className="block font-display text-3xl font-black leading-tight sm:text-4xl md:text-5xl"
               style={{ color: "#8b5cf6" }}>
-              à un tarif qui récompense l'ambition.
+              à un tarif qui récompense l&rsquo;ambition.
             </span>
           </h2>
           <p className="max-w-xl text-base text-white/45">
             Chaque planche inclut direction artistique, retouches et droits commerciaux.
-            Tarif dégressif jusqu'à −21% dès 10 planches.
+            Tarif dégressif jusqu&rsquo;à −21% dès 10 planches.
           </p>
         </motion.div>
 
@@ -122,13 +122,13 @@ export default function PricingBD() {
                     Grille tarifaire <span style={{ color: "#8b5cf6" }}>dégressive</span>
                   </h3>
                   <p className="mt-1 text-xs text-white/35">
-                    Le tarif le plus bas s'applique automatiquement à toutes les planches commandées.
+                    Le tarif le plus bas s&rsquo;applique automatiquement à toutes les planches commandées.
                   </p>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl px-3 py-2"
                   style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)" }}>
                   <TrendingDown className="h-4 w-4" style={{ color: "#22c55e" }} />
-                  <span className="font-display text-sm font-black" style={{ color: "#22c55e" }}>Jusqu'à −21%</span>
+                  <span className="font-display text-sm font-black" style={{ color: "#22c55e" }}>Jusqu&rsquo;à −21%</span>
                 </div>
               </div>
 
@@ -244,7 +244,7 @@ export default function PricingBD() {
               </div>
               <div className="mb-7 flex items-center gap-2">
                 <TrendingDown className="h-3.5 w-3.5" style={{ color: "#22c55e" }} />
-                <span className="text-xs font-semibold" style={{ color: "#22c55e" }}>Dégressif jusqu'à 150€ dès 10 planches</span>
+                <span className="text-xs font-semibold" style={{ color: "#22c55e" }}>Dégressif jusqu&rsquo;à 150€ dès 10 planches</span>
               </div>
 
               {/* Features */}

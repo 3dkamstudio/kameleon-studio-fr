@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 
 export type DividerVariant = "scan" | "wave" | "circuit" | "chevron" | "signal";
 
@@ -232,9 +231,9 @@ function SignalDivider() {
 
 // ── Export ───────────────────────────────────────────────────────────────────
 export default function SectionDivider({ variant = "scan" }: { variant?: DividerVariant }) {
-  if (variant === "wave")    return <WaveDivider />;
-  if (variant === "circuit") return <CircuitDivider />;
-  if (variant === "chevron") return <ChevronDivider />;
-  if (variant === "signal")  return <SignalDivider />;
+  if (variant === "wave")    { return <WaveDivider />; }
+  if (variant === "circuit") { return <CircuitDivider />; }
+  if (variant === "chevron") { return <ChevronDivider />; }
+  if (variant === "signal")  { return <SignalDivider />; }
   return <ScanDivider />;
 }

@@ -21,15 +21,15 @@ export default function ConstellationCanvas() {
 
   useEffect(() => {
     const rawCanvas = ref.current;
-    if (!rawCanvas) return;
+    if (!rawCanvas) { return; }
     const rawCtx = rawCanvas.getContext("2d");
-    if (!rawCtx) return;
+    if (!rawCtx) { return; }
 
     // Aliases non-nullables pour les closures (TS strict ne narrow pas au travers des closures)
     const cv = rawCanvas as HTMLCanvasElement;
     const cx = rawCtx   as CanvasRenderingContext2D;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
 
     const isMob  = () => window.innerWidth < 768;
     const COUNT  = () => isMob() ? 25 : 50;
@@ -70,7 +70,7 @@ export default function ConstellationCanvas() {
     /* ── Boucle ─────────────────────────────────────────────────────────── */
     function tick() {
       raf = requestAnimationFrame(tick);
-      if (document.hidden) return;
+      if (document.hidden) { return; }
 
       cx.clearRect(0, 0, W, H);
 
@@ -103,7 +103,7 @@ export default function ConstellationCanvas() {
         for (let j = i + 1; j < pts.length; j++) {
           const b = pts[j];
           const d = Math.hypot(b.x - a.x, b.y - a.y);
-          if (d > maxD) continue;
+          if (d > maxD) { continue; }
 
           const alpha = (1 - d / maxD) * 0.22;
           const [ar, ag, ab] = PALETTE[a.ci];
