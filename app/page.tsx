@@ -24,19 +24,19 @@ export default function Home() {
         <SectionDivider variant="scan" />
 
         <SectionWrapper><Services /></SectionWrapper>
-        <SectionDivider variant="wave" />
-
-        <SectionWrapper><Prestations /></SectionWrapper>
-        <SectionDivider variant="circuit" />
-
-        <SectionWrapper><Showreel /></SectionWrapper>
         <SectionDivider variant="chevron" />
 
-        <SectionWrapper><Process /></SectionWrapper>
+        <SectionWrapper><Prestations /></SectionWrapper>
         <SectionDivider variant="wave" />
 
-        <SectionWrapper><Testimonials /></SectionWrapper>
+        <SectionWrapper><Showreel /></SectionWrapper>
+        <SectionDivider variant="circuit" />
+
+        <SectionWrapper><Process /></SectionWrapper>
         <SectionDivider variant="scan" />
+
+        <SectionWrapper><Testimonials /></SectionWrapper>
+        <SectionDivider variant="wave" />
 
         <SectionWrapper><PricingVideo /></SectionWrapper>
         <SectionDivider variant="chevron" />
@@ -45,10 +45,10 @@ export default function Home() {
         <SectionDivider variant="circuit" />
 
         <SectionWrapper><WebStudio /></SectionWrapper>
-        <SectionDivider variant="wave" />
+        <SectionDivider variant="scan" />
 
         <SectionWrapper><FAQ /></SectionWrapper>
-        <SectionDivider variant="chevron" />
+        <SectionDivider variant="wave" />
 
         <SectionWrapper><Contact /></SectionWrapper>
       </div>
