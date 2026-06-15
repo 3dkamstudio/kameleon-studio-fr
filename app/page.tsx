@@ -72,7 +72,7 @@ export default function Home() {
         <SectionWrapper><Contact /></SectionWrapper>
       </div>
 
-      <SectionDivider variant="scan" />
+      <SectionDivider variant="signal" />
       <Footer />
     </main>
   );

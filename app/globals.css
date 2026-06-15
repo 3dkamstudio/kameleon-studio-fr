@@ -475,47 +475,51 @@
   50%       { opacity: 0.6; }
 }
 
-/* ── Section Dividers ───────────────────────────────────────────────────── */
+/* ── Section Dividers — transitions deep space ───────────────────────────── */
 
-/* scan — faisceau qui traverse la ligne holographique */
-@keyframes div-scan-beam {
-  from { transform: translateX(0); opacity: 0; }
-  4%   {                            opacity: 1; }
-  96%  {                            opacity: 1; }
-  to   { transform: translateX(calc(100vw + 560px)); opacity: 0; }
+/* Aurora Flow — halos cyan qui dérivent latéralement */
+@keyframes div-aurora-drift {
+  0%   { transform: translateX(-7%); }
+  50%  { transform: translateX(7%);  }
+  100% { transform: translateX(-7%); }
 }
-/* scan — pulsation douce de la ligne arc-en-ciel */
-@keyframes div-scan-pulse {
-  0%, 100% { opacity: 0.22; }
-  50%       { opacity: 0.45; }
+.div-aurora-drift {
+  animation: div-aurora-drift 20s ease-in-out infinite;
 }
 
-/* wave — le rect de dégradé défile d'une longueur de viewBox */
-@keyframes div-wave-rect {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-1440px); }
+/* Particle Drift — points cosmiques qui tombent en fondu */
+@keyframes div-particle-drop {
+  0%   { transform: translateY(-4px); opacity: 0;   }
+  20%  {                              opacity: 1;   }
+  80%  {                              opacity: 0.7; }
+  100% { transform: translateY(46px); opacity: 0;   }
 }
-/* Classe appliquée sur le <rect> SVG */
-.div-wave-rect {
-  animation: div-wave-rect 10s linear infinite;
-}
-
-/* circuit — nœuds actifs qui s'allument */
-@keyframes div-circuit-blink {
-  0%, 35%, 100% { opacity: 0.12; }
-  50%           { opacity: 1.00; }
+.div-particle {
+  animation: div-particle-drop 10s ease-in-out infinite;
 }
 
-/* chevron — pulsation néon sur le trait et l'apex */
-@keyframes div-chevron-pulse {
-  0%, 100% { opacity: 0.28; }
-  50%       { opacity: 0.55; }
+/* Signal Pulse — ligne footer */
+@keyframes div-signal-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1;   }
 }
-.div-chevron-line {
-  animation: div-chevron-pulse 3s ease-in-out infinite;
+.div-signal-line {
+  animation: div-signal-pulse 4s ease-in-out infinite;
 }
-.div-chevron-apex {
-  animation: div-chevron-pulse 3s ease-in-out infinite;
+
+/* Mobile : hauteur réduite + animations désactivées */
+@media (max-width: 768px) {
+  .div-section-divider              { height: 80px !important; }
+  .div-aurora-drift,
+  .div-particle,
+  .div-signal-line                  { animation: none !important; }
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .div-aurora-drift,
+  .div-particle,
+  .div-signal-line                  { animation: none !important; }
 }
 
 /* ── Showreel playlist scrollbar ────────────────────────────────────────── */
