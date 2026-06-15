@@ -500,8 +500,8 @@
 
 /* Signal Pulse — ligne footer */
 @keyframes div-signal-pulse {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 1;   }
+  0%, 100% { opacity: 0.08; }
+  50%       { opacity: 0.15; }
 }
 .div-signal-line {
   animation: div-signal-pulse 4s ease-in-out infinite;
