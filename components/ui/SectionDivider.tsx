@@ -10,19 +10,15 @@ const BASE = {
 };
 
 // ── NEBULA FADE ("scan") ─────────────────────────────────────────────────────
-// Fondu vertical doux + halo radial fuchsia à 6% — l'espace respire
+// Halo radial fuchsia discret — l'espace respire
 function NebulaDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 140 }}>
       <div style={{
-        position: "absolute", inset: 0,
-        background: "linear-gradient(to bottom, rgba(10,10,15,0.52) 0%, transparent 50%, rgba(10,10,15,0.52) 100%)",
-      }} />
-      <div style={{
         position: "absolute", left: "50%", top: "50%",
         transform: "translate(-50%, -50%)",
         width: 700, height: 160,
-        background: "radial-gradient(ellipse at center, rgba(217,70,239,0.06) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse at center, rgba(217,70,239,0.07) 0%, transparent 65%)",
         filter: "blur(22px)",
       }} />
     </div>
@@ -82,23 +78,15 @@ function ParticleDivider() {
 }
 
 // ── DEEP SPACE ("chevron") ───────────────────────────────────────────────────
-// Variation de luminosité progressive + halo violet à 4% en bord droit
+// Halo violet discret en bord droit
 function DeepSpaceDivider() {
   return (
     <div aria-hidden="true" className="div-section-divider" style={{ ...BASE, height: 160 }}>
       <div style={{
-        position: "absolute", inset: "0 0 55% 0",
-        background: "linear-gradient(to bottom, rgba(10,10,15,0.42) 0%, transparent 100%)",
-      }} />
-      <div style={{
-        position: "absolute", inset: "55% 0 0 0",
-        background: "linear-gradient(to top, rgba(10,10,15,0.42) 0%, transparent 100%)",
-      }} />
-      <div style={{
         position: "absolute", right: "-5%", top: "50%",
         transform: "translateY(-50%)",
         width: 480, height: 240,
-        background: "radial-gradient(ellipse at center, rgba(138,109,255,0.04) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse at center, rgba(138,109,255,0.05) 0%, transparent 65%)",
         filter: "blur(30px)",
       }} />
     </div>
