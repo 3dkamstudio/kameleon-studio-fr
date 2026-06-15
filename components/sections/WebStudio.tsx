@@ -46,28 +46,31 @@ const CREATION_PLANS = [
     highlight: false,
     cta: "Démarrer ce projet",
     for: "Freelances, artisans, indépendants",
-    tags: ["1 page", "CSS uniquement", "SEO basique"],
+    tags: ["1 page", "Animations de base", "RDV inclus", "SEO basique"],
     excludes: [
-      "Animations avancées (Framer Motion)",
       "Pages multiples",
-      "Visuels générés par IA",
+      "Paiement en ligne",
+      "Espace membre",
+      "Animations avancées (Framer Motion, parallax) — offre Premium",
     ],
     includes: [
-      "1 page one-pager structurée",
+      "1 page (one-pager) structurée",
       "Design sur mesure (couleurs, typo, logo)",
-      "Transitions CSS et effets hover",
+      "Animations de base (scroll, effets de survol sur boutons)",
       "Responsive mobile / tablette / desktop",
-      "Formulaire de contact opérationnel",
-      "SEO de base (méta, balises H)",
+      "Formulaire de contact inclus",
+      "Prise de RDV intégrée (Calendly, Google Cal…)",
+      "SEO de base",
       "1 série de retouches incluse",
       "Mise en ligne incluse",
     ],
   },
   {
-    tag: "SITE COMPLET",
+    tag: "SITE SUR MESURE",
     badge: "PREMIUM",
     price: "1 600",
-    delay: "5 à 8 jours ouvrés",
+    priceNote: "2 pages incluses — +200€ par page supp. (max 5 pages)",
+    delay: "5 à 8 jours ouvrés (selon nombre de pages)",
     color: "#d946ef",
     colorTo: "#8b5cf6",
     glow: "rgba(217,70,239,0.45)",
@@ -75,17 +78,21 @@ const CREATION_PLANS = [
     highlightBadge: "RECOMMANDÉ",
     cta: "Je veux ce site",
     for: "Marques, créateurs, entreprises",
-    tags: ["5 pages", "Framer Motion", "IA incluse", "SEO avancé"],
-    excludes: [] as string[],
+    tags: ["2–5 pages", "Framer Motion", "IA incluse", "Stripe + RDV"],
+    excludes: [
+      "E-commerce complet, espace client, base de données : sur devis",
+    ],
     includes: [
-      "Jusqu'à 5 pages dédiées",
-      "Direction artistique personnalisée",
+      "2 pages incluses (jusqu'à 5, +200€/page supp.)",
+      "Direction artistique personnalisée complète",
       "Animations avancées Framer Motion",
-      "Visuels custom générés par IA",
-      "Formulaire connecté + tracking",
-      "SEO avancé (métadonnées, sitemap)",
+      "Visuels IA custom (backgrounds, illustrations)",
+      "Paiement en ligne inclus (Stripe ou équivalent)",
+      "Prise de RDV intégrée (Calendly, Google Cal…)",
+      "Formulaire connecté + tracking conversions",
+      "SEO avancé (métadonnées, sitemap, Open Graph)",
       "2 séries de retouches incluses",
-      "Mise en ligne + config domaine",
+      "Mise en ligne + configuration domaine",
     ],
   },
 ] as const;
@@ -94,24 +101,24 @@ const CREATION_PLANS = [
 const OPTIONS = [
   {
     icon: "💳",
-    label: "Paiement en ligne (Stripe)",
+    label: "Paiement en ligne",
     price: "+120€",
     color: "#22c55e",
-    tooltip: "Bouton de paiement sécurisé Stripe intégré à votre page",
+    tooltip: "Intégration Stripe ou équivalent — disponible sur l'offre Essentiel uniquement (déjà inclus dans le Premium)",
   },
   {
-    icon: "📅",
-    label: "Prise de rendez-vous (Calendly)",
-    price: "+100€",
-    color: "#f97316",
-    tooltip: "Module de réservation synchronisé avec votre agenda",
+    icon: "🎨",
+    label: "Visuels IA custom",
+    price: "+150€",
+    color: "#ff9d4d",
+    tooltip: "Images, backgrounds et illustrations générées par IA, adaptées à votre univers de marque",
   },
   {
-    icon: "🔒",
-    label: "Mentions légales et CGU",
+    icon: "📊",
+    label: "Analytics & tracking",
     price: "+80€",
-    color: "#eab308",
-    tooltip: "Rédaction et intégration des pages légales obligatoires",
+    color: "#ffd95e",
+    tooltip: "Google Analytics, suivi des conversions, tableau de bord de performance",
   },
 ] as const;
 
@@ -478,9 +485,12 @@ export default function WebStudio() {
 
                       {/* Price */}
                       <div
-                        className="mb-7 rounded-2xl px-6 py-5 text-center"
+                        className="mb-6 rounded-2xl px-6 py-5 text-center"
                         style={{ background: `${plan.color}07`, border: `1px solid ${plan.color}1a` }}
                       >
+                        <p className="mb-1 text-[0.58rem] font-semibold uppercase tracking-widest text-white/32">
+                          À partir de
+                        </p>
                         <div className="flex items-end justify-center gap-1">
                           <span
                             className="font-display text-7xl font-black leading-none"
@@ -497,16 +507,19 @@ export default function WebStudio() {
                             <p className="whitespace-nowrap text-[0.56rem] text-white/22">paiement unique</p>
                           </div>
                         </div>
-                        <div className="mt-3 flex items-center justify-center gap-1.5">
+                        <div className="mt-2.5 flex items-center justify-center gap-1.5">
                           <Clock className="h-3 w-3" style={{ color: plan.color }} />
                           <span className="text-xs text-white/40">
                             Délai&nbsp;: <strong className="text-white/65">{plan.delay}</strong>
                           </span>
                         </div>
+                        <p className="mt-2.5 text-[0.61rem] leading-snug text-white/28">
+                          {plan.priceNote}
+                        </p>
                       </div>
 
                       {/* Includes */}
-                      <ul className="mb-7 flex flex-1 flex-col gap-2.5">
+                      <ul className="mb-5 flex flex-1 flex-col gap-2.5">
                         {plan.includes.map((f) => (
                           <li key={f} className="flex items-start gap-3">
                             <span
@@ -519,6 +532,19 @@ export default function WebStudio() {
                           </li>
                         ))}
                       </ul>
+
+                      {/* Sur devis */}
+                      <div className="mb-6 rounded-xl p-3.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        <p className="mb-1.5 text-[0.6rem] font-black uppercase tracking-widest text-white/22">Sur devis</p>
+                        <ul className="flex flex-col gap-1">
+                          {plan.excludes.map((e) => (
+                            <li key={e} className="flex items-center gap-2">
+                              <X className="h-2.5 w-2.5 shrink-0 text-white/20" />
+                              <span className="text-[0.68rem] text-white/28">{e}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
                       {/* CTA — full gradient */}
                       <motion.a
@@ -603,6 +629,10 @@ export default function WebStudio() {
             </div>
             <p className="mt-3.5 text-center text-[0.62rem] text-white/18">
               Ces options s&apos;appuient sur vos propres comptes tiers — vous restez 100% propriétaire de vos données.
+            </p>
+            <p className="mt-1.5 text-center text-[0.60rem] text-white/14">
+              L&apos;intégration des mentions légales fournies par le client est incluse dans toute offre.
+              Kaméléon Studio n&apos;assure pas la rédaction ni le conseil juridique.
             </p>
           </motion.div>
         </div>
@@ -996,7 +1026,7 @@ export default function WebStudio() {
       {/* ── Kame Phase 1 ────────────────────────────────────────────────── */}
       <div className="pointer-events-none absolute right-4 top-[680px] z-20 hidden 2xl:flex">
         <KameSpeech variants={SPEECH_P1} position="left">
-          <Kame context="point" src="/kame-pro.png" size={180} />
+          <Kame context="point" src="/kame-web.png" size={180} />
         </KameSpeech>
       </div>
 
