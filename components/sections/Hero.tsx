@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
-import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
@@ -25,53 +24,8 @@ const fadeUp: Variants = {
 };
 
 export default function Hero() {
-  const sectionRef      = useRef<HTMLElement>(null);
-  const prefersReduced  = useReducedMotion();
-
-  // ── Valeurs brutes → springs amorties ──────────────────────────────────────
-  const rawX   = useMotionValue(0);
-  const rawY   = useMotionValue(0);
-  const springX = useSpring(rawX, { stiffness: 80, damping: 20 });
-  const springY = useSpring(rawY, { stiffness: 80, damping: 20 });
-
-  useEffect(() => {
-    if (prefersReduced) return;
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    let lastCall = 0;
-
-    function onMouseMove(e: MouseEvent) {
-      const now = Date.now();
-      if (now - lastCall < 16) return;
-      lastCall = now;
-
-      const rect = section!.getBoundingClientRect();
-      const nx = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
-      const ny = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
-
-      rawX.set(nx * 28);  // ±28 px
-      rawY.set(ny * 18);  // ±18 px
-    }
-
-    function onMouseLeave() {
-      rawX.set(0);
-      rawY.set(0);
-    }
-
-    section.addEventListener("mousemove",  onMouseMove,  { passive: true });
-    section.addEventListener("mouseleave", onMouseLeave);
-
-    return () => {
-      section.removeEventListener("mousemove",  onMouseMove);
-      section.removeEventListener("mouseleave", onMouseLeave);
-    };
-  }, [prefersReduced, rawX, rawY]);
-
   return (
     <section
-      ref={sectionRef}
       className="relative flex min-h-screen flex-col justify-center overflow-hidden"
     >
 
@@ -114,15 +68,15 @@ export default function Hero() {
       <Sparkles className="z-[3]" />
 
       {/* ══════════════════════════════════════════════════════════════════
-          KAME — guide mascotte avec parallax souris (desktop uniquement)
+          KAME — guide mascotte
       ══════════════════════════════════════════════════════════════════ */}
-      <motion.div
+      <div
         aria-hidden="true"
         className="pointer-events-none absolute right-[4%] z-20"
-        style={{ x: springX, y: springY, top: "calc(50% - 130px)" }}
+        style={{ top: "calc(50% - 130px)" }}
       >
         <Kame context="hero" size={240} priority />
-      </motion.div>
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════════
           CONTENU HÉRO
