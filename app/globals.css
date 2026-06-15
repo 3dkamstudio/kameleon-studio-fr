@@ -475,51 +475,12 @@
   50%       { opacity: 0.6; }
 }
 
-/* ── Section Dividers — transitions deep space ───────────────────────────── */
+/* ── Section Dividers v3 ─────────────────────────────────────────────────── */
 
-/* Aurora Flow — halos cyan qui dérivent latéralement */
-@keyframes div-aurora-drift {
-  0%   { transform: translateX(-7%); }
-  50%  { transform: translateX(7%);  }
-  100% { transform: translateX(-7%); }
-}
-.div-aurora-drift {
-  animation: div-aurora-drift 20s ease-in-out infinite;
-}
-
-/* Particle Drift — points cosmiques qui tombent en fondu */
-@keyframes div-particle-drop {
-  0%   { transform: translateY(-4px); opacity: 0;   }
-  20%  {                              opacity: 1;   }
-  80%  {                              opacity: 0.7; }
-  100% { transform: translateY(46px); opacity: 0;   }
-}
-.div-particle {
-  animation: div-particle-drop 10s ease-in-out infinite;
-}
-
-/* Signal Pulse — ligne footer */
-@keyframes div-signal-pulse {
-  0%, 100% { opacity: 0.08; }
-  50%       { opacity: 0.15; }
-}
-.div-signal-line {
-  animation: div-signal-pulse 4s ease-in-out infinite;
-}
-
-/* Mobile : hauteur réduite + animations désactivées */
+/* Mobile : hauteur réduite + particules masquées */
 @media (max-width: 768px) {
-  .div-section-divider              { height: 80px !important; }
-  .div-aurora-drift,
-  .div-particle,
-  .div-signal-line                  { animation: none !important; }
-}
-
-/* prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .div-aurora-drift,
-  .div-particle,
-  .div-signal-line                  { animation: none !important; }
+  .div-section-divider { height: 80px !important; }
+  .div-particles       { display: none !important; }
 }
 
 /* ── Showreel playlist scrollbar ────────────────────────────────────────── */
