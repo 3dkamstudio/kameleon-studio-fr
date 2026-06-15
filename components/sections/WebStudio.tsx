@@ -417,19 +417,29 @@ export default function WebStudio() {
                 return (
                   <div
                     className="relative flex flex-1 flex-col overflow-hidden rounded-[22px]"
-                    style={{
-                      background: "linear-gradient(155deg, rgba(217,70,239,0.10) 0%, rgba(139,92,246,0.07) 40%, rgba(6,6,20,0.95) 70%)",
-                      backdropFilter: "blur(14px)",
-                    }}
+                    style={{ background: "rgba(7,7,18,0.97)" }}
                   >
-                    {/* Corner glow */}
+                    {/* Dot-grid texture */}
                     <div
-                      className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full blur-3xl"
-                      style={{ background: "radial-gradient(circle, rgba(217,70,239,0.55), transparent 70%)", opacity: 0.45 }}
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        backgroundImage: "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)",
+                        backgroundSize: "22px 22px",
+                        opacity: 0.55,
+                      }}
                     />
+                    {/* Top neon scan-line */}
                     <div
-                      className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full blur-2xl"
-                      style={{ background: "radial-gradient(circle, rgba(139,92,246,0.40), transparent 70%)", opacity: 0.35 }}
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                      style={{ background: "linear-gradient(90deg, transparent 0%, rgba(217,70,239,0.80) 40%, rgba(139,92,246,0.80) 60%, transparent 100%)" }}
+                    />
+                    {/* Very subtle corner whisper — not a flood */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full blur-3xl"
+                      style={{ background: "radial-gradient(circle, rgba(217,70,239,0.35), transparent 70%)", opacity: 0.10 }}
                     />
 
                     <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-8">
@@ -766,14 +776,29 @@ export default function WebStudio() {
                 return (
                   <div
                     className="relative flex flex-1 flex-col overflow-hidden rounded-[22px]"
-                    style={{
-                      background: "linear-gradient(155deg, rgba(139,92,246,0.10) 0%, rgba(244,63,94,0.06) 40%, rgba(6,6,20,0.95) 70%)",
-                      backdropFilter: "blur(14px)",
-                    }}
+                    style={{ background: "rgba(7,7,18,0.97)" }}
                   >
+                    {/* Dot-grid texture */}
                     <div
-                      className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full blur-3xl"
-                      style={{ background: "radial-gradient(circle, rgba(139,92,246,0.50), transparent 70%)", opacity: 0.40 }}
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        backgroundImage: "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)",
+                        backgroundSize: "22px 22px",
+                        opacity: 0.55,
+                      }}
+                    />
+                    {/* Top neon scan-line */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                      style={{ background: "linear-gradient(90deg, transparent 0%, rgba(139,92,246,0.80) 40%, rgba(244,63,94,0.75) 60%, transparent 100%)" }}
+                    />
+                    {/* Very subtle corner whisper */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full blur-3xl"
+                      style={{ background: "radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%)", opacity: 0.10 }}
                     />
 
                     <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-8">
