@@ -1,159 +1,240 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-export type DividerVariant =
-  | "hero-services"
-  | "services-process"
-  | "process-prestations"
-  | "prestations-web"
-  | "web-showreel"
-  | "showreel-clients"
-  | "clients-contact"
-  | "contact-footer";
+export type DividerVariant = "scan" | "wave" | "circuit" | "chevron" | "signal";
 
-// ── Couleurs ambiantes par section ────────────────────────────────────────────
-const C = {
-  fuchsia: "#d946ef",
-  cyan:    "#4dd9ff",
-  violet:  "#8a6dff",
-  orange:  "#ff9d4d",
-  vert:    "#5eff9d",
-  rose:    "#ff5e7e",
-  noir:    "#050510",
-} as const;
-
-// ── Utilitaire hex → rgba ─────────────────────────────────────────────────────
-function rgba(hex: string, a: number) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${a})`;
-}
-
-// ── Config des 8 variantes ────────────────────────────────────────────────────
-const VARIANTS: Record<DividerVariant, {
-  top:        string;
-  bottom:     string;
-  particles?: [string, string];
-}> = {
-  "hero-services":       { top: C.fuchsia, bottom: C.cyan                                  },
-  "services-process":    { top: C.cyan,    bottom: C.violet, particles: [C.cyan,   C.violet] },
-  "process-prestations": { top: C.violet,  bottom: C.orange                                },
-  "prestations-web":     { top: C.orange,  bottom: C.vert,   particles: [C.orange, C.vert  ] },
-  "web-showreel":        { top: C.vert,    bottom: C.rose                                  },
-  "showreel-clients":    { top: C.rose,    bottom: C.cyan,   particles: [C.rose,   C.cyan  ] },
-  "clients-contact":     { top: C.cyan,    bottom: C.violet                                },
-  "contact-footer":      { top: C.violet,  bottom: C.noir                                  },
-};
-
-// ── 8 directions d'explosion (cercle complet) ─────────────────────────────────
-const DIRS = [
-  { dx:  0,      dy: -1      },  // 0°
-  { dx:  0.707,  dy: -0.707  },  // 45°
-  { dx:  1,      dy:  0      },  // 90°
-  { dx:  0.707,  dy:  0.707  },  // 135°
-  { dx:  0,      dy:  1      },  // 180°
-  { dx: -0.707,  dy:  0.707  },  // 225°
-  { dx: -1,      dy:  0      },  // 270°
-  { dx: -0.707,  dy: -0.707  },  // 315°
-] as const;
-
-const DIST = [65, 48, 72, 52, 60, 42, 70, 58] as const;
-const SIZE = [3,  2,  4,  2,  3,  4,  2,  3 ] as const;
-const DUR  = [1.0,0.9,1.1,0.85,1.0,0.95,1.15,0.8] as const;
-
-// ── Explosion de particules ───────────────────────────────────────────────────
-function Particles({ colors }: { colors: [string, string] }) {
-  const prefersReduced = useReducedMotion();
-  const wrapRef        = useRef<HTMLDivElement>(null);
-  const [fired, setFired] = useState(false);
-
-  useEffect(() => {
-    if (prefersReduced) return;
-    const el = wrapRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setFired(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.5 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [prefersReduced]);
-
-  if (prefersReduced) return null;
-
+// ── SCAN — ligne holographique qui pulse ─────────────────────────────────────
+function ScanDivider() {
   return (
-    <div
-      ref={wrapRef}
-      className="div-particles"
-      style={{ position: "absolute", inset: 0 }}
-    >
-      {fired && DIRS.map((dir, i) => {
-        const color = colors[i % 2];
-        const s     = SIZE[i];
-        return (
-          <motion.div
-            key={i}
-            initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-            animate={{
-              x:       dir.dx * DIST[i],
-              y:       dir.dy * DIST[i],
-              opacity: [1, 0.8, 0],
-              scale:   [1, 1.5, 0],
-            }}
-            transition={{ duration: DUR[i], ease: "easeOut" }}
-            style={{
-              position:    "absolute",
-              left:        "50%",
-              top:         "50%",
-              marginLeft:  -(s / 2),
-              marginTop:   -(s / 2),
-              width:       s,
-              height:      s,
-              borderRadius: "50%",
-              background:  color,
-              boxShadow:   `0 0 8px ${color}99`,
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-// ── Composant principal ───────────────────────────────────────────────────────
-export default function SectionDivider({ variant }: { variant: DividerVariant }) {
-  const cfg = VARIANTS[variant];
-
-  return (
-    <div
-      aria-hidden="true"
-      className="div-section-divider"
-      style={{
-        position:      "relative",
-        height:         160,
-        overflow:       "hidden",
-        pointerEvents:  "none",
-        zIndex:          1,
-      }}
-    >
-      {/* Option 3 — Gradient ambiant (toutes les transitions) */}
+    <div aria-hidden="true" style={{ position: "relative", height: 2, overflow: "visible", margin: "0 0" }}>
+      {/* Ligne principale */}
       <div style={{
-        position: "absolute",
-        inset:    0,
-        background: `linear-gradient(to bottom, ${rgba(cfg.top, 0.08)} 0%, transparent 50%, ${rgba(cfg.bottom, 0.08)} 100%)`,
+        position: "absolute", left: 0, right: 0, top: 0, height: "1px",
+        background: "linear-gradient(90deg, transparent 0%, #8b5cf6 20%, #d946ef 50%, #06b6d4 80%, transparent 100%)",
+        animation: "scan-pulse 2.5s ease-in-out infinite",
       }} />
-
-      {/* Option 2 — Explosion de particules (3 variantes uniquement) */}
-      {cfg.particles && <Particles colors={cfg.particles} />}
+      {/* Halo glow sous la ligne */}
+      <div style={{
+        position: "absolute", left: "10%", right: "10%", top: -6, height: 13,
+        background: "linear-gradient(90deg, transparent, rgba(217,70,239,0.35) 30%, rgba(6,182,212,0.35) 70%, transparent)",
+        filter: "blur(6px)",
+        animation: "scan-pulse 2.5s ease-in-out infinite",
+      }} />
+      {/* Point scanner qui défile */}
+      <div style={{
+        position: "absolute", top: -3, width: 6, height: 6, borderRadius: "50%",
+        background: "#d946ef",
+        boxShadow: "0 0 12px 4px rgba(217,70,239,0.8)",
+        animation: "scan-travel 3s linear infinite",
+      }} />
+      <style>{`
+        @keyframes scan-pulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 1; }
+        }
+        @keyframes scan-travel {
+          0% { left: 0%; opacity: 0; }
+          5% { opacity: 1; }
+          95% { opacity: 1; }
+          100% { left: 100%; opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .scan-anim { animation: none !important; }
+        }
+      `}</style>
     </div>
   );
+}
+
+// ── WAVE — vague SVG avec dégradé animé ─────────────────────────────────────
+function WaveDivider() {
+  return (
+    <div aria-hidden="true" style={{ position: "relative", height: 60, overflow: "hidden" }}>
+      <svg
+        viewBox="0 0 1440 60"
+        preserveAspectRatio="none"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      >
+        <defs>
+          <linearGradient id="wave-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stopColor="#8b5cf6" stopOpacity="0" />
+            <stop offset="20%"  stopColor="#d946ef" stopOpacity="0.7" />
+            <stop offset="50%"  stopColor="#06b6d4" stopOpacity="0.9" />
+            <stop offset="80%"  stopColor="#d946ef" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+            <animateTransform
+              attributeName="gradientTransform"
+              type="translate"
+              from="-1 0" to="1 0"
+              dur="4s" repeatCount="indefinite"
+            />
+          </linearGradient>
+          {/* Glow filter */}
+          <filter id="wave-glow">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        {/* Vague principale */}
+        <path
+          d="M0,30 C240,5 480,55 720,30 C960,5 1200,55 1440,30"
+          fill="none"
+          stroke="url(#wave-grad)"
+          strokeWidth="1.5"
+          filter="url(#wave-glow)"
+        />
+        {/* Vague secondaire décalée */}
+        <path
+          d="M0,35 C240,10 480,60 720,35 C960,10 1200,60 1440,35"
+          fill="none"
+          stroke="url(#wave-grad)"
+          strokeWidth="0.5"
+          opacity="0.4"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// ── CIRCUIT — points lumineux animés ────────────────────────────────────────
+const NODES = [
+  { x: "8%",  y: 20, color: "#8b5cf6", size: 4, delay: "0s" },
+  { x: "22%", y: 40, color: "#d946ef", size: 3, delay: "0.5s" },
+  { x: "38%", y: 15, color: "#06b6d4", size: 4, delay: "1s" },
+  { x: "54%", y: 45, color: "#8b5cf6", size: 3, delay: "0.3s" },
+  { x: "67%", y: 20, color: "#d946ef", size: 4, delay: "1.5s" },
+  { x: "80%", y: 38, color: "#06b6d4", size: 3, delay: "0.8s" },
+  { x: "92%", y: 18, color: "#8b5cf6", size: 4, delay: "0.2s" },
+];
+
+// Lignes entre les nodes
+const LINES = [
+  { x1: "8%",  x2: "22%", y: 30 },
+  { x1: "22%", x2: "38%", y: 28 },
+  { x1: "38%", x2: "54%", y: 30 },
+  { x1: "54%", x2: "67%", y: 32 },
+  { x1: "67%", x2: "80%", y: 29 },
+  { x1: "80%", x2: "92%", y: 28 },
+];
+
+function CircuitDivider() {
+  return (
+    <div aria-hidden="true" style={{ position: "relative", height: 60, overflow: "visible" }}>
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+        <defs>
+          <filter id="node-glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        {/* Lignes de circuit */}
+        {LINES.map((l, i) => (
+          <line key={i}
+            x1={l.x1} y1={l.y} x2={l.x2} y2={l.y}
+            stroke="rgba(139,92,246,0.3)" strokeWidth="0.5"
+            strokeDasharray="4 6"
+          />
+        ))}
+        {/* Nodes */}
+        {NODES.map((n, i) => (
+          <circle key={i}
+            cx={n.x} cy={n.y} r={n.size}
+            fill={n.color}
+            filter="url(#node-glow)"
+            style={{ animation: `node-pulse 2s ease-in-out ${n.delay} infinite` }}
+          />
+        ))}
+      </svg>
+      <style>{`
+        @keyframes node-pulse {
+          0%, 100% { opacity: 0.4; r: 3; }
+          50% { opacity: 1; r: 5; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          circle { animation: none !important; opacity: 0.6; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── CHEVRON — diagonale anguleuse néon ──────────────────────────────────────
+function ChevronDivider() {
+  return (
+    <div aria-hidden="true" style={{ position: "relative", height: 40, overflow: "visible" }}>
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+        <defs>
+          <linearGradient id="chev-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stopColor="#d946ef" stopOpacity="0" />
+            <stop offset="25%"  stopColor="#d946ef" stopOpacity="0.9" />
+            <stop offset="50%"  stopColor="#8b5cf6" stopOpacity="1" />
+            <stop offset="75%"  stopColor="#06b6d4" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+          </linearGradient>
+          <filter id="chev-glow">
+            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        {/* Chevron principal */}
+        <polyline
+          points="0,35 360,8 720,25 1080,5 1440,20"
+          fill="none"
+          stroke="url(#chev-grad)"
+          strokeWidth="1.5"
+          filter="url(#chev-glow)"
+        />
+        {/* Écho atténué */}
+        <polyline
+          points="0,38 360,11 720,28 1080,8 1440,23"
+          fill="none"
+          stroke="url(#chev-grad)"
+          strokeWidth="0.5"
+          opacity="0.3"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// ── SIGNAL — ligne fine avec pulse ──────────────────────────────────────────
+function SignalDivider() {
+  return (
+    <div aria-hidden="true" style={{ position: "relative", height: 20, overflow: "visible" }}>
+      <div style={{
+        position: "absolute", left: 0, right: 0, top: "50%",
+        height: "0.5px", transform: "translateY(-50%)",
+        background: "linear-gradient(90deg, transparent 0%, #d946ef 20%, #06b6d4 50%, #d946ef 80%, transparent 100%)",
+        animation: "signal-pulse 3s ease-in-out infinite",
+      }} />
+      <div style={{
+        position: "absolute", left: "15%", right: "15%", top: "50%",
+        height: 8, transform: "translateY(-50%)",
+        background: "linear-gradient(90deg, transparent, rgba(217,70,239,0.4) 30%, rgba(6,182,212,0.4) 70%, transparent)",
+        filter: "blur(4px)",
+        animation: "signal-pulse 3s ease-in-out infinite",
+      }} />
+      <style>{`
+        @keyframes signal-pulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .signal-anim { animation: none !important; opacity: 0.5; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── Export ───────────────────────────────────────────────────────────────────
+export default function SectionDivider({ variant = "scan" }: { variant?: DividerVariant }) {
+  if (variant === "wave")    return <WaveDivider />;
+  if (variant === "circuit") return <CircuitDivider />;
+  if (variant === "chevron") return <ChevronDivider />;
+  if (variant === "signal")  return <SignalDivider />;
+  return <ScanDivider />;
 }
