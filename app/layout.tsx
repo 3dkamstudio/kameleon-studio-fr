@@ -21,7 +21,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kameleo-studio.fr"),
+  metadataBase: new URL("https://xn--kamlonstudio-debb.fr"),
   title: "Kaméléon Studio — Production vidéo & web par IA",
   description:
     "Studio de production vidéo et web premium propulsé par l'intelligence artificielle. Créations sur-mesure, identités visuelles, contenus qui transforment.",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://kameleo-studio.fr",
+    url: "https://xn--kamlonstudio-debb.fr",
     siteName: "Kaméléon Studio",
     title: "Kaméléon Studio — Production vidéo & web par IA",
     description:

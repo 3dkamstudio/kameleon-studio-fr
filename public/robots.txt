@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kameleo-studio.fr/sitemap.xml
+Sitemap: https://xn--kamlonstudio-debb.fr/sitemap.xml
