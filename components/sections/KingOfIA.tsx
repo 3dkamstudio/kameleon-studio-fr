@@ -464,8 +464,10 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
           </motion.div>
 
           {/* Overlays graduels */}
-          {/* Fond sombre fort sur 65% bas */}
-          <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(to top, rgba(3,2,14,0.99) 0%, rgba(3,2,14,0.97) 20%, rgba(3,2,14,0.88) 42%, rgba(3,2,14,0.50) 62%, rgba(3,2,14,0.10) 80%, transparent 100%)` }} />
+          {/* Mobile : overlay allégé pour voir l'image */}
+          <div className="absolute inset-0 z-10 sm:hidden" style={{ background: `linear-gradient(to top, rgba(3,2,14,0.99) 0%, rgba(3,2,14,0.95) 32%, rgba(3,2,14,0.55) 52%, rgba(3,2,14,0.08) 70%, transparent 100%)` }} />
+          {/* Desktop : overlay sombre original */}
+          <div className="absolute inset-0 z-10 hidden sm:block" style={{ background: `linear-gradient(to top, rgba(3,2,14,0.99) 0%, rgba(3,2,14,0.97) 20%, rgba(3,2,14,0.88) 42%, rgba(3,2,14,0.50) 62%, rgba(3,2,14,0.10) 80%, transparent 100%)` }} />
           {/* Teinture couleur latérale */}
           <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(135deg, ${color}10 0%, transparent 55%, ${color}08 100%)` }} />
           {/* Vignette hover */}

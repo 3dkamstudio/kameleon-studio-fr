@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Play, Layers, Palette, BookOpen, ChefHat, Mic2,
-  GraduationCap, ExternalLink, ShieldCheck,
+  GraduationCap, ExternalLink, ShieldCheck, Briefcase,
 } from "lucide-react";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
@@ -17,7 +17,7 @@ const SHOWREEL_SPEECH = [
 ];
 
 // ── Catalogue ──────────────────────────────────────────────────────────────────
-type CatKey = "all" | "animation" | "biblique" | "recette" | "podcast" | "pedagogique" | "prevention";
+type CatKey = "all" | "animation" | "biblique" | "recette" | "podcast" | "pedagogique" | "prevention" | "professionnel";
 
 type Video = {
   id: string;
@@ -35,7 +35,8 @@ const CATEGORIES: Record<CatKey, { label: string; color: string; Icon: React.Ele
   recette:     { label: "Recette",      color: "#22c55e", Icon: ChefHat },
   podcast:     { label: "Podcast",      color: "#06b6d4", Icon: Mic2 },
   pedagogique: { label: "Pédagogique",  color: "#eab308", Icon: GraduationCap },
-  prevention:  { label: "Prévention",   color: "#f43f5e", Icon: ShieldCheck },
+  prevention:    { label: "Prévention",    color: "#f43f5e", Icon: ShieldCheck },
+  professionnel: { label: "Professionnel", color: "#ec4899", Icon: Briefcase },
 };
 
 const VIDEOS: Video[] = [
@@ -127,6 +128,20 @@ const VIDEOS: Video[] = [
     cat:   "prevention",
     tag:   "Prévention",
   },
+  {
+    id:    "Nsi9tKNVPP0",
+    title: "BLR FORMATION",
+    desc:  "Vidéo professionnelle de présentation — identité de marque, message clair, production premium.",
+    cat:   "professionnel",
+    tag:   "Pro",
+  },
+  {
+    id:    "9YbpZnqSedE",
+    title: "JL CONSEILS - Gerer les conflits",
+    desc:  "Contenu conseil professionnel — mise en scène soignée, message impactant, livré rapidement.",
+    cat:   "professionnel",
+    tag:   "Pro",
+  },
 ];
 
 // ── Composant miniature ────────────────────────────────────────────────────────
@@ -142,17 +157,33 @@ function Thumbnail({ id, title }: { id: string; title: string }) {
   );
 }
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+}
+
 // ── Section principale ─────────────────────────────────────────────────────────
 export default function Showreel() {
+  const isDesktop = useIsDesktop();
   const [activeId,  setActiveId]  = useState<string>(VIDEOS[0].id);
   const [activeCat, setActiveCat] = useState<CatKey>("all");
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const filtered   = activeCat === "all" ? VIDEOS : VIDEOS.filter(v => v.cat === activeCat);
+  const displayedVideos = isDesktop ? filtered : filtered.slice(0, visibleCount);
   const activeVideo = VIDEOS.find(v => v.id === activeId) ?? VIDEOS[0];
   const cat        = CATEGORIES[activeVideo.cat];
 
   function pickCategory(key: CatKey) {
     setActiveCat(key);
+    setVisibleCount(6);
     const pool = key === "all" ? VIDEOS : VIDEOS.filter(v => v.cat === key);
     if (pool.length && !pool.find(v => v.id === activeId)) { setActiveId(pool[0].id); }
   }
@@ -342,7 +373,7 @@ export default function Showreel() {
             {/* Scrollable list */}
             <div className="showreel-playlist flex flex-col gap-2.5 lg:max-h-[520px] lg:overflow-y-auto lg:pr-1">
               <AnimatePresence mode="popLayout">
-                {filtered.map((video, i) => {
+                {displayedVideos.map((video, i) => {
                   const vcat     = CATEGORIES[video.cat];
                   const isActive = video.id === activeId;
                   return (
@@ -406,6 +437,14 @@ export default function Showreel() {
                   );
                 })}
               </AnimatePresence>
+              {!isDesktop && filtered.length > visibleCount && (
+                <button
+                  onClick={() => setVisibleCount(v => v + 6)}
+                  className="mt-1 w-full rounded-xl border border-white/10 py-3 text-xs font-bold text-white/40 transition-all hover:border-white/20 hover:text-white/70"
+                >
+                  Afficher plus ({filtered.length - visibleCount} restante{filtered.length - visibleCount > 1 ? "s" : ""})
+                </button>
+              )}
             </div>
           </motion.div>
         </div>

@@ -92,7 +92,7 @@ export default function KameSpeech({
 
   const bubblePlacement =
     activePosition === "above"
-      ? "absolute bottom-full left-1/2 -translate-x-1/2 mb-3"
+      ? "absolute bottom-full right-0 mb-3 sm:left-1/2 sm:right-auto sm:-translate-x-1/2"
       : activePosition === "left"
       ? "absolute right-full top-1/2 -translate-y-1/2 mr-3"
       : "absolute left-full top-1/2 -translate-y-1/2 ml-3";
@@ -122,7 +122,7 @@ export default function KameSpeech({
   return (
     <div
       ref={wrapperRef}
-      className={cn("relative inline-flex flex-col items-center pointer-events-none", className)}
+      className={cn("relative inline-flex flex-col items-center pointer-events-none max-md:mt-12", className)}
     >
       {children}
 
@@ -131,7 +131,7 @@ export default function KameSpeech({
           <motion.div
             key={idx}
             className={cn(
-              "absolute z-30 w-max max-w-[210px] cursor-pointer pointer-events-auto",
+              "absolute z-30 w-[190px] cursor-pointer pointer-events-auto",
               bubblePlacement,
             )}
             initial={{ opacity: 0, scale: 0.65, y: activePosition === "above" ? 10 : 0 }}

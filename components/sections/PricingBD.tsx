@@ -115,7 +115,7 @@ export default function PricingBD() {
 
           {/* ── Colonne gauche : Grille tarifaire ── */}
           <motion.div
-            className="relative overflow-hidden rounded-3xl"
+            className="relative rounded-3xl"
             style={{
               background: "linear-gradient(160deg, rgba(139,92,246,0.06) 0%, rgba(9,8,15,0.98) 45%)",
               border: "1px solid rgba(255,255,255,0.08)",
@@ -128,7 +128,7 @@ export default function PricingBD() {
             initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7 }}
           >
-            <div className="h-[3px]" style={{ background: "linear-gradient(90deg,#8b5cf6,#06b6d4,#22c55e)" }} />
+            <div className="h-[3px] rounded-t-3xl" style={{ background: "linear-gradient(90deg,#8b5cf6,#06b6d4,#22c55e)" }} />
             <div className="p-6 sm:p-8">
 
               {/* En-tête grille */}

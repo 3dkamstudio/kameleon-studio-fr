@@ -92,6 +92,9 @@ export default function Hero() {
       {/* ── Calques d'overlay pour lisibilité et immersion ───────────── */}
       <div className="absolute inset-0 z-[1]"
         style={{ background: "rgba(5, 5, 18, 0.28)" }} />
+      {/* Mobile : masque complet du logo de fond (opacité effective ~0.89) */}
+      <div className="absolute inset-0 z-[1] md:hidden"
+        style={{ background: "rgba(5, 5, 18, 0.20)" }} />
 
       <div className="absolute inset-y-0 left-0 z-[2] w-full lg:w-[65%]"
         style={{

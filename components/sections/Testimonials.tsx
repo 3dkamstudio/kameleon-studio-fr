@@ -16,11 +16,11 @@ const TESTIMONIALS_SPEECH = [
 const CLIENTS = [
   { name: "Paillette Academy",     logo: "/logo-paillette-academy.png", description: "Vidéos pédagogiques",    glow: "#4dd9ff" },
   { name: "BLR Conseil Formation", logo: "/logo-blr-conseils.png",      description: "Conseil & formation",    glow: "#8a6dff" },
-  { name: "Gabi",                  logo: "/logo-gabi.webp",              description: "Littérature jeunesse",   glow: "#d946ef" },
+  { name: "Les aventures de Gabi",  logo: "/logo-gabi.webp",              description: "Littérature jeunesse",   glow: "#eab308" },
   { name: "JL Conseils",           logo: "/logo-jl-conseils.png",       description: "Conseil bien-être",      glow: "#5eff9d" },
   { name: "Les Pépites de Lylou",       logo: "/logo-pepites-lylou.png",              description: "Créations chrétiennes",  glow: "#ff9d4d" },
   { name: "Collège Fernand Donatien",   logo: "/logo-college-fernand-donatien.png",   description: "Prévention numérique",   glow: "#eab308" },
-  { name: "W&KEYSELITE",               logo: "/logo-wkeyselite.png",                 description: "Excellence & lifestyle",  glow: "#f43f5e" },
+  { name: "W&KEYSELITE",               logo: "/logo-wkeyselite.png",                 description: "Conciergerie",            glow: "#f43f5e" },
   { name: "Gommier",                   logo: "/logo-gommier.png",                    description: "Partenaire créatif",      glow: "#ffffff" },
 ] as const;
 
@@ -53,7 +53,7 @@ function AnimatedCount({ value, suffix, color }: { value: number; suffix: string
 
   return (
     <span
-      className="font-display text-6xl font-black leading-none"
+      className="font-display text-4xl sm:text-6xl font-black leading-none"
       style={{
         background: `linear-gradient(135deg, ${color} 0%, ${color}99 100%)`,
         WebkitBackgroundClip: "text",

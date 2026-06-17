@@ -132,7 +132,7 @@ const MAINTENANCE_PLANS = [
     highlight: false,
     cta: "Démarrer la maintenance",
     includes: [
-      "Jusqu'à 2 demandes de modification/mois (texte, image, lien, contenu)",
+      "Modifications illimitées (texte, image, lien, descriptions, contenu)",
       "Réponse sous 48h ouvrées",
       "Mises à jour techniques",
       "Sauvegarde mensuelle",
@@ -156,7 +156,7 @@ const MAINTENANCE_PLANS = [
     highlightBadge: "LE PLUS CHOISI",
     cta: "Démarrer la maintenance",
     includes: [
-      "Jusqu'à 4 demandes de modification/mois (texte, image, contenu, liens…)",
+      "Modifications illimitées (texte, image, lien, descriptions, contenu)",
       "Réponse sous 24h ouvrées",
       "Tout ce qui est dans Landing Page",
       "Interventions techniques incluses (bugs, sécurité, mises à jour)",
@@ -515,7 +515,7 @@ export default function WebStudio() {
                           >
                             {plan.badge}
                           </span>
-                          <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
+                          <h4 className="font-display text-2xl font-black leading-tight text-white sm:text-4xl">
                             Site{" "}
                             <motion.span
                               style={{
@@ -929,7 +929,7 @@ export default function WebStudio() {
                           >
                             {plan.badge}
                           </span>
-                          <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
+                          <h4 className="font-display text-2xl font-black leading-tight text-white sm:text-4xl">
                             Site{" "}
                             <motion.span
                               style={{
