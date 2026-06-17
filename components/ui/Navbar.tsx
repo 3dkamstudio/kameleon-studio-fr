@@ -58,7 +58,6 @@ export default function Navbar() {
           background: "rgba(6,6,14,0.88)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
           boxShadow: "0 4px 40px rgba(0,0,0,0.45)",
         } : {
           background: "linear-gradient(to bottom, rgba(6,6,14,0.70) 0%, transparent 100%)",
@@ -80,13 +79,17 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span className="hidden font-display text-[0.95rem] font-black tracking-tight text-white sm:block">
-              Kaméléon{" "}
+            <span className="hidden font-display text-[1.05rem] font-black tracking-tight sm:block">
               <span style={{
-                background: "linear-gradient(90deg, #d946ef, #8b5cf6, #06b6d4)",
+                background: "linear-gradient(90deg, #d946ef, #8b5cf6, #06b6d4, #22c55e, #f97316, #d946ef)",
+                backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-              }}>
+                backgroundClip: "text",
+                animation: "gradient-x-flow 4s linear infinite",
+              }}>Kaméléon</span>{" "}
+              <span style={{ display: "inline-block", color: "rgba(255,255,255,0.80)",
+                borderBottom: "1.5px solid rgba(217,70,239,0.65)", paddingBottom: "1px" }}>
                 Studio
               </span>
             </span>

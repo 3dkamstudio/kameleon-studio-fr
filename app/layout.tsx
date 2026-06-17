@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     "Studio de production vidéo et web premium propulsé par l'intelligence artificielle. Créations sur-mesure, identités visuelles, contenus qui transforment.",
   keywords: ["studio", "production vidéo", "web", "IA", "intelligence artificielle", "Kaméléon Studio", "Martinique"],
   icons: {
-    icon: "/kame.png",
-    apple: "/kame.png",
+    icon: "/favicon-ks.png",
+    apple: "/favicon-ks.png",
   },
   openGraph: {
     type: "website",

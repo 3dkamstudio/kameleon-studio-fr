@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Play, Layers, Palette, BookOpen, ChefHat, Mic2,
-  GraduationCap, ExternalLink,
+  GraduationCap, ExternalLink, ShieldCheck,
 } from "lucide-react";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
@@ -17,7 +17,7 @@ const SHOWREEL_SPEECH = [
 ];
 
 // ── Catalogue ──────────────────────────────────────────────────────────────────
-type CatKey = "all" | "animation" | "biblique" | "recette" | "podcast" | "pedagogique";
+type CatKey = "all" | "animation" | "biblique" | "recette" | "podcast" | "pedagogique" | "prevention";
 
 type Video = {
   id: string;
@@ -35,6 +35,7 @@ const CATEGORIES: Record<CatKey, { label: string; color: string; Icon: React.Ele
   recette:     { label: "Recette",      color: "#22c55e", Icon: ChefHat },
   podcast:     { label: "Podcast",      color: "#06b6d4", Icon: Mic2 },
   pedagogique: { label: "Pédagogique",  color: "#eab308", Icon: GraduationCap },
+  prevention:  { label: "Prévention",   color: "#f43f5e", Icon: ShieldCheck },
 };
 
 const VIDEOS: Video[] = [
@@ -91,13 +92,6 @@ const VIDEOS: Video[] = [
     start: 1,
   },
   {
-    id:    "xhjN96uah6s",
-    title: "E31: ACCOMPAGNER LA PERSONNE - BAC PRO ASSP - PROFESSEURE PAILLETTE.",
-    desc:  "Contenu e-learning premium — visuels clairs, structure progressive, rétention maximale garantie.",
-    cat:   "pedagogique",
-    tag:   "E-learning",
-  },
-  {
     id:    "TTMo7o30uWw",
     title: "La reproduction humaine : le cours simple à retenir",
     desc:  "Formation animée en série — apprentissage visuel, contenu structuré et mémorable.",
@@ -108,13 +102,6 @@ const VIDEOS: Video[] = [
     id:    "oB0K44-0wTo",
     title: "E2 Bac Pro ASSP : comment construire une AES sans paniquer",
     desc:  "Épisode de formation animée — vulgarisation claire, engagement maximal, livré en quelques jours.",
-    cat:   "pedagogique",
-    tag:   "E-learning",
-  },
-  {
-    id:    "QVJes1CuDEE",
-    title: "LA CONCEPTION D'UNE ACTION D'ÉDUCATION À LA SANTÉ - PROFESSEURE PAILLETTE",
-    desc:  "Suite de la série e-learning — visuels dynamiques, narration pédagogique, accessible à tous.",
     cat:   "pedagogique",
     tag:   "E-learning",
   },
@@ -132,6 +119,13 @@ const VIDEOS: Video[] = [
     cat:   "recette",
     tag:   "Recette",
     start: 5,
+  },
+  {
+    id:    "-S7dSXuEpYo",
+    title: "Vidéo de prévention",
+    desc:  "Production audiovisuelle de sensibilisation — message fort, mise en scène soignée, impact immédiat.",
+    cat:   "prevention",
+    tag:   "Prévention",
   },
 ];
 
@@ -170,7 +164,7 @@ export default function Showreel() {
   return (
     <section
       id="showreel"
-      className="relative overflow-hidden py-24 sm:py-32"
+      className="relative py-24 sm:py-32"
       style={{ background: "transparent" }}
     >
       {/* ── Fond ──────────────────────────────────────────────────────────── */}
@@ -179,8 +173,6 @@ export default function Showreel() {
           style={{ background: "radial-gradient(circle, rgba(139,92,246,0.14) 0%, transparent 70%)" }} />
         <div className="absolute -right-32 bottom-0 h-[600px] w-[600px] rounded-full blur-[110px]"
           style={{ background: "radial-gradient(circle, rgba(217,70,239,0.12) 0%, transparent 70%)" }} />
-        <div className="hex-grid absolute inset-0 opacity-30" />
-        <div className="scanline absolute inset-0" />
       </div>
       <Sparkles />
 
@@ -280,9 +272,9 @@ export default function Showreel() {
                     transition={{ duration: 0.3 }}
                   >
                     <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${activeId}?rel=0&modestbranding=1&color=white${activeVideo.start ? `&start=${activeVideo.start}` : ""}`}
+                      src={`https://www.youtube-nocookie.com/embed/${activeId}?rel=0&modestbranding=1&color=white&playsinline=1${activeVideo.start ? `&start=${activeVideo.start}` : ""}`}
                       title={activeVideo.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                       allowFullScreen
                       className="h-full w-full"
                       loading="lazy"
@@ -420,7 +412,7 @@ export default function Showreel() {
 
         {/* ══ BANDE CATÉGORIES VISUELLES (mobile scroll) ════════════════════ */}
         <motion.div
-          className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-6 lg:hidden"
+          className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-7 lg:hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -479,8 +471,8 @@ export default function Showreel() {
       </div>
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-10 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={SHOWREEL_SPEECH} position="left">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-10 md:right-8 md:mt-0 md:pb-0 md:w-auto">
+        <KameSpeech variants={SHOWREEL_SPEECH} position="above" positionMd="left">
           <Kame context="default" src="/kame-cameraman.png" size={185} />
         </KameSpeech>
       </div>
