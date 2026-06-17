@@ -8,11 +8,14 @@ import PricingVideo from "@/components/sections/PricingVideo";
 import PricingBD from "@/components/sections/PricingBD";
 import WebStudio from "@/components/sections/WebStudio";
 import FAQ from "@/components/sections/FAQ";
+import KingOfIA from "@/components/sections/KingOfIA";
+import CtaFinal from "@/components/sections/CtaFinal";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 import CelestialBackground from "@/components/ui/CelestialBackground";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
+import RevealSection from "@/components/ui/RevealSection";
 
 export default function Home() {
   return (
@@ -20,39 +23,44 @@ export default function Home() {
       <CelestialBackground />
 
       <div className="relative z-[1]">
+        {/* Hero : animation propre interne, pas de RevealSection */}
         <SectionWrapper><Hero /></SectionWrapper>
         <SectionDivider variant="scan" />
 
-        <SectionWrapper><Services /></SectionWrapper>
-        <SectionDivider variant="chevron" />
+        <RevealSection><SectionWrapper><Services /></SectionWrapper></RevealSection>
+        <div className="divider-rainbow-glow" />
 
-        <SectionWrapper><Prestations /></SectionWrapper>
+        <RevealSection><SectionWrapper><Prestations /></SectionWrapper></RevealSection>
         <SectionDivider variant="wave" />
 
-        <SectionWrapper><Showreel /></SectionWrapper>
-        <SectionDivider variant="circuit" />
-
-        <SectionWrapper><Process /></SectionWrapper>
+        <RevealSection><SectionWrapper><Showreel /></SectionWrapper></RevealSection>
         <SectionDivider variant="scan" />
 
-        <SectionWrapper><Testimonials /></SectionWrapper>
-        <SectionDivider variant="wave" />
-
-        <SectionWrapper><PricingVideo /></SectionWrapper>
-        <SectionDivider variant="chevron" />
-
-        <SectionWrapper><PricingBD /></SectionWrapper>
-        <SectionDivider variant="circuit" />
-
-        <SectionWrapper><WebStudio /></SectionWrapper>
+        <RevealSection><SectionWrapper><Process /></SectionWrapper></RevealSection>
         <SectionDivider variant="scan" />
 
-        <SectionWrapper><FAQ /></SectionWrapper>
+        <RevealSection><SectionWrapper><Testimonials /></SectionWrapper></RevealSection>
         <SectionDivider variant="wave" />
 
-        <SectionWrapper><Contact /></SectionWrapper>
+        <RevealSection><SectionWrapper><PricingVideo /></SectionWrapper></RevealSection>
+        <SectionDivider variant="chevron" />
+
+        <RevealSection><SectionWrapper><PricingBD /></SectionWrapper></RevealSection>
+        <SectionDivider variant="circuit" />
+
+        <RevealSection><SectionWrapper><WebStudio /></SectionWrapper></RevealSection>
+        <SectionDivider variant="scan" />
+
+        <RevealSection><SectionWrapper><FAQ /></SectionWrapper></RevealSection>
+        <SectionDivider variant="wave" />
+
+        <RevealSection><KingOfIA /></RevealSection>
+        <SectionDivider variant="wave" />
+
+        <RevealSection><SectionWrapper><Contact /></SectionWrapper></RevealSection>
       </div>
 
+      <CtaFinal />
       <SectionDivider variant="signal" />
       <Footer />
     </main>

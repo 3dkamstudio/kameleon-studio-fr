@@ -243,6 +243,43 @@
     opacity: 0.4;
   }
 
+  /* Séparateur arc-en-ciel avec spot lumineux animé */
+  .divider-rainbow-glow {
+    position: relative;
+    height: 2px;
+    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #d946ef,
+      #8b5cf6,
+      #06b6d4,
+      #22c55e,
+      #eab308,
+      #f97316,
+      #f43f5e,
+      transparent
+    );
+    opacity: 0.85;
+    box-shadow: 0 0 14px rgba(217,70,239,0.45), 0 0 28px rgba(139,92,246,0.22);
+  }
+
+  .divider-rainbow-glow::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 220px;
+    height: 10px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 35%, transparent 70%);
+    filter: blur(3px);
+    animation: glow-travel 2.6s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .divider-rainbow-glow::after { animation: none; }
+  }
+
   /* ── Gradient flow animé (horizontal) — titre ligne 2, style KingOfIA ── */
   /* Variante froide : cyan → violet → fuchsia (Hero) */
   .text-gradient-cool {
@@ -515,3 +552,24 @@
   0%   { background-position: 0% -100%; }
   100% { background-position: 0% 100%; }
 }
+
+/* ── Kame float — CSS thread, compositor-only ───────────────────────────── */
+@keyframes kame-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+.animate-kame-float { animation: kame-float 4s ease-in-out infinite; }
+
+@keyframes glow-travel {
+  0%   { transform: translateX(-220px); }
+  100% { transform: translateX(100vw); }
+}
+
+/* ── KingOfIA — compositor-safe glow animations ─────────────────────────── */
+@keyframes koi-halo-pulse {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 1; }
+}
+.animate-koi-halo        { animation: koi-halo-pulse 2.4s ease-in-out infinite; }
+.animate-koi-halo-fast   { animation: koi-halo-pulse 1.1s ease-in-out infinite; }
+.animate-koi-recommended { animation: koi-halo-pulse 1.6s ease-in-out infinite; }

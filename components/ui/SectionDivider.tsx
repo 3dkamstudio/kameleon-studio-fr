@@ -49,7 +49,7 @@ function ScanDivider() {
 // ── WAVE — vague SVG avec dégradé animé ─────────────────────────────────────
 function WaveDivider() {
   return (
-    <div aria-hidden="true" style={{ position: "relative", height: 60, overflow: "hidden" }}>
+    <div aria-hidden="true" style={{ position: "relative", height: 60, overflow: "visible" }}>
       <svg
         viewBox="0 0 1440 60"
         preserveAspectRatio="none"
