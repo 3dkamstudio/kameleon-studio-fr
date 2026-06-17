@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Film, Clock, Zap, TrendingDown } from "lucide-react";
+
+import Image from "next/image";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
 import KameSpeech from "@/components/ui/KameSpeech";
@@ -42,12 +44,21 @@ const STATS = [
   { label: "Délai livraison", value: "7 jours", color: "#06b6d4" },
 ];
 
+const rowVariants = {
+  hidden:  { opacity: 0, x: -12 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.35 } },
+};
+const tbodyVariants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.035 } },
+};
+
 
 export default function PricingVideo() {
   return (
     <section
       id="tarifs-video"
-      className="relative overflow-hidden px-6 py-28"
+      className="relative px-6 py-28"
       style={{ background: "transparent" }}
     >
       {/* ── Fond dynamique orange ─────────────────────────────────────────── */}
@@ -112,80 +123,100 @@ export default function PricingVideo() {
         {/* ── Corps principal : 2 colonnes ───────────────────────────────── */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.6fr]">
 
-          {/* ── Colonne gauche : Feature card ── */}
+          {/* ── Colonne gauche : Feature card plein cadre ── */}
           <motion.div
-            className="flex flex-col overflow-hidden rounded-3xl"
+            className="relative overflow-hidden rounded-3xl min-h-[580px] max-lg:min-h-[800px]"
             style={{
-              background: "linear-gradient(160deg, rgba(249,115,22,0.13) 0%, rgba(9,8,15,0.97) 55%)",
-              border: "1px solid rgba(249,115,22,0.28)",
-              boxShadow: "0 0 80px rgba(249,115,22,0.10), 0 24px 48px rgba(0,0,0,0.4)",
+              border: "1px solid rgba(249,115,22,0.35)",
+              boxShadow: "0 0 80px rgba(249,115,22,0.12), 0 24px 48px rgba(0,0,0,0.5)",
             }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+          <motion.div
+            className="absolute inset-0"
             initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7 }}
           >
-            {/* Barre top */}
-            <div className="h-[3px]" style={{ background: "linear-gradient(90deg,#f97316,#f43f5e,#d946ef)" }} />
+            {/* Image plein fond */}
+            <Image
+              src="/prest-video.webp"
+              alt="Production Vidéo"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+            />
 
-            {/* Halo décoratif */}
-            <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 overflow-hidden rounded-3xl">
-              <div className="absolute -right-8 -top-8 h-52 w-52 rounded-full blur-3xl opacity-30"
-                style={{ background: "radial-gradient(circle,rgba(249,115,22,0.7),transparent 70%)" }} />
+            {/* Overlay gradient fort bas → haut */}
+            <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to top, rgba(5,4,16,1) 0%, rgba(5,4,16,0.97) 28%, rgba(5,4,16,0.75) 52%, rgba(5,4,16,0.25) 72%, rgba(5,4,16,0.05) 100%)" }} />
+            {/* Teinture orange */}
+            <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(160deg, rgba(249,115,22,0.16) 0%, transparent 55%)" }} />
+
+            {/* Barre top */}
+            <div className="absolute inset-x-0 top-0 z-20 h-[3px]" style={{ background: "linear-gradient(90deg,#f97316,#f43f5e,#d946ef)" }} />
+
+            {/* ── Titre en haut ── */}
+            <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-4 p-7 sm:p-9" style={{ paddingTop: "calc(3px + 8rem)" }}>
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
+                style={{ background: "rgba(249,115,22,0.30)", border: "1px solid rgba(249,115,22,0.55)", backdropFilter: "blur(8px)" }}>
+                <Film className="h-7 w-7" style={{ color: "#f97316" }} />
+              </div>
+              <div>
+                <h3 className="font-display text-4xl font-black drop-shadow-lg sm:text-5xl">
+                  <span className="text-white">Production </span>
+                  <span className="text-gradient-warm">Vidéo</span>
+                </h3>
+                <p className="text-xs text-white/60">30s · 16:9 + 9:16 · Montage premium</p>
+              </div>
             </div>
 
-            <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-9">
-              {/* Icône + badge */}
-              <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl"
-                  style={{ background: "linear-gradient(145deg,rgba(249,115,22,0.35),rgba(244,63,94,0.15))", border: "1px solid rgba(249,115,22,0.4)", boxShadow: "0 0 24px rgba(249,115,22,0.3),inset 0 1px 0 rgba(255,255,255,0.12)" }}>
-                  <Film className="h-7 w-7" style={{ color: "#f97316" }} />
-                </div>
-                <div>
-                  <h3 className="font-display text-2xl font-black text-white">Production Vidéo</h3>
-                  <p className="text-xs text-white/40">30s · 16:9 + 9:16 · Montage premium</p>
-                </div>
-              </div>
+            {/* ── Contenu en bas ── */}
+            <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col p-7 sm:p-9">
+
+              {/* Ligne déco */}
+              <div className="mb-5 h-px" style={{ background: "linear-gradient(90deg,#f97316,#f43f5e,transparent)" }} />
 
               {/* Prix hero */}
-              <div className="mb-2 flex items-end gap-2">
-                <span className="font-display text-[4.5rem] font-black leading-none" style={{ color: "#f97316" }}>250</span>
+              <div className="mb-1 flex items-end gap-2">
+                <span className="font-display text-[4rem] font-black leading-none drop-shadow-lg" style={{ color: "#f97316" }}>250</span>
                 <div className="mb-2 flex flex-col">
-                  <span className="text-lg font-bold text-white/50">€</span>
-                  <span className="text-xs text-white/30">/ vidéo</span>
+                  <span className="text-lg font-bold text-white/60">€</span>
+                  <span className="text-xs text-white/45">/ vidéo</span>
                 </div>
               </div>
-              <div className="mb-7 flex items-center gap-2">
+              <div className="mb-6 flex items-center gap-2">
                 <TrendingDown className="h-3.5 w-3.5" style={{ color: "#22c55e" }} />
                 <span className="text-xs font-semibold" style={{ color: "#22c55e" }}>Dégressif jusqu&rsquo;à 200€ dès 10 vidéos</span>
               </div>
 
               {/* Features */}
-              <ul className="mb-8 flex flex-col gap-3">
+              <ul className="mb-6 flex flex-col gap-2.5">
                 {FEATURES.map(f => (
                   <li key={f} className="flex items-start gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full mt-0.5"
-                      style={{ background: "rgba(249,115,22,0.20)", border: "1px solid rgba(249,115,22,0.45)" }}>
+                      style={{ background: "rgba(249,115,22,0.25)", border: "1px solid rgba(249,115,22,0.55)" }}>
                       <Check className="h-2.5 w-2.5" style={{ color: "#f97316" }} />
                     </span>
-                    <span className="text-sm leading-snug text-white/65">{f}</span>
+                    <span className="text-sm font-medium leading-snug text-white/85">{f}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Options supplémentaires */}
-              <div className="mb-8 rounded-2xl px-4 py-3.5"
-                style={{ background: "rgba(249,115,22,0.07)", border: "1px solid rgba(249,115,22,0.18)" }}>
+              {/* Durée supplémentaire */}
+              <div className="mb-6 rounded-2xl px-4 py-3"
+                style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(249,115,22,0.22)", backdropFilter: "blur(12px)" }}>
                 <div className="flex items-center gap-2 mb-1">
                   <Zap className="h-3.5 w-3.5" style={{ color: "#f97316" }} />
                   <span className="text-xs font-black uppercase tracking-widest" style={{ color: "#f97316" }}>Durée supplémentaire</span>
                 </div>
-                <p className="text-xs text-white/50">+70 € TTC par tranche de 30s ajoutée, par vidéo.</p>
+                <p className="text-xs text-white/65">+70 € TTC par tranche de 30s ajoutée, par vidéo.</p>
               </div>
 
               {/* CTA */}
               <motion.a href="#contact"
-                className="mt-auto inline-flex w-full items-center justify-center gap-2.5 rounded-2xl py-4 text-sm font-black text-white"
-                style={{ background: "linear-gradient(135deg,#f97316,#f43f5e)", boxShadow: "0 4px 24px rgba(249,115,22,0.45)" }}
-                whileHover={{ scale: 1.03, boxShadow: "0 8px 40px rgba(249,115,22,0.65)" }}
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl py-4 text-sm font-black text-white"
+                style={{ background: "linear-gradient(135deg,#f97316,#f43f5e)", boxShadow: "0 4px 24px rgba(249,115,22,0.50)" }}
+                whileHover={{ scale: 1.03, boxShadow: "0 8px 40px rgba(249,115,22,0.75)" }}
                 whileTap={{ scale: 0.97 }}
               >
                 Commander mes vidéos
@@ -193,14 +224,20 @@ export default function PricingVideo() {
               </motion.a>
             </div>
           </motion.div>
+          </motion.div>
 
           {/* ── Colonne droite : Grille tarifaire ── */}
           <motion.div
-            className="overflow-hidden rounded-3xl"
+            className="relative overflow-hidden rounded-3xl"
             style={{
               background: "linear-gradient(160deg, rgba(249,115,22,0.06) 0%, rgba(9,8,15,0.98) 45%)",
               border: "1px solid rgba(255,255,255,0.08)",
             }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+          <motion.div
+            className="relative"
             initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
           >
@@ -225,7 +262,7 @@ export default function PricingVideo() {
               </div>
 
               {/* Table */}
-              <div className="overflow-x-auto">
+                <div className="overflow-x-auto">
                 <table className="w-full min-w-[460px] border-collapse">
                   <thead>
                     <tr className="border-b border-white/[0.07]">
@@ -235,13 +272,15 @@ export default function PricingVideo() {
                       <th className="pb-3 text-right text-[0.62rem] font-black uppercase tracking-widest text-white/30">Économie</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {GRID.map(({ qty, unit, total, save, best }, i) => (
+                  <motion.tbody
+                    variants={tbodyVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
+                    {GRID.map(({ qty, unit, total, save, best }) => (
                       <motion.tr key={qty}
-                        initial={{ opacity: 0, x: -12 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.035, duration: 0.35 }}
+                        variants={rowVariants}
                         className="group/row border-b border-white/[0.04] last:border-0 transition-colors hover:bg-white/[0.025]"
                         style={best ? { background: "linear-gradient(90deg,rgba(249,115,22,0.14),rgba(244,63,94,0.06))" } : undefined}
                       >
@@ -285,9 +324,9 @@ export default function PricingVideo() {
                         </td>
                       </motion.tr>
                     ))}
-                  </tbody>
+                  </motion.tbody>
                 </table>
-              </div>
+                </div>
 
               {/* Note de bas de tableau */}
               <div className="mt-5 flex items-start gap-3 rounded-2xl border-t border-white/[0.05] pt-5">
@@ -300,12 +339,13 @@ export default function PricingVideo() {
               </div>
             </div>
           </motion.div>
+          </motion.div>
         </div>
       </div>
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={PRICING_SPEECH} position="left">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-8 md:right-8 md:mt-0 md:pb-0 md:w-auto">
+        <KameSpeech variants={PRICING_SPEECH} position="above" positionMd="left">
           <Kame context="point" src="/kame-cyberpunk.png" size={185} />
         </KameSpeech>
       </div>

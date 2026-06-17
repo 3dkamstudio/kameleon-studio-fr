@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, BookOpen, Clock, TrendingDown, Layers } from "lucide-react";
+
+import Image from "next/image";
 import Sparkles from "@/components/ui/Sparkles";
 
 // ── Grille dégressive BD ──────────────────────────────────────────────────────
@@ -34,11 +36,20 @@ const STATS = [
   { label: "Retouches",      value: "2 / pl.", color: "#06b6d4" },
 ];
 
+const rowVariants = {
+  hidden:  { opacity: 0, x: -12 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.35 } },
+};
+const tbodyVariants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.035 } },
+};
+
 export default function PricingBD() {
   return (
     <section
       id="tarifs-bd"
-      className="relative overflow-hidden px-6 py-28"
+      className="relative px-6 py-28"
       style={{ background: "transparent" }}
     >
       {/* ── Fond dynamique violet / cyan ──────────────────────────────────── */}
@@ -104,11 +115,16 @@ export default function PricingBD() {
 
           {/* ── Colonne gauche : Grille tarifaire ── */}
           <motion.div
-            className="overflow-hidden rounded-3xl"
+            className="relative overflow-hidden rounded-3xl"
             style={{
               background: "linear-gradient(160deg, rgba(139,92,246,0.06) 0%, rgba(9,8,15,0.98) 45%)",
               border: "1px solid rgba(255,255,255,0.08)",
             }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+          <motion.div
+            className="relative"
             initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7 }}
           >
@@ -133,7 +149,7 @@ export default function PricingBD() {
               </div>
 
               {/* Table */}
-              <div className="overflow-x-auto">
+                <div className="overflow-x-auto">
                 <table className="w-full min-w-[460px] border-collapse">
                   <thead>
                     <tr className="border-b border-white/[0.07]">
@@ -143,13 +159,15 @@ export default function PricingBD() {
                       <th className="pb-3 text-right text-[0.62rem] font-black uppercase tracking-widest text-white/30">Économie</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {GRID.map(({ qty, unit, total, save, best }, i) => (
+                  <motion.tbody
+                    variants={tbodyVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
+                    {GRID.map(({ qty, unit, total, save, best }) => (
                       <motion.tr key={qty}
-                        initial={{ opacity: 0, x: -12 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.035, duration: 0.35 }}
+                        variants={rowVariants}
                         className="border-b border-white/[0.04] last:border-0 transition-colors hover:bg-white/[0.025]"
                         style={best ? { background: "linear-gradient(90deg,rgba(139,92,246,0.14),rgba(6,182,212,0.06))" } : undefined}
                       >
@@ -189,9 +207,9 @@ export default function PricingBD() {
                         </td>
                       </motion.tr>
                     ))}
-                  </tbody>
+                  </motion.tbody>
                 </table>
-              </div>
+                </div>
 
               <div className="mt-5 flex items-start gap-3 rounded-2xl border-t border-white/[0.05] pt-5">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-white/25" />
@@ -202,75 +220,98 @@ export default function PricingBD() {
               </div>
             </div>
           </motion.div>
+          </motion.div>
 
-          {/* ── Colonne droite : Feature card ── */}
+          {/* ── Colonne droite : Feature card plein cadre ── */}
           <motion.div
-            className="flex flex-col overflow-hidden rounded-3xl"
+            className="relative overflow-hidden rounded-3xl min-h-[560px] max-lg:min-h-[800px]"
             style={{
-              background: "linear-gradient(160deg, rgba(139,92,246,0.13) 0%, rgba(9,8,15,0.97) 55%)",
-              border: "1px solid rgba(139,92,246,0.28)",
-              boxShadow: "0 0 80px rgba(139,92,246,0.10), 0 24px 48px rgba(0,0,0,0.4)",
+              border: "1px solid rgba(139,92,246,0.35)",
+              boxShadow: "0 0 80px rgba(139,92,246,0.12), 0 24px 48px rgba(0,0,0,0.5)",
             }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+          <motion.div
+            className="absolute inset-0"
             initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <div className="h-[3px]" style={{ background: "linear-gradient(90deg,#8b5cf6,#06b6d4,#22c55e)" }} />
+            {/* Image plein fond */}
+            <Image
+              src="/prest-bd.webp"
+              alt="Planche BD"
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+            />
 
-            <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 overflow-hidden rounded-3xl">
-              <div className="absolute -right-8 -top-8 h-52 w-52 rounded-full blur-3xl opacity-25"
-                style={{ background: "radial-gradient(circle,rgba(139,92,246,0.7),transparent 70%)" }} />
+            {/* Overlay gradient fort bas → haut */}
+            <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to top, rgba(5,4,16,1) 0%, rgba(5,4,16,0.97) 25%, rgba(5,4,16,0.80) 50%, rgba(5,4,16,0.30) 72%, rgba(5,4,16,0.05) 100%)" }} />
+            {/* Teinture violet latérale */}
+            <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.18) 0%, transparent 55%)" }} />
+
+            {/* Barre top */}
+            <div className="absolute inset-x-0 top-0 z-20 h-[3px]" style={{ background: "linear-gradient(90deg,#8b5cf6,#06b6d4,#22c55e)" }} />
+
+            {/* Titre en haut */}
+            <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-4 p-7 sm:p-9" style={{ paddingTop: "calc(3px + 8rem)" }}>
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
+                style={{ background: "rgba(139,92,246,0.30)", border: "1px solid rgba(139,92,246,0.55)", backdropFilter: "blur(8px)" }}>
+                <BookOpen className="h-7 w-7" style={{ color: "#8b5cf6" }} />
+              </div>
+              <div>
+                <h3 className="font-display text-4xl font-black drop-shadow-lg sm:text-5xl">
+                  <span className="text-white">Planches </span>
+                  <span className="text-gradient-cool">BD</span>
+                </h3>
+                <p className="text-xs text-white/55">Narration · Identité · Direction artistique</p>
+              </div>
             </div>
 
-            <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-9">
-              {/* Icône + titre */}
-              <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl"
-                  style={{ background: "linear-gradient(145deg,rgba(139,92,246,0.35),rgba(6,182,212,0.15))", border: "1px solid rgba(139,92,246,0.4)", boxShadow: "0 0 24px rgba(139,92,246,0.30),inset 0 1px 0 rgba(255,255,255,0.12)" }}>
-                  <BookOpen className="h-7 w-7" style={{ color: "#8b5cf6" }} />
-                </div>
-                <div>
-                  <h3 className="font-display text-2xl font-black text-white">Planches BD</h3>
-                  <p className="text-xs text-white/40">Narration · Identité · Direction artistique</p>
-                </div>
-              </div>
+            {/* Contenu overlayé en bas */}
+            <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col p-7 sm:p-9">
+
+              {/* Ligne déco */}
+              <div className="mb-5 h-px" style={{ background: "linear-gradient(90deg,#8b5cf6,#06b6d4,transparent)" }} />
 
               {/* Prix hero */}
-              <div className="mb-2 flex items-end gap-2">
-                <span className="font-display text-[4.5rem] font-black leading-none" style={{ color: "#8b5cf6" }}>190</span>
+              <div className="mb-1 flex items-end gap-2">
+                <span className="font-display text-[4rem] font-black leading-none drop-shadow-lg" style={{ color: "#8b5cf6" }}>190</span>
                 <div className="mb-2 flex flex-col">
-                  <span className="text-lg font-bold text-white/50">€</span>
-                  <span className="text-xs text-white/30">/ planche</span>
+                  <span className="text-lg font-bold text-white/60">€</span>
+                  <span className="text-xs text-white/40">/ planche</span>
                 </div>
               </div>
-              <div className="mb-7 flex items-center gap-2">
+              <div className="mb-6 flex items-center gap-2">
                 <TrendingDown className="h-3.5 w-3.5" style={{ color: "#22c55e" }} />
                 <span className="text-xs font-semibold" style={{ color: "#22c55e" }}>Dégressif jusqu&rsquo;à 150€ dès 10 planches</span>
               </div>
 
               {/* Features */}
-              <ul className="mb-8 flex flex-col gap-3">
+              <ul className="mb-6 flex flex-col gap-2.5">
                 {FEATURES.map(f => (
                   <li key={f} className="flex items-start gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full mt-0.5"
-                      style={{ background: "rgba(139,92,246,0.20)", border: "1px solid rgba(139,92,246,0.45)" }}>
+                      style={{ background: "rgba(139,92,246,0.25)", border: "1px solid rgba(139,92,246,0.55)" }}>
                       <Check className="h-2.5 w-2.5" style={{ color: "#8b5cf6" }} />
                     </span>
-                    <span className="text-sm leading-snug text-white/65">{f}</span>
+                    <span className="text-sm font-medium leading-snug text-white/85">{f}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Bloc format livraison */}
-              <div className="mb-8 rounded-2xl px-4 py-3.5"
-                style={{ background: "rgba(139,92,246,0.07)", border: "1px solid rgba(139,92,246,0.18)" }}>
+              {/* Formats */}
+              <div className="mb-6 rounded-2xl px-4 py-3"
+                style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(139,92,246,0.22)", backdropFilter: "blur(12px)" }}>
                 <div className="flex items-center gap-2 mb-2">
                   <Layers className="h-3.5 w-3.5" style={{ color: "#8b5cf6" }} />
                   <span className="text-xs font-black uppercase tracking-widest" style={{ color: "#8b5cf6" }}>Formats de livraison</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {["PNG haute résolution", "PDF vectoriel", "Fichiers sources"].map(t => (
-                    <span key={t} className="rounded-lg px-2.5 py-1 text-[0.68rem] font-semibold text-white/55"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}>
+                    <span key={t} className="rounded-lg px-2.5 py-1 text-[0.68rem] font-semibold text-white/70"
+                      style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }}>
                       {t}
                     </span>
                   ))}
@@ -279,15 +320,16 @@ export default function PricingBD() {
 
               {/* CTA */}
               <motion.a href="#contact"
-                className="mt-auto inline-flex w-full items-center justify-center gap-2.5 rounded-2xl py-4 text-sm font-black text-white"
-                style={{ background: "linear-gradient(135deg,#8b5cf6,#06b6d4)", boxShadow: "0 4px 24px rgba(139,92,246,0.45)" }}
-                whileHover={{ scale: 1.03, boxShadow: "0 8px 40px rgba(139,92,246,0.65)" }}
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl py-4 text-sm font-black text-white"
+                style={{ background: "linear-gradient(135deg,#8b5cf6,#06b6d4)", boxShadow: "0 4px 24px rgba(139,92,246,0.50)" }}
+                whileHover={{ scale: 1.03, boxShadow: "0 8px 40px rgba(139,92,246,0.75)" }}
                 whileTap={{ scale: 0.97 }}
               >
                 Commander mes planches
                 <ArrowRight className="h-4 w-4" />
               </motion.a>
             </div>
+          </motion.div>
           </motion.div>
         </div>
       </div>
