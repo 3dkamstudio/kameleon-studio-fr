@@ -236,23 +236,16 @@ function BentoCard({
 // ── Section ───────────────────────────────────────────────────────────────────
 export default function Prestations() {
   return (
-    <section id="prestations" className="relative overflow-hidden" style={{ background: "transparent" }}>
+    <section id="prestations" className="relative" style={{ background: "transparent" }}>
 
       {/* Fond */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, #07070e 0%, #0b0b18 40%, #08080f 70%, #060610 100%)" }} />
         <div className="absolute -right-32 -top-32 h-[600px] w-[600px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(217,70,239,0.11) 0%, transparent 70%)" }} />
         <div className="absolute -left-20 top-1/3 h-[500px] w-[500px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(249,115,22,0.09) 0%, transparent 70%)" }} />
         <div className="absolute -bottom-20 right-1/4 h-[450px] w-[450px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)" }} />
-        <div className="absolute inset-0 opacity-[0.022]"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-          }} />
       </div>
 
       <Sparkles />
@@ -325,8 +318,8 @@ export default function Prestations() {
         </div>
 
         {/* ── Kame guide ─────────────────────────────────────────────────── */}
-        <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-          <KameSpeech variants={PRESTATIONS_SPEECH} position="left">
+        <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-8 md:right-8 md:mt-0 md:pb-0 md:w-auto">
+          <KameSpeech variants={PRESTATIONS_SPEECH} position="above" positionMd="left">
             <Kame context="default" src="/kame-scientist.png" size={185} />
           </KameSpeech>
         </div>

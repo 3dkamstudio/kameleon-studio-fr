@@ -18,7 +18,10 @@ const CLIENTS = [
   { name: "BLR Conseil Formation", logo: "/logo-blr-conseils.png",      description: "Conseil & formation",    glow: "#8a6dff" },
   { name: "Gabi",                  logo: "/logo-gabi.webp",              description: "Littérature jeunesse",   glow: "#d946ef" },
   { name: "JL Conseils",           logo: "/logo-jl-conseils.png",       description: "Conseil bien-être",      glow: "#5eff9d" },
-  { name: "Les Pépites de Lylou",  logo: "/logo-pepites-lylou.png",     description: "Créations chrétiennes",  glow: "#ff9d4d" },
+  { name: "Les Pépites de Lylou",       logo: "/logo-pepites-lylou.png",              description: "Créations chrétiennes",  glow: "#ff9d4d" },
+  { name: "Collège Fernand Donatien",   logo: "/logo-college-fernand-donatien.png",   description: "Prévention numérique",   glow: "#eab308" },
+  { name: "W&KEYSELITE",               logo: "/logo-wkeyselite.png",                 description: "Excellence & lifestyle",  glow: "#f43f5e" },
+  { name: "Gommier",                   logo: "/logo-gommier.png",                    description: "Partenaire créatif",      glow: "#ffffff" },
 ] as const;
 
 const STATS = [
@@ -163,7 +166,7 @@ export default function Testimonials() {
   return (
     <section
       id="avis"
-      className="relative overflow-hidden py-24 sm:py-32"
+      className="relative py-24 sm:py-32"
       style={{ background: "transparent" }}
     >
       <style>{`

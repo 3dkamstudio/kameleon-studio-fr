@@ -121,7 +121,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-24 sm:py-32"
+      className="relative py-24 sm:py-32"
       style={{ background: "transparent" }}
     >
       {/* ── Fond ────────────────────────────────────────────────────────── */}
@@ -477,8 +477,8 @@ export default function Contact() {
       </div>
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-8 right-6 z-20 hidden lg:flex">
-        <KameSpeech variants={CONTACT_SPEECH} position="left">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-8 md:right-6 md:mt-0 md:pb-0 md:w-auto">
+        <KameSpeech variants={CONTACT_SPEECH} position="above" positionMd="left">
           <Kame context="default" src="/kame-closeup.webp" size={185} />
         </KameSpeech>
       </div>

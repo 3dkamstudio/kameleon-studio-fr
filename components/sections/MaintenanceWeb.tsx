@@ -92,7 +92,7 @@ const HORS_FORFAIT = [
 // ── Composant ─────────────────────────────────────────────────────────────────
 export default function MaintenanceWeb() {
   return (
-    <section id="maintenance" className="relative overflow-hidden px-6 py-28">
+    <section id="maintenance" className="relative px-6 py-28">
 
       {/* ── Fond ──────────────────────────────────────────────────────────── */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -426,13 +426,12 @@ export default function MaintenanceWeb() {
       </div>
 
       {/* ── Kame ──────────────────────────────────────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-10 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={SPEECH} position="left">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-10 md:right-8 md:mt-0 md:pb-0 md:w-auto">
+        <KameSpeech variants={SPEECH} position="above" positionMd="left">
           <Kame context="thumbsup" src="/kame-jump.png" size={185} />
         </KameSpeech>
       </div>
 
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface to-transparent" />
     </section>
   );
 }

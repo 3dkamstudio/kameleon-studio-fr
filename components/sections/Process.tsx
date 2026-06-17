@@ -146,7 +146,7 @@ export default function Process() {
   return (
     <section
       id="processus"
-      className="relative overflow-hidden px-6 py-32"
+      className="relative px-6 py-32"
       style={{ background: "transparent" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -169,12 +169,6 @@ export default function Process() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Grille futuriste */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.018]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
-        }} />
 
       <Sparkles />
 
@@ -491,8 +485,8 @@ export default function Process() {
       </div>
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={PROCESS_SPEECH} position="left">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-8 md:right-8 md:mt-0 md:pb-0 md:w-auto">
+        <KameSpeech variants={PROCESS_SPEECH} position="above" positionMd="left">
           <Kame context="default" src="/kame-robot.png" size={185} />
         </KameSpeech>
       </div>

@@ -202,7 +202,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden py-24 sm:py-32"
+      className="relative py-24 sm:py-32"
       style={{ background: "transparent" }}
     >
       {/* ── Fond ──────────────────────────────────────────────────────────── */}
@@ -213,13 +213,6 @@ export default function FAQ() {
           style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.10) 0%, rgba(217,70,239,0.06) 40%, transparent 70%)" }}
         />
         {/* Grille fine */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
         {/* Grand "?" décoratif */}
         <div
           className="pointer-events-none absolute right-[-40px] top-1/2 -translate-y-1/2 font-display text-[22rem] font-black leading-none select-none opacity-[0.018] sm:right-0 sm:text-[28rem]"
@@ -335,8 +328,8 @@ export default function FAQ() {
       </div>
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden lg:flex">
-        <KameSpeech variants={FAQ_SPEECH} position="left">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center mt-20 pb-4 md:absolute md:bottom-8 md:right-8 md:mt-0 md:pb-0 md:w-auto">
+        <KameSpeech variants={FAQ_SPEECH} position="above" positionMd="left">
           <Kame context="default" src="/kame-welcome.png" size={185} />
         </KameSpeech>
       </div>

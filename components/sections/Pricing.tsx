@@ -89,7 +89,7 @@ function Tick({ ok, color }: { ok: boolean | string; color: string }) {
 // ── Composant ─────────────────────────────────────────────────────────────────
 export default function Pricing() {
   return (
-    <section id="tarifs" className="relative overflow-hidden px-6 py-28">
+    <section id="tarifs" className="relative px-6 py-28">
 
       {/* ── Fond ──────────────────────────────────────────────────────────── */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -523,7 +523,6 @@ export default function Pricing() {
         </div>
       </div>
 
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface to-transparent" />
     </section>
   );
 }
