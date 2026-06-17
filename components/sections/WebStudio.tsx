@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import type { Variants } from "framer-motion";
 import {
   Check, ArrowRight, ChevronDown, Clock,
@@ -44,6 +45,7 @@ const CREATION_PLANS = [
     colorTo: "#3b82f6",
     glow: "rgba(99,102,241,0.28)",
     highlight: false,
+    image: "/web-vitrine-bg.webp",
     cta: "Démarrer ce projet",
     for: "Freelances, artisans, indépendants",
     tags: ["1 page", "Animations de base", "RDV inclus", "SEO basique"],
@@ -75,6 +77,7 @@ const CREATION_PLANS = [
     colorTo: "#8b5cf6",
     glow: "rgba(217,70,239,0.45)",
     highlight: true,
+    image: "/web-sur-mesure-bg.webp",
     highlightBadge: "RECOMMANDÉ",
     cta: "Je veux ce site",
     for: "Marques, créateurs, entreprises",
@@ -185,7 +188,7 @@ export default function WebStudio() {
   return (
     <section
       id="sites-web"
-      className="relative overflow-hidden px-5 py-24 sm:px-8 sm:py-32"
+      className="relative px-5 py-24 sm:px-8 sm:py-32"
     >
       {/* ── Background glows ─────────────────────────────────────────────── */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -294,39 +297,67 @@ export default function WebStudio() {
                 return (
                   <div
                     className="relative flex h-full flex-col overflow-hidden rounded-3xl"
-                    style={{
-                      background: "rgba(10,10,22,0.90)",
-                      border: "1px solid rgba(99,102,241,0.20)",
-                    }}
+                    style={{ border: "1px solid rgba(99,102,241,0.35)" }}
                   >
+                    {/* Image de fond */}
+                    <Image
+                      src={(plan as typeof plan & { image?: string }).image!}
+                      alt="Site Vitrine"
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                    {/* Overlay principal — lisibilité */}
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: "linear-gradient(160deg, rgba(6,5,20,0.82) 0%, rgba(8,6,26,0.75) 40%, rgba(6,5,20,0.88) 100%)" }}
+                    />
+                    {/* Teinte couleur subtile */}
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: `linear-gradient(135deg, ${plan.color}18 0%, transparent 55%, ${plan.colorTo}10 100%)` }}
+                    />
                     {/* Left accent bar */}
                     <div
                       className="absolute left-0 top-0 h-full w-[3px] rounded-l-3xl"
                       style={{ background: `linear-gradient(to bottom, ${plan.color}, ${plan.colorTo})` }}
                     />
 
-                    <div className="flex flex-1 flex-col pl-8 pr-7 pt-7 pb-7 sm:pl-9 sm:pr-8 sm:pt-8 sm:pb-8">
+                    <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-8">
                       {/* Head */}
-                      <div className="mb-5 flex items-start justify-between gap-3">
-                        <div>
-                          <span
-                            className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[0.58rem] font-black uppercase tracking-widest"
-                            style={{ background: `${plan.color}14`, border: `1px solid ${plan.color}30`, color: plan.color }}
+                      <div className="mb-5">
+                        <span
+                          className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[0.58rem] font-black uppercase tracking-widest"
+                          style={{ background: `${plan.color}22`, border: `1px solid ${plan.color}55`, color: `${plan.color}ee` }}
+                        >
+                          {plan.badge}
+                        </span>
+                        <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
+                          Site{" "}
+                          <motion.span
+                            style={{
+                              background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, ${plan.color})`,
+                              backgroundSize: "200% auto",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                              backgroundClip: "text",
+                            }}
+                            animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                           >
-                            {plan.tag}
-                          </span>
-                          <h4 className="font-display text-xl font-black text-white">{plan.badge}</h4>
-                          <p className="mt-0.5 text-[0.68rem] text-white/30">{plan.for}</p>
-                        </div>
+                            Vitrine
+                          </motion.span>
+                        </h4>
+                        <p className="mt-1 text-[0.68rem] text-white/65">{plan.for}</p>
                       </div>
 
                       {/* Quick tags */}
-                      <div className="mb-6 flex flex-wrap gap-1.5">
+                      <div className="mb-6 flex flex-wrap gap-1.5 max-lg:hidden">
                         {plan.tags.map((t) => (
                           <span
                             key={t}
                             className="rounded-lg px-2.5 py-1 text-[0.62rem] font-semibold"
-                            style={{ background: `${plan.color}10`, color: `${plan.color}cc` }}
+                            style={{ background: `${plan.color}20`, color: `${plan.color}ee`, border: `1px solid ${plan.color}40` }}
                           >
                             {t}
                           </span>
@@ -334,51 +365,60 @@ export default function WebStudio() {
                       </div>
 
                       {/* Price */}
-                      <div className="mb-7">
-                        <div className="flex items-baseline gap-1">
+                      <div
+                        className="mb-6 rounded-2xl px-6 py-5 text-center"
+                        style={{ background: `${plan.color}14`, border: `1px solid ${plan.color}35`, backdropFilter: "blur(8px)" }}
+                      >
+                        <p className="mb-1 text-[0.58rem] font-semibold uppercase tracking-widest text-white/55">
+                          Paiement unique
+                        </p>
+                        <div className="flex items-end justify-center gap-1">
                           <span
-                            className="font-display text-5xl font-black leading-none text-white"
+                            className="font-display text-7xl font-black leading-none"
+                            style={{
+                              background: `linear-gradient(135deg, ${plan.color}, ${plan.colorTo})`,
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                            }}
                           >
                             {plan.price}
                           </span>
-                          <span className="text-xl font-bold text-white/40">€</span>
-                          <span className="ml-1 text-[0.65rem] text-white/22">paiement unique</span>
+                          <div className="mb-3 text-left">
+                            <p className="text-xl font-bold text-white/65">€</p>
+                          </div>
                         </div>
-                        <div className="mt-2.5 flex items-center gap-1.5">
+                        <div className="mt-2.5 flex items-center justify-center gap-1.5">
                           <Clock className="h-3 w-3" style={{ color: plan.color }} />
-                          <span className="text-xs text-white/35">
-                            Délai&nbsp;: <strong className="text-white/55">{plan.delay}</strong>
+                          <span className="text-xs text-white/60">
+                            Délai&nbsp;: <strong className="text-white/85">{plan.delay}</strong>
                           </span>
                         </div>
                       </div>
 
-                      {/* Separator */}
-                      <div className="mb-6 h-px" style={{ background: "rgba(99,102,241,0.12)" }} />
-
                       {/* Includes */}
-                      <ul className="mb-4 flex flex-col gap-2">
+                      <ul className="mb-5 flex flex-1 flex-col gap-2.5">
                         {plan.includes.map((f) => (
-                          <li key={f} className="flex items-start gap-2.5">
+                          <li key={f} className="flex items-start gap-3">
                             <span
-                              className="mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full"
-                              style={{ background: `${plan.color}15`, border: `1px solid ${plan.color}35` }}
+                              className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                              style={{ background: `${plan.color}18`, border: `1px solid ${plan.color}42` }}
                             >
-                              <Check className="h-2.5 w-2.5" style={{ color: plan.color }} />
+                              <Check className="h-3 w-3" style={{ color: plan.color }} />
                             </span>
-                            <span className="text-sm leading-snug text-white/58">{f}</span>
+                            <span className="text-sm leading-snug text-white/85">{f}</span>
                           </li>
                         ))}
                       </ul>
 
                       {/* Non inclus */}
                       {plan.excludes.length > 0 && (
-                        <div className="mb-7 rounded-xl p-3.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                          <p className="mb-1.5 text-[0.6rem] font-black uppercase tracking-widest text-white/22">Non inclus</p>
+                        <div className="mb-7 rounded-xl p-3.5 max-lg:hidden" style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.10)" }}>
+                          <p className="mb-1.5 text-[0.6rem] font-black uppercase tracking-widest text-white/45">Non inclus</p>
                           <ul className="flex flex-col gap-1">
                             {plan.excludes.map((e) => (
                               <li key={e} className="flex items-center gap-2">
-                                <X className="h-2.5 w-2.5 shrink-0 text-white/20" />
-                                <span className="text-[0.68rem] text-white/28">{e}</span>
+                                <X className="h-2.5 w-2.5 shrink-0 text-white/40" />
+                                <span className="text-[0.68rem] text-white/55">{e}</span>
                               </li>
                             ))}
                           </ul>
@@ -390,14 +430,15 @@ export default function WebStudio() {
                         href="#contact"
                         className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl border py-3.5 text-sm font-black transition-colors"
                         style={{
-                          borderColor: `${plan.color}55`,
+                          borderColor: `${plan.color}70`,
                           color: plan.color,
-                          background: `${plan.color}08`,
+                          background: `${plan.color}18`,
+                          backdropFilter: "blur(8px)",
                         }}
                         whileHover={{
-                          background: `${plan.color}18`,
-                          borderColor: `${plan.color}90`,
-                          boxShadow: `0 0 22px ${plan.glow}`,
+                          background: `${plan.color}30`,
+                          borderColor: `${plan.color}aa`,
+                          boxShadow: `0 0 28px ${plan.glow}`,
                         }}
                         whileTap={{ scale: 0.97 }}
                       >
@@ -422,16 +463,33 @@ export default function WebStudio() {
                 return (
                   <div
                     className="relative flex flex-1 flex-col overflow-hidden rounded-[22px]"
-                    style={{ background: "rgba(7,7,18,0.97)" }}
                   >
-                    {/* Dot-grid texture */}
+                    {/* Image de fond */}
+                    <Image
+                      src={(plan as typeof plan & { image?: string }).image!}
+                      alt="Site Sur Mesure"
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    {/* Overlay principal */}
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: "linear-gradient(160deg, rgba(5,4,18,0.88) 0%, rgba(8,5,22,0.80) 45%, rgba(5,4,18,0.92) 100%)" }}
+                    />
+                    {/* Teinte fuchsia/violet */}
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: "linear-gradient(135deg, rgba(217,70,239,0.12) 0%, transparent 50%, rgba(139,92,246,0.10) 100%)" }}
+                    />
+                    {/* Dot-grid texture sur l'image */}
                     <div
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-0"
                       style={{
                         backgroundImage: "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)",
                         backgroundSize: "22px 22px",
-                        opacity: 0.55,
+                        opacity: 0.35,
                       }}
                     />
                     {/* Top neon scan-line */}
@@ -440,11 +498,11 @@ export default function WebStudio() {
                       className="pointer-events-none absolute inset-x-0 top-0 h-px"
                       style={{ background: "linear-gradient(90deg, transparent 0%, rgba(217,70,239,0.80) 40%, rgba(139,92,246,0.80) 60%, transparent 100%)" }}
                     />
-                    {/* Very subtle corner whisper — not a flood */}
+                    {/* Corner glow */}
                     <div
                       aria-hidden="true"
                       className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full blur-3xl"
-                      style={{ background: "radial-gradient(circle, rgba(217,70,239,0.35), transparent 70%)", opacity: 0.10 }}
+                      style={{ background: "radial-gradient(circle, rgba(217,70,239,0.35), transparent 70%)", opacity: 0.18 }}
                     />
 
                     <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-8">
@@ -453,12 +511,27 @@ export default function WebStudio() {
                         <div>
                           <span
                             className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[0.58rem] font-black uppercase tracking-widest"
-                            style={{ background: `${plan.color}18`, border: `1px solid ${plan.color}45`, color: plan.color }}
+                            style={{ background: `${plan.color}22`, border: `1px solid ${plan.color}55`, color: `${plan.color}ee` }}
                           >
-                            {plan.tag}
+                            {plan.badge}
                           </span>
-                          <h4 className="font-display text-xl font-black text-white">{plan.badge}</h4>
-                          <p className="mt-0.5 text-[0.68rem] text-white/35">{plan.for}</p>
+                          <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
+                            Site{" "}
+                            <motion.span
+                              style={{
+                                background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, #06b6d4, ${plan.color})`,
+                                backgroundSize: "200% auto",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                              }}
+                              animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            >
+                              Sur Mesure
+                            </motion.span>
+                          </h4>
+                          <p className="mt-1 text-[0.68rem] text-white/65">{plan.for}</p>
                         </div>
                         <div
                           className="shrink-0 rounded-full px-3 py-1 text-[0.58rem] font-black uppercase tracking-widest text-white"
@@ -469,12 +542,12 @@ export default function WebStudio() {
                       </div>
 
                       {/* Quick tags */}
-                      <div className="mb-6 flex flex-wrap gap-1.5">
+                      <div className="mb-6 flex flex-wrap gap-1.5 max-lg:hidden">
                         {plan.tags.map((t) => (
                           <span
                             key={t}
                             className="rounded-lg px-2.5 py-1 text-[0.62rem] font-semibold"
-                            style={{ background: `${plan.color}12`, color: `${plan.color}dd`, border: `1px solid ${plan.color}20` }}
+                            style={{ background: `${plan.color}22`, color: `${plan.color}ee`, border: `1px solid ${plan.color}45` }}
                           >
                             {t}
                           </span>
@@ -484,9 +557,9 @@ export default function WebStudio() {
                       {/* Price */}
                       <div
                         className="mb-6 rounded-2xl px-6 py-5 text-center"
-                        style={{ background: `${plan.color}07`, border: `1px solid ${plan.color}1a` }}
+                        style={{ background: `${plan.color}14`, border: `1px solid ${plan.color}35`, backdropFilter: "blur(8px)" }}
                       >
-                        <p className="mb-1 text-[0.58rem] font-semibold uppercase tracking-widest text-white/32">
+                        <p className="mb-1 text-[0.58rem] font-semibold uppercase tracking-widest text-white/55">
                           À partir de
                         </p>
                         <div className="flex items-end justify-center gap-1">
@@ -501,17 +574,17 @@ export default function WebStudio() {
                             {plan.price}
                           </span>
                           <div className="mb-3 text-left">
-                            <p className="text-xl font-bold text-white/45">€</p>
-                            <p className="whitespace-nowrap text-[0.56rem] text-white/22">paiement unique</p>
+                            <p className="text-xl font-bold text-white/65">€</p>
+                            <p className="whitespace-nowrap text-[0.56rem] text-white/50">paiement unique</p>
                           </div>
                         </div>
                         <div className="mt-2.5 flex items-center justify-center gap-1.5">
                           <Clock className="h-3 w-3" style={{ color: plan.color }} />
-                          <span className="text-xs text-white/40">
-                            Délai&nbsp;: <strong className="text-white/65">{plan.delay}</strong>
+                          <span className="text-xs text-white/60">
+                            Délai&nbsp;: <strong className="text-white/85">{plan.delay}</strong>
                           </span>
                         </div>
-                        <p className="mt-2.5 text-[0.61rem] leading-snug text-white/28">
+                        <p className="mt-2.5 text-[0.61rem] leading-snug text-white/55">
                           {plan.priceNote}
                         </p>
                       </div>
@@ -526,19 +599,19 @@ export default function WebStudio() {
                             >
                               <Check className="h-3 w-3" style={{ color: plan.color }} />
                             </span>
-                            <span className="text-sm leading-snug text-white/65">{f}</span>
+                            <span className="text-sm leading-snug text-white/85">{f}</span>
                           </li>
                         ))}
                       </ul>
 
                       {/* Sur devis */}
-                      <div className="mb-6 rounded-xl p-3.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                        <p className="mb-1.5 text-[0.6rem] font-black uppercase tracking-widest text-white/22">Sur devis</p>
+                      <div className="mb-6 rounded-xl p-3.5 max-lg:hidden" style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(6px)" }}>
+                        <p className="mb-1.5 text-[0.6rem] font-black uppercase tracking-widest text-white/45">Sur devis</p>
                         <ul className="flex flex-col gap-1">
                           {plan.excludes.map((e) => (
                             <li key={e} className="flex items-center gap-2">
-                              <X className="h-2.5 w-2.5 shrink-0 text-white/20" />
-                              <span className="text-[0.68rem] text-white/28">{e}</span>
+                              <X className="h-2.5 w-2.5 shrink-0 text-white/40" />
+                              <span className="text-[0.68rem] text-white/60">{e}</span>
                             </li>
                           ))}
                         </ul>
@@ -742,12 +815,27 @@ export default function WebStudio() {
                       <div className="mb-4">
                         <span
                           className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[0.58rem] font-black uppercase tracking-widest"
-                          style={{ background: `${plan.color}14`, border: `1px solid ${plan.color}30`, color: plan.color }}
+                          style={{ background: `${plan.color}10`, border: `1px solid ${plan.color}28`, color: `${plan.color}99` }}
                         >
-                          {plan.tag}
+                          {plan.badge}
                         </span>
-                        <h4 className="font-display text-xl font-black text-white">{plan.badge}</h4>
-                        <p className="mt-0.5 text-[0.68rem] text-white/30">{plan.forWho}</p>
+                        <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
+                          Landing{" "}
+                          <motion.span
+                            style={{
+                              background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, ${plan.color})`,
+                              backgroundSize: "200% auto",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                              backgroundClip: "text",
+                            }}
+                            animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          >
+                            Page
+                          </motion.span>
+                        </h4>
+                        <p className="mt-1 text-[0.68rem] text-white/35">{plan.forWho}</p>
                       </div>
 
                       <div className="mb-6">
@@ -837,12 +925,27 @@ export default function WebStudio() {
                         <div>
                           <span
                             className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[0.58rem] font-black uppercase tracking-widest"
-                            style={{ background: `${plan.color}18`, border: `1px solid ${plan.color}45`, color: plan.color }}
+                            style={{ background: `${plan.color}10`, border: `1px solid ${plan.color}28`, color: `${plan.color}99` }}
                           >
-                            {plan.tag}
+                            {plan.badge}
                           </span>
-                          <h4 className="font-display text-xl font-black text-white">{plan.badge}</h4>
-                          <p className="mt-0.5 text-[0.68rem] text-white/35">{plan.forWho}</p>
+                          <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
+                            Site{" "}
+                            <motion.span
+                              style={{
+                                background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, #d946ef, ${plan.color})`,
+                                backgroundSize: "200% auto",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                              }}
+                              animate={{ backgroundPosition: ["0% center", "200% center"] }}
+                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            >
+                              Complet
+                            </motion.span>
+                          </h4>
+                          <p className="mt-1 text-[0.68rem] text-white/35">{plan.forWho}</p>
                         </div>
                         <div
                           className="shrink-0 rounded-full px-3 py-1 text-[0.58rem] font-black uppercase tracking-widest text-white"
@@ -886,7 +989,7 @@ export default function WebStudio() {
                             >
                               <Check className="h-3 w-3" style={{ color: plan.color }} />
                             </span>
-                            <span className="text-sm leading-snug text-white/65">{f}</span>
+                            <span className="text-sm leading-snug text-white/85">{f}</span>
                           </li>
                         ))}
                       </ul>
