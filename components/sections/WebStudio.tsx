@@ -374,7 +374,7 @@ export default function WebStudio() {
                         </p>
                         <div className="flex items-end justify-center gap-1">
                           <span
-                            className="font-display text-7xl font-black leading-none"
+                            className="font-display text-7xl font-black leading-none whitespace-nowrap"
                             style={{
                               background: `linear-gradient(135deg, ${plan.color}, ${plan.colorTo})`,
                               WebkitBackgroundClip: "text",
@@ -507,7 +507,7 @@ export default function WebStudio() {
 
                     <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-8">
                       {/* Head */}
-                      <div className="mb-5 flex items-start justify-between gap-3">
+                      <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                         <div>
                           <span
                             className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-[0.58rem] font-black uppercase tracking-widest"
@@ -534,7 +534,7 @@ export default function WebStudio() {
                           <p className="mt-1 text-[0.68rem] text-white/65">{plan.for}</p>
                         </div>
                         <div
-                          className="shrink-0 rounded-full px-3 py-1 text-[0.58rem] font-black uppercase tracking-widest text-white"
+                          className="shrink-0 self-start rounded-full px-3 py-1 text-[0.58rem] font-black uppercase tracking-widest text-white sm:self-auto"
                           style={{ background: `${plan.color}22`, border: `1px solid ${plan.color}50`, boxShadow: `0 0 12px ${plan.color}40` }}
                         >
                           ✦ {plan.highlightBadge}
@@ -564,7 +564,7 @@ export default function WebStudio() {
                         </p>
                         <div className="flex items-end justify-center gap-1">
                           <span
-                            className="font-display text-7xl font-black leading-none"
+                            className="font-display text-7xl font-black leading-none whitespace-nowrap"
                             style={{
                               background: `linear-gradient(135deg, ${plan.color}, ${plan.colorTo})`,
                               WebkitBackgroundClip: "text",
@@ -961,7 +961,7 @@ export default function WebStudio() {
                       >
                         <div className="flex items-end justify-center gap-1">
                           <span
-                            className="font-display text-7xl font-black leading-none"
+                            className="font-display text-7xl font-black leading-none whitespace-nowrap"
                             style={{
                               background: `linear-gradient(135deg, ${plan.color}, ${plan.colorTo})`,
                               WebkitBackgroundClip: "text",

@@ -22,6 +22,7 @@ const CLIENTS = [
   { name: "Collège Fernand Donatien",   logo: "/logo-college-fernand-donatien.png",   description: "Prévention numérique",   glow: "#eab308" },
   { name: "W&KEYSELITE",               logo: "/logo-wkeyselite.png",                 description: "Conciergerie",            glow: "#f43f5e" },
   { name: "Gommier",                   logo: "/logo-gommier.png",                    description: "Partenaire créatif",      glow: "#ffffff" },
+  { name: "Loulou Panthera",           logo: "/logo-loulou-panthera.png",            description: "Série animée",            glow: "#8b5cf6" },
 ] as const;
 
 const STATS = [

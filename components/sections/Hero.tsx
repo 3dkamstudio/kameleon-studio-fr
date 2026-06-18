@@ -95,6 +95,9 @@ export default function Hero() {
       {/* Mobile : masque complet du logo de fond (opacité effective ~0.89) */}
       <div className="absolute inset-0 z-[1] md:hidden"
         style={{ background: "rgba(5, 5, 18, 0.20)" }} />
+      {/* Mobile : zone centrale assombrie pour lisibilité du contenu texte */}
+      <div className="absolute inset-x-0 z-[2] md:hidden"
+        style={{ top: "25%", height: "50%", background: "linear-gradient(to bottom, transparent 0%, rgba(5,5,18,0.72) 22%, rgba(5,5,18,0.72) 78%, transparent 100%)" }} />
 
       <div className="absolute inset-y-0 left-0 z-[2] w-full lg:w-[65%]"
         style={{
@@ -191,7 +194,7 @@ export default function Hero() {
 
           {/* Stats */}
           <motion.div
-            className="flex w-full flex-wrap items-start gap-x-8 gap-y-5 border-t border-white/[0.20] pt-10 max-md:justify-center"
+            className="flex w-full flex-wrap items-start gap-x-8 gap-y-5 border-t border-white/[0.20] pt-10 max-md:justify-center max-md:mt-10"
             variants={fadeUp}
           >
             {STATS.map(({ numeric, suffix, label, sub, color, size }) => (

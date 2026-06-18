@@ -5,6 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
+const NAV_STARS = [
+  { x: 4,  y: 30, d: 0.0, t: 2.8 }, { x: 11, y: 68, d: 0.7, t: 3.5 },
+  { x: 19, y: 18, d: 1.4, t: 2.2 }, { x: 28, y: 78, d: 0.3, t: 4.0 },
+  { x: 36, y: 42, d: 1.8, t: 2.6 }, { x: 45, y: 82, d: 0.9, t: 3.2 },
+  { x: 54, y: 22, d: 0.2, t: 2.9 }, { x: 62, y: 62, d: 1.5, t: 3.8 },
+  { x: 71, y: 15, d: 0.6, t: 2.4 }, { x: 80, y: 80, d: 1.1, t: 4.5 },
+  { x: 87, y: 48, d: 0.4, t: 2.1 }, { x: 94, y: 72, d: 1.9, t: 3.7 },
+  { x: 33, y: 55, d: 0.8, t: 2.5 }, { x: 75, y: 35, d: 1.3, t: 4.2 },
+] as const;
+
 const LINKS = [
   { label: "Services",     href: "#services"     },
   { label: "Prestations",  href: "#prestations"  },
@@ -55,21 +65,37 @@ export default function Navbar() {
       <header
         className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
         style={scrolled ? {
-          background: "rgba(6,6,14,0.88)",
+          background: "rgba(6,6,14,0.82)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           boxShadow: "0 4px 40px rgba(0,0,0,0.45)",
         } : {
-          background: "linear-gradient(to bottom, rgba(6,6,14,0.70) 0%, transparent 100%)",
+          background: "linear-gradient(to bottom, rgba(6,6,14,0.38) 0%, rgba(6,6,14,0.10) 60%, transparent 100%)",
         }}
       >
+        {/* Étoiles scintillantes */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+          {NAV_STARS.map(({ x, y, d, t }, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                left: `${x}%`, top: `${y}%`,
+                width: i % 3 === 0 ? 2 : 1.5,
+                height: i % 3 === 0 ? 2 : 1.5,
+                boxShadow: "0 0 3px 1px rgba(255,255,255,0.45)",
+                animation: `star-twinkle ${t}s ease-in-out ${d}s infinite`,
+              }}
+            />
+          ))}
+        </div>
+
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4">
 
           {/* ── Logo ───────────────────────────────────────────────────── */}
           <a href="#" className="group flex items-center gap-2">
             <div
               className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-200 group-hover:scale-105"
-              style={{ boxShadow: "0 0 18px rgba(217,70,239,0.35)" }}
             >
               <Image
                 src="/ks-logo.png"
