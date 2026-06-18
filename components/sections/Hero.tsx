@@ -92,20 +92,18 @@ export default function Hero() {
       {/* ── Calques d'overlay pour lisibilité et immersion ───────────── */}
       <div className="absolute inset-0 z-[1]"
         style={{ background: "rgba(5, 5, 18, 0.28)" }} />
-      {/* Mobile : masque complet du logo de fond (opacité effective ~0.89) */}
-      <div className="absolute inset-0 z-[1] md:hidden"
-        style={{ background: "rgba(5, 5, 18, 0.20)" }} />
       {/* Mobile : zone centrale assombrie pour lisibilité du contenu texte */}
       <div className="absolute inset-x-0 z-[2] md:hidden"
         style={{ top: "25%", height: "50%", background: "linear-gradient(to bottom, transparent 0%, rgba(5,5,18,0.72) 22%, rgba(5,5,18,0.72) 78%, transparent 100%)" }} />
 
-      <div className="absolute inset-y-0 left-0 z-[2] w-full lg:w-[65%]"
+      {/* Left gradient : desktop uniquement (mobile = full-width trop sombre) */}
+      <div className="absolute inset-y-0 left-0 z-[2] hidden w-full md:block lg:w-[65%]"
         style={{
           background: "linear-gradient(to right, rgba(5,5,18,0.94) 0%, rgba(5,5,18,0.82) 22%, rgba(5,5,18,0.55) 48%, rgba(5,5,18,0.18) 72%, transparent 100%)",
         }} />
 
       <div className="absolute inset-x-0 top-0 z-[2] h-44"
-        style={{ background: "linear-gradient(to bottom, rgba(5,5,18,0.75) 0%, rgba(5,5,18,0.25) 60%, transparent 100%)" }} />
+        style={{ background: "linear-gradient(to bottom, rgba(5,5,18,0.38) 0%, rgba(5,5,18,0.08) 60%, transparent 100%)" }} />
 
       <div className="absolute inset-x-0 bottom-0 z-[2] h-56"
         style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.75) 50%, transparent 100%)" }} />
