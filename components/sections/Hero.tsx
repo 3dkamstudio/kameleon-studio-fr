@@ -116,8 +116,8 @@ export default function Hero() {
       <div className="absolute inset-x-0 top-0 z-[2] h-44"
         style={{ background: "linear-gradient(to bottom, rgba(5,5,18,0.38) 0%, rgba(5,5,18,0.08) 60%, transparent 100%)" }} />
 
-      <div className="absolute inset-x-0 bottom-0 z-[2] h-80 max-md:h-96"
-        style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.82) 35%, rgba(10,10,15,0.40) 65%, transparent 100%)" }} />
+      <div className="absolute inset-x-0 bottom-0 z-[2] h-[28rem] max-md:h-96"
+        style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.90) 28%, rgba(10,10,15,0.60) 55%, rgba(10,10,15,0.20) 78%, transparent 100%)" }} />
 
       <motion.div style={{ y: halosY }}>
         <div className="pointer-events-none absolute -left-24 top-20 z-[2] h-[400px] w-[400px] rounded-full blur-[80px]"
