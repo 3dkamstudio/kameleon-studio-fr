@@ -102,15 +102,19 @@ const MODULES = [
 
 const STARTER_FEAT = [
   "Modules 01 à 05 — accès immédiat",
-  "Prompts, templates et ressources inclus",
-  "Mises à jour à vie",
-  "Support par email",
+  "Maîtrise les outils IA de A à Z",
+  "Crée tes premières vidéos animées 3D professionnelles",
+  "Workflow complet du script au montage final",
+  "Accès à vie + mises à jour incluses",
 ];
 const PRO_FEAT = [
   "Tout le Starter inclus (modules 01-05)",
-  "Modules exclusifs 06, 07 & 08",
-  "Communauté privée Kaméléon Studio",
-  "Accès bêta aux nouveaux outils",
+  "Modules exclusifs 06, 07, 08 & 09",
+  "Crée ton premier podcast en vidéo IA",
+  "Crée ta propre musique IA pour tes productions",
+  "Conçois ton assistant IA personnalisé",
+  "Automatise ton workflow de production",
+  "Accès à vie + mises à jour incluses",
 ];
 
 // ── NeonBorder — bordure néon tournante au hover ───────────────────────────────
