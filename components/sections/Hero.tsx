@@ -134,7 +134,7 @@ export default function Hero() {
       {/* ══════════════════════════════════════════════════════════════════
           CONTENU HÉRO
       ══════════════════════════════════════════════════════════════════ */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-6 pb-16 sm:py-40">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-6 max-md:pb-0 sm:py-40">
         <motion.div
           className="flex w-full max-w-2xl flex-col items-start max-md:items-center max-md:text-center"
           variants={container}

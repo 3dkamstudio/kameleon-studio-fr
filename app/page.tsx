@@ -25,7 +25,6 @@ export default function Home() {
       <div className="relative z-[1]">
         {/* Hero : animation propre interne, pas de RevealSection */}
         <SectionWrapper><Hero /></SectionWrapper>
-        <SectionDivider variant="scan" />
 
         <RevealSection><SectionWrapper><Services /></SectionWrapper></RevealSection>
         <div className="divider-rainbow-glow" />
