@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useSpring, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform, useInView, useMotionValue } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
@@ -55,19 +55,30 @@ function StatNumber({ numeric, suffix, color, size }: { numeric: number; suffix:
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const bgY       = useTransform(scrollY, [0, 800], [0,  -60]);
+  const bgYRaw    = useTransform(scrollY, [0, 800], [0,  -60]);
+  const bgY       = useMotionValue(0);
   const halosY    = useTransform(scrollY, [0, 800], [0, -200]);
   const sparklesY = useTransform(scrollY, [0, 800], [0, -380]);
+
+  // Option 1 : parallax désactivé sur mobile (évite le gap en bas au scroll)
+  useEffect(() => {
+    const unsub = bgYRaw.on("change", v => {
+      bgY.set(window.innerWidth < 768 ? 0 : v);
+    });
+    return unsub;
+  }, [bgYRaw, bgY]);
 
   return (
     <section
       className="relative flex min-h-[100dvh] flex-col justify-center md:min-h-screen max-md:pt-16"
+      style={{ backgroundColor: "#0a0a0f" }}
     >
 
       {/* ══════════════════════════════════════════════════════════════════
           IMAGE PLEIN-CADRE — DA Kaméléon Studio
       ══════════════════════════════════════════════════════════════════ */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
+      {/* Option 2 : bottom-[-60px] compense la translation max du parallax sur desktop */}
+      <motion.div className="absolute inset-x-0 top-0 bottom-[-60px] z-0" style={{ y: bgY }}>
         {/* Mobile : bannière verticale 9:16 */}
         <Image
           src="/banner-mobile.webp"
@@ -92,9 +103,9 @@ export default function Hero() {
       {/* ── Calques d'overlay pour lisibilité et immersion ───────────── */}
       <div className="absolute inset-0 z-[1]"
         style={{ background: "rgba(5, 5, 18, 0.28)" }} />
-      {/* Mobile : zone centrale assombrie pour lisibilité du contenu texte */}
+      {/* Mobile : contraste texte — overlay léger derrière le contenu */}
       <div className="absolute inset-x-0 z-[2] md:hidden"
-        style={{ top: "25%", height: "50%", background: "linear-gradient(to bottom, transparent 0%, rgba(5,5,18,0.72) 22%, rgba(5,5,18,0.72) 78%, transparent 100%)" }} />
+        style={{ top: "15%", height: "70%", background: "linear-gradient(to bottom, transparent 0%, rgba(5,5,18,0.45) 18%, rgba(5,5,18,0.45) 82%, transparent 100%)" }} />
 
       {/* Left gradient : desktop uniquement (mobile = full-width trop sombre) */}
       <div className="absolute inset-y-0 left-0 z-[2] hidden w-full md:block lg:w-[65%]"
@@ -105,8 +116,8 @@ export default function Hero() {
       <div className="absolute inset-x-0 top-0 z-[2] h-44"
         style={{ background: "linear-gradient(to bottom, rgba(5,5,18,0.38) 0%, rgba(5,5,18,0.08) 60%, transparent 100%)" }} />
 
-      <div className="absolute inset-x-0 bottom-0 z-[2] h-56"
-        style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.75) 50%, transparent 100%)" }} />
+      <div className="absolute inset-x-0 bottom-0 z-[2] h-80 max-md:h-96"
+        style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.82) 35%, rgba(10,10,15,0.40) 65%, transparent 100%)" }} />
 
       <motion.div style={{ y: halosY }}>
         <div className="pointer-events-none absolute -left-24 top-20 z-[2] h-[400px] w-[400px] rounded-full blur-[80px]"
@@ -123,7 +134,7 @@ export default function Hero() {
       {/* ══════════════════════════════════════════════════════════════════
           CONTENU HÉRO
       ══════════════════════════════════════════════════════════════════ */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-6 pb-28 sm:py-40">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-6 pb-16 sm:py-40">
         <motion.div
           className="flex w-full max-w-2xl flex-col items-start max-md:items-center max-md:text-center"
           variants={container}
@@ -192,7 +203,7 @@ export default function Hero() {
 
           {/* Stats */}
           <motion.div
-            className="flex w-full flex-wrap items-start gap-x-8 gap-y-5 border-t border-white/[0.20] pt-10 max-md:justify-center max-md:mt-10"
+            className="flex w-full flex-wrap items-start gap-x-8 gap-y-5 border-t border-white/[0.20] pt-10 max-md:justify-center"
             variants={fadeUp}
           >
             {STATS.map(({ numeric, suffix, label, sub, color, size }) => (
