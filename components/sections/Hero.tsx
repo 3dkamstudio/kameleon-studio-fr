@@ -70,15 +70,14 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[100dvh] flex-col justify-center md:min-h-screen max-md:pt-16"
+      className="relative overflow-hidden flex min-h-[100dvh] flex-col justify-center md:min-h-screen max-md:pt-16"
       style={{ backgroundColor: "#0a0a0f" }}
     >
 
       {/* ══════════════════════════════════════════════════════════════════
           IMAGE PLEIN-CADRE — DA Kaméléon Studio
       ══════════════════════════════════════════════════════════════════ */}
-      {/* Option 2 : bottom-[-60px] compense la translation max du parallax sur desktop */}
-      <motion.div className="absolute inset-x-0 top-0 bottom-[-60px] z-0" style={{ y: bgY }}>
+      <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         {/* Mobile : bannière verticale 9:16 */}
         <Image
           src="/banner-mobile.webp"
@@ -116,8 +115,8 @@ export default function Hero() {
       <div className="absolute inset-x-0 top-0 z-[2] h-44"
         style={{ background: "linear-gradient(to bottom, rgba(5,5,18,0.38) 0%, rgba(5,5,18,0.08) 60%, transparent 100%)" }} />
 
-      <div className="absolute inset-x-0 bottom-0 z-[2] h-[28rem] max-md:h-96"
-        style={{ background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.90) 28%, rgba(10,10,15,0.60) 55%, rgba(10,10,15,0.20) 78%, transparent 100%)" }} />
+      <div className="absolute inset-x-0 bottom-0 z-[2]"
+        style={{ height: "40%", background: "linear-gradient(to top, rgba(10,10,15,1) 0%, rgba(10,10,15,0.95) 20%, rgba(10,10,15,0.75) 45%, rgba(10,10,15,0.35) 70%, transparent 100%)" }} />
 
       <motion.div style={{ y: halosY }}>
         <div className="pointer-events-none absolute -left-24 top-20 z-[2] h-[400px] w-[400px] rounded-full blur-[80px]"
