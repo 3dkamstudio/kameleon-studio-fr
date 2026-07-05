@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 // SVG inline — lucide-react ne ship pas d'icônes social dans cette version
 function IconInstagram({ className }: { className?: string }) {
@@ -43,12 +44,13 @@ const stagger: Variants = {
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
-  { label: "Services",     href: "#services"     },
-  { label: "Prestations",  href: "#prestations"  },
-  { label: "Tarifs",       href: "#tarifs-video" },
-  { label: "Sites Web",    href: "#sites-web"    },
-  { label: "Réalisations", href: "#showreel"     },
-  { label: "Contact",      href: "#contact"      },
+  { label: "Production vidéo",     href: "/video"       },
+  { label: "BD & illustration",    href: "/bd"          },
+  { label: "Sites web",            href: "/web"         },
+  { label: "Formation King of IA", href: "/formation"   },
+  { label: "Coaching IA",          href: "/coaching"    },
+  { label: "Réalisations",         href: "/realisations"},
+  { label: "Contact",              href: "/contact"     },
 ];
 
 const LEGAL_LINKS = [
@@ -109,7 +111,7 @@ export default function Footer() {
           {/* ── Colonne 1 : Logo + tagline + réseaux ─────────────────────── */}
           <motion.div variants={fadeUp} className="flex flex-col gap-6">
             {/* Logo */}
-            <a href="#" className="group inline-flex items-center gap-3 self-start">
+            <Link href="/" className="group inline-flex items-center gap-3 self-start">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl"
                 style={{ boxShadow: "0 0 20px rgba(217,70,239,0.3)" }}>
                 <Image
@@ -127,7 +129,7 @@ export default function Footer() {
                   Production créative par IA
                 </span>
               </div>
-            </a>
+            </Link>
 
             {/* Tagline */}
             <p className="max-w-xs text-sm leading-relaxed text-white/40">
@@ -167,7 +169,7 @@ export default function Footer() {
             </p>
             <nav className="flex flex-col gap-2.5">
               {NAV_LINKS.map(({ label, href }) => (
-                <a
+                <Link
                   key={label}
                   href={href}
                   className="group inline-flex items-center gap-1.5 text-sm font-medium text-white/45 transition-colors hover:text-white/90"
@@ -177,7 +179,7 @@ export default function Footer() {
                     style={{ background: "linear-gradient(90deg,#d946ef,#8b5cf6)" }}
                   />
                   {label}
-                </a>
+                </Link>
               ))}
             </nav>
           </motion.div>

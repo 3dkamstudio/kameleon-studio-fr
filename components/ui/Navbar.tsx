@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_STARS = [
   { x: 4,  y: 30, d: 0.0, t: 2.8 }, { x: 11, y: 68, d: 0.7, t: 3.5 },
@@ -15,53 +17,35 @@ const NAV_STARS = [
   { x: 33, y: 55, d: 0.8, t: 2.5 }, { x: 75, y: 35, d: 1.3, t: 4.2 },
 ] as const;
 
-const LINKS = [
-  { label: "Services",     href: "#services"     },
-  { label: "Prestations",  href: "#prestations"  },
-  { label: "Réalisations", href: "#showreel"     },
-  { label: "Process",      href: "#processus"   },
-  { label: "Tarifs",       href: "#tarifs-video"},
-  { label: "Sites Web",    href: "#sites-web"   },
-  { label: "FAQ",          href: "#faq"         },
-  { label: "Contact",      href: "#contact"     },
+const PRESTATION_LINKS = [
+  { label: "Production vidéo",     href: "/video",     color: "#d946ef", emoji: "🎬" },
+  { label: "BD & illustration",    href: "/bd",        color: "#f97316", emoji: "🎨" },
+  { label: "Sites web",            href: "/web",       color: "#06b6d4", emoji: "🌐" },
+  { label: "Formation King of IA", href: "/formation", color: "#8b5cf6", emoji: "🎓" },
+  { label: "Coaching IA",          href: "/coaching",  color: "#f43f5e", emoji: "👑" },
 ];
 
 export default function Navbar() {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [mobileOpen,  setMobileOpen]  = useState(false);
-  const [activeHash,  setActiveHash]  = useState("");
+  const pathname = usePathname();
+  const [scrolled,       setScrolled]       = useState(false);
+  const [mobileOpen,     setMobileOpen]     = useState(false);
+  const [dropdownOpen,   setDropdownOpen]   = useState(false);
+  const [mobilePrestOpen, setMobilePrestOpen] = useState(false);
 
-  /* ── Scroll → fond glassmorphism ────────────────────────────────────── */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ── Active section via IntersectionObserver ────────────────────────── */
-  useEffect(() => {
-    const ids = LINKS.map(l => l.href.slice(1));
-    const observers: IntersectionObserver[] = [];
+  useEffect(() => { setMobileOpen(false); setDropdownOpen(false); }, [pathname]);
 
-    ids.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) { return; }
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) { setActiveHash(`#${id}`); } },
-        { rootMargin: "-40% 0px -55% 0px" },
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
-    return () => observers.forEach(o => o.disconnect());
-  }, []);
-
-  function closeMenu() { setMobileOpen(false); }
+  const isPrestActive     = PRESTATION_LINKS.some(l => pathname === l.href);
+  const isRealisActive    = pathname === "/realisations";
 
   return (
     <>
-      {/* ══ HEADER FIXE ══════════════════════════════════════════════════ */}
+      {/* ══ HEADER ═══════════════════════════════════════════════════════════ */}
       <header
         className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
         style={scrolled ? {
@@ -92,18 +76,10 @@ export default function Navbar() {
 
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4">
 
-          {/* ── Logo ───────────────────────────────────────────────────── */}
-          <a href="#" className="group flex items-center gap-2">
-            <div
-              className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-200 group-hover:scale-105"
-            >
-              <Image
-                src="/ks-logo.png"
-                alt="King of IA"
-                fill
-                className="object-contain"
-                priority
-              />
+          {/* ── Logo ───────────────────────────────────────────────────────── */}
+          <Link href="/" className="group flex items-center gap-2">
+            <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-200 group-hover:scale-105">
+              <Image src="/ks-logo.png" alt="King of IA" fill className="object-contain" priority />
             </div>
             <span className="hidden font-display text-[1.05rem] font-black tracking-tight sm:block">
               <span style={{
@@ -114,67 +90,121 @@ export default function Navbar() {
                 backgroundClip: "text",
                 animation: "gradient-x-flow 4s linear infinite",
               }}>King</span>{" "}
-              <span style={{ display: "inline-block", color: "rgba(255,255,255,0.80)",
-                borderBottom: "1.5px solid rgba(217,70,239,0.65)", paddingBottom: "1px" }}>
+              <span style={{ display: "inline-block", color: "rgba(255,255,255,0.80)", borderBottom: "1.5px solid rgba(217,70,239,0.65)", paddingBottom: "1px" }}>
                 of IA
               </span>
             </span>
-          </a>
+          </Link>
 
-          {/* ── Liens desktop ──────────────────────────────────────────── */}
+          {/* ── Nav desktop ────────────────────────────────────────────────── */}
           <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
-            {LINKS.map(({ label, href }) => {
-              const isActive = activeHash === href;
-              return (
-                <a
-                  key={href}
-                  href={href}
-                  className="relative rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors duration-200"
-                  style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.50)" }}
-                  onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; } }}
-                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.50)"; } }}
-                >
-                  {label}
-                  {/* Indicateur actif */}
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute inset-0 rounded-lg"
-                      style={{ background: "rgba(255,255,255,0.07)" }}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {/* Dot actif */}
-                  {isActive && (
-                    <span
-                      className="absolute bottom-0.5 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full"
-                      style={{ background: "#d946ef", boxShadow: "0 0 6px #d946ef" }}
-                    />
-                  )}
-                </a>
-              );
-            })}
+
+            {/* Dropdown Prestations */}
+            <div
+              className="relative"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <button
+                className="relative flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors duration-200"
+                style={{ color: isPrestActive ? "#fff" : "rgba(255,255,255,0.50)" }}
+                aria-haspopup="true"
+                aria-expanded={dropdownOpen}
+              >
+                Prestations
+                <ChevronDown
+                  className="h-3.5 w-3.5 transition-transform duration-200"
+                  style={{ transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                />
+                {isPrestActive && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute inset-0 rounded-lg"
+                    style={{ background: "rgba(255,255,255,0.07)" }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    key="dropdown"
+                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-1.5 w-60 overflow-hidden rounded-2xl"
+                    style={{
+                      background: "rgba(8,8,20,0.97)",
+                      border: "1px solid rgba(255,255,255,0.10)",
+                      boxShadow: "0 20px 60px rgba(0,0,0,0.7)",
+                      backdropFilter: "blur(24px)",
+                    }}
+                  >
+                    <div className="h-[2px]" style={{ background: "linear-gradient(90deg, #d946ef, #8b5cf6, #06b6d4, #22c55e, #f97316)" }} />
+                    <div className="py-2">
+                      {PRESTATION_LINKS.map(({ label, href, color, emoji }) => (
+                        <Link
+                          key={href}
+                          href={href}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-all duration-150 hover:bg-white/5"
+                          style={{ color: pathname === href ? color : "rgba(255,255,255,0.65)" }}
+                        >
+                          <span className="text-base shrink-0">{emoji}</span>
+                          {label}
+                          {pathname === href && (
+                            <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: color, boxShadow: `0 0 6px ${color}` }} />
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Réalisations */}
+            <Link
+              href="/realisations"
+              className="relative rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors duration-200 hover:text-white/85"
+              style={{ color: isRealisActive ? "#fff" : "rgba(255,255,255,0.50)" }}
+            >
+              Réalisations
+              {isRealisActive && (
+                <>
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute inset-0 rounded-lg"
+                    style={{ background: "rgba(255,255,255,0.07)" }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                  <span className="absolute bottom-0.5 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full" style={{ background: "#d946ef", boxShadow: "0 0 6px #d946ef" }} />
+                </>
+              )}
+            </Link>
+
           </nav>
 
-          {/* ── CTA + burger ───────────────────────────────────────────── */}
+          {/* ── CTA + burger ───────────────────────────────────────────────── */}
           <div className="flex items-center gap-3">
-            {/* CTA desktop */}
-            <motion.a
-              href="#contact"
-              className="group relative hidden items-center gap-2 overflow-hidden rounded-xl px-5 py-2.5 text-sm font-black text-white md:inline-flex"
-              style={{
-                background: "linear-gradient(135deg, #d946ef, #8b5cf6)",
-                boxShadow: "0 0 20px rgba(217,70,239,0.35)",
-              }}
+            <motion.div
+              className="group relative hidden overflow-hidden rounded-xl md:inline-flex"
               whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(217,70,239,0.55)" }}
               whileTap={{ scale: 0.97 }}
+              style={{ boxShadow: "0 0 20px rgba(217,70,239,0.35)" }}
             >
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              Démarrer un projet
-              <ArrowRight className="h-3.5 w-3.5" />
-            </motion.a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-black text-white"
+                style={{ background: "linear-gradient(135deg, #d946ef, #8b5cf6)" }}
+              >
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                Devis gratuit
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </motion.div>
 
-            {/* Burger mobile */}
             <button
               onClick={() => setMobileOpen(o => !o)}
               className="flex h-9 w-9 items-center justify-center rounded-xl transition-colors duration-200 md:hidden"
@@ -196,11 +226,10 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ══ MENU MOBILE ══════════════════════════════════════════════════ */}
+      {/* ══ MENU MOBILE ══════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               key="backdrop"
               className="fixed inset-0 z-40 md:hidden"
@@ -209,10 +238,9 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              onClick={closeMenu}
+              onClick={() => setMobileOpen(false)}
             />
 
-            {/* Panneau */}
             <motion.nav
               key="panel"
               className="fixed inset-x-3 top-[64px] z-50 overflow-hidden rounded-3xl md:hidden"
@@ -227,49 +255,93 @@ export default function Navbar() {
               exit={{ opacity: 0, y: -16, scale: 0.97 }}
               transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
             >
-              {/* Rainbow top accent */}
               <div className="h-[2px]" style={{ background: "linear-gradient(90deg, #d946ef, #8b5cf6, #06b6d4, #22c55e, #f97316, #d946ef)" }} />
 
-              <div className="flex flex-col p-4 gap-1">
-                {LINKS.map(({ label, href }, i) => (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    onClick={closeMenu}
-                    className="flex items-center justify-between rounded-2xl px-5 py-4 text-base font-bold transition-colors duration-150"
+              <div className="flex flex-col gap-1 p-4">
+
+                {/* Prestations (accordéon mobile) */}
+                <div>
+                  <button
+                    className="flex w-full items-center justify-between rounded-2xl px-5 py-4 text-base font-bold transition-colors duration-150"
                     style={{
-                      color: activeHash === href ? "#fff" : "rgba(255,255,255,0.62)",
-                      background: activeHash === href ? "rgba(217,70,239,0.12)" : "transparent",
+                      color: isPrestActive ? "#fff" : "rgba(255,255,255,0.62)",
+                      background: isPrestActive ? "rgba(217,70,239,0.12)" : "transparent",
                     }}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 + i * 0.05, duration: 0.2 }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = activeHash === href ? "rgba(217,70,239,0.12)" : "transparent"; }}
+                    onClick={() => setMobilePrestOpen(o => !o)}
                   >
-                    {label}
-                    {activeHash === href && (
-                      <span className="h-2 w-2 rounded-full" style={{ background: "#d946ef", boxShadow: "0 0 8px #d946ef" }} />
+                    Prestations
+                    <ChevronDown
+                      className="h-4 w-4 transition-transform duration-200"
+                      style={{ transform: mobilePrestOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {mobilePrestOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.22 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-0.5 px-2 pb-2 pt-1">
+                          {PRESTATION_LINKS.map(({ label, href, color, emoji }, i) => (
+                            <motion.div
+                              key={href}
+                              initial={{ opacity: 0, x: -8 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.04 }}
+                            >
+                              <Link
+                                href={href}
+                                onClick={() => setMobileOpen(false)}
+                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors hover:bg-white/5"
+                                style={{ color: pathname === href ? color : "rgba(255,255,255,0.55)" }}
+                              >
+                                <span className="text-base">{emoji}</span>
+                                {label}
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
                     )}
-                  </motion.a>
-                ))}
+                  </AnimatePresence>
+                </div>
+
+                {/* Réalisations */}
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.08 }}>
+                  <Link
+                    href="/realisations"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between rounded-2xl px-5 py-4 text-base font-bold transition-colors duration-150 hover:bg-white/5"
+                    style={{
+                      color: isRealisActive ? "#fff" : "rgba(255,255,255,0.62)",
+                      background: isRealisActive ? "rgba(217,70,239,0.12)" : "transparent",
+                    }}
+                  >
+                    Réalisations
+                    {isRealisActive && <span className="h-2 w-2 rounded-full" style={{ background: "#d946ef", boxShadow: "0 0 8px #d946ef" }} />}
+                  </Link>
+                </motion.div>
 
                 {/* CTA mobile */}
-                <motion.a
-                  href="#contact"
-                  onClick={closeMenu}
-                  className="mt-2 flex items-center justify-center gap-2 rounded-2xl py-4 text-sm font-black text-white"
-                  style={{
-                    background: "linear-gradient(135deg, #d946ef, #8b5cf6)",
-                    boxShadow: "0 4px 24px rgba(217,70,239,0.35)",
-                  }}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.32, duration: 0.2 }}
-                >
-                  Démarrer un projet
-                  <ArrowRight className="h-4 w-4" />
-                </motion.a>
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}>
+                  <Link
+                    href="/contact"
+                    onClick={() => setMobileOpen(false)}
+                    className="mt-2 flex items-center justify-center gap-2 rounded-2xl py-4 text-sm font-black text-white"
+                    style={{
+                      background: "linear-gradient(135deg, #d946ef, #8b5cf6)",
+                      boxShadow: "0 4px 24px rgba(217,70,239,0.35)",
+                    }}
+                  >
+                    Devis gratuit
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </motion.div>
+
               </div>
             </motion.nav>
           </>

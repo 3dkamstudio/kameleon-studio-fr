@@ -11,7 +11,6 @@ import FAQ from "@/components/sections/FAQ";
 import KingOfIA from "@/components/sections/KingOfIA";
 import CtaFinal from "@/components/sections/CtaFinal";
 import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
 import CelestialBackground from "@/components/ui/CelestialBackground";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
@@ -62,7 +61,6 @@ export default function Home() {
 
       <CtaFinal />
       <SectionDivider variant="signal" />
-      <Footer />
     </main>
   );
 }

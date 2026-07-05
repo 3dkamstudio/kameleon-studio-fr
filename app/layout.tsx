@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/ui/Navbar";
+import Footer from "@/components/sections/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ConstellationCanvas from "@/components/ui/ConstellationCanvas";
@@ -71,6 +72,7 @@ export default function RootLayout({
         <ConstellationCanvas />
         <Navbar />
         {children}
+        <Footer />
         <ScrollToTop />
         <WhatsAppButton />
       </body>
