@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback, type FormEvent } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, CheckCircle, Loader2, Mail, Star, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, Star, Zap, Sparkles } from "lucide-react";
 
 // ── Variants ──────────────────────────────────────────────────────────────────
 const fadeUp: Variants = {
@@ -109,7 +108,7 @@ const STARTER_FEAT = [
 ];
 const PRO_FEAT = [
   "Tout le Starter inclus (modules 01-05)",
-  "Modules exclusifs 06, 07, 08 & 09",
+  "Modules exclusifs 06, 07 & 08",
   "Crée ton premier podcast en vidéo IA",
   "Crée ta propre musique IA pour tes productions",
   "Conçois ton assistant IA personnalisé",
@@ -558,7 +557,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
 
             {/* CTA */}
             <motion.a
-              href="#waitlist-form"
+              href="#contact"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-black text-white"
               style={{
                 background: `linear-gradient(135deg, ${color}dd, ${color})`,
@@ -568,7 +567,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
               whileHover={{ scale: 1.04, boxShadow: `0 8px 48px ${color}90` }}
               whileTap={{ scale: 0.96 }}
             >
-              Je rejoins la liste d&apos;attente
+              Je suis intéressé(e)
               <ArrowRight className="h-4 w-4" />
             </motion.a>
           </div>
@@ -580,27 +579,6 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
 
 // ── Section ───────────────────────────────────────────────────────────────────
 export default function KingOfIA() {
-  const progressRef = useRef<HTMLDivElement>(null);
-  const progressInView = useInView(progressRef, { once: true, margin: "-100px" });
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!email.trim()) { return; }
-    setStatus("loading");
-    try {
-      const res = await fetch("https://formspree.io/f/xykalpon", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email, _subject: "Inscription liste d'attente — King of IA" }),
-      });
-      setStatus(res.ok ? "success" : "error");
-    } catch {
-      setStatus("error");
-    }
-  }
-
   return (
     <section id="king-of-ia" className="relative px-6 py-28 sm:py-36">
 
@@ -616,21 +594,6 @@ export default function KingOfIA() {
 
         {/* ══ HERO ═══════════════════════════════════════════════════════════ */}
         <motion.div className="mb-24 flex flex-col items-center text-center" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-          <motion.div variants={fadeUp}>
-            <motion.div
-              className="mb-8 inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-[0.68rem] font-black uppercase tracking-widest text-white"
-              style={{ background: "linear-gradient(135deg, rgba(217,70,239,0.18), rgba(139,92,246,0.18))", border: "1px solid rgba(217,70,239,0.42)" }}
-              animate={{ boxShadow: ["0 0 10px rgba(217,70,239,0.22)", "0 0 32px rgba(217,70,239,0.7)", "0 0 10px rgba(217,70,239,0.22)"] }}
-              transition={{ duration: 2.2, repeat: Infinity }}
-            >
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-fuchsia-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-fuchsia-400" />
-              </span>
-              Bientôt disponible — Liste d&apos;attente ouverte
-            </motion.div>
-          </motion.div>
-
           <motion.h2 variants={fadeUp} className="mb-6 tracking-tight">
             <span className="block font-display font-black leading-[1.05] text-white" style={{ fontSize: "clamp(2.2rem, 5.5vw, 4.2rem)" }}>
               Maîtrisez l&apos;IA. Créez.
@@ -645,20 +608,6 @@ export default function KingOfIA() {
             Avancez à votre rythme, sans engagement de session.
           </motion.p>
 
-          <motion.div ref={progressRef} variants={fadeUp} className="w-full max-w-md">
-            <div className="mb-3 flex items-center justify-between">
-              <span className="text-sm text-white/65"><span className="font-display text-xl font-black text-white">1</span>{" "}créateur inscrit</span>
-              <span className="text-sm text-white/35">100 places max</span>
-            </div>
-            <div className="relative h-3 w-full overflow-hidden rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
-              <motion.div className="absolute inset-y-0 left-0 rounded-full" style={{ background: "linear-gradient(90deg, #8b5cf6, #d946ef, #06b6d4)" }} initial={{ width: "0%" }} animate={progressInView ? { width: "1%" } : { width: "0%" }} transition={{ duration: 1.6, ease: "easeOut", delay: 0.4 }} />
-              <motion.div className="absolute inset-y-0 left-0 rounded-full blur-[6px]" style={{ background: "linear-gradient(90deg, #8b5cf6, #d946ef)" }} initial={{ width: "0%" }} animate={progressInView ? { width: "1%" } : { width: "0%" }} transition={{ duration: 1.6, ease: "easeOut", delay: 0.4 }} />
-            </div>
-            <div className="mt-2 flex justify-between">
-              <p className="text-[0.65rem] text-white/28">Places garanties à l&apos;ouverture</p>
-              <p className="text-[0.65rem] text-white/28">53 restantes</p>
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* ══ MODULES ════════════════════════════════════════════════════════ */}
@@ -716,61 +665,6 @@ export default function KingOfIA() {
           </p>
         </div>
 
-        {/* ══ FORMULAIRE ═════════════════════════════════════════════════════ */}
-        <motion.div id="waitlist-form" className="relative mx-auto max-w-2xl" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.75 }}>
-          <div className="absolute inset-0 rounded-3xl blur-[60px] pointer-events-none" style={{ background: "radial-gradient(ellipse, rgba(217,70,239,0.18) 0%, rgba(139,92,246,0.10) 50%, transparent 75%)", margin: "-20px" }} />
-          <div className="relative rounded-3xl p-px" style={{ background: "linear-gradient(135deg, rgba(217,70,239,0.55), rgba(139,92,246,0.38), rgba(6,182,212,0.30))" }}>
-            <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, white 2px, white 4px)" }} />
-            <div className="relative overflow-hidden rounded-[calc(1.5rem-1px)] px-7 py-12 text-center sm:px-12 sm:py-14" style={{ background: "linear-gradient(145deg, rgba(6,5,18,0.99) 0%, rgba(11,9,26,0.97) 100%)" }}>
-              <div className="pointer-events-none absolute left-0 top-0 h-32 w-32 rounded-full blur-[60px]" style={{ background: "rgba(139,92,246,0.20)" }} />
-              <div className="pointer-events-none absolute bottom-0 right-0 h-32 w-32 rounded-full blur-[60px]" style={{ background: "rgba(6,182,212,0.18)" }} />
-
-              <motion.div className="relative mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl" style={{ background: "linear-gradient(135deg, rgba(217,70,239,0.22), rgba(139,92,246,0.16))", border: "1px solid rgba(217,70,239,0.38)" }} animate={{ boxShadow: ["0 0 20px rgba(217,70,239,0.22)", "0 0 50px rgba(217,70,239,0.5)", "0 0 20px rgba(217,70,239,0.22)"] }} transition={{ duration: 2.5, repeat: Infinity }}>
-                <Mail className="h-9 w-9 text-fuchsia-400" />
-              </motion.div>
-
-              <h3 className="mb-2 font-display text-2xl font-black text-white sm:text-3xl lg:text-4xl">
-                Soyez les{" "}
-                <span style={{ background: "linear-gradient(90deg, #d946ef, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  premiers informés
-                </span>
-              </h3>
-              <p className="mb-8 text-sm leading-relaxed text-white/42 sm:text-base">
-                Accès prioritaire, tarif early adopter et bonus exclusifs réservés aux inscrits avant le lancement.
-              </p>
-
-              <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
-                {["✓ Accès prioritaire", "✓ Tarif early adopter", "✓ Sans engagement"].map(b => (
-                  <span key={b} className="rounded-full px-3 py-1 text-[0.65rem] font-semibold text-white/50" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>{b}</span>
-                ))}
-              </div>
-
-              <AnimatePresence mode="wait">
-                {status === "success" ? (
-                  <motion.div key="success" initial={{ opacity: 0, scale: 0.8, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="flex flex-col items-center gap-4 py-4">
-                    <motion.div animate={{ scale: [0.8, 1.15, 1], rotate: [0, 10, 0] }} transition={{ duration: 0.6 }}>
-                      <CheckCircle className="h-16 w-16 text-green-400" />
-                    </motion.div>
-                    <div>
-                      <p className="font-display text-xl font-black text-white">Vous êtes sur la liste !</p>
-                      <p className="mt-1 text-sm text-white/42">Nous vous contacterons dès l&apos;ouverture. Restez connecté.</p>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
-                    <input type="email" required placeholder="votre@email.com" value={email} onChange={e => setEmail(e.target.value)} disabled={status === "loading"} className="flex-1 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-4 text-sm text-white placeholder-white/28 outline-none transition focus:border-fuchsia-500/60 focus:ring-2 focus:ring-fuchsia-500/20 disabled:opacity-50" />
-                    <motion.button type="submit" disabled={status === "loading"} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl px-7 py-4 text-sm font-black text-white disabled:opacity-60" style={{ background: "linear-gradient(135deg, #d946ef, #8b5cf6)", boxShadow: "0 4px 24px rgba(217,70,239,0.38)" }} whileHover={{ scale: 1.04, boxShadow: "0 8px 40px rgba(217,70,239,0.6)" }} whileTap={{ scale: 0.96 }}>
-                      {status === "loading" ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Je m&apos;inscris <ArrowRight className="h-4 w-4" /></>}
-                    </motion.button>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-
-              {status === "error" && <p className="mt-3 text-xs text-red-400">Erreur d&apos;envoi — réessayez ou contactez-nous directement.</p>}
-              <p className="mt-5 text-[0.65rem] text-white/22">Pas de spam. Désinscription en un clic à tout moment.</p>
-            </div>
-          </div>
-        </motion.div>
 
       </div>
     </section>

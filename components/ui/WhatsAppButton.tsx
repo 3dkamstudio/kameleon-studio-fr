@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const WA_URL =
   `https://wa.me/33762236491?text=${encodeURIComponent(
-    "Bonjour Kaméléon Studio, je souhaite un devis pour "
+    "Bonjour King of IA, je souhaite un devis pour "
   )}`;
 
 function IconWhatsApp({ className }: { className?: string }) {
@@ -67,7 +67,7 @@ export default function WhatsAppButton() {
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Contacter Kaméléon Studio sur WhatsApp"
+            aria-label="Contacter King of IA sur WhatsApp"
             className="relative flex h-12 w-12 items-center justify-center rounded-full text-white"
             style={{ background: "#25D366" }}
             /* entrée */

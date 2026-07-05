@@ -134,7 +134,7 @@ export default function Kame({
       >
         <Image
           src={src ?? "/kame.png"}
-          alt="Kame, mascotte Kaméléon Studio"
+          alt="Kame, mascotte King of IA"
           width={size}
           height={size}
           priority={priority}

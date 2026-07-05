@@ -99,7 +99,7 @@ export default function Navbar() {
             >
               <Image
                 src="/ks-logo.png"
-                alt="Kaméléon Studio"
+                alt="King of IA"
                 fill
                 className="object-contain"
                 priority
@@ -113,10 +113,10 @@ export default function Navbar() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 animation: "gradient-x-flow 4s linear infinite",
-              }}>Kaméléon</span>{" "}
+              }}>King</span>{" "}
               <span style={{ display: "inline-block", color: "rgba(255,255,255,0.80)",
                 borderBottom: "1.5px solid rgba(217,70,239,0.65)", paddingBottom: "1px" }}>
-                Studio
+                of IA
               </span>
             </span>
           </a>

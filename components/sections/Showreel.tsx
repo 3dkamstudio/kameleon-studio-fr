@@ -43,7 +43,7 @@ const VIDEOS: Video[] = [
   {
     id:    "ZHCLE0t9lII",
     title: "🎙️ Indépendance Artificielle (EP.1) : le podcast 100% créé avec l'IA 🤖",
-    desc:  "Premier épisode du podcast Kaméléon Studio — discussions, coulisses et créativité propulsée par l'IA.",
+    desc:  "Premier épisode du podcast King of IA — discussions, coulisses et créativité propulsée par l'IA.",
     cat:   "podcast",
     tag:   "Podcast",
   },
@@ -217,7 +217,7 @@ export default function Showreel() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="badge-pill badge-fuchsia mb-7">🎬 Kaméléon Studio en action</span>
+          <span className="badge-pill badge-fuchsia mb-7">🎬 King of IA en action</span>
           <h2 className="mb-4 tracking-tight">
             <span className="block font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.8rem]">
               Voir, c&apos;est croire.

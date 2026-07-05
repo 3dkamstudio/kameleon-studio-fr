@@ -183,7 +183,7 @@ export default function Services() {
           viewport={{ once: true, margin: "-80px" }}
         >
           <motion.div variants={fadeUp}>
-            <span className="badge-pill badge-fuchsia mb-8">✦ Le Cockpit Kaméléon</span>
+            <span className="badge-pill badge-fuchsia mb-8">✦ Le Cockpit King of IA</span>
           </motion.div>
           <motion.h2 className="mb-3 tracking-tight" variants={fadeUp}>
             <span className="block font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.75rem]">
@@ -249,7 +249,7 @@ export default function Services() {
               >
                 <Image
                   src="/kame-cockpit.webp"
-                  alt="Kame, mascotte Kaméléon Studio"
+                  alt="Kame, mascotte King of IA"
                   width={460}
                   height={460}
                   priority
@@ -278,7 +278,7 @@ export default function Services() {
           >
             <Image
               src="/kame-cockpit.webp"
-              alt="Kame, mascotte Kaméléon Studio"
+              alt="Kame, mascotte King of IA"
               width={240}
               height={240}
               className="object-contain"

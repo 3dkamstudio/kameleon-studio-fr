@@ -75,13 +75,13 @@ export default function Hero() {
     >
 
       {/* ══════════════════════════════════════════════════════════════════
-          IMAGE PLEIN-CADRE — DA Kaméléon Studio
+          IMAGE PLEIN-CADRE — DA King of IA
       ══════════════════════════════════════════════════════════════════ */}
       <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         {/* Mobile : bannière verticale 9:16 */}
         <Image
           src="/banner-mobile.webp"
-          alt="Kaméléon Studio — Studio de production créative par IA"
+          alt="King of IA — Studio de production créative par IA"
           fill
           priority
           quality={90}
@@ -90,7 +90,7 @@ export default function Hero() {
         {/* Desktop : bannière horizontale */}
         <Image
           src="/banner-wide.webp"
-          alt="Kaméléon Studio — Studio de production créative par IA"
+          alt="King of IA — Studio de production créative par IA"
           fill
           priority
           quality={90}

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Mentions légales — Kaméléon Studio",
-  description: "Mentions légales et informations légales de Kaméléon Studio, auto-entrepreneur.",
+  title: "Mentions légales — King of IA",
+  description: "Mentions légales et informations légales de King of IA, auto-entrepreneur.",
 };
 
 export default function MentionsLegales() {
@@ -28,10 +28,10 @@ export default function MentionsLegales() {
               Éditeur du site
             </h2>
             <p>
-              Kaméléon Studio<br />
+              King of IA<br />
               Auto-entrepreneur — SIRET en cours d&apos;enregistrement<br />
               Activité : production vidéo, web et contenu créatif par intelligence artificielle<br />
-              Email : <a href="mailto:infos.kamstudio@gmail.com" className="text-fuchsia-400 hover:text-fuchsia-300 transition-colors">infos.kamstudio@gmail.com</a>
+              Email : <a href="mailto:contact@kingofia.fr" className="text-fuchsia-400 hover:text-fuchsia-300 transition-colors">contact@kingofia.fr</a>
             </p>
           </section>
 
@@ -52,7 +52,7 @@ export default function MentionsLegales() {
             </h2>
             <p>
               L&apos;ensemble des contenus présents sur ce site (textes, images, vidéos, animations, logo,
-              mascotte Kame) sont la propriété exclusive de Kaméléon Studio, sauf mention contraire.
+              mascotte Kame) sont la propriété exclusive de King of IA, sauf mention contraire.
               Toute reproduction, même partielle, est interdite sans autorisation préalable.
             </p>
           </section>
@@ -66,8 +66,8 @@ export default function MentionsLegales() {
               uniquement pour répondre à votre demande. Elles ne sont ni revendues ni transmises à des tiers.
               Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression
               en écrivant à{" "}
-              <a href="mailto:infos.kamstudio@gmail.com" className="text-fuchsia-400 hover:text-fuchsia-300 transition-colors">
-                infos.kamstudio@gmail.com
+              <a href="mailto:contact@kingofia.fr" className="text-fuchsia-400 hover:text-fuchsia-300 transition-colors">
+                contact@kingofia.fr
               </a>.
             </p>
           </section>
@@ -87,7 +87,7 @@ export default function MentionsLegales() {
               Limitation de responsabilité
             </h2>
             <p>
-              Kaméléon Studio s&apos;efforce de maintenir les informations de ce site à jour et exactes.
+              King of IA s&apos;efforce de maintenir les informations de ce site à jour et exactes.
               Cependant, des erreurs ou omissions peuvent survenir. L&apos;éditeur ne saurait être tenu
               responsable des dommages directs ou indirects résultant de l&apos;utilisation du site.
             </p>

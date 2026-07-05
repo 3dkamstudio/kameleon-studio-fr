@@ -206,7 +206,7 @@ export default function Contact() {
                     >
                       <Image
                         src="/team-ks.png"
-                        alt="L'équipe Kaméléon Studio — production vidéo, BD et web par IA"
+                        alt="King of IA — production vidéo, BD et web par IA"
                         width={600}
                         height={600}
                         className="w-full object-cover"
@@ -241,7 +241,7 @@ export default function Contact() {
               {/* Infos contact en dessous de l'image */}
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 {[
-                  { icon: Mail,  label: "Email direct",      val: "infos.kamstudio@gmail.com", color: "#d946ef" },
+                  { icon: Mail,  label: "Email direct",      val: "contact@kingofia.fr", color: "#d946ef" },
                   { icon: Zap,   label: "Premier échange",   val: "Toujours gratuit",            color: "#22c55e" },
                 ].map(({ icon: Icon, label, val, color }) => (
                   <div key={label}

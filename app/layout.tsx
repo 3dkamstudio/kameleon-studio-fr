@@ -21,11 +21,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://xn--kamlonstudio-debb.fr"),
-  title: "Kaméléon Studio — Production vidéo & web par IA",
+  metadataBase: new URL("https://kingofia.fr"),
+  title: "King of IA — Vidéo, BD & web par IA",
   description:
-    "Studio de production vidéo et web premium propulsé par l'intelligence artificielle. Créations sur-mesure, identités visuelles, contenus qui transforment.",
-  keywords: ["studio", "production vidéo", "web", "IA", "intelligence artificielle", "Kaméléon Studio", "Martinique"],
+    "Studio de production vidéo, BD et web premium propulsé par l'intelligence artificielle. Créations sur-mesure, identités visuelles, contenus qui transforment.",
+  keywords: ["studio", "production vidéo", "web", "IA", "intelligence artificielle", "King of IA", "kingofia", "Martinique"],
   icons: {
     icon: "/favicon-ks.png",
     apple: "/favicon-ks.png",
@@ -33,25 +33,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://xn--kamlonstudio-debb.fr",
-    siteName: "Kaméléon Studio",
-    title: "Kaméléon Studio — Production vidéo & web par IA",
+    url: "https://kingofia.fr",
+    siteName: "King of IA",
+    title: "King of IA — Vidéo, BD & web par IA",
     description:
-      "Studio de production vidéo et web premium propulsé par l'intelligence artificielle. Créations sur-mesure, identités visuelles, contenus qui transforment.",
+      "Studio de production vidéo, BD et web premium propulsé par l'intelligence artificielle. Créations sur-mesure, identités visuelles, contenus qui transforment.",
     images: [
       {
         url: "/banner-ks.png",
         width: 1200,
         height: 630,
-        alt: "Kaméléon Studio — Production vidéo & web par IA",
+        alt: "King of IA — Vidéo, BD & web par IA",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kaméléon Studio — Production vidéo & web par IA",
+    title: "King of IA — Vidéo, BD & web par IA",
     description:
-      "Studio de production vidéo et web premium propulsé par l'intelligence artificielle.",
+      "Studio de production vidéo, BD et web premium propulsé par l'intelligence artificielle.",
     images: ["/banner-ks.png"],
   },
 };

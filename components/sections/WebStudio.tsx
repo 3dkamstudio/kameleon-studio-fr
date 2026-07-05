@@ -701,7 +701,7 @@ export default function WebStudio() {
             </p>
             <p className="mt-1.5 text-center text-[0.60rem] text-white/14">
               L&apos;intégration des mentions légales fournies par le client est incluse dans toute offre.
-              Kaméléon Studio n&apos;assure pas la rédaction ni le conseil juridique.
+              King of IA n&apos;assure pas la rédaction ni le conseil juridique.
             </p>
           </motion.div>
         </div>

@@ -290,7 +290,7 @@ export default function MaintenanceWeb() {
                 mentions légales, politique de confidentialité, CGV, informations de contact, liens obligatoires ou textes liés aux cookies.
               </p>
               <p className="mb-4 text-sm leading-relaxed text-white/55">
-                Kaméléon Studio peut intégrer ou mettre à jour ces éléments sur votre site, mais ne fournit pas de conseil juridique.
+                King of IA peut intégrer ou mettre à jour ces éléments sur votre site, mais ne fournit pas de conseil juridique.
                 Le client reste responsable du contenu légal transmis et de sa conformité réglementaire.
               </p>
               <div className="rounded-xl p-3.5" style={{ background: "rgba(6,182,212,0.06)", border: "1px solid rgba(6,182,212,0.14)" }}>
@@ -319,7 +319,7 @@ export default function MaintenanceWeb() {
               </div>
               <p className="mb-4 text-sm leading-relaxed text-white/55">
                 La maintenance est un service préventif continu. En cas d&rsquo;interruption de l&rsquo;abonnement,
-                Kaméléon Studio ne peut garantir l&rsquo;état technique, la sécurité ou le bon fonctionnement
+                King of IA ne peut garantir l&rsquo;état technique, la sécurité ou le bon fonctionnement
                 du site pendant la période non couverte.
               </p>
               <div className="rounded-xl p-3.5" style={{ background: "rgba(234,179,8,0.06)", border: "1px solid rgba(234,179,8,0.15)" }}>

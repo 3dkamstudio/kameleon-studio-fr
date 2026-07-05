@@ -245,7 +245,7 @@ export default function FAQ() {
           </h2>
 
           <p className="max-w-md text-sm text-white/40 sm:text-base">
-            Les réponses aux questions les plus posées avant de démarrer un projet avec Kaméléon Studio.
+            Les réponses aux questions les plus posées avant de démarrer un projet avec King of IA.
           </p>
 
           <motion.div

@@ -222,7 +222,7 @@ export default function Testimonials() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Des créateurs, indépendants et entreprises qui ont choisi Kaméléon Studio pour leurs projets.
+            Des créateurs, indépendants et entreprises qui ont choisi King of IA pour leurs projets.
           </motion.p>
         </div>
 

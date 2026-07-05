@@ -114,14 +114,14 @@ export default function Footer() {
                 style={{ boxShadow: "0 0 20px rgba(217,70,239,0.3)" }}>
                 <Image
                   src="/ks-logo.png"
-                  alt="Logo Kaméléon Studio"
+                  alt="Logo King of IA"
                   fill
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
               <div>
                 <span className="block font-display text-lg font-black leading-none text-white">
-                  Kaméléon Studio
+                  King of IA
                 </span>
                 <span className="block text-[0.62rem] font-semibold uppercase tracking-widest text-white/30">
                   Production créative par IA
@@ -206,10 +206,10 @@ export default function Footer() {
                 Contact direct
               </p>
               <a
-                href="mailto:infos.kamstudio@gmail.com"
+                href="mailto:contact@kingofia.fr"
                 className="text-sm font-medium text-white/40 transition-colors hover:text-brand-fuchsia break-all"
               >
-                infos.kamstudio@gmail.com
+                contact@kingofia.fr
               </a>
             </div>
           </motion.div>
@@ -224,7 +224,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p className="text-[0.72rem] text-white/60">
-            © 2026 Kaméléon Studio — Tous droits réservés
+            © 2026 King of IA — Tous droits réservés
           </p>
           <p className="text-[0.65rem] text-white/50">
             Fait avec ✦ et beaucoup de caféine par Kame

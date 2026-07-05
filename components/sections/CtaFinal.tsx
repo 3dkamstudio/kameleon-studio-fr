@@ -12,7 +12,7 @@ export default function CtaFinal() {
       <div className="md:hidden absolute inset-0 z-0">
         <Image
           src="/cta-final-mobile.webp"
-          alt="Kaméléon Studio — caméra créative"
+          alt="King of IA — studio créatif"
           fill
           className="object-cover object-center"
           sizes="100vw"
@@ -24,7 +24,7 @@ export default function CtaFinal() {
       <div className="hidden md:block absolute inset-0 z-0">
         <Image
           src="/cta-final-desktop.webp"
-          alt="Kaméléon Studio — caméra créative"
+          alt="King of IA — studio créatif"
           fill
           className="object-cover object-center"
           sizes="100vw"
@@ -105,7 +105,7 @@ export default function CtaFinal() {
               variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, delay: 0.05 } } }}
               className="mb-10 max-w-lg text-base text-white/55 sm:text-lg"
             >
-              Vidéos, animations 3D, BD, formations IA — confiez votre projet à Kaméléon Studio et voyez la magie opérer.
+              Vidéos, animations 3D, BD, formations IA — confiez votre projet à King of IA et voyez la magie opérer.
             </motion.p>
 
             {/* Boutons */}
