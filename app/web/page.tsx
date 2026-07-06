@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
 import WebStudio from "@/components/sections/WebStudio";
 import MaintenanceWeb from "@/components/sections/MaintenanceWeb";
+import FAQ, { type FAQItem } from "@/components/sections/FAQ";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
@@ -12,6 +13,15 @@ export const metadata: Metadata = {
   title: "Sites web & Landing pages IA — King of IA",
   description: "Landing pages premium, sites vitrine sur mesure avec animations IA. Design responsive, mise en ligne incluse. À partir de 800€.",
 };
+
+const WEB_FAQ: FAQItem[] = [
+  {
+    num: "01", cat: "Paiement",
+    color: "#06b6d4",
+    q: "Quels sont les modes de paiement acceptés ?",
+    a: "Paiement en ligne sécurisé par carte bancaire (Stripe), virement bancaire, ou PayPal. Pour les projets d'un montant supérieur à 800 €, un acompte de 50 % est demandé au démarrage, le solde à la livraison. Facturation avec TVA selon situation.",
+  },
+];
 
 export default function WebPage() {
   return (
@@ -48,6 +58,10 @@ export default function WebPage() {
       <RevealSection><SectionWrapper><WebStudio /></SectionWrapper></RevealSection>
       <SectionDivider variant="wave" />
       <RevealSection><SectionWrapper><MaintenanceWeb /></SectionWrapper></RevealSection>
+      <SectionDivider variant="scan" />
+      <RevealSection><SectionWrapper>
+        <FAQ items={WEB_FAQ} subtitle="Les réponses aux questions les plus posées avant de lancer ton site." />
+      </SectionWrapper></RevealSection>
 
       {/* Cross-sell */}
       <section className="px-6 py-16 text-center">

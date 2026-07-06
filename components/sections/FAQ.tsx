@@ -14,7 +14,7 @@ const FAQ_SPEECH = [
 ];
 
 // ── Données ────────────────────────────────────────────────────────────────────
-type FAQItem = {
+export type FAQItem = {
   num: string;
   cat: string;
   q: string;
@@ -73,24 +73,12 @@ const FAQS: FAQItem[] = [
   },
   {
     num: "09", cat: "Général",
-    color: "#f97316",
-    q: "Quels sont les modes de paiement acceptés ?",
-    a: "Paiement en ligne sécurisé par carte bancaire (Stripe), virement bancaire, ou PayPal. Pour les projets d'un montant supérieur à 800 €, un acompte de 50 % est demandé au démarrage, le solde à la livraison. Facturation avec TVA selon situation.",
-  },
-  {
-    num: "10", cat: "Général",
     color: "#22c55e",
     q: "Travaillez-vous avec des clients en dehors de la France ?",
     a: "Absolument. Tous nos échanges se font à distance — brief par formulaire, révisions par e-mail ou visio, livraison par lien de téléchargement sécurisé. Nous travaillons avec des clients en Europe, en Afrique francophone et en Antilles. La langue de travail est le français.",
   },
   {
-    num: "11", cat: "Maintenance",
-    color: "#06b6d4",
-    q: "Quelle est la différence entre les deux formules de maintenance web ?",
-    a: "La Maintenance Landing Page (49 €/mois) est conçue pour une page unique — landing page, page de vente, page de capture ou page formation. Elle inclut 30 min d'intervention mensuelle. La Maintenance Site Web Complet (79 €/mois) couvre un site vitrine de plusieurs pages avec 1h d'intervention, un mini contrôle SEO en plus, et une surveillance sécurité renforcée. Les deux formules s'engagent sur 3 mois minimum et incluent mises à jour techniques, vérifications légales et sauvegardes.",
-  },
-  {
-    num: "12", cat: "Maintenance",
+    num: "10", cat: "Maintenance",
     color: "#22c55e",
     q: "La maintenance est-elle obligatoire après la création de mon site ?",
     a: "Non, la maintenance est un service optionnel. Votre site vous est livré clé en main et fonctionnel. Elle est recommandée si vous souhaitez que votre site reste sécurisé, à jour et performant dans le temps, sans vous en occuper vous-même. C'est un accompagnement préventif continu — pas une intervention ponctuelle quand quelque chose tombe en panne.",
@@ -192,7 +180,13 @@ function FAQRow({ item, isOpen, onToggle }: {
 }
 
 // ── Section principale ─────────────────────────────────────────────────────────
-export default function FAQ() {
+export default function FAQ({
+  items = FAQS,
+  subtitle = "Les réponses aux questions les plus posées avant de démarrer un projet avec King of IA.",
+}: {
+  items?: FAQItem[];
+  subtitle?: string;
+}) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   function toggle(i: number) {
@@ -245,7 +239,7 @@ export default function FAQ() {
           </h2>
 
           <p className="max-w-md text-sm text-white/40 sm:text-base">
-            Les réponses aux questions les plus posées avant de démarrer un projet avec King of IA.
+            {subtitle}
           </p>
 
           <motion.div
@@ -267,7 +261,7 @@ export default function FAQ() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5 }}
         >
-          {FAQS.map((item, i) => (
+          {items.map((item, i) => (
             <motion.div
               key={item.num}
               initial={{ opacity: 0, y: 16 }}

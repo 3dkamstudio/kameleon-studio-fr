@@ -114,7 +114,7 @@ export default function CtaFinal() {
               className="flex flex-wrap gap-4"
             >
               <motion.a
-                href="#contact"
+                href="/contact"
                 className="group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-bold text-white"
                 style={{
                   background: "linear-gradient(135deg, #d946ef, #f43f5e)",
@@ -126,12 +126,12 @@ export default function CtaFinal() {
                 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Démarrer mon projet
+                Réserver mon diagnostic gratuit — 15 min
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </motion.a>
 
               <motion.a
-                href="#showreel"
+                href="/realisations"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.06] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/[0.11]"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
