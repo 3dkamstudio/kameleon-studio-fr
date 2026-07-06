@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Star, Zap, Sparkles } from "lucide-react";
@@ -133,7 +133,7 @@ function NeonBorder({ active, color, children }: { active: boolean; color: strin
       <motion.div
         className="absolute inset-[-140%] rounded-full"
         style={{ background: `conic-gradient(from 0deg, transparent 0%, ${color}70 18%, ${color} 30%, ${color}ff 36%, ${color}70 48%, transparent 60%)` }}
-        animate={{ opacity: active ? 1 : 0, rotate: 360 }}
+        animate={active ? { opacity: 1, rotate: 360 } : { opacity: 0 }}
         transition={{ opacity: { duration: 0.15 }, rotate: { duration: 1.8, repeat: Infinity, ease: "linear" } }}
       />
       <div className="relative" style={{ borderRadius: "calc(1rem - 1px)" }}>
@@ -368,6 +368,9 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
 }) {
   const [hovered, setHovered] = useState(false);
   const spotRef = useRef<HTMLDivElement>(null);
+  // Pause des animations infinies (sparks, glimmers, bordure conic) hors écran
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(cardRef, { margin: "-10% 0px" });
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!spotRef.current) { return; }
@@ -377,6 +380,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
 
   return (
     <motion.div
+      ref={cardRef}
       className="relative flex flex-1 flex-col"
       style={{ willChange: "transform" }}
       initial={{ opacity: 0, y: 56 }}
@@ -408,8 +412,8 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
             key={i}
             className="absolute rounded-full"
             style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.s, height: p.s, background: color, boxShadow: `0 0 ${p.s * 5}px ${color}ee` }}
-            animate={{ y: [0, -35, -70], opacity: [0, 0.9, 0], scale: [0.4, 1.3, 0.2] }}
-            transition={{ duration: p.dur, delay: p.d, repeat: Infinity, ease: "easeOut" }}
+            animate={inView ? { y: [0, -35, -70], opacity: [0, 0.9, 0], scale: [0.4, 1.3, 0.2] } : { opacity: 0 }}
+            transition={inView ? { duration: p.dur, delay: p.d, repeat: Infinity, ease: "easeOut" } : { duration: 0.2 }}
           />
         ))}
       </div>
@@ -421,8 +425,8 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
             key={i}
             className="absolute select-none font-black leading-none"
             style={{ left: `${g.x}%`, top: `${g.y}%`, fontSize: g.sz, color }}
-            animate={{ opacity: [0, 1, 0.7, 0], scale: [0.3, 1.2, 0.9, 0.3], rotate: [0, 15, -10, 0] }}
-            transition={{ duration: g.dur, delay: g.d, repeat: Infinity, ease: "easeInOut" }}
+            animate={inView ? { opacity: [0, 1, 0.7, 0], scale: [0.3, 1.2, 0.9, 0.3], rotate: [0, 15, -10, 0] } : { opacity: 0 }}
+            transition={inView ? { duration: g.dur, delay: g.d, repeat: Infinity, ease: "easeInOut" } : { duration: 0.2 }}
           >
             ✦
           </motion.span>
@@ -445,7 +449,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
         <motion.div
           className="absolute inset-[-130%] rounded-full"
           style={{ background: `conic-gradient(from 0deg, transparent 0%, ${color}45 16%, ${color}cc 26%, ${color}ff 32%, ${color}cc 38%, ${color}45 48%, transparent 60%)` }}
-          animate={{ rotate: 360 }}
+          animate={inView ? { rotate: 360 } : {}}
           transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
         />
 

@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/sections/Footer";
+import MotionProvider from "@/components/ui/MotionProvider";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ConstellationCanvas from "@/components/ui/ConstellationCanvas";
@@ -69,12 +70,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground antialiased font-sans">
-        <ConstellationCanvas />
-        <Navbar />
-        {children}
-        <Footer />
-        <ScrollToTop />
-        <WhatsAppButton />
+        <MotionProvider>
+          <ConstellationCanvas />
+          <Navbar />
+          {children}
+          <Footer />
+          <ScrollToTop />
+          <WhatsAppButton />
+        </MotionProvider>
       </body>
     </html>
   );
