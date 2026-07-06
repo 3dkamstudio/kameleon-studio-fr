@@ -18,7 +18,9 @@
 
 ## PHASE 1 — MIGRATION DE MARQUE (à faire en premier, avant toute nouvelle page)
 
-1. Remplacer **toutes** les occurrences de "Kaméléon Studio" par "King of IA" : navbar, footer, mentions légales, page contact, metadata (`title`, `description`), `manifest`, alt des images.
+> **Architecture de marque (mise à jour)** : King of IA est LA marque du site (navbar, footer, métadonnées, légal, accueil). **Kaméléon Studio survit comme sous-marque du studio vidéo**, présente UNIQUEMENT sur `/video`, toujours introduite par la formule : *"Kaméléon Studio — le studio de production vidéo de King of IA"*. Les mentions Kaméléon Studio sur `/video` ne sont PAS des résidus à corriger.
+
+1. Remplacer **toutes** les occurrences de "Kaméléon Studio" par "King of IA" : navbar, footer, mentions légales, page contact, metadata (`title`, `description`), `manifest`, alt des images. **Exception : la page `/video`** (voir architecture de marque ci-dessus et section 3.2).
 2. Corriger les métadonnées Open Graph : `og:url`, `og:site_name`, `canonical` doivent pointer vers `https://kingofia.fr` (elles pointent actuellement vers l'ancien domaine kaméléonstudio).
 3. Ajouter dans `next.config.js` des redirects 301 depuis les anciennes ancres si les URLs changent. La redirection domaine kameleonstudio.fr → kingofia.fr se fait côté Vercel/Ionos (hors code) — le signaler à Sébastien, ne pas tenter de le faire dans le code.
 4. **Supprimer le compteur de waitlist** ("X créateurs inscrits / places restantes") de la section formation. Ne le remplacer par aucun faux compteur. Si preuve sociale nécessaire : rien tant qu'il n'y a pas de vrais chiffres.
@@ -84,6 +86,8 @@ Chaque univers a une **teinte dominante** dérivée de la palette néon existant
 - CTA final : diagnostic gratuit 15 min (Calendly).
 
 ### 3.2 /video
+- **Sous-marque** : la page porte la marque Kaméléon Studio, introduite par la formule exacte *"Kaméléon Studio — le studio de production vidéo de King of IA"*. C'est la SEULE page du site où Kaméléon Studio apparaît.
+- **Hero** : l'asset `banner-wide.webp` (bannière Kaméléon Studio existante) devient le hero de la page.
 - Reprendre la grille tarifaire vidéo existante (tarifs dégressifs) sans modification de prix.
 - Showreel filtré : uniquement les vidéos.
 - FAQ : délais, révisions, formats livrés, droits d'usage.
