@@ -49,9 +49,9 @@ export default function Navbar() {
       <header
         className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
         style={scrolled ? {
-          background: "rgba(6,6,14,0.82)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
+          background: "rgba(6,6,14,0.88)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
           boxShadow: "0 4px 40px rgba(0,0,0,0.45)",
         } : {
           background: "linear-gradient(to bottom, rgba(6,6,14,0.38) 0%, rgba(6,6,14,0.10) 60%, transparent 100%)",

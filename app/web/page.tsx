@@ -3,7 +3,6 @@ import PrestationLayout from "@/components/layouts/PrestationLayout";
 import WebStudio from "@/components/sections/WebStudio";
 import MaintenanceWeb from "@/components/sections/MaintenanceWeb";
 import FAQ, { type FAQItem } from "@/components/sections/FAQ";
-import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";
@@ -55,13 +54,13 @@ export default function WebPage() {
       </section>
 
       <SectionDivider variant="scan" />
-      <RevealSection><SectionWrapper><WebStudio /></SectionWrapper></RevealSection>
+      <RevealSection><WebStudio /></RevealSection>
       <SectionDivider variant="wave" />
-      <RevealSection><SectionWrapper><MaintenanceWeb /></SectionWrapper></RevealSection>
+      <RevealSection><MaintenanceWeb /></RevealSection>
       <SectionDivider variant="scan" />
-      <RevealSection><SectionWrapper>
+      <RevealSection>
         <FAQ items={WEB_FAQ} subtitle="Les réponses aux questions les plus posées avant de lancer ton site." />
-      </SectionWrapper></RevealSection>
+      </RevealSection>
 
       {/* Cross-sell */}
       <section className="px-6 py-16 text-center">

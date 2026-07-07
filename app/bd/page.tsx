@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
 import PricingBD from "@/components/sections/PricingBD";
-import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";
@@ -45,7 +44,7 @@ export default function BdPage() {
       </section>
 
       <SectionDivider variant="circuit" />
-      <RevealSection><SectionWrapper><PricingBD /></SectionWrapper></RevealSection>
+      <RevealSection><PricingBD /></RevealSection>
 
       {/* Cross-sell */}
       <section className="px-6 py-16 text-center">

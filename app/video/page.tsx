@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
 import PricingVideo from "@/components/sections/PricingVideo";
 import Showreel from "@/components/sections/Showreel";
-import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";
@@ -45,9 +44,9 @@ export default function VideoPage() {
       </section>
 
       <SectionDivider variant="scan" />
-      <RevealSection><SectionWrapper><Showreel /></SectionWrapper></RevealSection>
+      <RevealSection><Showreel /></RevealSection>
       <SectionDivider variant="chevron" />
-      <RevealSection><SectionWrapper><PricingVideo /></SectionWrapper></RevealSection>
+      <RevealSection><PricingVideo /></RevealSection>
 
       {/* Cross-sell */}
       <section className="px-6 py-16 text-center">

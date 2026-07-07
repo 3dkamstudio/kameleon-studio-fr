@@ -18,11 +18,13 @@ const STARS = Array.from({ length: 60 }, (_, i) => {
   };
 });
 
+// Fond commun à toutes les pages (rendu depuis le layout).
+// `fixed` : la couche ne bouge pas au scroll — zéro re-compositing des orbes.
 export default function CelestialBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
       {/* Dégradé cosmique de base */}
       <div

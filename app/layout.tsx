@@ -6,7 +6,7 @@ import Footer from "@/components/sections/Footer";
 import MotionProvider from "@/components/ui/MotionProvider";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
-import ConstellationCanvas from "@/components/ui/ConstellationCanvas";
+import CelestialBackground from "@/components/ui/CelestialBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -71,7 +71,7 @@ export default function RootLayout({
     >
       <body className="bg-background text-foreground antialiased font-sans">
         <MotionProvider>
-          <ConstellationCanvas />
+          <CelestialBackground />
           <Navbar />
           {children}
           <Footer />

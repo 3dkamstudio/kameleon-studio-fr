@@ -16,7 +16,7 @@ export default function CoachingPage() {
     <PrestationLayout>
       <SectionWrapper><CoachingHero /></SectionWrapper>
       <SectionDivider variant="scan" />
-      <RevealSection><SectionWrapper><CoachingCatalogue /></SectionWrapper></RevealSection>
+      <RevealSection><CoachingCatalogue /></RevealSection>
     </PrestationLayout>
   );
 }

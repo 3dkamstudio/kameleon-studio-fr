@@ -3,17 +3,14 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
+// Fade + y subtil uniquement — pas de scale (rasterisation coûteuse des
+// sections entières), pas de spring (durée longue pendant le scroll).
 const revealVariants = {
-  hidden: { opacity: 0, y: 48, scale: 0.93 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: {
-      y:       { type: "spring" as const, stiffness: 180, damping: 22 },
-      scale:   { type: "spring" as const, stiffness: 180, damping: 22 },
-      opacity: { duration: 0.5, ease: "easeOut" as const },
-    },
+    transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] as const },
   },
 };
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
 import Showreel from "@/components/sections/Showreel";
-import SectionWrapper from "@/components/ui/SectionWrapper";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";
 
@@ -14,7 +13,7 @@ export default function RealisationsPage() {
   return (
     <PrestationLayout>
 
-      <RevealSection><SectionWrapper><Showreel /></SectionWrapper></RevealSection>
+      <RevealSection><Showreel /></RevealSection>
 
       {/* Cross-sell */}
       <section className="px-6 py-16 text-center">
