@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Video, Disc, FileText } from "lucide-react";
@@ -25,7 +25,7 @@ export default function CoachingHero() {
       <div className="relative z-10 flex flex-col items-center">
 
         {/* Kame mentor — flottement */}
-        <motion.div
+        <m.div
           className="mb-8"
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -38,13 +38,10 @@ export default function CoachingHero() {
             priority
             className="object-contain drop-shadow-[0_0_35px_rgba(244,63,94,0.30)]"
           />
-        </motion.div>
+        </m.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-        >
+        {/* Texte LCP : visible au SSR, jamais animé */}
+        <div>
           <span className="badge-pill badge-fuchsia mb-6 inline-block">👑 Coaching IA</span>
           <h1 className="mb-4 font-display text-4xl font-black leading-tight text-white sm:text-5xl md:text-6xl">
             D&apos;indépendant{" "}
@@ -55,15 +52,10 @@ export default function CoachingHero() {
           <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg">
             Tu viens avec une problématique, tu repars avec une méthode.
           </p>
-        </motion.div>
+        </div>
 
         {/* Format — 3 chips sobres */}
-        <motion.div
-          className="mb-10 flex flex-wrap items-center justify-center gap-3"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.25 }}
-        >
+        <div className="mb-10 flex flex-wrap items-center justify-center gap-3">
           {FORMAT_CHIPS.map(({ icon: Icon, label }) => (
             <span
               key={label}
@@ -74,15 +66,10 @@ export default function CoachingHero() {
               {label}
             </span>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA — vend le diagnostic, pas la séance */}
-        <motion.div
-          className="flex flex-col items-center"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.38 }}
-        >
+        <div className="flex flex-col items-center">
           <Link
             href="/contact"
             className="group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-black text-white transition-transform hover:scale-[1.04] active:scale-[0.97]"
@@ -97,7 +84,7 @@ export default function CoachingHero() {
           <p className="mt-3 text-xs text-white/30">
             Sans engagement · on identifie ensemble la séance qu&apos;il te faut
           </p>
-        </motion.div>
+        </div>
 
       </div>
     </section>

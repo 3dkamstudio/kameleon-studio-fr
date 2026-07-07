@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Check, ArrowRight, Shield, Clock, AlertCircle, XCircle, RefreshCw, Wrench } from "lucide-react";
 import Kame from "@/components/ui/Kame";
@@ -117,43 +117,43 @@ export default function MaintenanceWeb() {
         {/* ════════════════════════════════════════════════════════
             EN-TÊTE
         ════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-16 flex flex-col items-center text-center"
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+          variants={stagger} initial={false} animate="visible"
         >
-          <motion.div variants={fadeUp}>
+          <m.div variants={fadeUp}>
             <span className="badge-pill badge-green mb-8">🛡️ Maintenance Web</span>
-          </motion.div>
+          </m.div>
 
-          <motion.h2 className="mb-5 tracking-tight" variants={fadeUp}>
+          <m.h2 className="mb-5 tracking-tight" variants={fadeUp}>
             <span className="block font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.9rem]">
               Votre site, sécurisé, stable
             </span>
             <span className="block font-display text-3xl font-black leading-tight text-gradient-tech sm:text-4xl md:text-[2.9rem]">
               et à jour chaque mois.
             </span>
-          </motion.h2>
+          </m.h2>
 
-          <motion.p className="max-w-2xl text-base text-white/50" variants={fadeUp}>
+          <m.p className="max-w-2xl text-base text-white/50" variants={fadeUp}>
             La maintenance web est un accompagnement préventif continu — pas une intervention ponctuelle quand le site tombe en panne.
             Elle assure le bon fonctionnement du site, effectue les mises à jour nécessaires, surveille les éléments techniques essentiels
             et évite que votre site ne se dégrade avec le temps.
-          </motion.p>
+          </m.p>
 
-          <motion.div variants={fadeUp} className="mt-8 w-full max-w-xs">
+          <m.div variants={fadeUp} className="mt-8 w-full max-w-xs">
             <div className="divider-rainbow" />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════
             CARTES ABONNEMENT
         ════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-2"
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
+          variants={stagger} initial={false} animate="visible"
         >
           {PLANS.map((plan) => (
-            <motion.div
+            <m.div
               key={plan.label}
               variants={fadeUp}
               whileHover={{ y: -8, transition: { duration: 0.22 } }}
@@ -245,7 +245,7 @@ export default function MaintenanceWeb() {
                 </ul>
 
                 {/* CTA */}
-                <motion.a
+                <m.a
                   href="#contact"
                   className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-sm font-black text-white"
                   style={{
@@ -257,22 +257,22 @@ export default function MaintenanceWeb() {
                 >
                   Demander la maintenance de mon site
                   <ArrowRight className="h-4 w-4" />
-                </motion.a>
+                </m.a>
               </div>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════
             BLOCS INFORMATIFS 2 × 2
         ════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-10 grid grid-cols-1 gap-5 lg:grid-cols-2"
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
+          variants={stagger} initial={false} animate="visible"
         >
 
           {/* Mentions légales */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             className="overflow-hidden rounded-3xl"
             style={{ background: "linear-gradient(160deg,rgba(6,182,212,0.08) 0%,rgba(10,10,15,0.97) 60%)", border: "1px solid rgba(6,182,212,0.20)" }}
@@ -301,10 +301,10 @@ export default function MaintenanceWeb() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Reprise après interruption */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             className="overflow-hidden rounded-3xl"
             style={{ background: "linear-gradient(160deg,rgba(234,179,8,0.08) 0%,rgba(10,10,15,0.97) 60%)", border: "1px solid rgba(234,179,8,0.20)" }}
@@ -329,10 +329,10 @@ export default function MaintenanceWeb() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Non inclus */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             className="overflow-hidden rounded-3xl"
             style={{ background: "linear-gradient(160deg,rgba(244,63,94,0.07) 0%,rgba(10,10,15,0.97) 60%)", border: "1px solid rgba(244,63,94,0.20)" }}
@@ -353,10 +353,10 @@ export default function MaintenanceWeb() {
                 Ces demandes relèvent du hors forfait et nécessitent une validation préalable du client avant toute intervention.
               </p>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Hors forfait */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             className="overflow-hidden rounded-3xl"
             style={{ background: "linear-gradient(160deg,rgba(139,92,246,0.08) 0%,rgba(10,10,15,0.97) 60%)", border: "1px solid rgba(139,92,246,0.20)" }}
@@ -388,15 +388,15 @@ export default function MaintenanceWeb() {
                 </p>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════
             PROTECTION + CTA
         ════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="flex flex-col items-center gap-6"
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          initial={false} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <div
@@ -409,7 +409,7 @@ export default function MaintenanceWeb() {
             </p>
           </div>
 
-          <motion.a
+          <m.a
             href="#contact"
             className="inline-flex items-center gap-2.5 rounded-2xl px-10 py-4 text-sm font-black text-white"
             style={{
@@ -421,8 +421,8 @@ export default function MaintenanceWeb() {
           >
             Demander la maintenance de mon site
             <ArrowRight className="h-4 w-4" />
-          </motion.a>
-        </motion.div>
+          </m.a>
+        </m.div>
       </div>
 
       {/* ── Kame ──────────────────────────────────────────────────────────── */}

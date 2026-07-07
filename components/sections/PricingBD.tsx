@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Check, ArrowRight, BookOpen, Clock, TrendingDown, Layers } from "lucide-react";
 
 import Image from "next/image";
@@ -68,10 +68,10 @@ export default function PricingBD() {
       <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* ── Header ────────────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-14 flex flex-col items-center text-center"
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6 }}
+          initial={false} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           <span className="badge-pill badge-violet mb-7">📖 Tarifs — Planches BD</span>
           <h2 className="mb-5 tracking-tight">
@@ -87,13 +87,13 @@ export default function PricingBD() {
             Chaque planche inclut direction artistique, retouches et droits commerciaux.
             Tarif dégressif jusqu&rsquo;à −21% dès 10 planches.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── Barre de stats ────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-12 grid grid-cols-2 gap-3 sm:grid-cols-4"
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+          initial={false} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           {STATS.map((s) => (
             <div key={s.label}
@@ -108,13 +108,13 @@ export default function PricingBD() {
               </span>
             </div>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* ── Corps principal : 2 colonnes — grille à gauche, card à droite ── */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
 
           {/* ── Colonne gauche : Grille tarifaire ── */}
-          <motion.div
+          <m.div
             className="relative rounded-3xl"
             style={{
               background: "linear-gradient(160deg, rgba(139,92,246,0.06) 0%, rgba(9,8,15,0.98) 45%)",
@@ -123,10 +123,10 @@ export default function PricingBD() {
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-          <motion.div
+          <m.div
             className="relative"
-            initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.7 }}
+            initial={false} animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
           >
             <div className="h-[3px] rounded-t-3xl" style={{ background: "linear-gradient(90deg,#8b5cf6,#06b6d4,#22c55e)" }} />
             <div className="p-6 sm:p-8">
@@ -159,14 +159,14 @@ export default function PricingBD() {
                       <th className="pb-3 text-right text-[0.62rem] font-black uppercase tracking-widest text-white/30">Économie</th>
                     </tr>
                   </thead>
-                  <motion.tbody
+                  <m.tbody
                     variants={tbodyVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
+                    initial={false}
+                    animate="visible"
+                   
                   >
                     {GRID.map(({ qty, unit, total, save, best }) => (
-                      <motion.tr key={qty}
+                      <m.tr key={qty}
                         variants={rowVariants}
                         className="border-b border-white/[0.04] last:border-0 transition-colors hover:bg-white/[0.025]"
                         style={best ? { background: "linear-gradient(90deg,rgba(139,92,246,0.14),rgba(6,182,212,0.06))" } : undefined}
@@ -205,9 +205,9 @@ export default function PricingBD() {
                             <span className="text-xs text-white/20">—</span>
                           )}
                         </td>
-                      </motion.tr>
+                      </m.tr>
                     ))}
-                  </motion.tbody>
+                  </m.tbody>
                 </table>
                 </div>
 
@@ -219,11 +219,11 @@ export default function PricingBD() {
                 </p>
               </div>
             </div>
-          </motion.div>
-          </motion.div>
+          </m.div>
+          </m.div>
 
           {/* ── Colonne droite : Feature card plein cadre ── */}
-          <motion.div
+          <m.div
             className="relative overflow-hidden rounded-3xl min-h-[560px] max-lg:min-h-[800px]"
             style={{
               border: "1px solid rgba(139,92,246,0.35)",
@@ -232,10 +232,10 @@ export default function PricingBD() {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-          <motion.div
+          <m.div
             className="absolute inset-0"
-            initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
+            initial={false} animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
           >
             {/* Image plein fond */}
             <Image
@@ -319,7 +319,7 @@ export default function PricingBD() {
               </div>
 
               {/* CTA */}
-              <motion.a href="#contact"
+              <m.a href="#contact"
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl py-4 text-sm font-black text-white"
                 style={{ background: "linear-gradient(135deg,#8b5cf6,#06b6d4)", boxShadow: "0 4px 24px rgba(139,92,246,0.50)" }}
                 whileHover={{ scale: 1.03, boxShadow: "0 8px 40px rgba(139,92,246,0.75)" }}
@@ -327,10 +327,10 @@ export default function PricingBD() {
               >
                 Commander mes planches
                 <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              </m.a>
             </div>
-          </motion.div>
-          </motion.div>
+          </m.div>
+          </m.div>
         </div>
       </div>
     </section>

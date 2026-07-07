@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import type { Transition, TargetAndTransition } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -103,7 +103,7 @@ export default function Kame({
   const skipIdle = isStatic || prefersReduced;
 
   return (
-    <motion.div
+    <m.div
       className={cn("pointer-events-none select-none relative", className)}
       style={{ width: size }}
       initial={entry.initial}
@@ -112,7 +112,7 @@ export default function Kame({
     >
       {/* Speech bubble optionnelle */}
       {speech && (
-        <motion.div
+        <m.div
           className="absolute -top-14 left-1/2 z-20"
           style={{ transform: "translateX(-50%)" }}
           initial={{ opacity: 0, scale: 0.7, y: 8 }}
@@ -123,11 +123,11 @@ export default function Kame({
             {speech}
             <div className="absolute -bottom-2 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r border-white/15 bg-surface-2/90" />
           </div>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Animation idle — désactivée si isStatic ou prefers-reduced-motion */}
-      <motion.div
+      <m.div
         animate={skipIdle ? {} : idle.animate}
         transition={skipIdle ? {} : idle.transition}
         style={{ transform: flip ? "scaleX(-1)" : undefined }}
@@ -141,7 +141,7 @@ export default function Kame({
           className="object-contain"
           style={{ filter: glowStyle[context] }}
         />
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }

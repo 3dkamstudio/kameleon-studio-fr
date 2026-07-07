@@ -6,7 +6,6 @@ import ShowreelTeaser from "@/components/sections/ShowreelTeaser";
 import Process from "@/components/sections/Process";
 import FAQ from "@/components/sections/FAQ";
 import CtaFinal from "@/components/sections/CtaFinal";
-import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 
@@ -14,8 +13,8 @@ export default function Home() {
   return (
     <main className="relative overflow-x-hidden">
       <div className="relative z-[1]">
-        {/* Hero royal : animation propre interne, pas de RevealSection */}
-        <SectionWrapper><HeroRoyal /></SectionWrapper>
+        {/* Hero royal : texte LCP visible au SSR — aucun wrapper animé */}
+        <HeroRoyal />
         <SectionDivider variant="scan" />
 
         <RevealSection><Services /></RevealSection>

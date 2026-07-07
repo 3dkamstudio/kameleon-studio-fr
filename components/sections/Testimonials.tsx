@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring, animate } from "framer-motion";
+import { m, useInView, useMotionValue, useSpring, animate } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Kame from "@/components/ui/Kame";
@@ -72,7 +72,7 @@ type Client = (typeof CLIENTS)[number];
 
 function ClientCard({ client, index }: { client: Client; index: number }) {
   return (
-    <motion.div
+    <m.div
       variants={{
         hidden: { opacity: 0, scale: 0.88, y: 28 },
         visible: {
@@ -158,7 +158,7 @@ function ClientCard({ client, index }: { client: Client; index: number }) {
         </p>
         <p className="text-[0.64rem] text-white/38">{client.description}</p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -189,20 +189,20 @@ export default function Testimonials() {
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
         <div className="mb-16 flex flex-col items-center text-center gap-5">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <m.div
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.55 }}
           >
             <span className="badge-pill badge-cyan">✦ Ils nous font confiance</span>
-          </motion.div>
+          </m.div>
 
-          <motion.h2
+          <m.h2
             className="font-display text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.6, delay: 0.08 }}
           >
             Ils nous font{" "}
@@ -213,25 +213,25 @@ export default function Testimonials() {
             }}>
               confiance.
             </span>
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             className="max-w-xl text-sm text-white/45 sm:text-base"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1 }}
+           
             transition={{ duration: 0.5, delay: 0.15 }}
           >
             Des créateurs, indépendants et entreprises qui ont choisi King of IA pour leurs projets.
-          </motion.p>
+          </m.p>
         </div>
 
         {/* ── Logos clients ───────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-24 flex flex-wrap justify-center gap-6 sm:gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
+          initial={false}
+          animate="visible"
+         
           variants={{
             hidden: {},
             visible: { transition: { staggerChildren: 0.12 } },
@@ -240,18 +240,18 @@ export default function Testimonials() {
           {CLIENTS.map((client, i) => (
             <ClientCard key={client.name} client={client} index={i} />
           ))}
-        </motion.div>
+        </m.div>
 
         {/* ── Stats + Kame ─────────────────────────────────────────────────── */}
         <div className="relative flex flex-col items-center gap-16 lg:flex-row lg:items-start lg:gap-12">
 
           <div className="flex-1 w-full">
             {/* Stats desktop */}
-            <motion.div
+            <m.div
               className="hidden sm:flex items-stretch rounded-2xl overflow-hidden"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+             
               transition={{ duration: 0.6 }}
               style={{
                 background: "rgba(6,6,18,0.70)",
@@ -271,18 +271,18 @@ export default function Testimonials() {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Stats mobile */}
-            <motion.div
+            <m.div
               className="grid grid-cols-2 gap-4 sm:hidden"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              initial={false}
+              animate="visible"
+             
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
             >
               {STATS.map(stat => (
-                <motion.div
+                <m.div
                   key={stat.label}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
@@ -298,24 +298,24 @@ export default function Testimonials() {
                 >
                   <AnimatedCount value={stat.value} suffix={stat.suffix} color={stat.color} />
                   <p className="text-sm font-semibold text-white/45">{stat.label}</p>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Kame */}
-          <motion.div
+          <m.div
             className="flex flex-col items-center gap-6 lg:w-64"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, x: 0 }}
+           
             transition={{ duration: 0.65, delay: 0.25 }}
           >
             <KameSpeech variants={TESTIMONIALS_SPEECH}>
               <Kame context="celebrate" src="/kame-celebrate.png" size={200} />
             </KameSpeech>
 
-          </motion.div>
+          </m.div>
 
         </div>
       </div>

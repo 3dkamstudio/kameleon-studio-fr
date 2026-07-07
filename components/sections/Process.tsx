@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
 import KameSpeech from "@/components/ui/KameSpeech";
@@ -153,11 +153,11 @@ export default function Process() {
     >
       {/* ── Fond dynamique — suit la couleur de l'étape active ──────────── */}
       <AnimatePresence mode="sync">
-        <motion.div
+        <m.div
           key={`orb-${active}`}
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
@@ -166,7 +166,7 @@ export default function Process() {
             style={{ background: `${step.color}0e` }} />
           <div className="absolute right-1/4 bottom-0 h-[500px] w-[500px] translate-x-1/2 rounded-full blur-[120px]"
             style={{ background: `${step.colorTo}09` }} />
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
 
@@ -175,11 +175,11 @@ export default function Process() {
       <div className="relative z-10 mx-auto max-w-6xl">
 
         {/* ── Header ────────────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-16 flex flex-col items-center text-center"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
           <span className="badge-pill badge-green mb-8">⚡ Comment ça marche</span>
@@ -194,14 +194,14 @@ export default function Process() {
           <p className="max-w-md text-sm leading-relaxed text-white/40 sm:text-base">
             Un process clair, sans jargon et sans surprise — du brief initial aux fichiers finaux.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── Sélecteur — nodes connectés ────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-10 flex items-center justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.55, delay: 0.15 }}
         >
           <div className="flex w-full max-w-3xl items-center">
@@ -235,7 +235,7 @@ export default function Process() {
                     >
                       {/* Ring animé quand actif */}
                       {isActive && (
-                        <motion.div
+                        <m.div
                           className="absolute inset-0 rounded-full"
                           style={{ border: `2px solid ${s.color}` }}
                           animate={{ scale: [1, 1.35, 1], opacity: [0.7, 0, 0.7] }}
@@ -279,7 +279,7 @@ export default function Process() {
                       {/* Rail de fond */}
                       <div className="absolute inset-0 rounded-full bg-white/[0.06]" />
                       {/* Segment complété */}
-                      <motion.div
+                      <m.div
                         className="absolute inset-y-0 left-0 rounded-full"
                         animate={{ width: i < active ? "100%" : "0%" }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -287,7 +287,7 @@ export default function Process() {
                       />
                       {/* Dot voyageur */}
                       {i === active && !paused && (
-                        <motion.div
+                        <m.div
                           className="absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
                           style={{ background: step.color, boxShadow: `0 0 8px ${step.glow}` }}
                           animate={{ left: ["0%", "100%"] }}
@@ -301,12 +301,12 @@ export default function Process() {
               );
             })}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ── Panneau de détail ──────────────────────────────────────────── */}
         <div className="relative overflow-hidden rounded-3xl" style={{ minHeight: "320px" }}>
           <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
+            <m.div
               key={active}
               custom={dir}
               variants={panelVariants}
@@ -459,7 +459,7 @@ export default function Process() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 

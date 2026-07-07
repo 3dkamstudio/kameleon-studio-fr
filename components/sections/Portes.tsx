@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -57,11 +57,11 @@ export default function Portes() {
       <div className="mx-auto max-w-6xl">
 
         {/* ── Header ───────────────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-14 text-center"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
         >
           <span className="badge-pill badge-fuchsia mb-6 inline-block">🚪 Les 5 portes du royaume</span>
@@ -71,21 +71,21 @@ export default function Portes() {
           <p className="mt-3 text-sm text-white/40 sm:text-base">
             Cinq façons de mettre l&apos;IA au service de ton activité.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── Cards ────────────────────────────────────────────────────────── */}
         <div className="flex flex-wrap justify-center gap-5">
           {PORTES.map(({ href, emoji, title, phrase, color, img }, i) => (
-            <motion.div
+            <m.div
               key={href}
               className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+             
               transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 0.61, 0.36, 1] }}
             >
               <Link href={href} className="group block h-full">
-                <motion.div
+                <m.div
                   className="flex h-full flex-col overflow-hidden rounded-3xl px-6 pb-6 pt-4"
                   style={{
                     background: "rgba(255,255,255,0.03)",
@@ -124,9 +124,9 @@ export default function Portes() {
                     Découvrir
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                   </span>
-                </motion.div>
+                </m.div>
               </Link>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

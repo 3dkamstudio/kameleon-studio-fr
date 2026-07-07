@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   Play, Layers, Palette, BookOpen, ChefHat, Mic2,
   GraduationCap, ExternalLink, ShieldCheck, Briefcase,
@@ -210,11 +210,11 @@ export default function Showreel() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
 
         {/* ══ HEADER ════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-10 flex flex-col items-center text-center"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
         >
           <span className="badge-pill badge-fuchsia mb-7">🎬 King of IA en action</span>
@@ -230,20 +230,20 @@ export default function Showreel() {
             Animations, podcasts, formations, recettes — chaque production 100&nbsp;% par IA,
             livrée en quelques jours.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ══ FILTRES CATÉGORIES ════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-7 flex flex-wrap items-center justify-center gap-2"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           {(Object.entries(CATEGORIES) as [CatKey, typeof CATEGORIES[CatKey]][]).map(([key, { label, color, Icon }]) => {
             const isActive = activeCat === key;
             return (
-              <motion.button
+              <m.button
                 key={key}
                 onClick={() => pickCategory(key)}
                 whileHover={{ scale: 1.05 }}
@@ -261,20 +261,20 @@ export default function Showreel() {
                     {VIDEOS.filter(v => v.cat === key).length}
                   </span>
                 )}
-              </motion.button>
+              </m.button>
             );
           })}
-        </motion.div>
+        </m.div>
 
         {/* ══ LAYOUT PRINCIPAL ═════════════════════════════════════════════ */}
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
 
           {/* ── LECTEUR ──────────────────────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="w-full lg:flex-1"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, x: 0 }}
+           
             transition={{ duration: 0.7, delay: 0.05 }}
           >
             {/* Rainbow border container */}
@@ -294,10 +294,10 @@ export default function Showreel() {
 
                 {/* YouTube iframe — key force-remounts on video change */}
                 <AnimatePresence mode="wait">
-                  <motion.div
+                  <m.div
                     key={activeId}
                     className="aspect-video"
-                    initial={{ opacity: 0, scale: 0.98 }}
+                    initial={false}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.3 }}
@@ -310,15 +310,15 @@ export default function Showreel() {
                       className="h-full w-full"
                       loading="lazy"
                     />
-                  </motion.div>
+                  </m.div>
                 </AnimatePresence>
 
                 {/* Info panel below player */}
                 <AnimatePresence mode="wait">
-                  <motion.div
+                  <m.div
                     key={`info-${activeId}`}
                     className="flex items-start justify-between gap-4 px-5 py-4"
-                    initial={{ opacity: 0, y: 8 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.28 }}
@@ -351,18 +351,18 @@ export default function Showreel() {
                     >
                       <ExternalLink className="h-4 w-4" />
                     </a>
-                  </motion.div>
+                  </m.div>
                 </AnimatePresence>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* ── PLAYLIST SIDEBAR ─────────────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="flex flex-col gap-2.5 lg:w-[310px] lg:shrink-0"
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, x: 0 }}
+           
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             {/* Count label */}
@@ -377,10 +377,10 @@ export default function Showreel() {
                   const vcat     = CATEGORIES[video.cat];
                   const isActive = video.id === activeId;
                   return (
-                    <motion.button
+                    <m.button
                       key={video.id}
                       layout
-                      initial={{ opacity: 0, y: 12 }}
+                      initial={false}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.96 }}
                       transition={{ duration: 0.25, delay: i * 0.05 }}
@@ -433,7 +433,7 @@ export default function Showreel() {
                           <span className="text-[0.6rem] text-white/25">{video.tag}</span>
                         )}
                       </div>
-                    </motion.button>
+                    </m.button>
                   );
                 })}
               </AnimatePresence>
@@ -446,15 +446,15 @@ export default function Showreel() {
                 </button>
               )}
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ══ BANDE CATÉGORIES VISUELLES (mobile scroll) ════════════════════ */}
-        <motion.div
+        <m.div
           className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-7 lg:hidden"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1 }}
+         
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {(Object.entries(CATEGORIES).filter(([k]) => k !== "all") as [CatKey, typeof CATEGORIES[CatKey]][]).map(([key, { label, color, Icon }]) => (
@@ -474,17 +474,17 @@ export default function Showreel() {
               <span className="text-[0.6rem] font-bold leading-tight text-white/50">{label}</span>
             </button>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* ══ CTA ═══════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1 }}
+         
           transition={{ delay: 0.4 }}
         >
-          <motion.a
+          <m.a
             href="#contact"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl px-8 py-4 text-sm font-black text-white"
             style={{
@@ -496,7 +496,7 @@ export default function Showreel() {
           >
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             Je veux une production comme ça
-          </motion.a>
+          </m.a>
           <a
             href="https://www.youtube.com/@3Dkamstudio"
             target="_blank"
@@ -506,7 +506,7 @@ export default function Showreel() {
             <ExternalLink className="h-4 w-4" />
             Voir toute la chaîne YouTube
           </a>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* ── Kame guide ─────────────────────────────────────────────────────── */}

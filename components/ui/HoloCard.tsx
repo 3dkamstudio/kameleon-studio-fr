@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { ReactNode, CSSProperties } from "react";
 
 export default function HoloCard({
@@ -48,7 +48,7 @@ export default function HoloCard({
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={`relative ${overflowX === "auto" ? "overflow-x-auto overflow-y-hidden" : "overflow-hidden"} ${className}`}
       style={{ ...style, rotateX, rotateY, transformPerspective: 900 }}
@@ -59,12 +59,12 @@ export default function HoloCard({
       onMouseLeave={onMouseLeave}
     >
       {/* Glow fixe — position via transform uniquement (compositor-only) */}
-      <motion.div
+      <m.div
         className="pointer-events-none absolute inset-0 z-[1]"
         animate={{ opacity: hovered ? 1 : 0 }}
         transition={{ duration: 0.25 }}
       >
-        <motion.div
+        <m.div
           className="absolute h-[300px] w-[300px] rounded-full"
           style={{
             background: `radial-gradient(ellipse at center, ${accentColor}1f 0%, transparent 70%)`,
@@ -74,8 +74,8 @@ export default function HoloCard({
             translateY: "-50%",
           }}
         />
-      </motion.div>
+      </m.div>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

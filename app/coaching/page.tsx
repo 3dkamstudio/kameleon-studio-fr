@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
 import CoachingHero from "@/components/sections/CoachingHero";
 import CoachingCatalogue from "@/components/sections/CoachingCatalogue";
-import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 export default function CoachingPage() {
   return (
     <PrestationLayout>
-      <SectionWrapper><CoachingHero /></SectionWrapper>
+      <CoachingHero />
       <SectionDivider variant="scan" />
       <RevealSection><CoachingCatalogue /></RevealSection>
     </PrestationLayout>

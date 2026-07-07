@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 
@@ -61,15 +61,15 @@ export default function CtaFinal() {
       {/* ── Contenu ── */}
       <div className="relative z-20 w-full px-6 pb-20 pt-48 md:pb-28 md:pt-0">
         <div className="mx-auto max-w-7xl">
-          <motion.div
+          <m.div
             className="max-w-2xl"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            initial={false}
+            animate="visible"
+           
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
           >
             {/* Badge */}
-            <motion.div
+            <m.div
               variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55 } } }}
               className="mb-6"
             >
@@ -77,10 +77,10 @@ export default function CtaFinal() {
                 <Sparkles className="h-3.5 w-3.5" />
                 Studio de création IA
               </span>
-            </motion.div>
+            </m.div>
 
             {/* Titre */}
-            <motion.h2
+            <m.h2
               variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] } } }}
               className="mb-4 font-display font-black leading-[1.05] tracking-tight"
             >
@@ -98,22 +98,22 @@ export default function CtaFinal() {
               >
                 en chef-d&apos;œuvre.
               </span>
-            </motion.h2>
+            </m.h2>
 
             {/* Sous-titre */}
-            <motion.p
+            <m.p
               variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, delay: 0.05 } } }}
               className="mb-10 max-w-lg text-base text-white/55 sm:text-lg"
             >
               Vidéos, animations 3D, BD, formations IA — confiez votre projet à King of IA et voyez la magie opérer.
-            </motion.p>
+            </m.p>
 
             {/* Boutons */}
-            <motion.div
+            <m.div
               variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } } }}
               className="flex flex-wrap gap-4"
             >
-              <motion.a
+              <m.a
                 href="/contact"
                 className="group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-bold text-white"
                 style={{
@@ -128,18 +128,18 @@ export default function CtaFinal() {
               >
                 Réserver mon diagnostic gratuit — 15 min
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </motion.a>
+              </m.a>
 
-              <motion.a
+              <m.a
                 href="/realisations"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.06] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/[0.11]"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
                 Voir nos réalisations
-              </motion.a>
-            </motion.div>
-          </motion.div>
+              </m.a>
+            </m.div>
+          </m.div>
         </div>
       </div>
     </section>

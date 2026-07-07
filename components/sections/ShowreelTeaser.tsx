@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import { Play, ArrowRight } from "lucide-react";
 
@@ -19,26 +19,26 @@ export default function ShowreelTeaser() {
       <div className="mx-auto max-w-4xl text-center">
 
         {/* ── Header ───────────────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mb-12"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
         >
           <span className="badge-pill badge-fuchsia mb-6 inline-block">🎬 King of IA en action</span>
           <h2 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.75rem]">
             Voir, c&apos;est croire.
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* ── Façade vidéo ─────────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="relative mx-auto aspect-video w-full overflow-hidden rounded-3xl"
           style={{ border: "1px solid rgba(255,255,255,0.10)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.65 }}
         >
           {playing ? (
@@ -77,14 +77,14 @@ export default function ShowreelTeaser() {
               </span>
             </button>
           )}
-        </motion.div>
+        </m.div>
 
         {/* ── Lien vers la grille complète ─────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mt-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1 }}
+         
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Link
@@ -94,7 +94,7 @@ export default function ShowreelTeaser() {
             Toutes les réalisations
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
-        </motion.div>
+        </m.div>
 
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Check, ArrowRight, Minus, Clock, Globe, Zap, Shield, Layers, Wrench } from "lucide-react";
 import Sparkles from "@/components/ui/Sparkles";
@@ -121,15 +121,15 @@ export default function Pricing() {
         {/* ════════════════════════════════════════════════════════════════
             EN-TÊTE
         ════════════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-16 flex flex-col items-center text-center"
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+          variants={stagger} initial={false} animate="visible"
         >
-          <motion.div variants={fadeUp}>
+          <m.div variants={fadeUp}>
             <span className="badge-pill badge-cyan mb-8">🌐 Sites Web Premium</span>
-          </motion.div>
+          </m.div>
 
-          <motion.h2 className="mb-5 tracking-tight" variants={fadeUp}>
+          <m.h2 className="mb-5 tracking-tight" variants={fadeUp}>
             <span className="block font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.9rem]">
               Votre site web, c&apos;est votre
             </span>
@@ -143,15 +143,15 @@ export default function Pricing() {
             >
               meilleur commercial 24h/24.
             </span>
-          </motion.h2>
+          </m.h2>
 
-          <motion.p className="max-w-xl text-base text-white/50" variants={fadeUp}>
+          <m.p className="max-w-xl text-base text-white/50" variants={fadeUp}>
             Design unique sur mesure, animations soignées, SEO intégré.
             Paiement en deux fois — 50% à la commande, 50% à la livraison.
-          </motion.p>
+          </m.p>
 
           {/* Stats rapides */}
-          <motion.div
+          <m.div
             variants={fadeUp}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
@@ -179,19 +179,19 @@ export default function Pricing() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={fadeUp} className="mt-8 w-full max-w-xs">
+          <m.div variants={fadeUp} className="mt-8 w-full max-w-xs">
             <div className="divider-rainbow" />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════════════
             CARTES OFFRES
         ════════════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-2"
-          variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
+          variants={stagger} initial={false} animate="visible"
         >
           {PLANS.map((plan) => {
             const card = (
@@ -293,7 +293,7 @@ export default function Pricing() {
                   </p>
 
                   {/* CTA */}
-                  <motion.a
+                  <m.a
                     href="#contact"
                     className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-sm font-black text-white"
                     style={{
@@ -305,7 +305,7 @@ export default function Pricing() {
                   >
                     Démarrer ce projet
                     <ArrowRight className="h-4 w-4" />
-                  </motion.a>
+                  </m.a>
                 </div>
               </div>
             );
@@ -313,7 +313,7 @@ export default function Pricing() {
             /* Carte Premium : border arc-en-ciel via wrapper 1px */
             if (plan.highlight) {
               return (
-                <motion.div
+                <m.div
                   key={plan.label}
                   variants={fadeUp}
                   whileHover={{ y: -8, transition: { duration: 0.22 } }}
@@ -324,12 +324,12 @@ export default function Pricing() {
                   }}
                 >
                   {card}
-                </motion.div>
+                </m.div>
               );
             }
 
             return (
-              <motion.div
+              <m.div
                 key={plan.label}
                 variants={fadeUp}
                 whileHover={{ y: -8, transition: { duration: 0.22 } }}
@@ -337,21 +337,21 @@ export default function Pricing() {
                 style={{ border: "1px solid rgba(6,182,212,0.22)" }}
               >
                 {card}
-              </motion.div>
+              </m.div>
             );
           })}
-        </motion.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════════════
             TABLEAU COMPARATIF
         ════════════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-8 overflow-hidden rounded-3xl"
           style={{
             background: "linear-gradient(160deg, rgba(255,255,255,0.02) 0%, rgba(10,10,15,0.98) 60%)",
             border: "1px solid rgba(255,255,255,0.07)",
           }}
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         >
           <div className="h-[3px]" style={{ background: "linear-gradient(90deg,#06b6d4,#8b5cf6,#d946ef,#f43f5e)" }} />
           <div className="p-6 sm:p-8">
@@ -395,18 +395,18 @@ export default function Pricing() {
               </table>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════════════
             OPTIONS — Stripe / Calendly
         ════════════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-8 overflow-hidden rounded-3xl"
           style={{
             background: "linear-gradient(135deg,rgba(234,179,8,0.07) 0%,rgba(10,10,15,0.97) 60%)",
             border: "1px solid rgba(234,179,8,0.18)",
           }}
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         >
           <div className="h-[3px]" style={{ background: "linear-gradient(90deg,#eab308,#f97316,#f43f5e)" }} />
           <div className="p-6 sm:p-8">
@@ -454,18 +454,18 @@ export default function Pricing() {
               Ces options s&apos;appuient sur vos propres comptes Stripe / Calendly — vous restez propriétaire à 100% de vos données.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════════════
             TEASER MAINTENANCE
         ════════════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-12 overflow-hidden rounded-3xl"
           style={{
             background: "linear-gradient(135deg, rgba(34,197,94,0.07) 0%, rgba(6,182,212,0.05) 50%, rgba(10,10,15,0.98) 100%)",
             border: "1px solid rgba(34,197,94,0.20)",
           }}
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         >
           <div className="h-[3px]" style={{ background: "linear-gradient(90deg,#22c55e,#06b6d4,#8b5cf6)" }} />
           <div className="flex flex-col items-start justify-between gap-5 p-6 sm:flex-row sm:items-center sm:p-8">
@@ -483,7 +483,7 @@ export default function Pricing() {
                 </p>
               </div>
             </div>
-            <motion.a
+            <m.a
               href="#maintenance"
               className="inline-flex shrink-0 items-center gap-2 rounded-2xl px-6 py-3 text-sm font-black text-white"
               style={{
@@ -495,15 +495,15 @@ export default function Pricing() {
             >
               Voir la maintenance
               <ArrowRight className="h-4 w-4" />
-            </motion.a>
+            </m.a>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ════════════════════════════════════════════════════════════════
             CTA FINAL
         ════════════════════════════════════════════════════════════════ */}
         <div className="flex flex-col items-center gap-4">
-          <motion.a
+          <m.a
             href="#contact"
             className="inline-flex items-center gap-2.5 rounded-2xl px-12 py-4 text-sm font-black text-white"
             style={{
@@ -515,7 +515,7 @@ export default function Pricing() {
           >
             Demander un devis gratuit
             <ArrowRight className="h-4 w-4" />
-          </motion.a>
+          </m.a>
           <p className="mt-1 max-w-xl text-center text-xs text-white/20">
             Tarifs TTC valables pour 2026. Tout projet démarre par un brief structuré inclus.
             Paiement en deux fois&nbsp;: 50% à la commande, 50% à la livraison.

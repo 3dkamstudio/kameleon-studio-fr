@@ -5,18 +5,23 @@ const ORBS = [
   { color: "#8b5cf6", cx: "48%", cy: "85%", size: 600, blur: 120, op: 0.11, dur: 29, delay: 4,   anim: "orb-float-b" },
 ];
 
-// 60 étoiles — positions déterministes (golden ratio)
-const STARS = Array.from({ length: 60 }, (_, i) => {
-  const idx = i + 1;
-  return {
-    x:        Number(((idx * 61.8) % 100).toFixed(1)),
-    y:        Number(((idx * 38.2) % 100).toFixed(1)),
-    size:     idx % 7 === 0 ? 2 : 1,
-    delayMs:  (idx * 370) % 4000,
-    dur:      2500 + (idx % 5) * 700,
-    opacity:  0.35 + (idx % 4) * 0.12,
-  };
-});
+// 60 étoiles — positions déterministes (golden ratio), bakées en 2 couches
+// de radial-gradients CSS : 2 nœuds DOM au lieu de 60, twinkle par opacité
+// de couche (compositor-only).
+function starLayer(offset: number): string {
+  const stops: string[] = [];
+  for (let i = offset; i < 60; i += 2) {
+    const idx = i + 1;
+    const x = ((idx * 61.8) % 100).toFixed(1);
+    const y = ((idx * 38.2) % 100).toFixed(1);
+    const size = idx % 7 === 0 ? "2px 2px" : "1px 1px";
+    const op = (0.35 + (idx % 4) * 0.12).toFixed(2);
+    stops.push(`radial-gradient(${size} at ${x}% ${y}%, rgba(255,255,255,${op}), transparent)`);
+  }
+  return stops.join(",");
+}
+const STAR_LAYER_A = starLayer(0);
+const STAR_LAYER_B = starLayer(1);
 
 // Fond commun à toutes les pages (rendu depuis le layout).
 // `fixed` : la couche ne bouge pas au scroll — zéro re-compositing des orbes.
@@ -59,25 +64,15 @@ export default function CelestialBackground() {
         />
       ))}
 
-      {/* 60 étoiles */}
-      {STARS.map((s, i) => (
-        <div
-          key={`s${i}`}
-          style={{
-            position:     "absolute",
-            left:         `${s.x}%`,
-            top:          `${s.y}%`,
-            width:        s.size,
-            height:       s.size,
-            borderRadius: "50%",
-            background:   s.size === 2
-              ? `radial-gradient(circle, rgba(255,255,255,${s.opacity}) 0%, transparent 100%)`
-              : `rgba(255,255,255,${s.opacity})`,
-            boxShadow:    s.size === 2 ? `0 0 3px 1px rgba(255,255,255,0.15)` : "none",
-            animation:    `celestial-twinkle ${s.dur}ms ease-in-out ${s.delayMs}ms infinite alternate`,
-          }}
-        />
-      ))}
+      {/* 60 étoiles — 2 couches CSS pur */}
+      <div
+        className="absolute inset-0"
+        style={{ backgroundImage: STAR_LAYER_A, animation: "star-twinkle 3.4s ease-in-out infinite" }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ backgroundImage: STAR_LAYER_B, animation: "star-twinkle 4.6s ease-in-out 1.2s infinite" }}
+      />
     </div>
   );
 }

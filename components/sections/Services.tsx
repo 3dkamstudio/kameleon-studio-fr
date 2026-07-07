@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { m, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useRef, type CSSProperties } from "react";
 import {
@@ -61,10 +61,10 @@ function HoloPanel({
   title: string; delay: number; mobile?: boolean;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.85, y: 12 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
+    <m.div
+      initial={false}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+     
       transition={{ duration: 0.5, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       whileHover={{ scale: 1.05, y: -6, transition: { duration: 0.18, ease: "easeOut" } }}
       className="relative overflow-hidden rounded-2xl"
@@ -142,7 +142,7 @@ function HoloPanel({
         className="absolute inset-x-0 bottom-0 h-[1px]"
         style={{ background: `linear-gradient(90deg, transparent, ${color}60, transparent)` }}
       />
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -175,35 +175,35 @@ export default function Services() {
       <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* ── Header ── */}
-        <motion.div
+        <m.div
           className="mb-14 flex flex-col items-center text-center"
           variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          initial={false}
+          animate="visible"
+         
         >
-          <motion.div variants={fadeUp}>
+          <m.div variants={fadeUp}>
             <span className="badge-pill badge-fuchsia mb-8">✦ Le Cockpit King of IA</span>
-          </motion.div>
-          <motion.h2 className="mb-3 tracking-tight" variants={fadeUp}>
+          </m.div>
+          <m.h2 className="mb-3 tracking-tight" variants={fadeUp}>
             <span className="block font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.75rem]">
               Un studio complet,
             </span>
             <span className="block font-display text-3xl font-black leading-tight text-gradient-warm sm:text-4xl md:text-[2.75rem]">
               pour chaque besoin
             </span>
-          </motion.h2>
-          <motion.p variants={fadeUp} className="mt-1 text-[0.82rem] font-medium tracking-wide text-white/30">
+          </m.h2>
+          <m.p variants={fadeUp} className="mt-1 text-[0.82rem] font-medium tracking-wide text-white/30">
             Du script à la livraison finale — tout sur mesure, en quelques jours.
-          </motion.p>
-          <motion.p
+          </m.p>
+          <m.p
             variants={fadeUp}
             className="mx-auto mt-5 max-w-lg text-[0.92rem] font-medium leading-relaxed text-white/55"
           >
             Production 100&nbsp;% IA — vidéo, animation 3D, identité visuelle.
             De l&apos;idée à la livraison, en quelques jours.
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
 
         {/* ── COCKPIT desktop — 4 panels par côté ── */}
         <div className="mx-auto hidden max-w-[900px] lg:block">
@@ -221,29 +221,29 @@ export default function Services() {
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 h-[540px] w-[540px] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ border: "1px solid rgba(139,92,246,0.05)" }} />
 
             {/* Panels gauche — indices 0,2,4,6 */}
-            <motion.div style={{ y: leftY }} className="absolute inset-0 pointer-events-none">
+            <m.div style={{ y: leftY }} className="absolute inset-0 pointer-events-none">
               {([0, 2, 4, 6] as const).map(i => (
                 <div key={i} className="absolute pointer-events-auto" style={DESKTOP_POS[i]}>
                   <HoloPanel {...PANELS[i]} delay={i * 0.06} />
                 </div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Panels droite — indices 1,3,5,7 */}
-            <motion.div style={{ y: rightY }} className="absolute inset-0 pointer-events-none">
+            <m.div style={{ y: rightY }} className="absolute inset-0 pointer-events-none">
               {([1, 3, 5, 7] as const).map(i => (
                 <div key={i} className="absolute pointer-events-auto" style={DESKTOP_POS[i]}>
                   <HoloPanel {...PANELS[i]} delay={0.04 + i * 0.06} />
                 </div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Kame au centre — z-10, déborde légèrement sur panels */}
-            <motion.div style={{ y: kameY }} className="relative z-10">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.80 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+            <m.div style={{ y: kameY }} className="relative z-10">
+              <m.div
+                initial={false}
+                animate={{ opacity: 1, scale: 1 }}
+               
                 transition={{ duration: 0.9, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className={prefersReduced ? "" : "animate-kame-float"}
               >
@@ -256,23 +256,23 @@ export default function Services() {
                   className="object-contain"
                   style={{ filter: "drop-shadow(0 0 80px rgba(139,92,246,0.65)) drop-shadow(0 0 40px rgba(217,70,239,0.35))" }}
                 />
-              </motion.div>
+              </m.div>
               {/* Sol lumineux */}
               <div
                 aria-hidden="true"
                 className="absolute -bottom-6 left-1/2 h-14 w-80 -translate-x-1/2 rounded-full blur-3xl"
                 style={{ background: "rgba(139,92,246,0.35)" }}
               />
-            </motion.div>
+            </m.div>
           </div>
         </div>
 
         {/* ── MOBILE — grille 2×4 ── */}
         <div className="flex flex-col items-center gap-10 lg:hidden">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <m.div
+            initial={false}
+            animate={{ opacity: 1, scale: 1 }}
+           
             transition={{ duration: 0.7 }}
             className={prefersReduced ? "" : "animate-kame-float"}
           >
@@ -284,7 +284,7 @@ export default function Services() {
               className="object-contain"
               style={{ filter: "drop-shadow(0 0 40px rgba(139,92,246,0.55))" }}
             />
-          </motion.div>
+          </m.div>
           <div className="grid w-full grid-cols-2 gap-3">
             {PANELS.map((p, i) => (
               <HoloPanel key={p.title} {...p} delay={i * 0.06} mobile />
@@ -293,14 +293,14 @@ export default function Services() {
         </div>
 
         {/* CTA */}
-        <motion.div
+        <m.div
           className="mt-16 flex justify-center"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <motion.a
+          <m.a
             href="#contact"
             className="group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-bold text-white"
             style={{
@@ -312,8 +312,8 @@ export default function Services() {
           >
             Démarrer un projet
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-          </motion.a>
-        </motion.div>
+          </m.a>
+        </m.div>
       </div>
     </section>
   );

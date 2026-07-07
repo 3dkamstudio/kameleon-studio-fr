@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import type { Variants } from "framer-motion";
 import {
@@ -204,11 +204,11 @@ export default function WebStudio() {
       <div className="relative z-10 mx-auto max-w-6xl">
 
         {/* ══ HEADER ══════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-20 flex flex-col items-center text-center"
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.65 }}
         >
           <span
@@ -241,17 +241,17 @@ export default function WebStudio() {
           <div className="mt-7 w-40">
             <div className="divider-rainbow" />
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ══════════════════════════════════════════════════════════════════
             PHASE 1 — CRÉATION
         ══════════════════════════════════════════════════════════════════ */}
         <div className="mb-10">
-          <motion.div
+          <m.div
             className="mb-10 flex flex-col items-center text-center"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.5 }}
           >
             <div
@@ -275,18 +275,18 @@ export default function WebStudio() {
               Votre site sur mesure
             </h3>
             <p className="text-sm text-white/40">Design premium. Livré vite. Zéro template.</p>
-          </motion.div>
+          </m.div>
 
           {/* ── Creation cards ──────────────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="grid grid-cols-1 gap-5 lg:grid-cols-2"
             variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            initial={false}
+            animate="visible"
+           
           >
             {/* ── ESSENTIEL : design "clean & pro" ────────────────────── */}
-            <motion.div variants={fadeUp} whileHover={{ y: -4, transition: { duration: 0.18 } }}>
+            <m.div variants={fadeUp} whileHover={{ y: -4, transition: { duration: 0.18 } }}>
               {(() => {
                 const plan = CREATION_PLANS[0];
                 return (
@@ -329,7 +329,7 @@ export default function WebStudio() {
                         </span>
                         <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
                           Site{" "}
-                          <motion.span
+                          <m.span
                             style={{
                               background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, ${plan.color})`,
                               backgroundSize: "200% auto",
@@ -341,7 +341,7 @@ export default function WebStudio() {
                             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                           >
                             Vitrine
-                          </motion.span>
+                          </m.span>
                         </h4>
                         <p className="mt-1 text-[0.68rem] text-white/65">{plan.for}</p>
                       </div>
@@ -421,7 +421,7 @@ export default function WebStudio() {
                       )}
 
                       {/* CTA — outlined */}
-                      <motion.a
+                      <m.a
                         href="#contact"
                         className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl border py-3.5 text-sm font-black transition-colors"
                         style={{
@@ -439,15 +439,15 @@ export default function WebStudio() {
                       >
                         {plan.cta}
                         <ArrowRight className="h-4 w-4" />
-                      </motion.a>
+                      </m.a>
                     </div>
                   </div>
                 );
               })()}
-            </motion.div>
+            </m.div>
 
             {/* ── PREMIUM : design "bold & premium" ───────────────────── */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               whileHover={{ y: -4, transition: { duration: 0.18 } }}
               className="ws-border-premium flex flex-col rounded-3xl p-px"
@@ -512,7 +512,7 @@ export default function WebStudio() {
                           </span>
                           <h4 className="font-display text-2xl font-black leading-tight text-white sm:text-4xl">
                             Site{" "}
-                            <motion.span
+                            <m.span
                               style={{
                                 background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, #06b6d4, ${plan.color})`,
                                 backgroundSize: "200% auto",
@@ -524,7 +524,7 @@ export default function WebStudio() {
                               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                             >
                               Sur Mesure
-                            </motion.span>
+                            </m.span>
                           </h4>
                           <p className="mt-1 text-[0.68rem] text-white/65">{plan.for}</p>
                         </div>
@@ -613,7 +613,7 @@ export default function WebStudio() {
                       </div>
 
                       {/* CTA — full gradient */}
-                      <motion.a
+                      <m.a
                         href="#contact"
                         className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-sm font-black text-white"
                         style={{
@@ -625,20 +625,20 @@ export default function WebStudio() {
                       >
                         {plan.cta}
                         <ArrowRight className="h-4 w-4" />
-                      </motion.a>
+                      </m.a>
                     </div>
                   </div>
                 );
               })()}
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
           {/* ── Options pills ────────────────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="mt-8"
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <p className="mb-1.5 text-center text-[0.63rem] font-black uppercase tracking-widest text-white/28">
@@ -655,7 +655,7 @@ export default function WebStudio() {
                   onMouseEnter={() => setHoveredOption(opt.label)}
                   onMouseLeave={() => setHoveredOption(null)}
                 >
-                  <motion.div
+                  <m.div
                     className="flex cursor-default items-center gap-2.5 rounded-2xl px-5 py-3"
                     style={{ background: `${opt.color}09`, border: `1px solid ${opt.color}25` }}
                     whileHover={{ scale: 1.04, boxShadow: `0 0 20px ${opt.color}35`, borderColor: `${opt.color}50` }}
@@ -664,11 +664,11 @@ export default function WebStudio() {
                     <span className="text-base">{opt.icon}</span>
                     <span className="text-sm font-semibold text-white/58">{opt.label}</span>
                     <span className="font-display text-sm font-black" style={{ color: opt.color }}>{opt.price}</span>
-                  </motion.div>
+                  </m.div>
                   <AnimatePresence>
                     {hoveredOption === opt.label && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 4, scale: 0.95 }}
+                      <m.div
+                        initial={false}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 4, scale: 0.95 }}
                         transition={{ duration: 0.13 }}
@@ -690,7 +690,7 @@ export default function WebStudio() {
                             borderTop: "6px solid rgba(6,6,18,0.97)",
                           }}
                         />
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -703,21 +703,21 @@ export default function WebStudio() {
               L&apos;intégration des mentions légales fournies par le client est incluse dans toute offre.
               King of IA n&apos;assure pas la rédaction ni le conseil juridique.
             </p>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════
             CONNECTEUR ANIMÉ
         ══════════════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="relative mx-auto mb-10 flex max-w-sm flex-col items-center py-2"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-40px" }}
+          initial={false}
+          animate={{ opacity: 1 }}
+         
           transition={{ duration: 0.55, delay: 0.1 }}
         >
           <div className="ws-data-stream h-10 w-[3px] rounded-full" />
-          <motion.div
+          <m.div
             className="relative z-10 my-2 flex h-10 w-10 items-center justify-center rounded-2xl font-display text-xl font-black text-white"
             style={{
               background: "linear-gradient(135deg, #6366f1, #d946ef, #8b5cf6)",
@@ -727,7 +727,7 @@ export default function WebStudio() {
             transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
           >
             +
-          </motion.div>
+          </m.div>
           <div className="ws-data-stream h-10 w-[3px] rounded-full" />
           <div
             className="mt-5 rounded-2xl px-6 py-3 text-center"
@@ -743,17 +743,17 @@ export default function WebStudio() {
               Votre site livré — la maintenance prend le relais.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ══════════════════════════════════════════════════════════════════
             PHASE 2 — MAINTENANCE
         ══════════════════════════════════════════════════════════════════ */}
         <div id="maintenance">
-          <motion.div
+          <m.div
             className="mb-10 flex flex-col items-center text-center"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.5 }}
           >
             <div
@@ -779,18 +779,18 @@ export default function WebStudio() {
             <p className="text-sm text-white/40">
               Sécurité, mises à jour, performances — chaque mois, sans y penser.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* ── Maintenance cards ───────────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="grid grid-cols-1 gap-5 lg:grid-cols-2"
             variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            initial={false}
+            animate="visible"
+           
           >
             {/* ── ESSENTIEL maintenance : design "clean" ──────────────── */}
-            <motion.div variants={fadeUp} whileHover={{ y: -4, transition: { duration: 0.18 } }}>
+            <m.div variants={fadeUp} whileHover={{ y: -4, transition: { duration: 0.18 } }}>
               {(() => {
                 const plan = MAINTENANCE_PLANS[0];
                 return (
@@ -816,7 +816,7 @@ export default function WebStudio() {
                         </span>
                         <h4 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
                           Landing{" "}
-                          <motion.span
+                          <m.span
                             style={{
                               background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, ${plan.color})`,
                               backgroundSize: "200% auto",
@@ -828,7 +828,7 @@ export default function WebStudio() {
                             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                           >
                             Page
-                          </motion.span>
+                          </m.span>
                         </h4>
                         <p className="mt-1 text-[0.68rem] text-white/35">{plan.forWho}</p>
                       </div>
@@ -862,7 +862,7 @@ export default function WebStudio() {
                         ))}
                       </ul>
 
-                      <motion.a
+                      <m.a
                         href="#contact"
                         className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl border py-3.5 text-sm font-black transition-colors"
                         style={{ borderColor: `${plan.color}55`, color: plan.color, background: `${plan.color}08` }}
@@ -871,15 +871,15 @@ export default function WebStudio() {
                       >
                         {plan.cta}
                         <ArrowRight className="h-4 w-4" />
-                      </motion.a>
+                      </m.a>
                     </div>
                   </div>
                 );
               })()}
-            </motion.div>
+            </m.div>
 
             {/* ── COMPLET maintenance : design "bold" ─────────────────── */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               whileHover={{ y: -4, transition: { duration: 0.18 } }}
               className="ws-border-maintenance flex flex-col rounded-3xl p-px"
@@ -926,7 +926,7 @@ export default function WebStudio() {
                           </span>
                           <h4 className="font-display text-2xl font-black leading-tight text-white sm:text-4xl">
                             Site{" "}
-                            <motion.span
+                            <m.span
                               style={{
                                 background: `linear-gradient(90deg, ${plan.color}, ${plan.colorTo}, #d946ef, ${plan.color})`,
                                 backgroundSize: "200% auto",
@@ -938,7 +938,7 @@ export default function WebStudio() {
                               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                             >
                               Complet
-                            </motion.span>
+                            </m.span>
                           </h4>
                           <p className="mt-1 text-[0.68rem] text-white/35">{plan.forWho}</p>
                         </div>
@@ -989,7 +989,7 @@ export default function WebStudio() {
                         ))}
                       </ul>
 
-                      <motion.a
+                      <m.a
                         href="#contact"
                         className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-sm font-black text-white"
                         style={{
@@ -1001,24 +1001,24 @@ export default function WebStudio() {
                       >
                         {plan.cta}
                         <ArrowRight className="h-4 w-4" />
-                      </motion.a>
+                      </m.a>
                     </div>
                   </div>
                 );
               })()}
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
           {/* ── Callout tarif hors forfait ─────────────────────────────── */}
-          <motion.div
+          <m.div
             className="mt-6 rounded-2xl px-5 py-4"
             style={{
               background: "rgba(255,255,255,0.025)",
               border: "1px solid rgba(255,255,255,0.07)",
             }}
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             <p className="text-xs leading-relaxed text-white/38">
@@ -1026,15 +1026,15 @@ export default function WebStudio() {
               après validation préalable du client.{" "}
               <strong className="font-black text-white/58">Tarif hors forfait&nbsp;: 50€/h</strong>
             </p>
-          </motion.div>
+          </m.div>
 
           {/* ── Hors forfait accordion ───────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="mt-7 overflow-hidden rounded-3xl"
             style={{ border: "1px solid rgba(255,255,255,0.07)" }}
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.45, delay: 0.15 }}
           >
             <button
@@ -1046,13 +1046,13 @@ export default function WebStudio() {
                 <AlertCircle className="h-4 w-4 text-white/35" />
                 <span className="text-sm font-black text-white/55">Hors forfait (sur devis)</span>
               </div>
-              <motion.span animate={{ rotate: horsOpen ? 180 : 0 }} transition={{ duration: 0.22 }}>
+              <m.span animate={{ rotate: horsOpen ? 180 : 0 }} transition={{ duration: 0.22 }}>
                 <ChevronDown className="h-4 w-4 text-white/30" />
-              </motion.span>
+              </m.span>
             </button>
             <AnimatePresence initial={false}>
               {horsOpen && (
-                <motion.div
+                <m.div
                   key="hors"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
@@ -1068,21 +1068,21 @@ export default function WebStudio() {
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
 
           {/* ── Protection callout ──────────────────────────────────────── */}
-          <motion.div
+          <m.div
             className="mt-5 flex flex-col items-center gap-4 rounded-3xl p-6 text-center sm:flex-row sm:text-left"
             style={{
               background: "linear-gradient(135deg, rgba(6,182,212,0.06) 0%, rgba(34,197,94,0.05) 100%)",
               border: "1px solid rgba(6,182,212,0.18)",
             }}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+           
             transition={{ duration: 0.45, delay: 0.2 }}
           >
             <div
@@ -1097,7 +1097,7 @@ export default function WebStudio() {
                 Vous avez déjà un site ? On peut le reprendre en maintenance. Demandez un diagnostic gratuit.
               </p>
             </div>
-            <motion.a
+            <m.a
               href="#contact"
               className="shrink-0 rounded-2xl px-5 py-2.5 text-sm font-black text-white"
               style={{
@@ -1108,22 +1108,22 @@ export default function WebStudio() {
               whileTap={{ scale: 0.97 }}
             >
               Diagnostic gratuit
-            </motion.a>
-          </motion.div>
+            </m.a>
+          </m.div>
         </div>
 
         {/* ── CTA global ──────────────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mt-16 flex flex-col items-center gap-4 text-center"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.5 }}
         >
           <p className="text-[0.68rem] font-black uppercase tracking-widest text-white/28">
             Prêt à lancer votre projet ?
           </p>
-          <motion.a
+          <m.a
             href="#contact"
             className="inline-flex items-center gap-2.5 rounded-2xl px-10 py-4 text-base font-black text-white"
             style={{
@@ -1135,9 +1135,9 @@ export default function WebStudio() {
           >
             Démarrer mon projet site web
             <ArrowRight className="h-4 w-4" />
-          </motion.a>
+          </m.a>
           <p className="text-xs text-white/22">Réponse sous 24h · Devis gratuit · Sans engagement</p>
-        </motion.div>
+        </m.div>
 
       </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
@@ -100,16 +100,16 @@ export default function Footer() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
 
         {/* ── Grille principale ──────────────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]"
           variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
+          initial={false}
+          animate="visible"
+         
         >
 
           {/* ── Colonne 1 : Logo + tagline + réseaux ─────────────────────── */}
-          <motion.div variants={fadeUp} className="flex flex-col gap-6">
+          <m.div variants={fadeUp} className="flex flex-col gap-6">
             {/* Logo */}
             <Link href="/" className="group inline-flex items-center gap-3 self-start">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl"
@@ -118,6 +118,7 @@ export default function Footer() {
                   src="/ks-logo.png"
                   alt="Logo King of IA"
                   fill
+                  sizes="40px"
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
@@ -140,7 +141,7 @@ export default function Footer() {
             {/* Réseaux sociaux */}
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map(({ label, href, icon: Icon, color, hoverGlow }) => (
-                <motion.a
+                <m.a
                   key={label}
                   href={href}
                   target="_blank"
@@ -157,13 +158,13 @@ export default function Footer() {
                   style={{ color: "rgba(255,255,255,0.4)" }}
                 >
                   <Icon className="h-4 w-4" />
-                </motion.a>
+                </m.a>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
           {/* ── Colonne 2 : Navigation ────────────────────────────────────── */}
-          <motion.div variants={fadeUp} className="flex flex-col gap-4">
+          <m.div variants={fadeUp} className="flex flex-col gap-4">
             <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/55">
               Navigation
             </p>
@@ -182,10 +183,10 @@ export default function Footer() {
                 </Link>
               ))}
             </nav>
-          </motion.div>
+          </m.div>
 
           {/* ── Colonne 3 : Légal + contact rapide ───────────────────────── */}
-          <motion.div variants={fadeUp} className="flex flex-col gap-4">
+          <m.div variants={fadeUp} className="flex flex-col gap-4">
             <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/55">
               Légal
             </p>
@@ -214,15 +215,15 @@ export default function Footer() {
                 contact@kingofia.fr
               </a>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* ── Séparateur fin + copyright ──────────────────────────────────── */}
-        <motion.div
+        <m.div
           className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-7 sm:flex-row"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={false}
+          animate={{ opacity: 1 }}
+         
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p className="text-[0.72rem] text-white/60">
@@ -231,7 +232,7 @@ export default function Footer() {
           <p className="text-[0.65rem] text-white/50">
             Fait avec ✦ et beaucoup de caféine par Kame
           </p>
-        </motion.div>
+        </m.div>
       </div>
     </footer>
   );

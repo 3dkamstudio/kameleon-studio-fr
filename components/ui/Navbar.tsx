@@ -1,21 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// Étoiles bakées en 2 couches de radial-gradients CSS (2 nœuds au lieu de 14),
+// twinkle par opacité de couche.
 const NAV_STARS = [
-  { x: 4,  y: 30, d: 0.0, t: 2.8 }, { x: 11, y: 68, d: 0.7, t: 3.5 },
-  { x: 19, y: 18, d: 1.4, t: 2.2 }, { x: 28, y: 78, d: 0.3, t: 4.0 },
-  { x: 36, y: 42, d: 1.8, t: 2.6 }, { x: 45, y: 82, d: 0.9, t: 3.2 },
-  { x: 54, y: 22, d: 0.2, t: 2.9 }, { x: 62, y: 62, d: 1.5, t: 3.8 },
-  { x: 71, y: 15, d: 0.6, t: 2.4 }, { x: 80, y: 80, d: 1.1, t: 4.5 },
-  { x: 87, y: 48, d: 0.4, t: 2.1 }, { x: 94, y: 72, d: 1.9, t: 3.7 },
-  { x: 33, y: 55, d: 0.8, t: 2.5 }, { x: 75, y: 35, d: 1.3, t: 4.2 },
+  { x: 4,  y: 30 }, { x: 11, y: 68 }, { x: 19, y: 18 }, { x: 28, y: 78 },
+  { x: 36, y: 42 }, { x: 45, y: 82 }, { x: 54, y: 22 }, { x: 62, y: 62 },
+  { x: 71, y: 15 }, { x: 80, y: 80 }, { x: 87, y: 48 }, { x: 94, y: 72 },
+  { x: 33, y: 55 }, { x: 75, y: 35 },
 ] as const;
+const NAV_STAR_LAYERS = [0, 1].map(offset =>
+  NAV_STARS.filter((_, i) => i % 2 === offset)
+    .map(({ x, y }, i) => `radial-gradient(${i % 3 === 0 ? "2px 2px" : "1.5px 1.5px"} at ${x}% ${y}%, rgba(255,255,255,0.55), transparent)`)
+    .join(","),
+);
 
 const PRESTATION_LINKS = [
   { label: "Production vidéo",     href: "/video",     color: "#d946ef", emoji: "🎬" },
@@ -57,21 +61,10 @@ export default function Navbar() {
           background: "linear-gradient(to bottom, rgba(6,6,14,0.38) 0%, rgba(6,6,14,0.10) 60%, transparent 100%)",
         }}
       >
-        {/* Étoiles scintillantes */}
+        {/* Étoiles scintillantes — 2 couches CSS pur */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-          {NAV_STARS.map(({ x, y, d, t }, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                left: `${x}%`, top: `${y}%`,
-                width: i % 3 === 0 ? 2 : 1.5,
-                height: i % 3 === 0 ? 2 : 1.5,
-                boxShadow: "0 0 3px 1px rgba(255,255,255,0.45)",
-                animation: `star-twinkle ${t}s ease-in-out ${d}s infinite`,
-              }}
-            />
-          ))}
+          <div className="absolute inset-0" style={{ backgroundImage: NAV_STAR_LAYERS[0], animation: "star-twinkle 3s ease-in-out infinite" }} />
+          <div className="absolute inset-0" style={{ backgroundImage: NAV_STAR_LAYERS[1], animation: "star-twinkle 4.2s ease-in-out 1s infinite" }} />
         </div>
 
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4">
@@ -79,7 +72,7 @@ export default function Navbar() {
           {/* ── Logo ───────────────────────────────────────────────────────── */}
           <Link href="/" className="group flex items-center gap-2">
             <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-200 group-hover:scale-105">
-              <Image src="/ks-logo.png" alt="King of IA" fill className="object-contain" priority />
+              <Image src="/ks-logo.png" alt="King of IA" fill sizes="44px" className="object-contain" priority />
             </div>
             <span className="hidden font-display text-[1.05rem] font-black tracking-tight sm:block">
               <span style={{
@@ -117,7 +110,7 @@ export default function Navbar() {
                   style={{ transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                 />
                 {isPrestActive && (
-                  <motion.span
+                  <m.span
                     layoutId="nav-indicator"
                     className="absolute inset-0 rounded-lg"
                     style={{ background: "rgba(255,255,255,0.07)" }}
@@ -128,7 +121,7 @@ export default function Navbar() {
 
               <AnimatePresence>
                 {dropdownOpen && (
-                  <motion.div
+                  <m.div
                     key="dropdown"
                     initial={{ opacity: 0, y: -8, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -159,7 +152,7 @@ export default function Navbar() {
                         </Link>
                       ))}
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -173,7 +166,7 @@ export default function Navbar() {
               Réalisations
               {isRealisActive && (
                 <>
-                  <motion.span
+                  <m.span
                     layoutId="nav-indicator"
                     className="absolute inset-0 rounded-lg"
                     style={{ background: "rgba(255,255,255,0.07)" }}
@@ -188,7 +181,7 @@ export default function Navbar() {
 
           {/* ── CTA + burger ───────────────────────────────────────────────── */}
           <div className="flex items-center gap-3">
-            <motion.div
+            <m.div
               className="group relative hidden overflow-hidden rounded-xl md:inline-flex"
               whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(217,70,239,0.55)" }}
               whileTap={{ scale: 0.97 }}
@@ -203,7 +196,7 @@ export default function Navbar() {
                 Devis gratuit
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-            </motion.div>
+            </m.div>
 
             <button
               onClick={() => setMobileOpen(o => !o)}
@@ -213,12 +206,12 @@ export default function Navbar() {
             >
               <AnimatePresence mode="wait" initial={false}>
                 {mobileOpen
-                  ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  ? <m.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
                       <X className="h-4 w-4 text-white" />
-                    </motion.span>
-                  : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    </m.span>
+                  : <m.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
                       <Menu className="h-4 w-4 text-white" />
-                    </motion.span>
+                    </m.span>
                 }
               </AnimatePresence>
             </button>
@@ -230,7 +223,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div
+            <m.div
               key="backdrop"
               className="fixed inset-0 z-40 md:hidden"
               style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}
@@ -241,7 +234,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
             />
 
-            <motion.nav
+            <m.nav
               key="panel"
               className="fixed inset-x-3 top-[64px] z-50 overflow-hidden rounded-3xl md:hidden"
               style={{
@@ -278,7 +271,7 @@ export default function Navbar() {
 
                   <AnimatePresence>
                     {mobilePrestOpen && (
-                      <motion.div
+                      <m.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
@@ -287,7 +280,7 @@ export default function Navbar() {
                       >
                         <div className="flex flex-col gap-0.5 px-2 pb-2 pt-1">
                           {PRESTATION_LINKS.map(({ label, href, color, emoji }, i) => (
-                            <motion.div
+                            <m.div
                               key={href}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
@@ -302,16 +295,16 @@ export default function Navbar() {
                                 <span className="text-base">{emoji}</span>
                                 {label}
                               </Link>
-                            </motion.div>
+                            </m.div>
                           ))}
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>
 
                 {/* Réalisations */}
-                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.08 }}>
+                <m.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.08 }}>
                   <Link
                     href="/realisations"
                     onClick={() => setMobileOpen(false)}
@@ -324,10 +317,10 @@ export default function Navbar() {
                     Réalisations
                     {isRealisActive && <span className="h-2 w-2 rounded-full" style={{ background: "#d946ef", boxShadow: "0 0 8px #d946ef" }} />}
                   </Link>
-                </motion.div>
+                </m.div>
 
                 {/* CTA mobile */}
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}>
+                <m.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}>
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
@@ -340,10 +333,10 @@ export default function Navbar() {
                     Devis gratuit
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                </motion.div>
+                </m.div>
 
               </div>
-            </motion.nav>
+            </m.nav>
           </>
         )}
       </AnimatePresence>

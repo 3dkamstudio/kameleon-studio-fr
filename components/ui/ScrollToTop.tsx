@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollToTop() {
@@ -20,7 +20,7 @@ export default function ScrollToTop() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.button
+        <m.button
           key="scroll-top"
           onClick={scrollTop}
           aria-label="Revenir en haut de la page"
@@ -37,7 +37,7 @@ export default function ScrollToTop() {
           }}
         >
           <ArrowUp className="h-5 w-5" strokeWidth={2.5} />
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );

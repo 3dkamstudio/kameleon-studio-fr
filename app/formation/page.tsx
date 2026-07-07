@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
 import KingOfIA from "@/components/sections/KingOfIA";
-import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -13,7 +12,8 @@ export default function FormationPage() {
   return (
     <PrestationLayout>
 
-      <RevealSection><KingOfIA /></RevealSection>
+      {/* Première section = LCP : pas de wrapper animé */}
+      <KingOfIA />
 
       {/* Cross-sell */}
       <section className="px-6 py-16 text-center">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Star, Zap, Sparkles } from "lucide-react";
@@ -130,7 +130,7 @@ function NeonBorder({ active, color, children }: { active: boolean; color: strin
         }}
       />
       {/* Conic gradient — toujours en DOM, opacity pilote la visibilité */}
-      <motion.div
+      <m.div
         className="absolute inset-[-140%] rounded-full"
         style={{ background: `conic-gradient(from 0deg, transparent 0%, ${color}70 18%, ${color} 30%, ${color}ff 36%, ${color}70 48%, transparent 60%)` }}
         animate={active ? { opacity: 1, rotate: 360 } : { opacity: 0 }}
@@ -157,7 +157,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
   }, [mod.color]);
 
   return (
-    <motion.div
+    <m.div
       variants={fadeUp}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -166,7 +166,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
       className="group cursor-default"
     >
       {/* Outer glow — toujours visible, s'intensifie au hover */}
-      <motion.div
+      <m.div
         className="absolute inset-0 -z-10 rounded-2xl"
         animate={{
           boxShadow: hovered
@@ -191,7 +191,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
             <div ref={spotlightRef} className="pointer-events-none absolute inset-0 z-20 transition-opacity duration-200" style={{ opacity: hovered ? 1 : 0 }} />
 
             {/* Image avec zoom */}
-            <motion.div
+            <m.div
               className="absolute inset-0"
               animate={{ scale: hovered ? 1.09 : 1 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
@@ -203,7 +203,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
                 className="object-cover object-center"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
-            </motion.div>
+            </m.div>
 
             {/* Gradient fondu bas */}
             <div
@@ -212,7 +212,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
             />
 
             {/* Teinte couleur au hover */}
-            <motion.div
+            <m.div
               className="absolute inset-0 z-10"
               style={{ background: mod.color }}
               animate={{ opacity: hovered ? 0.08 : 0 }}
@@ -220,7 +220,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
             />
 
             {/* Ligne de scan qui balaye */}
-            <motion.div
+            <m.div
               className="absolute inset-x-0 z-20 h-[2px]"
               style={{ top: "-2px", background: `linear-gradient(90deg, transparent, ${mod.color}dd, transparent)` }}
               animate={hovered ? { y: [0, 182], opacity: [0, 1, 1, 0] } : { y: 0, opacity: 0 }}
@@ -315,7 +315,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
             </div>
 
             {/* Bottom glow line hover */}
-            <motion.div
+            <m.div
               className="absolute inset-x-0 bottom-0 h-px"
               style={{ background: `linear-gradient(90deg, transparent, ${mod.color}, transparent)` }}
               animate={{ opacity: hovered ? 1 : 0, scaleX: hovered ? 1 : 0.3 }}
@@ -324,7 +324,7 @@ function ModuleCard({ mod }: { mod: typeof MODULES[number] }) {
           </div>
         </div>
       </NeonBorder>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -379,13 +379,13 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
   }, [color]);
 
   return (
-    <motion.div
+    <m.div
       ref={cardRef}
       className="relative flex flex-1 flex-col"
       style={{ willChange: "transform" }}
-      initial={{ opacity: 0, y: 56 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      initial={false}
+      animate={{ opacity: 1, y: 0 }}
+     
       transition={{ duration: 0.75, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -395,20 +395,20 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
       {/* ── Badge recommandé ── */}
       {recommended && (
         <div className="absolute -top-6 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap">
-          <motion.div
+          <m.div
             className="animate-koi-recommended flex items-center gap-2 rounded-full px-5 py-1.5 text-[0.65rem] font-black uppercase tracking-widest text-white"
             style={{ background: "linear-gradient(135deg, #8b5cf6, #d946ef)", boxShadow: "0 0 28px rgba(217,70,239,0.75)" }}
           >
             <Star className="h-3.5 w-3.5 fill-current" />
             Recommandé
-          </motion.div>
+          </m.div>
         </div>
       )}
 
       {/* ── Particules flottantes ── */}
       <div className="pointer-events-none absolute inset-0 z-30 overflow-hidden rounded-3xl">
         {sparks.map((p, i) => (
-          <motion.div
+          <m.div
             key={i}
             className="absolute rounded-full"
             style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.s, height: p.s, background: color, boxShadow: `0 0 ${p.s * 5}px ${color}ee` }}
@@ -421,7 +421,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
       {/* ── Scintillements ✦ ── */}
       <div className="pointer-events-none absolute inset-0 z-30 overflow-hidden rounded-3xl">
         {glimmers.map((g, i) => (
-          <motion.span
+          <m.span
             key={i}
             className="absolute select-none font-black leading-none"
             style={{ left: `${g.x}%`, top: `${g.y}%`, fontSize: g.sz, color }}
@@ -429,7 +429,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
             transition={inView ? { duration: g.dur, delay: g.d, repeat: Infinity, ease: "easeInOut" } : { duration: 0.2 }}
           >
             ✦
-          </motion.span>
+          </m.span>
         ))}
       </div>
 
@@ -446,7 +446,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
 
       {/* ── Carte principale (bordure conic tournante) ── */}
       <div className="relative flex flex-1 flex-col overflow-hidden rounded-3xl" style={{ padding: "2px" }}>
-        <motion.div
+        <m.div
           className="absolute inset-[-130%] rounded-full"
           style={{ background: `conic-gradient(from 0deg, transparent 0%, ${color}45 16%, ${color}cc 26%, ${color}ff 32%, ${color}cc 38%, ${color}45 48%, transparent 60%)` }}
           animate={inView ? { rotate: 360 } : {}}
@@ -457,7 +457,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
         <div className="relative flex flex-1 flex-col overflow-hidden rounded-[calc(1.5rem-1px)]" style={{ minHeight: "580px" }}>
 
           {/* Image plein fond */}
-          <motion.div
+          <m.div
             className="absolute inset-0"
             animate={{ scale: hovered ? 1.06 : 1 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
@@ -469,7 +469,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
               className="object-cover object-top"
               sizes="(max-width: 640px) 100vw, 50vw"
             />
-          </motion.div>
+          </m.div>
 
           {/* Overlays graduels */}
           {/* Mobile : overlay allégé pour voir l'image */}
@@ -479,14 +479,14 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
           {/* Teinture couleur latérale */}
           <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(135deg, ${color}10 0%, transparent 55%, ${color}08 100%)` }} />
           {/* Vignette hover */}
-          <motion.div className="absolute inset-0 z-10" animate={{ opacity: hovered ? 1 : 0 }} transition={{ duration: 0.4 }}
+          <m.div className="absolute inset-0 z-10" animate={{ opacity: hovered ? 1 : 0 }} transition={{ duration: 0.4 }}
             style={{ background: `radial-gradient(ellipse at 50% 0%, ${color}18 0%, transparent 65%)` }} />
 
           {/* Spotlight curseur */}
           <div ref={spotRef} className="pointer-events-none absolute inset-0 z-20 transition-opacity duration-300" style={{ opacity: hovered ? 1 : 0 }} />
 
           {/* Scan line sur toute la hauteur */}
-          <motion.div
+          <m.div
             className="absolute inset-x-0 z-20 h-[2px]"
             style={{ top: "-2px", background: `linear-gradient(90deg, transparent 5%, ${color}ee, ${color}ff, ${color}ee, transparent 95%)`, filter: "blur(0.5px)" }}
             animate={hovered ? { y: [0, 592], opacity: [0, 1, 1, 0] } : { y: 0, opacity: 0 }}
@@ -500,7 +500,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
             { cls: "left-3 bottom-3", bl: "borderLeft",  bt: "borderBottom"},
             { cls: "right-3 bottom-3",bl: "borderRight", bt: "borderBottom"},
           ]).map(({ cls, bl, bt }, i) => (
-            <motion.div
+            <m.div
               key={i}
               className={`pointer-events-none absolute z-20 h-5 w-5 ${cls}`}
               style={{ [bl]: `2px solid ${color}`, [bt]: `2px solid ${color}` }}
@@ -561,7 +561,7 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
             </ul>
 
             {/* CTA */}
-            <motion.a
+            <m.a
               href="#contact"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-black text-white"
               style={{
@@ -574,11 +574,11 @@ function OfferCard({ title, color, glow: _glow, features, recommended, delay = 0
             >
               Je suis intéressé(e)
               <ArrowRight className="h-4 w-4" />
-            </motion.a>
+            </m.a>
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -597,27 +597,27 @@ export default function KingOfIA() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
 
-        {/* ══ HERO ═══════════════════════════════════════════════════════════ */}
-        <motion.div className="mb-24 flex flex-col items-center text-center" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-          <motion.h2 variants={fadeUp} className="mb-6 tracking-tight">
+        {/* ══ HERO — texte LCP : visible au SSR, jamais animé ═════════════════ */}
+        <div className="mb-24 flex flex-col items-center text-center">
+          <h2 className="mb-6 tracking-tight">
             <span className="block font-display font-black leading-[1.05] text-white" style={{ fontSize: "clamp(2.2rem, 5.5vw, 4.2rem)" }}>
               Maîtrisez l&apos;IA. Créez.
             </span>
             <span className="block font-display font-black leading-[1.05]" style={{ fontSize: "clamp(2.2rem, 5.5vw, 4.2rem)", background: "linear-gradient(90deg, #d946ef 0%, #8b5cf6 50%, #06b6d4 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Automatisez. Dominez.
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p variants={fadeUp} className="mb-12 max-w-2xl text-base leading-relaxed text-white/52 sm:text-lg">
+          <p className="mb-12 max-w-2xl text-base leading-relaxed text-white/52 sm:text-lg">
             Formation 100% en ligne, autonome — accès immédiat aux modules, prompts, templates et ressources professionnelles.
             Avancez à votre rythme, sans engagement de session.
-          </motion.p>
+          </p>
 
-        </motion.div>
+        </div>
 
         {/* ══ MODULES ════════════════════════════════════════════════════════ */}
         <div className="mb-28">
-          <motion.div className="mb-12 text-center" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }}>
+          <m.div className="mb-12 text-center" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="mb-5 flex items-center justify-center gap-3">
               <div className="h-px flex-1 max-w-[80px]" style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.4))" }} />
               <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[0.62rem] font-black uppercase tracking-widest" style={{ background: "rgba(139,92,246,0.14)", border: "1px solid rgba(139,92,246,0.35)", color: "#a78bfa" }}>
@@ -632,22 +632,22 @@ export default function KingOfIA() {
                 tout changer
               </span>
             </h3>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
             variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
+            initial={false}
+            animate="visible"
+           
           >
             {MODULES.map(mod => <ModuleCard key={mod.num} mod={mod} />)}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ══ OFFRES ═════════════════════════════════════════════════════════ */}
         <div className="mb-28">
-          <motion.div className="mb-16 text-center" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }}>
+          <m.div className="mb-16 text-center" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="badge-pill badge-fuchsia mb-5">⚡ Formations</span>
             <h3 className="font-display text-2xl font-black leading-tight text-white sm:text-3xl md:text-4xl">
               Choisissez votre{" "}
@@ -656,7 +656,7 @@ export default function KingOfIA() {
               </span>
             </h3>
             <p className="mt-3 text-sm text-white/40">Prix de lancement — accès immédiat à tous les modules inclus dans votre pack.</p>
-          </motion.div>
+          </m.div>
 
           <div className="flex flex-col gap-12 sm:flex-row sm:items-stretch sm:gap-6 lg:gap-8">
             <OfferCard title="King of IA Starter" color="#06b6d4" glow="rgba(6,182,212,0.15)" features={STARTER_FEAT} delay={0} image="/offer-starter.webp" sparks={SPARKS_A} glimmers={GLIMMERS_A} priceLaunch={497} priceFull={697} valueIndividual={885} savings={200} />

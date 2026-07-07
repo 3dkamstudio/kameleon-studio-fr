@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MotionConfig } from "framer-motion";
+import { LazyMotion, domAnimation, MotionConfig } from "framer-motion";
 
 // reducedMotion="user" : Framer Motion désactive les animations transform/layout
 // quand l'OS demande prefers-reduced-motion (les opacity restent, comportement voulu).
@@ -20,8 +20,10 @@ export default function MotionProvider({ children }: { children: React.ReactNode
   }, []);
 
   return (
-    <MotionConfig reducedMotion={minimal ? "always" : "user"}>
-      {children}
-    </MotionConfig>
+    <LazyMotion features={domAnimation} strict>
+      <MotionConfig reducedMotion={minimal ? "always" : "user"}>
+        {children}
+      </MotionConfig>
+    </LazyMotion>
   );
 }

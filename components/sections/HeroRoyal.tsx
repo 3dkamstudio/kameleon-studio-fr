@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -39,7 +39,7 @@ export default function HeroRoyal() {
             }}
           />
           {/* Kame roi — flottement */}
-          <motion.div
+          <m.div
             className="absolute inset-4 flex items-end justify-center"
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -52,16 +52,11 @@ export default function HeroRoyal() {
               priority
               className="object-contain drop-shadow-[0_0_35px_rgba(217,70,239,0.35)]"
             />
-          </motion.div>
+          </m.div>
         </div>
 
-        {/* ── Promesse ─────────────────────────────────────────────────────── */}
-        <motion.h1
-          className="mb-10 max-w-3xl font-display font-black leading-[1.08] tracking-tight"
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
-        >
+        {/* ── Promesse — texte LCP : rendu visible au SSR, jamais animé ────── */}
+        <h1 className="mb-10 max-w-3xl font-display font-black leading-[1.08] tracking-tight">
           <span className="block text-4xl text-white sm:text-5xl md:text-6xl">
             L&apos;IA au service de ton contenu.
           </span>
@@ -76,15 +71,10 @@ export default function HeroRoyal() {
           >
             Vidéo, BD, web, formation — un seul royaume.
           </span>
-        </motion.h1>
+        </h1>
 
-        {/* ── CTA ──────────────────────────────────────────────────────────── */}
-        <motion.div
-          className="flex flex-wrap items-center justify-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-        >
+        {/* ── CTA — visible au SSR ─────────────────────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/contact"
             className="group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-black text-white transition-transform hover:scale-[1.04] active:scale-[0.97]"
@@ -102,15 +92,10 @@ export default function HeroRoyal() {
           >
             Voir les réalisations
           </Link>
-        </motion.div>
-        <motion.p
-          className="mt-4 text-xs text-white/30"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
+        </div>
+        <p className="mt-4 text-xs text-white/30">
           Sans engagement · on identifie ensemble ce qu&apos;il te faut
-        </motion.p>
+        </p>
 
       </div>
     </section>

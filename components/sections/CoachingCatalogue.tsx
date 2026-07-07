@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight, Crown, Star, Workflow, Mic, Clapperboard,
@@ -68,11 +68,11 @@ export default function CoachingCatalogue() {
       <div className="mx-auto max-w-6xl">
 
         {/* ══ BANDEAU PRIX — le prix vit au point de décision ═══════════════ */}
-        <motion.div
+        <m.div
           className="mb-12 flex flex-col items-center gap-2 text-center"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
@@ -84,13 +84,13 @@ export default function CoachingCatalogue() {
           <p className="text-sm text-white/40">
             Visio 1h · enregistrée · replay + fiche récap offerts
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ══ CARD VEDETTE — pleine largeur, seul glow permanent de la page ═ */}
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
+        <m.div
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
           className="relative mb-6"
         >
@@ -134,21 +134,21 @@ export default function CoachingCatalogue() {
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ══ GRILLE — 7 autres séances, discipline ═════════════════════════ */}
         <div className="mb-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SEANCES.map(({ icon: Icon, title, livrable, ...rest }, i) => {
             const surMesure = "surMesure" in rest;
             return (
-              <motion.div
+              <m.div
                 key={title}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
+                initial={false}
+                animate={{ opacity: 1, y: 0 }}
+               
                 transition={{ duration: 0.5, delay: i * 0.06 }}
               >
-                <motion.div
+                <m.div
                   className="flex h-full flex-col rounded-3xl p-6"
                   style={{
                     background: "rgba(255,255,255,0.03)",
@@ -170,19 +170,19 @@ export default function CoachingCatalogue() {
                   <p className="flex-1 text-sm leading-relaxed text-white/45">
                     Tu repars avec : <span className="text-white/65">{livrable}</span>
                   </p>
-                </motion.div>
-              </motion.div>
+                </m.div>
+              </m.div>
             );
           })}
         </div>
 
         {/* ══ BARRE PACKS — rappel prix au point de décision ════════════════ */}
-        <motion.div
+        <m.div
           className="mb-14 overflow-hidden rounded-3xl"
           style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
         >
           <div className="h-[2px]" style={{ background: `linear-gradient(90deg, ${ROSE}, #d946ef, ${ROSE})` }} />
@@ -202,13 +202,13 @@ export default function CoachingCatalogue() {
           <p className="pb-6 text-center text-xs text-white/35">
             Paiement en 2-3 fois disponible
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ══ PASSERELLE FORMATION PRO ══════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+        <m.div
+          initial={false}
+          animate={{ opacity: 1 }}
+         
           transition={{ duration: 0.5 }}
           className="mb-20"
         >
@@ -221,14 +221,14 @@ export default function CoachingCatalogue() {
             Le montant d&apos;une séance de coaching est déductible de l&apos;inscription au plan Pro de la formation.
             <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style={{ color: "#8b5cf6" }} />
           </Link>
-        </motion.div>
+        </m.div>
 
         {/* ══ CTA FINAL — vend le diagnostic + rappel prix ══════════════════ */}
-        <motion.div
+        <m.div
           className="text-center"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+         
           transition={{ duration: 0.6 }}
         >
           <h2 className="mb-6 font-display text-2xl font-black text-white sm:text-3xl">
@@ -251,7 +251,7 @@ export default function CoachingCatalogue() {
           <p className="mt-2 text-xs text-white/35">
             Séance 149€ · 3 séances 399€ · 5 séances 590€ · paiement en 2-3 fois
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── Atelier équipe — une phrase, pas une section ─────────────────── */}
         <p className="mt-20 text-center text-xs text-white/25">

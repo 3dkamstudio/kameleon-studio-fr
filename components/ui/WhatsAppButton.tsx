@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 const WA_URL =
   `https://wa.me/33762236491?text=${encodeURIComponent(
@@ -42,7 +42,7 @@ export default function WhatsAppButton() {
           {/* ── Tooltip ──────────────────────────────────────────────────── */}
           <AnimatePresence>
             {hovered && (
-              <motion.span
+              <m.span
                 key="tooltip"
                 role="tooltip"
                 initial={{ opacity: 0, x: 8, scale: 0.93 }}
@@ -58,12 +58,12 @@ export default function WhatsAppButton() {
                 }}
               >
                 Discutons de votre projet sur WhatsApp
-              </motion.span>
+              </m.span>
             )}
           </AnimatePresence>
 
           {/* ── Bouton ───────────────────────────────────────────────────── */}
-          <motion.a
+          <m.a
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -79,14 +79,14 @@ export default function WhatsAppButton() {
             whileTap={{   scale: 0.91 }}
           >
             {/* Anneau pulse continu */}
-            <motion.span
+            <m.span
               className="absolute inset-0 rounded-full"
               style={{ background: "#25D366" }}
               animate={{  scale: [1, 1.75, 1.75], opacity: [0.55, 0, 0] }}
               transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 0.8, ease: "easeOut" }}
             />
             <IconWhatsApp className="relative z-10 h-[22px] w-[22px]" />
-          </motion.a>
+          </m.a>
         </div>
       )}
     </AnimatePresence>

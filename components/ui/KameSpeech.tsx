@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -128,7 +128,7 @@ export default function KameSpeech({
 
       <AnimatePresence>
         {visible && (
-          <motion.div
+          <m.div
             key={idx}
             className={cn(
               "absolute z-30 w-[190px] cursor-pointer pointer-events-auto",
@@ -167,7 +167,7 @@ export default function KameSpeech({
                 <div style={tailStyle} />
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { ReactNode } from "react";
 
 // Fade + y subtil uniquement — pas de scale (rasterisation coûteuse des
@@ -16,13 +16,13 @@ const revealVariants = {
 
 export default function RevealSection({ children }: { children: ReactNode }) {
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px 0px" }}
       variants={revealVariants}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

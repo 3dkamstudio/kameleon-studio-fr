@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   Send, Mail, User, MessageSquare, ChevronDown,
@@ -56,13 +56,13 @@ const BUDGETS = [
 // ── Composants ────────────────────────────────────────────────────────────────
 function Field({ label, icon: Icon, children }: { label: string; icon: React.ElementType; children: React.ReactNode }) {
   return (
-    <motion.div variants={fadeUp} className="flex flex-col gap-1.5">
+    <m.div variants={fadeUp} className="flex flex-col gap-1.5">
       <label className="flex items-center gap-2 text-[0.7rem] font-black uppercase tracking-widest text-white/35">
         <Icon className="h-3 w-3" />
         {label}
       </label>
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -145,40 +145,40 @@ export default function Contact() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
 
         {/* ══ HEADER ════════════════════════════════════════════════════════ */}
-        <motion.div
+        <m.div
           className="mb-14 flex flex-col items-center text-center"
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
+          initial={false} animate="visible"
           variants={stagger}
         >
-          <motion.div variants={fadeUp}>
+          <m.div variants={fadeUp}>
             <span className="badge-pill badge-violet mb-7">✦ Parlons de votre projet</span>
-          </motion.div>
-          <motion.h2 variants={fadeUp} className="mb-4 tracking-tight">
+          </m.div>
+          <m.h2 variants={fadeUp} className="mb-4 tracking-tight">
             <span className="block font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
               Votre projet mérite
             </span>
             <span className="block font-display text-3xl font-black leading-tight text-gradient-cool sm:text-4xl md:text-5xl">
               une équipe dédiée.
             </span>
-          </motion.h2>
-          <motion.p variants={fadeUp} className="max-w-md text-sm leading-relaxed text-white/45 sm:text-base">
+          </m.h2>
+          <m.p variants={fadeUp} className="max-w-md text-sm leading-relaxed text-white/45 sm:text-base">
             Décrivez votre idée. On revient vers vous sous 24h avec une proposition claire, sur-mesure et sans engagement.
-          </motion.p>
-          <motion.div variants={fadeUp} className="mt-6 w-full max-w-xs">
+          </m.p>
+          <m.div variants={fadeUp} className="mt-6 w-full max-w-xs">
             <div className="divider-rainbow" />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* ══ CONTENU PRINCIPAL ═════════════════════════════════════════════ */}
         <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-stretch lg:gap-12">
 
           {/* ── COLONNE GAUCHE — Image équipe ─────────────────────────── */}
-          <motion.div
+          <m.div
             className="w-full lg:w-[44%] lg:shrink-0"
             variants={fadeLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
+            initial={false}
+            animate="visible"
+           
           >
             <div className="flex h-full flex-col gap-6">
 
@@ -200,7 +200,7 @@ export default function Contact() {
                     style={{ background: "#0d0d18" }}>
 
                     {/* Image équipe */}
-                    <motion.div
+                    <m.div
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                     >
@@ -212,7 +212,7 @@ export default function Contact() {
                         className="w-full object-cover"
                         priority
                       />
-                    </motion.div>
+                    </m.div>
 
                     {/* Overlay dégradé bas pour fondre avec fond */}
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32"
@@ -259,23 +259,23 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* ── COLONNE DROITE — Formulaire ───────────────────────────── */}
-          <motion.div
+          <m.div
             className="w-full flex-1"
             variants={fadeRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
+            initial={false}
+            animate="visible"
+           
           >
             <AnimatePresence mode="wait">
               {sent ? (
                 /* ── SUCCESS ─────────────────────────────────────────── */
-                <motion.div
+                <m.div
                   key="success"
                   className="flex h-full flex-col items-center justify-center gap-6 py-20 text-center"
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={false}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -294,23 +294,23 @@ export default function Contact() {
                       Notre équipe est déjà sur votre dossier. Attendez-vous à une réponse personnalisée sous 24h.
                     </p>
                   </div>
-                  <motion.button
+                  <m.button
                     onClick={handleReset}
                     className="rounded-2xl border border-white/10 bg-white/[0.05] px-8 py-3 text-sm font-semibold text-white/55 transition-colors hover:text-white/90"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
                     Envoyer une autre demande
-                  </motion.button>
-                </motion.div>
+                  </m.button>
+                </m.div>
               ) : (
                 /* ── FORMULAIRE ──────────────────────────────────────── */
-                <motion.div
+                <m.div
                   key="form"
                   className="h-full"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  initial={false}
+                  animate={{ opacity: 1, y: 0 }}
+                 
                   transition={{ duration: 0.6 }}
                 >
                   {/* Card avec gradient border */}
@@ -344,13 +344,13 @@ export default function Contact() {
                       </div>
 
                       {/* Champs */}
-                      <motion.form
+                      <m.form
                         onSubmit={handleSubmit}
                         className="relative z-10 flex flex-1 flex-col gap-5"
                         variants={stagger}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
+                        initial={false}
+                        animate="visible"
+                       
                       >
                         {/* Nom + Email */}
                         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -416,10 +416,10 @@ export default function Contact() {
                         </Field>
 
                         {/* Séparateur */}
-                        <motion.div variants={fadeUp} className="divider-rainbow opacity-30" />
+                        <m.div variants={fadeUp} className="divider-rainbow opacity-30" />
 
                         {/* CTA */}
-                        <motion.button
+                        <m.button
                           variants={fadeUp}
                           type="submit"
                           disabled={loading}
@@ -446,33 +446,33 @@ export default function Contact() {
                               <span className="relative">Envoyer ma demande</span>
                             </>
                           )}
-                        </motion.button>
+                        </m.button>
 
                         {/* Message d'erreur */}
                         <AnimatePresence>
                           {error && (
-                            <motion.p
-                              initial={{ opacity: 0, y: -6 }}
+                            <m.p
+                              initial={false}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -6 }}
                               transition={{ duration: 0.25 }}
                               className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-center text-xs font-medium text-rose-400"
                             >
                               ⚠ {error}
-                            </motion.p>
+                            </m.p>
                           )}
                         </AnimatePresence>
 
-                        <motion.p variants={fadeUp} className="text-center text-[0.66rem] text-white/20">
+                        <m.p variants={fadeUp} className="text-center text-[0.66rem] text-white/20">
                           Zéro spam · Réponse personnalisée sous 24h · Premier échange gratuit et sans engagement
-                        </motion.p>
-                      </motion.form>
+                        </m.p>
+                      </m.form>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
