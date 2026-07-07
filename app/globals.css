@@ -570,6 +570,21 @@
 .animate-koi-halo-fast   { animation: koi-halo-pulse 1.1s ease-in-out infinite; }
 .animate-koi-recommended { animation: koi-halo-pulse 1.6s ease-in-out infinite; }
 
+/* ── Mode debug perf ?minimal=1 — TEMPORAIRE, à retirer après diagnostic ── */
+/* Posé par MotionProvider. Coupe : fond céleste, blur navbar, animations CSS. */
+html[data-minimal="1"] .celestial-bg {
+  display: none !important;
+}
+html[data-minimal="1"] header {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-minimal="1"] *,
+html[data-minimal="1"] *::before,
+html[data-minimal="1"] *::after {
+  animation-play-state: paused !important;
+}
+
 /* ── prefers-reduced-motion — kill-switch global (exigence brief) ────────── */
 /* Coupe toutes les animations/transitions CSS. Les animations Framer Motion
    sont gérées par <MotionConfig reducedMotion="user"> dans le layout. */
