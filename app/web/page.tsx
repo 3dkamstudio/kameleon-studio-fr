@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
-import WebStudio from "@/components/sections/WebStudio";
-import MaintenanceWeb from "@/components/sections/MaintenanceWeb";
-import FAQ, { type FAQItem } from "@/components/sections/FAQ";
+import type { FAQItem } from "@/components/sections/FAQ";
+
+// Sections sous le pli : chunks différés (SSR conservé)
+const WebStudio      = dynamic(() => import("@/components/sections/WebStudio"));
+const MaintenanceWeb = dynamic(() => import("@/components/sections/MaintenanceWeb"));
+const FAQ            = dynamic(() => import("@/components/sections/FAQ"));
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";

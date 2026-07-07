@@ -1,13 +1,16 @@
+import dynamic from "next/dynamic";
 import HeroRoyal from "@/components/sections/HeroRoyal";
-import Services from "@/components/sections/Services";
-import Portes from "@/components/sections/Portes";
-import Testimonials from "@/components/sections/Testimonials";
-import ShowreelTeaser from "@/components/sections/ShowreelTeaser";
-import Process from "@/components/sections/Process";
-import FAQ from "@/components/sections/FAQ";
-import CtaFinal from "@/components/sections/CtaFinal";
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
+
+// Sections sous le pli : chunks différés (SSR conservé), hydratation hors chemin critique
+const Services       = dynamic(() => import("@/components/sections/Services"));
+const Portes         = dynamic(() => import("@/components/sections/Portes"));
+const Testimonials   = dynamic(() => import("@/components/sections/Testimonials"));
+const ShowreelTeaser = dynamic(() => import("@/components/sections/ShowreelTeaser"));
+const Process        = dynamic(() => import("@/components/sections/Process"));
+const FAQ            = dynamic(() => import("@/components/sections/FAQ"));
+const CtaFinal       = dynamic(() => import("@/components/sections/CtaFinal"));
 
 export default function Home() {
   return (

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
-import PricingBD from "@/components/sections/PricingBD";
+
+// Section sous le pli : chunk différé (SSR conservé)
+const PricingBD = dynamic(() => import("@/components/sections/PricingBD"));
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";

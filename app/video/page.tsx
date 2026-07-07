@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import PrestationLayout from "@/components/layouts/PrestationLayout";
-import PricingVideo from "@/components/sections/PricingVideo";
-import Showreel from "@/components/sections/Showreel";
+
+// Sections sous le pli : chunks différés (SSR conservé)
+const Showreel     = dynamic(() => import("@/components/sections/Showreel"));
+const PricingVideo = dynamic(() => import("@/components/sections/PricingVideo"));
 import SectionDivider from "@/components/ui/SectionDivider";
 import RevealSection from "@/components/ui/RevealSection";
 import Link from "next/link";

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/sections/Footer";
 import MotionProvider from "@/components/ui/MotionProvider";
+
+// Footer : toujours sous le pli — chunk différé (SSR conservé)
+const Footer = dynamic(() => import("@/components/sections/Footer"));
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import CelestialBackground from "@/components/ui/CelestialBackground";
