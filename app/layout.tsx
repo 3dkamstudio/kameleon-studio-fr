@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/ui/Navbar";
 import MotionProvider from "@/components/ui/MotionProvider";
+import RevealObserver from "@/components/ui/RevealObserver";
 
 // Footer : toujours sous le pli — chunk différé (SSR conservé)
 const Footer = dynamic(() => import("@/components/sections/Footer"));
@@ -74,6 +75,7 @@ export default function RootLayout({
     >
       <body className="bg-background text-foreground antialiased font-sans">
         <MotionProvider>
+          <RevealObserver />
           <CelestialBackground />
           <Navbar />
           {children}

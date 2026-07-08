@@ -1,11 +1,8 @@
-"use client";
-
-import { m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// ── Les 5 portes du royaume — cards sobres, teinte par univers ─────────────────
+// ── Les 5 portes du royaume — composant serveur, hovers en CSS pur ─────────────
 // Discipline : la teinte vit dans la bordure, le titre et le glow hover. Rien d'autre.
 
 const PORTES = [
@@ -57,13 +54,7 @@ export default function Portes() {
       <div className="mx-auto max-w-6xl">
 
         {/* ── Header ───────────────────────────────────────────────────────── */}
-        <m.div
-          className="mb-14 text-center"
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.6 }}
-        >
+        <div className="mb-14 text-center">
           <span className="badge-pill badge-fuchsia mb-6 inline-block">🚪 Les 5 portes du royaume</span>
           <h2 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl md:text-[2.75rem]">
             Choisis ta porte.
@@ -71,31 +62,21 @@ export default function Portes() {
           <p className="mt-3 text-sm text-white/40 sm:text-base">
             Cinq façons de mettre l&apos;IA au service de ton activité.
           </p>
-        </m.div>
+        </div>
 
         {/* ── Cards ────────────────────────────────────────────────────────── */}
         <div className="flex flex-wrap justify-center gap-5">
-          {PORTES.map(({ href, emoji, title, phrase, color, img }, i) => (
-            <m.div
-              key={href}
-              className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-             
-              transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 0.61, 0.36, 1] }}
-            >
+          {PORTES.map(({ href, emoji, title, phrase, color, img }) => (
+            <div key={href} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
               <Link href={href} className="group block h-full">
-                <m.div
-                  className="flex h-full flex-col overflow-hidden rounded-3xl px-6 pb-6 pt-4"
+                <div
+                  className="card-hover flex h-full flex-col overflow-hidden rounded-3xl px-6 pb-6 pt-4"
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: `1px solid ${color}26`,
-                  }}
-                  whileHover={{
-                    borderColor: `${color}60`,
-                    boxShadow: `0 0 40px ${color}22, 0 16px 48px rgba(0,0,0,0.45)`,
-                    transition: { duration: 0.25 },
-                  }}
+                    "--tint-border": `${color}60`,
+                    "--tint-glow": `${color}22`,
+                  } as React.CSSProperties}
                 >
                   {/* Pose de Kame */}
                   <div className="mb-4 flex h-40 items-end justify-center">
@@ -124,9 +105,9 @@ export default function Portes() {
                     Découvrir
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                   </span>
-                </m.div>
+                </div>
               </Link>
-            </m.div>
+            </div>
           ))}
         </div>
 

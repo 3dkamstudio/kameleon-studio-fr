@@ -1,28 +1,8 @@
-"use client";
-
-import { m } from "framer-motion";
 import type { ReactNode } from "react";
 
-// Fade + y subtil uniquement — pas de scale (rasterisation coûteuse des
-// sections entières), pas de spring (durée longue pendant le scroll).
-const revealVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] as const },
-  },
-};
-
+// Apparition de section en CSS pur (.reveal-section dans globals.css).
+// La classe .in-view est posée par RevealObserver (1 seul IntersectionObserver
+// global) — zéro framer-motion, zéro hydratation pour ce wrapper.
 export default function RevealSection({ children }: { children: ReactNode }) {
-  return (
-    <m.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px 0px" }}
-      variants={revealVariants}
-    >
-      {children}
-    </m.div>
-  );
+  return <div className="reveal-section">{children}</div>;
 }

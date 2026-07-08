@@ -1,7 +1,4 @@
-"use client";
-
-import { m, useInView, useMotionValue, useSpring, animate } from "framer-motion";
-import { useRef, useEffect } from "react";
+import AnimatedCount from "@/components/ui/AnimatedCount";
 import Image from "next/image";
 import Kame from "@/components/ui/Kame";
 import KameSpeech from "@/components/ui/KameSpeech";
@@ -32,75 +29,22 @@ const STATS = [
   { value: 100, suffix: "%",  label: "Livré dans les délais", color: "#f97316" },
 ] as const;
 
-// ── Compteur animé ─────────────────────────────────────────────────────────────
-function AnimatedCount({ value, suffix, color }: { value: number; suffix: string; color: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  const motionVal = useMotionValue(0);
-  const spring = useSpring(motionVal, { stiffness: 60, damping: 15 });
-
-  useEffect(() => {
-    if (!inView) { return; }
-    const ctrl = animate(motionVal, value, { duration: 1.8, ease: "easeOut" });
-    return () => ctrl.stop();
-  }, [inView, motionVal, value]);
-
-  useEffect(() => {
-    const unsub = spring.on("change", v => {
-      if (ref.current) { ref.current.textContent = Math.round(v).toString(); }
-    });
-    return unsub;
-  }, [spring]);
-
-  return (
-    <span
-      className="font-display text-4xl sm:text-6xl font-black leading-none"
-      style={{
-        background: `linear-gradient(135deg, ${color} 0%, ${color}99 100%)`,
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundClip: "text",
-      }}
-    >
-      <span ref={ref}>0</span>{suffix}
-    </span>
-  );
-}
-
 // ── Carte logo premium ─────────────────────────────────────────────────────────
 type Client = (typeof CLIENTS)[number];
 
 function ClientCard({ client, index }: { client: Client; index: number }) {
   return (
-    <m.div
-      variants={{
-        hidden: { opacity: 0, scale: 0.88, y: 28 },
-        visible: {
-          opacity: 1, scale: 1, y: 0,
-          transition: { duration: 0.55, ease: [0.22, 0.61, 0.36, 1] },
-        },
-      }}
-      whileHover={{ scale: 1.05, y: -8 }}
-      className="group relative flex flex-col overflow-hidden rounded-3xl
-        w-full sm:w-[260px] lg:w-[280px]"
+    <div
+      className="card-hover card-hover-lift group relative flex w-full flex-col overflow-hidden rounded-3xl sm:w-[260px] lg:w-[280px]"
       style={{
         background: "rgba(5,5,16,0.88)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         border: `1px solid ${client.glow}38`,
         boxShadow: `0 0 36px ${client.glow}18, 0 4px 24px rgba(0,0,0,0.45)`,
-        transition: "box-shadow 0.35s ease, border-color 0.35s ease",
-      }}
-      onMouseEnter={e => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.boxShadow = `0 0 70px ${client.glow}50, 0 0 130px ${client.glow}20, 0 20px 60px rgba(0,0,0,0.65)`;
-        el.style.borderColor = `${client.glow}75`;
-      }}
-      onMouseLeave={e => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.boxShadow = `0 0 36px ${client.glow}18, 0 4px 24px rgba(0,0,0,0.45)`;
-        el.style.borderColor = `${client.glow}38`;
-      }}
+        "--tint-border": `${client.glow}75`,
+        "--tint-glow": `${client.glow}50`,
+      } as React.CSSProperties}
     >
       {/* Barre d'accent colorée en haut */}
       <div style={{
@@ -158,7 +102,7 @@ function ClientCard({ client, index }: { client: Client; index: number }) {
         </p>
         <p className="text-[0.64rem] text-white/38">{client.description}</p>
       </div>
-    </m.div>
+    </div>
   );
 }
 
@@ -189,22 +133,11 @@ export default function Testimonials() {
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
         <div className="mb-16 flex flex-col items-center text-center gap-5">
-          <m.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-           
-            transition={{ duration: 0.55 }}
-          >
+          <div>
             <span className="badge-pill badge-cyan">✦ Ils nous font confiance</span>
-          </m.div>
+          </div>
 
-          <m.h2
-            className="font-display text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl"
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-           
-            transition={{ duration: 0.6, delay: 0.08 }}
-          >
+          <h2 className="font-display text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
             Ils nous font{" "}
             <span style={{
               background: "linear-gradient(90deg, #d946ef, #8b5cf6, #06b6d4)",
@@ -213,46 +146,27 @@ export default function Testimonials() {
             }}>
               confiance.
             </span>
-          </m.h2>
+          </h2>
 
-          <m.p
-            className="max-w-xl text-sm text-white/45 sm:text-base"
-            initial={false}
-            animate={{ opacity: 1 }}
-           
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
+          <p className="max-w-xl text-sm text-white/45 sm:text-base">
             Des créateurs, indépendants et entreprises qui ont choisi King of IA pour leurs projets.
-          </m.p>
+          </p>
         </div>
 
         {/* ── Logos clients ───────────────────────────────────────────────── */}
-        <m.div
-          className="mb-24 flex flex-wrap justify-center gap-6 sm:gap-8"
-          initial={false}
-          animate="visible"
-         
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.12 } },
-          }}
-        >
+        <div className="mb-24 flex flex-wrap justify-center gap-6 sm:gap-8">
           {CLIENTS.map((client, i) => (
             <ClientCard key={client.name} client={client} index={i} />
           ))}
-        </m.div>
+        </div>
 
         {/* ── Stats + Kame ─────────────────────────────────────────────────── */}
         <div className="relative flex flex-col items-center gap-16 lg:flex-row lg:items-start lg:gap-12">
 
           <div className="flex-1 w-full">
             {/* Stats desktop */}
-            <m.div
+            <div
               className="hidden sm:flex items-stretch rounded-2xl overflow-hidden"
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-             
-              transition={{ duration: 0.6 }}
               style={{
                 background: "rgba(6,6,18,0.70)",
                 border: "1px solid rgba(255,255,255,0.07)",
@@ -271,23 +185,13 @@ export default function Testimonials() {
                   </div>
                 </div>
               ))}
-            </m.div>
+            </div>
 
             {/* Stats mobile */}
-            <m.div
-              className="grid grid-cols-2 gap-4 sm:hidden"
-              initial={false}
-              animate="visible"
-             
-              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-            >
+            <div className="grid grid-cols-2 gap-4 sm:hidden">
               {STATS.map(stat => (
-                <m.div
+                <div
                   key={stat.label}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-                  }}
                   className="flex flex-col gap-2 rounded-2xl p-5 text-center"
                   style={{
                     background: "rgba(6,6,18,0.70)",
@@ -298,24 +202,17 @@ export default function Testimonials() {
                 >
                   <AnimatedCount value={stat.value} suffix={stat.suffix} color={stat.color} />
                   <p className="text-sm font-semibold text-white/45">{stat.label}</p>
-                </m.div>
+                </div>
               ))}
-            </m.div>
+            </div>
           </div>
 
           {/* Kame */}
-          <m.div
-            className="flex flex-col items-center gap-6 lg:w-64"
-            initial={false}
-            animate={{ opacity: 1, x: 0 }}
-           
-            transition={{ duration: 0.65, delay: 0.25 }}
-          >
+          <div className="flex flex-col items-center gap-6 lg:w-64">
             <KameSpeech variants={TESTIMONIALS_SPEECH}>
               <Kame context="celebrate" src="/kame-celebrate.png" size={200} />
             </KameSpeech>
-
-          </m.div>
+          </div>
 
         </div>
       </div>

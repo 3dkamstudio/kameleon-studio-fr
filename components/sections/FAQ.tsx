@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { m, AnimatePresence } from "framer-motion";
 import { Plus, Minus, MessageCircle } from "lucide-react";
 import Sparkles from "@/components/ui/Sparkles";
 import Kame from "@/components/ui/Kame";
@@ -142,39 +141,25 @@ function FAQRow({ item, isOpen, onToggle }: {
             boxShadow: isOpen ? `0 0 16px ${item.color}60` : "none",
           }}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            {isOpen
-              ? <m.span key="minus" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}>
-                  <Minus className="h-3.5 w-3.5 text-white" />
-                </m.span>
-              : <m.span key="plus" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }}>
-                  <Plus className="h-3.5 w-3.5 text-white/60" />
-                </m.span>
-            }
-          </AnimatePresence>
+          <span className="relative block h-3.5 w-3.5">
+            <Plus className={`absolute inset-0 h-3.5 w-3.5 text-white/60 transition-all duration-200 ${isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"}`} />
+            <Minus className={`absolute inset-0 h-3.5 w-3.5 text-white transition-all duration-200 ${isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"}`} />
+          </span>
         </div>
       </button>
 
-      {/* Réponse */}
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <m.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="px-6 pb-6 sm:px-8 sm:pb-7">
-              {/* Séparateur */}
-              <div className="mb-4 h-px" style={{ background: `linear-gradient(90deg, ${item.color}40, transparent)` }} />
-              <p className="text-sm leading-relaxed text-white/55 sm:text-[0.95rem]">
-                {item.a}
-              </p>
-            </div>
-          </m.div>
-        )}
-      </AnimatePresence>
+      {/* Réponse — hauteur animée en CSS pur (grid-template-rows) */}
+      <div className={`faq-answer ${isOpen ? "open" : ""}`} aria-hidden={!isOpen}>
+        <div>
+          <div className="px-6 pb-6 sm:px-8 sm:pb-7">
+            {/* Séparateur */}
+            <div className="mb-4 h-px" style={{ background: `linear-gradient(90deg, ${item.color}40, transparent)` }} />
+            <p className="text-sm leading-relaxed text-white/55 sm:text-[0.95rem]">
+              {item.a}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -220,13 +205,7 @@ export default function FAQ({
       <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6">
 
         {/* ══ HEADER ════════════════════════════════════════════════════════ */}
-        <m.div
-          className="mb-14 flex flex-col items-center text-center"
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.6 }}
-        >
+        <div className="mb-14 flex flex-col items-center text-center">
           <span className="badge-pill badge-violet mb-7">❓ Questions fréquentes</span>
 
           <h2 className="mb-4 tracking-tight">
@@ -242,53 +221,30 @@ export default function FAQ({
             {subtitle}
           </p>
 
-          <m.div
-            className="mx-auto mt-8 w-40"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-           
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
+          <div className="mx-auto mt-8 w-40">
             <div className="divider-rainbow" />
-          </m.div>
-        </m.div>
+          </div>
+        </div>
 
         {/* ══ ACCORDION ════════════════════════════════════════════════════ */}
-        <m.div
-          className="flex flex-col gap-3"
-          initial={false}
-          animate={{ opacity: 1 }}
-         
-          transition={{ duration: 0.5 }}
-        >
+        <div className="flex flex-col gap-3">
           {items.map((item, i) => (
-            <m.div
+            <FAQRow
               key={item.num}
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-             
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-            >
-              <FAQRow
-                item={item}
-                isOpen={openIdx === i}
-                onToggle={() => toggle(i)}
-              />
-            </m.div>
+              item={item}
+              isOpen={openIdx === i}
+              onToggle={() => toggle(i)}
+            />
           ))}
-        </m.div>
+        </div>
 
         {/* ══ CTA BOTTOM ═══════════════════════════════════════════════════ */}
-        <m.div
+        <div
           className="mt-14 flex flex-col items-center gap-4 rounded-3xl p-8 text-center"
           style={{
             background: "rgba(255,255,255,0.025)",
             border: "1px solid rgba(255,255,255,0.07)",
           }}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div
             className="flex h-12 w-12 items-center justify-center rounded-2xl"
@@ -304,20 +260,18 @@ export default function FAQ({
               Posez-nous directement votre question — on répond sous 24h.
             </p>
           </div>
-          <m.a
-            href="#contact"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl px-7 py-3.5 text-sm font-black text-white"
+          <a
+            href="/contact"
+            className="btn-hover group relative inline-flex items-center gap-2 overflow-hidden rounded-xl px-7 py-3.5 text-sm font-black text-white"
             style={{
               background: "linear-gradient(135deg, #8b5cf6, #d946ef)",
               boxShadow: "0 4px 24px rgba(139,92,246,0.40)",
             }}
-            whileHover={{ scale: 1.04, boxShadow: "0 8px 36px rgba(217,70,239,0.50)" }}
-            whileTap={{ scale: 0.97 }}
           >
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             Nous écrire directement
-          </m.a>
-        </m.div>
+          </a>
+        </div>
 
       </div>
 

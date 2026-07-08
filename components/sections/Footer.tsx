@@ -1,7 +1,3 @@
-"use client";
-
-import { m } from "framer-motion";
-import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -31,16 +27,6 @@ function IconYoutube({ className }: { className?: string }) {
     </svg>
   );
 }
-
-// ── Variants ──────────────────────────────────────────────────────────────────
-const fadeUp: Variants = {
-  hidden:  { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] } },
-};
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
-};
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
@@ -100,16 +86,10 @@ export default function Footer() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
 
         {/* ── Grille principale ──────────────────────────────────────────── */}
-        <m.div
-          className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]"
-          variants={stagger}
-          initial={false}
-          animate="visible"
-         
-        >
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
 
           {/* ── Colonne 1 : Logo + tagline + réseaux ─────────────────────── */}
-          <m.div variants={fadeUp} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
             {/* Logo */}
             <Link href="/" className="group inline-flex items-center gap-3 self-start">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl"
@@ -141,30 +121,28 @@ export default function Footer() {
             {/* Réseaux sociaux */}
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map(({ label, href, icon: Icon, color, hoverGlow }) => (
-                <m.a
+                <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-white/40 transition-colors"
-                  whileHover={{
-                    scale: 1.12,
-                    boxShadow: `0 0 18px ${hoverGlow}`,
-                    borderColor: `${color}55`,
-                    color,
-                  }}
-                  whileTap={{ scale: 0.93 }}
-                  style={{ color: "rgba(255,255,255,0.4)" }}
+                  className="social-hover flex h-9 w-9 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04]"
+                  style={{
+                    color: "rgba(255,255,255,0.4)",
+                    "--tint-border": `${color}55`,
+                    "--tint-glow": hoverGlow,
+                    "--tint-color": color,
+                  } as React.CSSProperties}
                 >
                   <Icon className="h-4 w-4" />
-                </m.a>
+                </a>
               ))}
             </div>
-          </m.div>
+          </div>
 
           {/* ── Colonne 2 : Navigation ────────────────────────────────────── */}
-          <m.div variants={fadeUp} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/55">
               Navigation
             </p>
@@ -183,10 +161,10 @@ export default function Footer() {
                 </Link>
               ))}
             </nav>
-          </m.div>
+          </div>
 
           {/* ── Colonne 3 : Légal + contact rapide ───────────────────────── */}
-          <m.div variants={fadeUp} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/55">
               Légal
             </p>
@@ -215,24 +193,18 @@ export default function Footer() {
                 contact@kingofia.fr
               </a>
             </div>
-          </m.div>
-        </m.div>
+          </div>
+        </div>
 
         {/* ── Séparateur fin + copyright ──────────────────────────────────── */}
-        <m.div
-          className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-7 sm:flex-row"
-          initial={false}
-          animate={{ opacity: 1 }}
-         
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-7 sm:flex-row">
           <p className="text-[0.72rem] text-white/60">
             © 2026 King of IA — Tous droits réservés
           </p>
           <p className="text-[0.65rem] text-white/50">
             Fait avec ✦ et beaucoup de caféine par Kame
           </p>
-        </m.div>
+        </div>
       </div>
     </footer>
   );

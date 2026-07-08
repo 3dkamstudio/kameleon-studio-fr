@@ -1,6 +1,3 @@
-"use client";
-
-import { m } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight, Crown, Star, Workflow, Mic, Clapperboard,
@@ -9,7 +6,7 @@ import {
 
 const ROSE = "#f43f5e";
 
-// ── Catalogue — 7 séances + sur-mesure, 149€ la séance ─────────────────────────
+// ── Catalogue — 7 séances + sur-mesure, 149€ la séance — composant serveur ─────
 const SEANCE_VEDETTE = {
   icon: Workflow,
   title: "Ton système de contenu IA",
@@ -68,13 +65,7 @@ export default function CoachingCatalogue() {
       <div className="mx-auto max-w-6xl">
 
         {/* ══ BANDEAU PRIX — le prix vit au point de décision ═══════════════ */}
-        <m.div
-          className="mb-12 flex flex-col items-center gap-2 text-center"
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.6 }}
-        >
+        <div className="mb-12 flex flex-col items-center gap-2 text-center">
           <h2 className="font-display text-3xl font-black leading-tight text-white sm:text-4xl">
             Le catalogue des séances.
           </h2>
@@ -84,16 +75,10 @@ export default function CoachingCatalogue() {
           <p className="text-sm text-white/40">
             Visio 1h · enregistrée · replay + fiche récap offerts
           </p>
-        </m.div>
+        </div>
 
         {/* ══ CARD VEDETTE — pleine largeur, seul glow permanent de la page ═ */}
-        <m.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.6 }}
-          className="relative mb-6"
-        >
+        <div className="relative mb-6">
           <div className="absolute -top-3.5 left-6 z-10">
             <span
               className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-widest text-white"
@@ -127,63 +112,49 @@ export default function CoachingCatalogue() {
             </div>
             <Link
               href="/contact"
-              className="group inline-flex shrink-0 items-center gap-2 self-start rounded-xl px-6 py-3.5 text-sm font-black text-white transition-transform hover:scale-[1.04] sm:self-center"
+              className="btn-hover group inline-flex shrink-0 items-center gap-2 self-start rounded-xl px-6 py-3.5 text-sm font-black text-white sm:self-center"
               style={{ background: `linear-gradient(135deg, ${ROSE}, #d946ef)`, boxShadow: `0 4px 24px ${ROSE}55` }}
             >
               Réserver mon diagnostic gratuit
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </div>
-        </m.div>
+        </div>
 
         {/* ══ GRILLE — 7 autres séances, discipline ═════════════════════════ */}
         <div className="mb-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SEANCES.map(({ icon: Icon, title, livrable, ...rest }, i) => {
+          {SEANCES.map(({ icon: Icon, title, livrable, ...rest }) => {
             const surMesure = "surMesure" in rest;
             return (
-              <m.div
+              <div
                 key={title}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-               
-                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="card-hover flex h-full flex-col rounded-3xl p-6"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: surMesure ? `1.5px solid ${ROSE}60` : "1px solid rgba(255,255,255,0.08)",
+                  "--tint-border": `${ROSE}70`,
+                  "--tint-glow": `${ROSE}1a`,
+                } as React.CSSProperties}
               >
-                <m.div
-                  className="flex h-full flex-col rounded-3xl p-6"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: surMesure ? `1.5px solid ${ROSE}60` : "1px solid rgba(255,255,255,0.08)",
-                  }}
-                  whileHover={{
-                    borderColor: `${ROSE}70`,
-                    boxShadow: `0 0 32px ${ROSE}1a`,
-                    transition: { duration: 0.25 },
-                  }}
-                >
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: `${ROSE}14` }}>
-                    <Icon className="h-5 w-5" style={{ color: ROSE }} />
-                  </div>
-                  <h3 className="mb-2 font-display text-base font-black leading-snug text-white">
-                    {surMesure && <span className="mr-1.5">👑</span>}
-                    {title}
-                  </h3>
-                  <p className="flex-1 text-sm leading-relaxed text-white/45">
-                    Tu repars avec : <span className="text-white/65">{livrable}</span>
-                  </p>
-                </m.div>
-              </m.div>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: `${ROSE}14` }}>
+                  <Icon className="h-5 w-5" style={{ color: ROSE }} />
+                </div>
+                <h3 className="mb-2 font-display text-base font-black leading-snug text-white">
+                  {surMesure && <span className="mr-1.5">👑</span>}
+                  {title}
+                </h3>
+                <p className="flex-1 text-sm leading-relaxed text-white/45">
+                  Tu repars avec : <span className="text-white/65">{livrable}</span>
+                </p>
+              </div>
             );
           })}
         </div>
 
         {/* ══ BARRE PACKS — rappel prix au point de décision ════════════════ */}
-        <m.div
+        <div
           className="mb-14 overflow-hidden rounded-3xl"
           style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.6 }}
         >
           <div className="h-[2px]" style={{ background: `linear-gradient(90deg, ${ROSE}, #d946ef, ${ROSE})` }} />
           <div className="flex flex-col items-center gap-6 px-7 py-8 sm:flex-row sm:justify-center sm:gap-0">
@@ -202,16 +173,10 @@ export default function CoachingCatalogue() {
           <p className="pb-6 text-center text-xs text-white/35">
             Paiement en 2-3 fois disponible
           </p>
-        </m.div>
+        </div>
 
         {/* ══ PASSERELLE FORMATION PRO ══════════════════════════════════════ */}
-        <m.div
-          initial={false}
-          animate={{ opacity: 1 }}
-         
-          transition={{ duration: 0.5 }}
-          className="mb-20"
-        >
+        <div className="mb-20">
           <Link
             href="/formation"
             className="group mx-auto flex max-w-2xl items-center justify-center gap-3 rounded-2xl px-6 py-4 text-center text-sm text-white/55 transition-colors hover:text-white/80"
@@ -221,16 +186,10 @@ export default function CoachingCatalogue() {
             Le montant d&apos;une séance de coaching est déductible de l&apos;inscription au plan Pro de la formation.
             <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style={{ color: "#8b5cf6" }} />
           </Link>
-        </m.div>
+        </div>
 
         {/* ══ CTA FINAL — vend le diagnostic + rappel prix ══════════════════ */}
-        <m.div
-          className="text-center"
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-         
-          transition={{ duration: 0.6 }}
-        >
+        <div className="text-center">
           <h2 className="mb-6 font-display text-2xl font-black text-white sm:text-3xl">
             On commence par un{" "}
             <span style={{ background: `linear-gradient(90deg,${ROSE},#d946ef)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
@@ -239,7 +198,7 @@ export default function CoachingCatalogue() {
           </h2>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-black text-white transition-transform hover:scale-[1.04] active:scale-[0.97]"
+            className="btn-hover group inline-flex items-center gap-2.5 rounded-xl px-8 py-4 text-sm font-black text-white"
             style={{ background: `linear-gradient(135deg, ${ROSE}, #d946ef)`, boxShadow: `0 4px 30px ${ROSE}40` }}
           >
             Réserver mon diagnostic gratuit — 15 min
@@ -251,7 +210,7 @@ export default function CoachingCatalogue() {
           <p className="mt-2 text-xs text-white/35">
             Séance 149€ · 3 séances 399€ · 5 séances 590€ · paiement en 2-3 fois
           </p>
-        </m.div>
+        </div>
 
         {/* ── Atelier équipe — une phrase, pas une section ─────────────────── */}
         <p className="mt-20 text-center text-xs text-white/25">
