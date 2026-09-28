@@ -38,8 +38,8 @@ export default function Header() {
         transition: "background 400ms ease, border-color 400ms ease",
       }}
     >
-      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)", height: 72, display: "flex", alignItems: "center", gap: 24 }}>
-        <Link href="/" aria-label="Kaméléon Studio, retour à l’accueil" style={{ display: "flex", alignItems: "center", gap: 11, textDecoration: "none", color: "#151827", flex: "none" }}>
+      <div className="hdr-row" style={{ maxWidth: 1240, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)", height: 72, display: "flex", alignItems: "center", gap: 24 }}>
+        <Link href="/" aria-label="Kaméléon Studio, retour à l’accueil" className="hdr-logo" style={{ display: "flex", alignItems: "center", gap: 11, textDecoration: "none", color: "#151827", flex: "none" }}>
           <Image src="/ks-logo.png" alt="" width={44} height={44} priority className="hv-logo" style={{ width: 44, height: 44, objectFit: "contain", margin: "-6px -6px -6px -8px" }} />
           <Brand dark={ov} />
         </Link>

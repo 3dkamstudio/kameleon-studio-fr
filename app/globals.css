@@ -366,6 +366,33 @@ textarea.input {
   }
 }
 
+/* Très petits écrans (≤ 360 px) : l'en-tête se resserre pour que « Menu » reste visible */
+@media (max-width: 360px) {
+  .hdr-row {
+    gap: 10px !important;
+    padding: 0 16px !important;
+  }
+  .hdr-logo .ff-d {
+    font-size: 15px !important;
+  }
+  button.nav-narrow {
+    padding: 0 14px !important;
+  }
+  /* Programme des formations : vignette réduite pour laisser la place aux titres longs */
+  .mod-row {
+    grid-template-columns: 76px minmax(0, 1fr) !important;
+    gap: 14px !important;
+  }
+  .mod-thumb {
+    width: 76px !important;
+    height: 57px !important;
+  }
+  .mod-row h3 {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+}
+
 /* ─── Parcours de l'accueil : pistes qui se déploient au survol ──────────── */
 .track {
   flex: 1 1 0;

@@ -18,8 +18,8 @@ export default function Programme() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,500px),1fr))", gap: "0 48px" }}>
           {MODULES.map((m, i) => (
-            <article key={m.n} style={{ display: "grid", gridTemplateColumns: "112px minmax(0,1fr)", gap: 20, padding: "24px 0", borderTop: "1px solid #D6D9E4", alignItems: "start" }}>
-              <div style={{ position: "relative", width: 112, height: 84, borderRadius: 10, overflow: "hidden", background: "#151827" }}>
+            <article key={m.n} className="mod-row" style={{ display: "grid", gridTemplateColumns: "112px minmax(0,1fr)", gap: 20, padding: "24px 0", borderTop: "1px solid #D6D9E4", alignItems: "start" }}>
+              <div className="mod-thumb" style={{ position: "relative", width: 112, height: 84, borderRadius: 10, overflow: "hidden", background: "#151827" }}>
                 {/* Vignette 4:3 d'un visuel 16:9 : environ 150 px de large une fois recadrée. */}
                 <Image src={m.img} alt="" fill sizes="150px" style={{ objectFit: "cover" }} />
               </div>
