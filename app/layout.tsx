@@ -52,6 +52,8 @@ export const metadata: Metadata = {
     description,
     images: [OG_IMAGE.url],
   },
+  // Propriété Google Search Console (préfixe https://www.kingofia.fr/) : ne pas retirer, sinon la validation est perdue.
+  verification: { google: "L8DJNWzZVpCJfRQPNOaOuN6lwemfkVX-l7P88vsPTfg" },
 };
 
 export const viewport: Viewport = {
