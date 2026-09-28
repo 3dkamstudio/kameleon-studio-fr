@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xn--kamlonstudio-debb.fr/sitemap.xml
+Sitemap: https://www.kingofia.fr/sitemap.xml

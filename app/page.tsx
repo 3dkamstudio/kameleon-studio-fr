@@ -1,68 +1,38 @@
-import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import Prestations from "@/components/sections/Prestations";
-import Showreel from "@/components/sections/Showreel";
-import Process from "@/components/sections/Process";
-import Testimonials from "@/components/sections/Testimonials";
-import PricingVideo from "@/components/sections/PricingVideo";
-import PricingBD from "@/components/sections/PricingBD";
-import WebStudio from "@/components/sections/WebStudio";
-import FAQ from "@/components/sections/FAQ";
-import KingOfIA from "@/components/sections/KingOfIA";
-import CtaFinal from "@/components/sections/CtaFinal";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
-import CelestialBackground from "@/components/ui/CelestialBackground";
-import SectionWrapper from "@/components/ui/SectionWrapper";
-import SectionDivider from "@/components/ui/SectionDivider";
-import RevealSection from "@/components/ui/RevealSection";
+import Cockpit, { Marquee } from "@/components/home/Cockpit";
+import Faq from "@/components/home/Faq";
+import Hero from "@/components/home/Hero";
+import LegacyAnchors from "@/components/home/LegacyAnchors";
+import Method from "@/components/home/Method";
+import Prestations from "@/components/home/Prestations";
+import References from "@/components/home/References";
+import Showreel from "@/components/home/Showreel";
+import StudioContact from "@/components/home/StudioContact";
+import Teasers from "@/components/home/Teasers";
+import Tracks from "@/components/home/Tracks";
+import { Sep } from "@/components/ks/ui";
 
 export default function Home() {
   return (
-    <main className="relative overflow-x-hidden">
-      <CelestialBackground />
-
-      <div className="relative z-[1]">
-        {/* Hero : animation propre interne, pas de RevealSection */}
-        <SectionWrapper><Hero /></SectionWrapper>
-        <SectionDivider variant="scan" />
-
-        <RevealSection><SectionWrapper><Services /></SectionWrapper></RevealSection>
-        <div className="divider-rainbow-glow" />
-
-        <RevealSection><SectionWrapper><Prestations /></SectionWrapper></RevealSection>
-        <SectionDivider variant="wave" />
-
-        <RevealSection><SectionWrapper><Showreel /></SectionWrapper></RevealSection>
-        <SectionDivider variant="scan" />
-
-        <RevealSection><SectionWrapper><Process /></SectionWrapper></RevealSection>
-        <SectionDivider variant="scan" />
-
-        <RevealSection><SectionWrapper><Testimonials /></SectionWrapper></RevealSection>
-        <SectionDivider variant="wave" />
-
-        <RevealSection><SectionWrapper><PricingVideo /></SectionWrapper></RevealSection>
-        <SectionDivider variant="chevron" />
-
-        <RevealSection><SectionWrapper><PricingBD /></SectionWrapper></RevealSection>
-        <SectionDivider variant="circuit" />
-
-        <RevealSection><SectionWrapper><WebStudio /></SectionWrapper></RevealSection>
-        <SectionDivider variant="scan" />
-
-        <RevealSection><SectionWrapper><FAQ /></SectionWrapper></RevealSection>
-        <SectionDivider variant="wave" />
-
-        <RevealSection><KingOfIA /></RevealSection>
-        <SectionDivider variant="wave" />
-
-        <RevealSection><SectionWrapper><Contact /></SectionWrapper></RevealSection>
-      </div>
-
-      <CtaFinal />
-      <SectionDivider variant="signal" />
-      <Footer />
-    </main>
+    <>
+      <LegacyAnchors />
+      <Hero />
+      <Marquee />
+      <Cockpit />
+      <Sep n="01" label="RÉALISATIONS" bg="w" />
+      <Showreel />
+      <Sep n="02" label="PARCOURS" bg="p" />
+      <Tracks />
+      <Sep n="03" label="RÉFÉRENCES" bg="w" />
+      <References />
+      <Sep n="04" label="MÉTHODE" bg="p" />
+      <Method />
+      <Sep n="05" label="PRESTATIONS" bg="w" />
+      <Prestations />
+      <Teasers />
+      <Sep n="06" label="FAQ" bg="p" />
+      <Faq />
+      <Sep n="07" label="LE STUDIO" bg="w" />
+      <StudioContact />
+    </>
   );
 }

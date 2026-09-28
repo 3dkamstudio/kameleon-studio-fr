@@ -1,40 +1,33 @@
-# Projet : Kaméléon Studio - Landing Page
+# Projet : Kaméléon Studio — www.kingofia.fr
 
 ## Stack
-- Next.js 14 (App Router)
-- TypeScript strict
-- Tailwind CSS + shadcn/ui
-- Framer Motion (animations) - à installer
-- lucide-react (icônes)
+- Next.js 14 (App Router), TypeScript strict, React 18
+- Styles : `app/globals.css` (classes partagées, keyframes `ks*`) + styles en ligne repris de la maquette Claude Design
+- Tailwind disponible (preflight désactivé : chaque composant pose ses marges)
+- Déploiement Vercel : production = branche `main`, prévisualisation = toute autre branche poussée
+
+## Structure
+- `app/` : `/` accueil, `/prestations`, `/coaching`, `/formations`, `/mentions-legales`
+- `components/ks/` : socle visuel (en-tête, pied de page + bannière finale, fond animé, guide Kame, primitives `ui.tsx`)
+- `components/home|prestations|coaching|formations/` : sections de chaque page
+- `lib/site.ts` : réglages (domaine, contact, Formspree, statut des formations, disponibilités du coaching)
+- `lib/content.ts` : contenus (vidéos, tarifs, FAQ, modules…) — source unique, ne pas dupliquer dans le JSX
+- `docs/REFONTE.md` : arborescence, redirections, paramètres encore à fournir
+
+## Design system — « Le studio du futur, en pleine lumière »
+- Surfaces claires #FFFFFF / #F7F8FC (≈ 80 %), texte #151827, secondaire #525B70
+- Actions : dégradé #7C3AED → #C026D3 (classe `btn-grad`), violet #6546D7
+- #20BFD1 et #FF776B : décor et statuts uniquement, jamais de texte sur fond blanc
+- Titres Unbounded (`FD`, `--font-display`), texte Instrument Sans (`--font-body`), 16 px minimum sur mobile
+- Kame : guide flottant (`KameGuide`) + notes « Kame conseille » (`KameNote`) choisies via l’attribut `data-kame` des sections
+- Animations en CSS, figées par `data-motion="off"` (bouton pause du hero) et par `prefers-reduced-motion`
+
+## Formulaires
+- Envoi réel via Formspree (`lib/forms.ts`), succès affiché uniquement après réponse du service
+- Coaching : demande de créneau, confirmée manuellement par e-mail (aucune réservation automatique)
+- Formations : liste d’attente tant que `FORMATION_STATUS = "bientot"` ; prix 497 € / 997 € non publiés
 
 ## Conventions
-- Composants en PascalCase dans /components/sections
-- Pages en kebab-case dans /app
-- Mobile-first obligatoire
-
-## Design system
-- Studio de production vidéo/web premium par IA
-- Mascotte : Kame, un caméléon 3D style Pixar semi-réaliste (queue arc-en-ciel fuchsia→violet)
-- Palette 7 couleurs : fond `#0a0a0f`, accents fuchsia `#d946ef`, rose `#f43f5e`, orange `#f97316`, jaune `#eab308`, vert `#22c55e`, cyan `#06b6d4`, violet `#8b5cf6`
-- Style : dark premium, néon, holographique, ambiance studio 3D
-- Police titres : **Syne** (600/700/800) — `font-display`
-- Police texte : **Inter** — `font-sans`
-- Animations : Framer Motion uniquement, max 3 types (apparition fadeUp, hover scale, transition de page)
-- Motifs visuels : ring lumineux arc-en-ciel, cards holographiques `.card-holo`, halos radiaux, séparateurs `.divider-rainbow`
-
-## Concept créatif global
-Le site entier doit donner l'impression d'entrer dans un studio de production 3D vivant et immersif — ambiance "backstage de studio Pixar/jeu vidéo AAA", colorée, dynamique, premium.
-
-Kame (le caméléon, notre mascotte) est un GUIDE récurrent présent sur toute la page :
-- Il apparaît à différents moments selon la section (Hero, Services, Tarifs...)
-- Il a des poses/réactions différentes selon le contexte (ex : pointe du doigt vers une offre, lève le pouce, regarde une affiche)
-- Toujours en image fixe pour l'instant (image fournie), avec animations CSS/Framer Motion (flottement, apparition, légère rotation au scroll)
-- Crée un composant réutilisable /components/ui/Kame.tsx avec une prop "pose" ou "context" pour varier son comportement selon la section
-
-Chaque section doit avoir : fond avec dégradés arc-en-ciel/glow animés, sensation de profondeur (cards en perspective, ombres, lumières de studio).
-
-## Contraintes
-- Lighthouse score > 90
-- Pas de librairie UI lourde (MUI, Antd, Bootstrap)
-- Toujours valider chaque section avant de passer à la suivante
-- Mascotte/logo disponible, je le fournirai en image
+- Composants en PascalCase, pages en kebab-case dans `/app`, mobile-first
+- Textes en français avec apostrophes typographiques (’)
+- Pas de librairie UI lourde ; objectif Lighthouse > 90
