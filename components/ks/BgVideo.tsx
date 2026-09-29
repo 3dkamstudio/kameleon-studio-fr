@@ -8,6 +8,13 @@ type Props = {
   /** Cadrage (object-position) sur ordinateur, puis sur mobile. */
   position?: string;
   mobilePosition?: string;
+  /**
+   * Version téléphone, recadrée sur la zone visible avec `mobilePosition` : même cadrage, fichier plus léger.
+   * Utilisée sur mobile (≤ 760 px) tant que le cadre ne dépasse pas ce rapport largeur / hauteur
+   * (largeur / hauteur de la version recadrée) ; au-delà, la vidéo complète reprend le relais.
+   */
+  mobileSrc?: string;
+  mobileMaxAspect?: number;
   /** Bannière d'accueil : l'image reste prioritaire, la vidéo se charge après la page. */
   deferUntilLoad?: boolean;
   filter?: string;
@@ -25,7 +32,7 @@ const FADE = 1.2;
  * - lecture seulement à l'écran, pause avec le bouton « Mettre en pause » du site ;
  * - rien n'est chargé en mode économie de données ; image fixe si les animations sont réduites.
  */
-export default function BgVideo({ src, position = "50% 50%", mobilePosition, deferUntilLoad, filter }: Props) {
+export default function BgVideo({ src, position = "50% 50%", mobilePosition, mobileSrc, mobileMaxAspect = 0, deferUntilLoad, filter }: Props) {
   const { on, reduced } = useMotion();
   const wrap = useRef<HTMLDivElement>(null);
   const aRef = useRef<HTMLVideoElement>(null);
@@ -35,6 +42,40 @@ export default function BgVideo({ src, position = "50% 50%", mobilePosition, def
   const [visible, setVisible] = useState(false);
   const [pageShown, setPageShown] = useState(true);
   const [dual, setDual] = useState(false);
+  const [narrow, setNarrow] = useState(false);
+  const file = narrow && mobileSrc ? mobileSrc : src;
+
+  // Version téléphone : seulement si le cadre reste assez étroit pour garder exactement le même cadrage.
+  useEffect(() => {
+    const el = wrap.current;
+    if (!mobileSrc || !el) {
+      return;
+    }
+    const mq = window.matchMedia("(max-width: 760px)");
+    const check = () => {
+      const r = el.getBoundingClientRect();
+      setNarrow(mq.matches && r.height > 0 && r.width / r.height <= mobileMaxAspect);
+    };
+    check();
+    window.addEventListener("resize", check);
+    mq.addEventListener("change", check);
+    return () => {
+      window.removeEventListener("resize", check);
+      mq.removeEventListener("change", check);
+    };
+  }, [mobileSrc, mobileMaxAspect]);
+
+  // Changement de fichier (rotation de l'écran) : la nouvelle vidéo réapparaît en fondu.
+  useEffect(() => {
+    [aRef.current, bRef.current].forEach((v) => {
+      if (v) {
+        v.dataset.on = "false";
+        v.dataset.top = "false";
+      }
+    });
+    engine.current.cur = 0;
+    engine.current.fading = false;
+  }, [file]);
 
   // Onglet en arrière-plan : lecture suspendue.
   useEffect(() => {
@@ -187,10 +228,10 @@ export default function BgVideo({ src, position = "50% 50%", mobilePosition, def
       }
       vids.forEach((v) => v.pause());
     };
-  }, [armed, visible, pageShown, on, reduced, dual]);
+  }, [armed, visible, pageShown, on, reduced, dual, file]);
 
   const vars = { "--vpos": position, "--vpos-m": mobilePosition ?? position, filter } as React.CSSProperties;
-  const source = armed ? (reduced ? `${src}#t=0.1` : src) : undefined;
+  const source = armed ? (reduced ? `${file}#t=0.1` : file) : undefined;
 
   return (
     <div ref={wrap} aria-hidden="true" className="bgv" style={vars}>

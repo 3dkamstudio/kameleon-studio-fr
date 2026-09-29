@@ -31,6 +31,7 @@ export default function CoachingPage() {
         id="coaching"
         kame="coaching"
         src="/videos/coaching.mp4"
+        mobileSrc="/videos/coaching-mobile.mp4"
         position="50% 45%"
         mobilePosition="30% 50%"
         side="right"

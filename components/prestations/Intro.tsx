@@ -8,7 +8,7 @@ import { Eyebrow, FD, G } from "@/components/ks/ui";
 export default function Intro() {
   return (
     <>
-      <VideoHero id="prestations-page" kame="prestations" src="/videos/prestations.mp4" position="50% 50%" mobilePosition="42% 50%" side="right">
+      <VideoHero id="prestations-page" kame="prestations" src="/videos/prestations.mp4" mobileSrc="/videos/prestations-mobile.mp4" position="50% 50%" mobilePosition="42% 50%" side="right">
         <nav aria-label="Fil d’Ariane" style={{ display: "flex", gap: 8, fontSize: 14, color: "#525B70" }}>
           <Link href="/" style={{ color: "#525B70" }}>
             Accueil

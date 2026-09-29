@@ -10,6 +10,8 @@ type Props = {
   /** Cadrage de la vidéo (object-position) sur ordinateur et sur mobile. */
   position?: string;
   mobilePosition?: string;
+  /** Version téléphone recadrée (voir BgVideo) : carrée, elle couvre les bandes vidéo jusqu'au format 1:1. */
+  mobileSrc?: string;
   /** Côté du bloc de texte sur ordinateur : on le place là où la vidéo a le moins de sujets. */
   side?: "left" | "right";
   /** Élément posé sur la vidéo, côté opposé au texte (ordinateur uniquement). */
@@ -21,7 +23,7 @@ type Props = {
  * En-tête de page en vidéo plein cadre : le texte repose en bas sur un fondu vers la page.
  * Sur mobile, la vidéo devient une bande cadrée sur le sujet, le texte chevauche son fondu.
  */
-export default function VideoHero({ id, kame, src, position, mobilePosition, side = "left", chip, children }: Props) {
+export default function VideoHero({ id, kame, src, position, mobilePosition, mobileSrc, side = "left", chip, children }: Props) {
   const right = side === "right";
   return (
     <section id={id} data-kame={kame} className="vhero bg-w">
@@ -35,7 +37,7 @@ export default function VideoHero({ id, kame, src, position, mobilePosition, sid
           ]}
         />
         {/* La vidéo se charge après la page : titres et boutons s'affichent d'abord. */}
-        <BgVideo src={src} position={position} mobilePosition={mobilePosition} deferUntilLoad />
+        <BgVideo src={src} position={position} mobilePosition={mobilePosition} mobileSrc={mobileSrc} mobileMaxAspect={1} deferUntilLoad />
       </div>
       <div aria-hidden="true" className="vhero__shade" />
       <VideoPause />

@@ -8,7 +8,7 @@ const open = FORMATION_STATUS === "ouverte";
 /** En-tête vidéo de /formations : King of IA, statut des inscriptions et accès à la liste d’attente. */
 export default function Hero() {
   return (
-    <VideoHero id="formations" kame="formations" src="/videos/formations.mp4" position="50% 50%" mobilePosition="16% 50%" side="right">
+    <VideoHero id="formations" kame="formations" src="/videos/formations.mp4" mobileSrc="/videos/formations-mobile.mp4" position="50% 50%" mobilePosition="16% 50%" side="right">
       <nav aria-label="Fil d’Ariane" style={{ display: "flex", gap: 8, fontSize: 14, color: "#525B70" }}>
         <Link href="/" style={{ color: "#525B70" }}>
           Accueil

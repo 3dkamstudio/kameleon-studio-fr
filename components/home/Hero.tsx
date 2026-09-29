@@ -33,7 +33,15 @@ export default function Hero() {
             {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <img {...rest} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "64% 50%", display: "block", filter: "saturate(1.35) brightness(1.18) contrast(1.05)" }} />
           </picture>
-          <BgVideo src="/videos/hero.mp4" position="62% 50%" mobilePosition="40% 50%" filter="saturate(1.12) brightness(1.06)" deferUntilLoad />
+          <BgVideo
+            src="/videos/hero.mp4"
+            position="62% 50%"
+            mobilePosition="40% 50%"
+            mobileSrc="/videos/hero-mobile.mp4"
+            mobileMaxAspect={0.75}
+            filter="saturate(1.12) brightness(1.06)"
+            deferUntilLoad
+          />
         </div>
         <div
           aria-hidden="true"
