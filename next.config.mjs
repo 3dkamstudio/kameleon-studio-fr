@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    // AVIF d'abord (≈ 40 % plus léger que WebP à qualité égale), WebP pour les navigateurs plus anciens.
+    formats: ["image/avif", "image/webp"],
+    // Images optimisées gardées 7 jours par le navigateur (0 par défaut) ; une image remplacée
+    // sous le même nom peut donc rester en cache une semaine chez un visiteur : la renommer si besoin.
+    minimumCacheTTL: 604800,
+  },
   // Adresses « parlantes » vers les sections de la refonte (temporaires : elles pourront devenir des pages).
   async redirects() {
     return [
