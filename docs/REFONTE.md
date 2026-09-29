@@ -8,9 +8,10 @@ Refonte issue de la maquette Claude Design « Kameleon Studio v6 » (septembre 2
 |---|---|
 | `/` | Hero + extraits à l’affiche, savoir-faire, 14 réalisations, 3 parcours, références, méthode, tarifs + estimateur, coaching/formations, FAQ, contact (`#studio`) |
 | `/prestations` | Univers, tarifs vidéo, tarifs BD, sites web, maintenance |
-| `/coaching` | Présentation et demande de séance (`#reserver`) |
+| `/coaching` | Présentation, 3 formules et réservation payante Cal.com (`#reserver`) |
 | `/formations` | King of IA : programme, formules, liste d’attente (`#liste-attente`) |
-| `/mentions-legales` | Conservée, mise à jour (formulaires, Formspree, YouTube) |
+| `/cgv` | Conditions générales de vente (coaching, prestations sur devis, rétractation, médiation) |
+| `/mentions-legales` | Conservée, mise à jour (formulaires, Formspree, Cal.com, Stripe, YouTube) |
 
 Redirections temporaires (`next.config.mjs`) : `/realisations` → `/#realisations`, `/studio` et `/contact` → `/#studio`, `/tarifs` → `/prestations`, `/formation` → `/formations`.
 
@@ -19,7 +20,8 @@ Anciennes ancres de la page unique (`components/home/LegacyAnchors.tsx`) : `#ser
 ## Connecté ou non
 
 **Fonctionne réellement**
-- Formulaire de contact, demande de coaching (+ changement de créneau et annulation), liste d’attente : envoi Formspree (`xykalpon`), succès affiché seulement après réponse du service.
+- Formulaire de contact et liste d’attente : envoi Formspree (`xykalpon`), succès affiché seulement après réponse du service.
+- Coaching : réservation et paiement Cal.com + Stripe (voir plus bas) ; l’ancienne demande de créneau Formspree reste disponible avec `COACHING_MODE = "demande"`.
 - Lecteurs YouTube chargés au clic (youtube-nocookie), estimateur vidéo (grille réelle 250 → 200 €, +70 € / 30 s), fuseaux Paris / Martinique avec changements d’heure.
 
 **Non repris de la maquette** : l’« Espace studio » (tableau de gestion de démonstration, données fictives) et les « Notes de refonte » (document interne). Un vrai tableau de gestion demande un outil de réservation et une authentification côté serveur.
@@ -28,12 +30,15 @@ Anciennes ancres de la page unique (`components/home/LegacyAnchors.tsx`) : `#ser
 
 - **Bannières vidéo** : `public/videos/hero.mp4` (accueil), `prestations.mp4`, `coaching.mp4`, `formations.mp4`. Pour en changer, remplacer le fichier en gardant le nom (MP4 H.264, sans son, ≤ 5 Mo idéalement). Chargement après la page, fondu d’apparition, fondu enchaîné à chaque boucle sur ordinateur, pause hors écran, bouton Pause, image fixe si « réduire les animations », rien en mode économie de données.
 - **Colonne flottante** (`components/ks/Dock.tsx`) : retour en haut (anneau de progression), WhatsApp (+33 7 62 23 64 91), guide Kame.
-- **Coaching, phase 1** : demande de créneau par formulaire, confirmation manuelle par e-mail.
-- **Coaching, phase 2** : paiement à la réservation. Option retenue : Cal.com (gratuit, Stripe inclus, synchronisé avec Google Agenda et Google Meet), intégré à la section `#reserver`. Variante sans paiement déjà prête : coller l’adresse d’une page de réservation Google Agenda dans `COACHING.googleBookingUrl`.
+- **Coaching, phase 1** (28/09/2026) : demande de créneau par formulaire, confirmation manuelle par e-mail.
+- **Coaching, phase 2** (29/09/2026) : paiement à la réservation sur Cal.com (compte `3dkamstudio`), relié à Stripe, Google Agenda (infos.kamstudio@gmail.com) et Google Meet ; calendrier intégré dans `#reserver` par le script officiel de Cal.com, chargé à l’approche de la section (`components/coaching/CalBooking.tsx`).
+  - Formules (`COACHING_OFFERS`, `lib/content.ts`) : Analyse & cadrage 30 min 50 € (`/cadrage`), Coaching complet 1 h 100 € (`/coaching`), Accompagnement approfondi 2 h 150 € (`/accompagnement`). Un changement de prix se fait dans Cal.com **et** dans ce fichier.
+  - Réglages Cal.com : lun–ven 9 h–18 h (Paris), préavis 24 h, réservation jusqu’à 40 jours ouvrés, 15 min de pause après chaque séance, remboursement automatique si annulation au moins 1 jour avant, case d’acceptation des CGV.
+  - Retour à la demande sans paiement : `COACHING_MODE = "demande"` dans `lib/site.ts`.
 
 ## Paramètres à fournir avant d’aller plus loin
 
-- **Coaching** : disponibilités réelles (`COACHING.weekly` dans `lib/site.ts` reprend l’exemple de la maquette : mardi et jeudi 10 h, 14 h, 17 h 30 ; samedi 9 h 30 et 11 h, heure de Paris), jours fermés, intitulés définitifs, durées, tarifs, règles de report et d’annulation, outil de visioconférence. Des tarifs 149 € / 399 € / 590 € existaient sur la branche `refonte-kingofia` : non publiés ici, à confirmer.
+- **Médiateur de la consommation** : obligatoire pour vendre aux particuliers. Après adhésion, renseigner `LEGAL.mediator` dans `lib/site.ts` : les CGV l’affichent automatiquement.
 - **Formations** : programme final, contenu des formules, validation éventuelle des prix 497 € / 997 € (masqués). Pour ouvrir : `FORMATION_STATUS = "ouverte"` dans `lib/site.ts`.
 - **Showreel** de 45 à 60 s (16:9 et 9:16) pour remplacer l’enchaînement de 4 extraits du hero.
 - Autorisation d’usage des logos clients ; reconfirmation des tarifs repris du site précédent.

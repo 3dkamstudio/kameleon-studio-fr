@@ -7,10 +7,10 @@
 - Déploiement Vercel : production = branche `main`, prévisualisation = toute autre branche poussée
 
 ## Structure
-- `app/` : `/` accueil, `/prestations`, `/coaching`, `/formations`, `/mentions-legales`
+- `app/` : `/` accueil, `/prestations`, `/coaching`, `/formations`, `/cgv`, `/mentions-legales`
 - `components/ks/` : socle visuel (en-tête, pied de page + bannière finale, fond animé, guide Kame, primitives `ui.tsx`)
 - `components/home|prestations|coaching|formations/` : sections de chaque page
-- `lib/site.ts` : réglages (domaine, contact, Formspree, statut des formations, disponibilités du coaching)
+- `lib/site.ts` : réglages (domaine, contact, identité légale et TVA, Formspree, statut des formations, mode de réservation du coaching)
 - `lib/content.ts` : contenus (vidéos, tarifs, FAQ, modules…) — source unique, ne pas dupliquer dans le JSX
 - `docs/REFONTE.md` : arborescence, redirections, paramètres encore à fournir
 
@@ -24,7 +24,8 @@
 
 ## Formulaires
 - Envoi réel via Formspree (`lib/forms.ts`), succès affiché uniquement après réponse du service
-- Coaching : demande de créneau, confirmée manuellement par e-mail (aucune réservation automatique)
+- Coaching : réservation et paiement en ligne sur Cal.com (Stripe, Google Agenda, Google Meet), 3 formules dans `COACHING_OFFERS` ; les prix se changent dans Cal.com et dans `lib/content.ts`. `COACHING_MODE = "demande"` rétablit la demande de créneau par e-mail (Formspree)
+- Prix nets : franchise de TVA (`LEGAL.vat`), jamais de mention « TTC »
 - Formations : liste d’attente tant que `FORMATION_STATUS = "bientot"` ; prix 497 € / 997 € non publiés
 
 ## Conventions

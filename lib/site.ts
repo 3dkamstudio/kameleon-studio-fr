@@ -15,6 +15,11 @@ export const LEGAL = {
   publisher: "Sebastien Athanase",
   registration: "RCS Paris 933 763 815",
   address: "60 rue François 1er, 75008 Paris",
+  // Franchise en base de TVA : mention obligatoire sur les factures, reprise sur le site et dans les CGV.
+  vat: "TVA non applicable, art. 293 B du CGI",
+  // Médiateur de la consommation (obligatoire pour vendre aux particuliers) : à renseigner après adhésion,
+  // par exemple { name: "Nom du médiateur", url: "https://…" }. Affiché dans les CGV.
+  mediator: null as { name: string; url: string } | null,
 };
 
 export const SOCIALS = [
@@ -34,13 +39,17 @@ export type FormationStatus = "bientot" | "ouverte";
 export const FORMATION_STATUS: FormationStatus = "bientot";
 
 // Coaching.
-// - Avec `googleBookingUrl` : la page de réservation Google Agenda du studio est intégrée
-//   (disponibilités réelles, confirmation immédiate, lien Google Meet, fuseau du visiteur).
-//   Valeur attendue : https://calendar.google.com/calendar/appointments/schedules/…
-//   (Google Agenda → page de réservation → Partager → Intégrer au site Web → copier l'adresse « src »).
-// - Sans : les visiteurs envoient une DEMANDE de créneau (Formspree), confirmée ensuite par e-mail.
+// - "cal" : réservation et paiement en ligne sur Cal.com (Stripe), synchronisés avec Google Agenda et Google Meet.
+//   Les formules (intitulé, durée, prix, lien) sont dans `COACHING_OFFERS` (lib/content.ts) :
+//   tout changement de prix se fait à la fois là et dans Cal.com.
+// - "demande" : les visiteurs envoient une DEMANDE de créneau (Formspree), confirmée ensuite par e-mail ;
+//   les réglages de `COACHING` ci-dessous ne servent qu'à ce mode.
+export type CoachingMode = "cal" | "demande";
+export const COACHING_MODE: CoachingMode = "cal";
+// Compte Cal.com du studio et script officiel d'intégration (chargé seulement sur la page Coaching).
+export const CAL = { origin: "https://cal.com", user: "3dkamstudio", embedScript: "https://app.cal.com/embed/embed.js" };
+
 export const COACHING = {
-  googleBookingUrl: "",
   studioTimeZone: "Europe/Paris",
   // Créneaux proposés, en heure de Paris, par jour de semaine (1 = lundi … 7 = dimanche).
   // Exemple repris de la maquette : à remplacer par les disponibilités réelles du studio.

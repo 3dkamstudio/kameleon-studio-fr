@@ -1,8 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { FD } from "@/components/ks/ui";
+import { LegalBlock, LegalPage } from "@/components/ks/Legal";
 import { pageMeta } from "@/lib/seo";
-import { COACHING, CONTACT, LEGAL } from "@/lib/site";
+import { COACHING_MODE, CONTACT, LEGAL } from "@/lib/site";
 
 export const metadata = pageMeta({
   title: "Mentions légales",
@@ -10,97 +9,81 @@ export const metadata = pageMeta({
   path: "/mentions-legales",
 });
 
-function Block({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section style={{ display: "grid", gap: 10, paddingTop: 22, borderTop: "1px solid #E6E8F0" }}>
-      <h2 style={{ margin: 0, fontFamily: FD, fontWeight: 500, fontSize: 19, letterSpacing: "-0.01em" }}>{title}</h2>
-      <div style={{ fontSize: 16, lineHeight: 1.65, color: "#525B70" }}>{children}</div>
-    </section>
-  );
-}
-
 const mail = <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>;
+const paid = COACHING_MODE === "cal";
 
 export default function MentionsLegales() {
   return (
-    <section className="bg-w" style={{ position: "relative", padding: "clamp(48px,6vw,88px) 0 clamp(64px,8vw,112px)" }}>
-      <div className="ks-wrap" style={{ maxWidth: 820, display: "grid", gap: 28 }}>
-        <nav aria-label="Fil d’Ariane" style={{ display: "flex", gap: 8, fontSize: 14, color: "#525B70" }}>
-          <Link href="/" style={{ color: "#525B70" }}>
-            Accueil
-          </Link>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page" style={{ color: "#151827", fontWeight: 600 }}>
-            Mentions légales
-          </span>
-        </nav>
-        <h1 style={{ margin: 0, fontFamily: FD, fontWeight: 500, fontSize: "clamp(30px,3.6vw,46px)", lineHeight: 1.1, letterSpacing: "-0.03em" }}>Mentions légales</h1>
+    <LegalPage title="Mentions légales" updated="septembre 2026">
+      <LegalBlock title="Éditeur du site">
+        <p>
+          Le site est édité par {LEGAL.publisher}, entrepreneur individuel, sous le nom « Kaméléon Studio ».
+          <br />
+          Immatriculation : {LEGAL.registration}
+          <br />
+          Adresse : {LEGAL.address}
+          <br />
+          Téléphone : {CONTACT.whatsappLabel}
+          <br />
+          E-mail : {mail}
+          <br />
+          Directeur de la publication : {LEGAL.publisher}
+          <br />
+          {LEGAL.vat}.
+        </p>
+        <p>
+          Les conditions de vente des séances de coaching et des prestations figurent dans les <Link href="/cgv">conditions générales de vente</Link>.
+        </p>
+      </LegalBlock>
 
-        <Block title="Éditeur du site">
-          <p style={{ margin: 0 }}>
-            Le site est édité par {LEGAL.publisher}, entrepreneur individuel, sous le nom « Kaméléon Studio ».
-            <br />
-            Immatriculation : {LEGAL.registration}
-            <br />
-            Adresse : {LEGAL.address}
-            <br />
-            Téléphone : {CONTACT.whatsappLabel}
-            <br />
-            E-mail : {mail}
-            <br />
-            Directeur de la publication : {LEGAL.publisher}
-          </p>
-        </Block>
+      <LegalBlock title="Hébergement">
+        <p>
+          Ce site est hébergé par Vercel Inc.
+          <br />
+          440 N Barranca Ave #4133, Covina, CA 91723, États-Unis
+          <br />
+          <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+            vercel.com
+          </a>
+        </p>
+      </LegalBlock>
 
-        <Block title="Hébergement">
-          <p style={{ margin: 0 }}>
-            Ce site est hébergé par Vercel Inc.
-            <br />
-            440 N Barranca Ave #4133, Covina, CA 91723, États-Unis
-            <br />
-            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-              vercel.com
-            </a>
-          </p>
-        </Block>
+      <LegalBlock title="Propriété intellectuelle">
+        <p>
+          L’ensemble des contenus présents sur ce site (textes, images, vidéos, animations, logo, mascotte Kame) sont la propriété exclusive de l’éditeur (Kaméléon Studio), sauf mention contraire. Toute reproduction, même partielle, est interdite sans autorisation préalable.
+        </p>
+      </LegalBlock>
 
-        <Block title="Propriété intellectuelle">
-          <p style={{ margin: 0 }}>
-            L’ensemble des contenus présents sur ce site (textes, images, vidéos, animations, logo, mascotte Kame) sont la propriété exclusive de l’éditeur (Kaméléon Studio), sauf mention contraire. Toute reproduction, même partielle, est interdite sans autorisation préalable.
+      <LegalBlock title="Données personnelles (RGPD)">
+        <p>
+          Les informations saisies sur le site (demande de production, réservation d’une séance de coaching, liste d’attente des formations) servent uniquement à répondre à votre demande, à exécuter la prestation réservée ou, pour la liste d’attente, à vous prévenir de l’ouverture des formations. Elles ne sont ni revendues ni cédées.
+        </p>
+        <p>
+          Les formulaires sont transmis au studio par l’intermédiaire du service Formspree (Formspree Inc.), qui agit comme sous-traitant technique. Les actualités du studio ne vous sont envoyées que si vous l’avez accepté séparément.
+        </p>
+        {paid && (
+          <p>
+            Les séances de coaching se réservent et se paient sur Cal.com (Cal.com, Inc., États-Unis), intégré à la page Coaching : vos informations servent à créer le rendez-vous dans l’agenda du studio, à générer le lien de visioconférence (Google Agenda et Google Meet, Google Ireland Limited) et à vous envoyer la confirmation. Le paiement est traité par Stripe (Stripe Payments Europe, Limited) : le studio n’a jamais accès à vos données de carte bancaire.
           </p>
-        </Block>
+        )}
+        <p>Si vous contactez le studio sur WhatsApp, vos échanges sont traités par WhatsApp (Meta) selon ses propres conditions.</p>
+        <p>
+          Les données liées à une réservation ou à une commande sont conservées le temps nécessaire à la prestation, puis archivées pendant la durée imposée par les obligations comptables et fiscales. Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression de vos données en écrivant à {mail}. Vous pouvez aussi adresser une réclamation à la CNIL (cnil.fr).
+        </p>
+      </LegalBlock>
 
-        <Block title="Données personnelles (RGPD)">
-          <p style={{ margin: "0 0 10px" }}>
-            Les informations saisies dans les formulaires du site (demande de production, demande de séance de coaching, liste d’attente des formations) servent uniquement à répondre à votre demande ou, pour la liste d’attente, à vous prévenir de l’ouverture des formations. Elles ne sont ni revendues ni cédées.
-          </p>
-          <p style={{ margin: "0 0 10px" }}>
-            Les formulaires sont transmis au studio par l’intermédiaire du service Formspree (Formspree Inc.), qui agit comme sous-traitant technique. Les actualités du studio ne vous sont envoyées que si vous l’avez accepté séparément.
-          </p>
-          {COACHING.googleBookingUrl && (
-            <p style={{ margin: "0 0 10px" }}>
-              Les séances de coaching se réservent sur la page de réservation Google Agenda du studio (Google Ireland Limited) : les informations saisies servent à créer le rendez-vous, à vous envoyer la confirmation et le lien de visioconférence.
-            </p>
-          )}
-          <p style={{ margin: "0 0 10px" }}>Si vous contactez le studio sur WhatsApp, vos échanges sont traités par WhatsApp (Meta) selon ses propres conditions.</p>
-          <p style={{ margin: 0 }}>Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression de vos données en écrivant à {mail}.</p>
-        </Block>
+      <LegalBlock title="Cookies et stockage local">
+        <p>
+          Ce site n’utilise pas de cookies de traçage publicitaire. Les vidéos YouTube ne sont chargées qu’à votre demande, au clic sur le lecteur, en mode de confidentialité renforcée (youtube-nocookie.com) ; YouTube peut alors déposer ses propres cookies selon les paramètres de votre navigateur. Le site mémorise localement, dans votre navigateur, les adresses déjà inscrites à la liste d’attente afin d’éviter les doublons ; cette information n’est pas transmise.
+          {paid && " Le calendrier de réservation Cal.com intégré à la page Coaching, ainsi que le module de paiement Stripe, peuvent déposer les cookies nécessaires à leur fonctionnement et à la sécurité des paiements."}
+        </p>
+      </LegalBlock>
 
-        <Block title="Cookies et stockage local">
-          <p style={{ margin: 0 }}>
-            Ce site n’utilise pas de cookies de traçage publicitaire. Les vidéos YouTube ne sont chargées qu’à votre demande, au clic sur le lecteur, en mode de confidentialité renforcée (youtube-nocookie.com) ; YouTube peut alors déposer ses propres cookies selon les paramètres de votre navigateur. Le site mémorise localement, dans votre navigateur, les adresses déjà inscrites à la liste d’attente afin d’éviter les doublons ; cette information n’est pas transmise.
-            {COACHING.googleBookingUrl && " La page de réservation Google Agenda intégrée à la page Coaching peut déposer des cookies Google."}
-          </p>
-        </Block>
-
-        <Block title="Limitation de responsabilité">
-          <p style={{ margin: 0 }}>
-            Kaméléon Studio s’efforce de maintenir les informations de ce site à jour et exactes. Cependant, des erreurs ou omissions peuvent survenir. L’éditeur ne saurait être tenu responsable des dommages directs ou indirects résultant de l’utilisation du site.
-          </p>
-        </Block>
-
-        <p style={{ margin: "14px 0 0", fontSize: 14, color: "#525B70" }}>Dernière mise à jour : septembre 2026</p>
-      </div>
-    </section>
+      <LegalBlock title="Limitation de responsabilité">
+        <p>
+          Kaméléon Studio s’efforce de maintenir les informations de ce site à jour et exactes. Cependant, des erreurs ou omissions peuvent survenir. L’éditeur ne saurait être tenu responsable des dommages directs ou indirects résultant de l’utilisation du site.
+        </p>
+      </LegalBlock>
+    </LegalPage>
   );
 }

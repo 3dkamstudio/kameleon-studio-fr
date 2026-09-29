@@ -23,7 +23,7 @@ type Props = {
   ink: string;
   /** Fond de l'étiquette « Meilleur prix ». */
   bestBg: string;
-  /** Dégradé des totaux TTC. */
+  /** Dégradé des totaux. */
   totalGrad: string;
 };
 
@@ -59,7 +59,7 @@ export default function PriceTable({ label, grid, save, unit, grad, tint, ink, b
           Prix / {unit}
         </span>
         <span role="columnheader" style={{ textAlign: "right" }}>
-          Total TTC
+          Total
         </span>
         <span role="columnheader" style={{ textAlign: "right" }}>
           Économie

@@ -7,7 +7,7 @@ import PriceTable from "./PriceTable";
 const FIRST = VIDEO_GRID[0];
 const BEST = VIDEO_GRID[VIDEO_GRID.length - 1];
 const MAX = VIDEO_SAVE[VIDEO_SAVE.length - 1];
-const EXTRA = `+${VIDEO_EXTRA_30S} € TTC par tranche de 30 s`;
+const EXTRA = `+${VIDEO_EXTRA_30S} € par tranche de 30 s`;
 
 /** Tarifs de la production vidéo : chiffres clés, offre illustrée, grille dégressive. */
 export default function TarifsVideo() {

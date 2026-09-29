@@ -159,7 +159,7 @@ export default function Estimator() {
 
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 20, paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.12)" }}>
         <div style={{ display: "grid", gap: 4 }}>
-          <span style={{ fontSize: 14, fontWeight: 600, color: "#B8BDD0" }}>Montant indicatif TTC</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "#B8BDD0" }}>Montant indicatif</span>
           <span aria-live="polite" className="grad-text" style={{ fontFamily: FD, fontSize: "clamp(38px,4.6vw,54px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.1, backgroundImage: "linear-gradient(90deg,#FDBA74,#FB7185,#F0ABFC)" }}>
             {eur(total)}
           </span>
@@ -170,7 +170,7 @@ export default function Estimator() {
         </div>
         <PrefillLink
           href="/#studio"
-          contact={{ type: "Production vidéo", msg: `Estimation : ${q} vidéo${q > 1 ? "s" : ""} de ${durL}, ${eur(total)} TTC indicatif. `, keepMsg: true }}
+          contact={{ type: "Production vidéo", msg: `Estimation : ${q} vidéo${q > 1 ? "s" : ""} de ${durL}, ${eur(total)} indicatif. `, keepMsg: true }}
           className="btn btn-grad hv-grad"
           style={{ minHeight: 52, padding: "0 24px", borderRadius: 999, fontSize: 16 }}
         >

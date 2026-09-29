@@ -2,7 +2,7 @@ import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { RAINBOW } from "@/lib/content";
 import { NAV } from "@/lib/nav";
-import { CONTACT, SOCIALS } from "@/lib/site";
+import { CONTACT, LEGAL, SOCIALS } from "@/lib/site";
 import { Aurora, Brand, FD, G, Sparkles } from "./ui";
 
 const colTitle = (color: string) => ({ fontSize: 12, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase" as const, color });
@@ -145,6 +145,9 @@ export default function Footer() {
               <Link href="/mentions-legales" className="hv-violet" style={footLink}>
                 Mentions légales
               </Link>
+              <Link href="/cgv" className="hv-violet" style={footLink}>
+                Conditions générales de vente
+              </Link>
               <Link href="/prestations" className="hv-violet" style={footLink}>
                 Tarifs et conditions
               </Link>
@@ -183,7 +186,9 @@ export default function Footer() {
             />
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 12, paddingTop: 22, borderTop: "1px solid #E3E6EE", fontSize: 14, color: "#525B70" }}>
-            <span>© {new Date().getFullYear()} Kaméléon Studio — Tous droits réservés</span>
+            <span>
+              © {new Date().getFullYear()} Kaméléon Studio — Tous droits réservés · Prix nets, {LEGAL.vat}
+            </span>
             <span>Fait avec soin, et beaucoup de caféine, par Kame.</span>
           </div>
         </div>

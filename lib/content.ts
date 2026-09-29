@@ -66,7 +66,7 @@ export const SPEECH: Record<KameKey, string[]> = {
   testimonials: ["Des créateurs, formateurs et entreprises nous font confiance.", "Rejoignez nos partenaires et donnez vie à votre projet !"],
   faq: ["Une question pas dans la liste ? Écrivez-nous !", "Le premier échange est toujours gratuit et sans engagement."],
   contact: ["Parlez-moi de votre projet : je transmets directement à l’équipe.", "On vous répond sous 24 h.", "Remplissez le formulaire, on prépare déjà votre brief."],
-  coaching: ["Choisissez votre fuseau : j’affiche les horaires pour Paris ou la Martinique.", "Décrivez votre objectif : la séance sera construite autour de votre projet."],
+  coaching: ["Vérifiez le fuseau affiché : Paris, Martinique ou ailleurs, les horaires s’adaptent.", "Décrivez votre objectif : la séance sera construite autour de votre projet."],
   formations: ["Inscrivez-vous : je vous préviens dès l’ouverture.", "Huit modules, du prompt au montage final."],
 };
 
@@ -169,7 +169,7 @@ export const INCLUSIONS = [
   "Voix-off IA professionnelle",
   "Montage premium et ambiances sonores",
   "Livraison sous 7 jours ouvrés maximum",
-  "+70 € TTC par tranche de 30 s supplémentaire",
+  "+70 € par tranche de 30 s supplémentaire",
 ];
 
 // ── FAQ ────────────────────────────────────────────────────────────────────
@@ -188,6 +188,14 @@ export const SESSIONS = [
   { id: "ameliorer", name: "Améliorer un projet", desc: "Retravailler un script, des visuels, une voix ou un montage existant." },
   { id: "organiser", name: "Organiser sa production", desc: "Structurer un processus répétable, du brief à la livraison." },
 ];
+
+// Formules réservées et payées sur Cal.com : `slug` = fin du lien Cal.com, prix identiques à ceux réglés dans Cal.com.
+export const COACHING_OFFERS = [
+  { slug: "cadrage", name: "Analyse & cadrage", duration: "30 min", price: 50, desc: "Un échange ciblé pour analyser votre besoin, comprendre votre projet, identifier les bons outils et structurer les prochaines étapes." },
+  { slug: "coaching", name: "Coaching complet", duration: "1 h", price: 100, desc: "Une séance complète dédiée à un sujet précis : conseils personnalisés, démonstrations, méthodologie et réponses adaptées à votre projet." },
+  { slug: "accompagnement", name: "Accompagnement approfondi", duration: "2 h", price: 150, desc: "Un travail plus complet avec analyse, mise en pratique, configuration des outils et construction d’un workflow directement applicable à votre activité." },
+];
+export const COACHING_FROM = Math.min(...COACHING_OFFERS.map((o) => o.price));
 
 // ── Formations King of IA ───────────────────────────────────────────────────
 export const MODULES = [

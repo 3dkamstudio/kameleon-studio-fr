@@ -604,17 +604,41 @@ textarea.input {
   }
 }
 
-/* Page de réservation Google Agenda intégrée (coaching) */
-.gbook-frame {
-  display: block;
-  width: 100%;
-  height: 760px;
-  border: 0;
+/* Réservation Cal.com intégrée (coaching) : le script de Cal.com ajuste lui-même la hauteur du calendrier. */
+.cal-inline {
+  min-height: 640px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e6e8f0;
+  border-radius: 20px;
+  box-shadow: 0 40px 80px -56px rgba(139, 92, 246, 0.45);
 }
-@media (max-width: 760px) {
-  .gbook-frame {
-    height: 1100px;
-  }
+.cal-offer:not(:has(input:checked)):hover {
+  border-color: #b9a8f0 !important;
+}
+.cal-offer:has(input:focus-visible) {
+  outline: 3px solid #6546d7;
+  outline-offset: 2px;
+}
+
+/* Pages juridiques (mentions légales, CGV) */
+.legal-body p,
+.legal-body ul,
+.legal-body ol {
+  margin: 0 0 10px;
+}
+.legal-body > :last-child {
+  margin-bottom: 0;
+}
+.legal-body ul,
+.legal-body ol {
+  padding-left: 22px;
+}
+.legal-body li + li {
+  margin-top: 6px;
+}
+.legal-body strong {
+  color: #151827;
 }
 
 /* Grilles tarifaires : plus compactes sur téléphone */

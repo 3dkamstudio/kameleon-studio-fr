@@ -1,15 +1,19 @@
 import Link from "next/link";
 import Booking from "@/components/coaching/Booking";
-import GoogleBooking from "@/components/coaching/GoogleBooking";
+import CalBooking from "@/components/coaching/CalBooking";
 import VideoHero from "@/components/ks/VideoHero";
 import { FD, G, Sep } from "@/components/ks/ui";
+import { COACHING_FROM, eur } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
-import { COACHING } from "@/lib/site";
+import { COACHING_MODE } from "@/lib/site";
+
+const paid = COACHING_MODE === "cal";
 
 export const metadata = pageMeta({
   title: "Coaching vidéo IA",
-  description:
-    "Séance individuelle en visioconférence pour lancer, améliorer ou organiser votre production vidéo IA avec le regard de Kaméléon Studio. Demandez un créneau en ligne, confirmation par e-mail sous 24 h.",
+  description: paid
+    ? `Coaching vidéo IA en visioconférence, dès ${eur(COACHING_FROM)} : analyse et cadrage (30 min), coaching complet (1 h) ou accompagnement approfondi (2 h). Réservation et paiement en ligne, lien Google Meet immédiat.`
+    : "Séance individuelle en visioconférence pour lancer, améliorer ou organiser votre production vidéo IA avec le regard de Kaméléon Studio. Demandez un créneau en ligne, confirmation par e-mail sous 24 h.",
   path: "/coaching",
 });
 
@@ -33,7 +37,7 @@ export default function CoachingPage() {
         chip={
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 999, background: "rgba(21,24,39,0.86)", color: "#FFFFFF", fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#20BFD1" }} />
-            Séance en visioconférence
+            {paid ? `Visio Google Meet · dès ${eur(COACHING_FROM)}` : "Séance en visioconférence"}
           </span>
         }
       >
@@ -48,7 +52,7 @@ export default function CoachingPage() {
         </nav>
         <span style={{ display: "inline-flex", width: "fit-content", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: 999, background: "#EFEBFC", fontSize: 13, fontWeight: 600 }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#6546D7" }} />
-          Coaching individuel · à distance
+          Coaching individuel · à distance{paid && ` · dès ${eur(COACHING_FROM)}`}
         </span>
         <h1 className="tw-balance" style={{ margin: 0, fontFamily: FD, fontWeight: 500, fontSize: "clamp(30px,3.6vw,50px)", lineHeight: 1.08, letterSpacing: "-0.035em" }}>
           Avancez sur vos vidéos IA, <G c="#7C3AED,#0891B2,#16A34A">avec le regard du studio.</G>
@@ -82,8 +86,8 @@ export default function CoachingPage() {
       </section>
 
       <Sep n="02" label="RÉSERVATION" bg="p" />
-      {/* Page de réservation Google Agenda si configurée, sinon demande de créneau par e-mail. */}
-      {COACHING.googleBookingUrl ? <GoogleBooking url={COACHING.googleBookingUrl} /> : <Booking />}
+      {/* Réservation payante Cal.com, ou demande de créneau par e-mail (mode "demande"). */}
+      {paid ? <CalBooking /> : <Booking />}
     </>
   );
 }
