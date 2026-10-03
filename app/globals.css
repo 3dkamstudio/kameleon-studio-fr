@@ -691,7 +691,7 @@ textarea.input {
   }
 }
 
-/* Hero de l'accueil : sur mobile, la vidéo occupe le premier écran puis se fond dans le noir */
+/* Hero de l'accueil : sur mobile, l'image occupe le premier écran puis se fond dans le noir */
 .hero-media {
   position: absolute;
   inset: -3%;

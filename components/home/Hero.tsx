@@ -1,6 +1,5 @@
 import { getImageProps } from "next/image";
 import Link from "next/link";
-import BgVideo from "@/components/ks/BgVideo";
 import { FD, Sparkles } from "@/components/ks/ui";
 import HeroPlayer from "./HeroPlayer";
 
@@ -31,7 +30,7 @@ export default function Hero() {
   return (
     <section id="accueil" data-kame="accueil" style={{ position: "relative", marginTop: -72 }}>
       <div style={{ position: "relative", zIndex: 1, overflow: "hidden", minHeight: "clamp(700px,100vh,980px)", background: "#0B0A14", isolation: "isolate", display: "flex", alignItems: "center" }}>
-        {/* Image affichée immédiatement, puis bannière vidéo en fondu une fois la page chargée. */}
+        {/* Bannière en image fixe (choix du studio, sans vidéo) : version portrait sur téléphone, paysage au-delà. */}
         <div className="hero-media">
           <picture style={{ position: "absolute", inset: 0 }}>
             <source type="image/avif" media="(max-width: 760px)" srcSet={AVIF_MOBILE} sizes="100vw" />
@@ -41,15 +40,6 @@ export default function Hero() {
             {/* eslint-disable-next-line jsx-a11y/alt-text */}
             <img {...rest} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "64% 50%", display: "block", filter: "saturate(1.35) brightness(1.18) contrast(1.05)" }} />
           </picture>
-          <BgVideo
-            src="/videos/hero.mp4"
-            position="62% 50%"
-            mobilePosition="40% 50%"
-            mobileSrc="/videos/hero-mobile.mp4"
-            mobileMaxAspect={0.75}
-            filter="saturate(1.12) brightness(1.06)"
-            deferUntilLoad
-          />
         </div>
         <div
           aria-hidden="true"
@@ -100,7 +90,7 @@ export default function Hero() {
               Studio créatif propulsé par l’IA
             </span>
             <h1 className="tw-balance" style={{ margin: 0, fontFamily: FD, fontWeight: 600, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1.06, letterSpacing: "-0.035em" }}>
-              <span style={{ display: "block" }}>Vos idées prennent vie.</span>
+              <span style={{ display: "block" }}>On s’adapte à vous.</span>
               <span
                 className="grad-text"
                 style={{
@@ -111,7 +101,7 @@ export default function Hero() {
                   animation: "ksHue 7s ease-in-out infinite alternate",
                 }}
               >
-                Votre message prend de l’ampleur.
+                On crée ce que vous imaginez.
               </span>
             </h1>
             <p className="tw-pretty" style={{ margin: 0, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.6, color: "#E4E6EE" }}>

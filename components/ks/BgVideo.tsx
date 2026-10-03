@@ -15,7 +15,7 @@ type Props = {
    */
   mobileSrc?: string;
   mobileMaxAspect?: number;
-  /** Bannière d'accueil : l'image reste prioritaire, la vidéo se charge après la page. */
+  /** Vidéo chargée après la page : le contenu de la bannière reste prioritaire. */
   deferUntilLoad?: boolean;
   filter?: string;
 };
