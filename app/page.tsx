@@ -4,6 +4,7 @@ import Faq from "@/components/home/Faq";
 import Hero from "@/components/home/Hero";
 import LegacyAnchors from "@/components/home/LegacyAnchors";
 import Method from "@/components/home/Method";
+import Premiere from "@/components/home/Premiere";
 import Prestations from "@/components/home/Prestations";
 import References from "@/components/home/References";
 import Showreel from "@/components/home/Showreel";
@@ -22,6 +23,9 @@ export default function Home() {
       <Hero />
       <Suspense>
         <Marquee />
+        <Premiere />
+      </Suspense>
+      <Suspense>
         <Cockpit />
       </Suspense>
       <Suspense>

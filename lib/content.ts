@@ -5,9 +5,25 @@ export const PAL = ["#8b5cf6", "#06b6d4", "#22c55e", "#eab308", "#f97316", "#f43
 export const RAINBOW = "linear-gradient(90deg, #8b5cf6, #06b6d4, #22c55e, #eab308, #f97316, #f43f5e, #d946ef, #8b5cf6)";
 
 // ── Vidéos ─────────────────────────────────────────────────────────────────
-export type VideoCat = "animation" | "biblique" | "recette" | "podcast" | "pedagogique" | "prevention" | "professionnel";
+export type VideoCat = "clip" | "animation" | "biblique" | "recette" | "podcast" | "pedagogique" | "prevention" | "professionnel";
+
+// Clip à la une de l'accueil (section « Avant-première »). Pour en changer : remplacer ces données et l'affiche
+// dans /public (vignette YouTube 1280 × 720, i.ytimg.com/vi/<id>/maxresdefault.jpg). La vidéo doit rester
+// publique ou non répertoriée sur YouTube : une vidéo privée ne se lit plus sur le site.
+export const CLIP = {
+  id: "xGcvC_PWvRw",
+  title: "Corane Birthday",
+  kind: "Clip officiel",
+  duration: "3 min 35",
+  poster: "/clip-corane-birthday.jpg",
+  lead: "Notre nouveau clip : 3 min 35 de fête en animation 3D, réalisé par Kaméléon Studio pour l’anniversaire de Corane.",
+  desc: "Soleil, danse, fous rires et ambiance explosive : un clip en animation 3D semi-réaliste, porté par une mise en scène cinématographique et toute l’énergie de l’entourage de Corane.",
+  tags: ["Animation 3D semi-réaliste", "Mise en scène cinématographique", "Ambiance dancehall & shatta", "De la Martinique à Toulouse"],
+  prefill: "Clip personnalisé dans l’esprit de « Corane Birthday » (anniversaire, mariage, événement…) : ",
+};
 
 export const VIDEOS: { id: string; title: string; desc: string; cat: VideoCat }[] = [
+  { id: CLIP.id, title: "Corane Birthday : le clip d’anniversaire en animation 3D", desc: "Clip officiel : animation 3D semi-réaliste, mise en scène cinématographique et ambiance dancehall, de la Martinique à Toulouse.", cat: "clip" },
   { id: "ZHCLE0t9lII", title: "Indépendance Artificielle (ép. 1) : le podcast 100 % créé avec l’IA", desc: "Premier épisode du podcast Kaméléon Studio : discussions, coulisses et créativité propulsée par l’IA.", cat: "podcast" },
   { id: "SwQSffhe_jk", title: "Indépendance Artificielle (ép. 2) : l’IA nous rend-elle idiots ?", desc: "Nouvel épisode du podcast : sujets créatifs, tendances et production digitale par intelligence artificielle.", cat: "podcast" },
   { id: "-t3_OPVkmhg", title: "Les Pépites de Lylou : une collection chrétienne pour éveiller la foi des enfants", desc: "Histoire biblique mise en animation : narration épique, visuels immersifs, accessible à tous les âges.", cat: "biblique" },
@@ -27,6 +43,7 @@ export const VIDEOS: { id: string; title: string; desc: string; cat: VideoCat }[
 // [libellé, encre, teinte]
 export const CATS: Record<"all" | VideoCat, [string, string, string]> = {
   all: ["Tout voir", "#6D28D9", "#F3E8FF"],
+  clip: ["Clip", "#BE185D", "#FCE7F3"],
   animation: ["Dessin animé", "#C2410C", "#FFEDD5"],
   biblique: ["Biblique", "#6D28D9", "#EDE9FE"],
   recette: ["Recette", "#15803D", "#DCFCE7"],
@@ -38,6 +55,7 @@ export const CATS: Record<"all" | VideoCat, [string, string, string]> = {
 
 // Extraits « À l’affiche » du hero.
 export const HERO_CLIPS = [
+  { id: CLIP.id, title: "Corane Birthday — Clip officiel", cat: "Nouveau · Clip 3D", accent: "#D946EF" },
   { id: "0wa3_fb2W48", title: "Madinina — La Course des Yoles", cat: "Dessin animé", accent: "#20BFD1" },
   { id: "-t3_OPVkmhg", title: "Les Pépites de Lylou", cat: "Biblique", accent: "#6546D7" },
   { id: "PccRg7wdaR8", title: "Elisabeth, femme obéissante", cat: "Biblique", accent: "#6546D7" },
@@ -50,11 +68,12 @@ export const ytWatch = (id: string) => `https://www.youtube.com/watch?v=${id}`;
 
 // ── Kame : répliques et poses par section ────────────────────────────────────
 export type KameKey =
-  | "accueil" | "cockpit" | "showreel" | "process" | "prestations" | "pricingVideo" | "pricingBD"
+  | "accueil" | "clip" | "cockpit" | "showreel" | "process" | "prestations" | "pricingVideo" | "pricingBD"
   | "web" | "maintenance" | "testimonials" | "faq" | "contact" | "coaching" | "formations";
 
 export const SPEECH: Record<KameKey, string[]> = {
-  accueil: ["Bienvenue dans le studio ! Je suis Kame, je vous guide.", "Le premier échange est toujours gratuit et sans engagement.", "Lancez un extrait à l’affiche pour voir notre travail."],
+  accueil: ["Bienvenue dans le studio ! Je suis Kame, je vous guide.", "Nouveau : le clip « Corane Birthday » vous attend juste en dessous !", "Le premier échange est toujours gratuit et sans engagement.", "Lancez un extrait à l’affiche pour voir notre travail."],
+  clip: ["Montez le son et passez en plein écran : ce clip se vit !", "Anniversaire, mariage, départ : votre histoire mérite aussi son film.", "Décors, personnages, mise en scène : chaque clip est créé sur mesure."],
   cockpit: ["Vidéo, 3D, voix, BD : tout est fait sur mesure.", "Chaque format est livré en 16:9 et en 9:16."],
   showreel: ["Cliquez sur une production pour la lancer sans quitter la page.", "Chaque vidéo ici a été créée pour un vrai client. La prochaine, c’est la vôtre ?", "Filtrez par univers : dessin animé, podcast, recette, formation…"],
   process: ["Voilà notre méthode : 5 étapes, zéro stress pour vous.", "De l’idée à la livraison, on vous accompagne à chaque étape.", "Vous posez les bases, on s’occupe du reste."],
@@ -72,6 +91,7 @@ export const SPEECH: Record<KameKey, string[]> = {
 
 export const POSE: Record<KameKey, string> = {
   accueil: "/kame-closeup.webp",
+  clip: "/kame-celebrate.png",
   cockpit: "/kame-services.png",
   showreel: "/kame-cameraman.png",
   process: "/kame-robot.png",

@@ -6,7 +6,7 @@ Refonte issue de la maquette Claude Design « Kameleon Studio v6 » (septembre 2
 
 | Route | Contenu |
 |---|---|
-| `/` | Hero + extraits à l’affiche, savoir-faire, 14 réalisations, 3 parcours, références, méthode, tarifs + estimateur, coaching/formations, FAQ, contact (`#studio`) |
+| `/` | Hero + extraits à l’affiche, avant-première (clip à la une, `#nouveau-clip`), savoir-faire, 15 réalisations, 3 parcours, références, méthode, tarifs + estimateur, coaching/formations, FAQ, contact (`#studio`) |
 | `/prestations` | Univers, tarifs vidéo, tarifs BD, sites web, maintenance |
 | `/coaching` | Présentation, 3 formules et réservation payante Cal.com (`#reserver`) |
 | `/formations` | King of IA : programme, formules, liste d’attente (`#liste-attente`) |
@@ -33,6 +33,7 @@ Anciennes ancres de la page unique (`components/home/LegacyAnchors.tsx`) : `#ser
   - Versions téléphone = recadrage de la zone visible sur mobile : largeur = rapport maximal du cadre × hauteur, décalage x = (largeur source − largeur) × `mobilePosition`. Coaching `crop=1080:1080:250:0`, Prestations `crop=944:944:524:0`, Formations `crop=2160:2160:268:0,scale=1080:1080` (cadres jusqu’à 1:1). Même cadrage garanti tant que `mobilePosition` ne change pas ; au-delà du rapport maximal, la vidéo complète est utilisée.
   - Pour remplacer une vidéo : réencoder les deux versions avec ces réglages en gardant les noms, ou changer les noms dans le code (le cache d’un jour peut sinon montrer l’ancienne version aux visiteurs récents).
 - **Bannière d’accueil** : image fixe, sans vidéo, depuis le 03/10/2026 (choix du studio ; l’ancienne vidéo `hero.mp4` reste dans l’historique git, commit `469ae76`). AVIF encodés à la main dans `public/hero/` (35 à 40 % plus légers que le WebP de Next, SSIM ≥ 0,98), WebP en secours. Si `banner-mobile.webp` ou `banner-wide.webp` change, réencoder chaque largeur : `ffmpeg -i public/banner-mobile.webp -vf scale=750:-2:flags=lanczos ref.png` puis `ffmpeg -i ref.png -c:v libaom-av1 -still-picture 1 -crf 28 -cpu-used 3 -pix_fmt yuv420p public/hero/banner-mobile-750.avif` (largeurs listées dans `components/home/Hero.tsx`). Cache navigateur : 7 jours, comme les autres images optimisées.
+- **Clip à la une** (`components/home/Premiere.tsx`, sous la bannière d’accueil) : « Corane Birthday » (03/10/2026), aussi premier extrait « À l’affiche » et rangé dans les réalisations (catégorie Clip). Affiche locale `public/clip-corane-birthday.jpg` (vignette YouTube 1280 × 720), lecteur YouTube chargé au clic, bouton « Je veux mon clip » qui pré-remplit le formulaire de contact. Pour changer de clip : `CLIP` dans `lib/content.ts` + l’affiche. La vidéo doit rester publique ou non répertoriée (une vidéo privée ne se lit plus).
 - **Colonne flottante** (`components/ks/Dock.tsx`) : retour en haut (anneau de progression), WhatsApp (+33 7 62 23 64 91), guide Kame.
 - **Coaching, phase 1** (28/09/2026) : demande de créneau par formulaire, confirmation manuelle par e-mail.
 - **Coaching, phase 2** (29/09/2026) : paiement à la réservation sur Cal.com (compte `3dkamstudio`), relié à Stripe, Google Agenda (infos.kamstudio@gmail.com) et Google Meet ; calendrier intégré dans `#reserver` par le script officiel de Cal.com, chargé à l’approche de la section (`components/coaching/CalBooking.tsx`).

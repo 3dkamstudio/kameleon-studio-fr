@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { HERO_CLIPS, ytEmbed, ytThumb } from "@/lib/content";
 import { useMotion } from "@/components/ks/motion";
 
-/** Carte « À l’affiche » : 4 extraits qui s'enchaînent, lecture YouTube au clic uniquement. */
+/** Carte « À l’affiche » : les extraits s'enchaînent (le nouveau clip en premier), lecture YouTube au clic uniquement. */
 export default function HeroPlayer() {
   const { on, paused, reduced, togglePause } = useMotion();
   const [idx, setIdx] = useState(0);
@@ -41,7 +41,9 @@ export default function HeroPlayer() {
         <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#f43f5e", boxShadow: "0 0 10px #f43f5e" }} />À L’AFFICHE
         </span>
-        <span>{idx + 1} / 4</span>
+        <span>
+          {idx + 1} / {HERO_CLIPS.length}
+        </span>
       </div>
       <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: 14, overflow: "hidden", background: "#000" }}>
         {HERO_CLIPS.map((c, i) => (
@@ -89,7 +91,7 @@ export default function HeroPlayer() {
           </button>
         )}
       </div>
-      <div role="group" aria-label="Choisir un extrait" style={{ display: "grid", gridTemplateColumns: "repeat(4,minmax(0,1fr))", gap: 6 }}>
+      <div role="group" aria-label="Choisir un extrait" style={{ display: "grid", gridTemplateColumns: `repeat(${HERO_CLIPS.length},minmax(0,1fr))`, gap: 6 }}>
         {HERO_CLIPS.map((c, i) => {
           const sel = i === idx;
           return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CATS, VIDEOS, ytEmbed, ytThumb, ytWatch, type VideoCat } from "@/lib/content";
+import { CATS, CLIP, VIDEOS, ytEmbed, ytThumb, ytWatch, type VideoCat } from "@/lib/content";
 import { YOUTUBE_CHANNEL } from "@/lib/site";
 import { KameNote } from "@/components/ks/Kame";
 import PrefillLink from "@/components/ks/PrefillLink";
@@ -9,10 +9,11 @@ import { Aurora, Eyebrow, FD, G, GlowBox, Sparkles } from "@/components/ks/ui";
 
 type CatKey = "all" | VideoCat;
 
-/** « Voir, c’est croire » : les 14 productions, filtres par univers et lecteur. */
+/** « Voir, c’est croire » : toutes les productions, filtres par univers et lecteur. */
 export default function Showreel() {
   const [cat, setCat] = useState<CatKey>("all");
-  const [showId, setShowId] = useState(VIDEOS[0].id);
+  // Le clip à la une a déjà sa section plus haut : le lecteur s'ouvre sur la production suivante.
+  const [showId, setShowId] = useState((VIDEOS.find((v) => v.id !== CLIP.id) ?? VIDEOS[0]).id);
   const [playing, setPlaying] = useState(false);
 
   const current = VIDEOS.find((v) => v.id === showId) ?? VIDEOS[0];

@@ -72,6 +72,7 @@ button {
 @keyframes ksSpin { to { transform: rotate(360deg); } }
 @keyframes ksMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes ksOrbit { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes ksKen { from { transform: scale(1.02); } to { transform: scale(1.09) translate(-1%, -1.5%); } }
 
 /* Bouton « Mettre en pause » du hero : fige toutes les animations continues. */
 [data-motion="off"] *,
@@ -455,6 +456,48 @@ textarea.input {
   .track .track-wash {
     opacity: 1;
   }
+}
+
+/* ─── Clip à la une de l'accueil (Premiere) : affiche en lent zoom, bouton de lecture pulsé ─── */
+.clip-poster {
+  animation: ksKen 18s ease-in-out infinite alternate;
+  transition: filter 400ms ease;
+}
+.clip-start:hover .clip-poster {
+  filter: saturate(1.15) brightness(1.06);
+}
+.clip-start:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -6px;
+}
+.clip-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(64px, 8vw, 96px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background-image: linear-gradient(135deg, #7c3aed, #c026d3, #e11d48);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2), 0 22px 44px rgba(192, 38, 211, 0.55);
+  transition: transform 250ms ease;
+}
+.clip-start:hover .clip-play {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.clip-play::before,
+.clip-play::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  animation: ksPulse 2.8s ease-out infinite;
+}
+.clip-play::after {
+  animation-delay: 1.4s;
 }
 
 /* Barre de défilement discrète pour la liste des productions */
