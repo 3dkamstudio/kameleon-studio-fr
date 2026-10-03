@@ -17,13 +17,13 @@ export const CLIP = {
   duration: "3 min 35",
   poster: "/clip-corane-birthday.jpg",
   lead: "Notre nouveau clip : 3 min 35 de fête en animation 3D, réalisé par Kaméléon Studio pour l’anniversaire de Corane.",
-  desc: "Soleil, danse, fous rires et ambiance explosive : un clip en animation 3D semi-réaliste, porté par une mise en scène cinématographique et toute l’énergie de l’entourage de Corane.",
-  tags: ["Animation 3D semi-réaliste", "Mise en scène cinématographique", "Ambiance dancehall & shatta", "De la Martinique à Toulouse"],
+  desc: "Soleil, danse, fous rires et ambiance explosive : un clip en animation 3D, porté par une mise en scène cinématographique et toute l’énergie de l’entourage de Corane.",
+  tags: ["Animations 3D", "Mise en scène cinématographique", "Ambiance Trap & Afrobeat", "De la Martinique à Toulouse"],
   prefill: "Clip personnalisé dans l’esprit de « Corane Birthday » (anniversaire, mariage, événement…) : ",
 };
 
 export const VIDEOS: { id: string; title: string; desc: string; cat: VideoCat }[] = [
-  { id: CLIP.id, title: "Corane Birthday : le clip d’anniversaire en animation 3D", desc: "Clip officiel : animation 3D semi-réaliste, mise en scène cinématographique et ambiance dancehall, de la Martinique à Toulouse.", cat: "clip" },
+  { id: CLIP.id, title: "Corane Birthday : le clip d’anniversaire en animation 3D", desc: "Clip officiel : animation 3D, mise en scène cinématographique et ambiance trap et afrobeat, de la Martinique à Toulouse.", cat: "clip" },
   { id: "ZHCLE0t9lII", title: "Indépendance Artificielle (ép. 1) : le podcast 100 % créé avec l’IA", desc: "Premier épisode du podcast Kaméléon Studio : discussions, coulisses et créativité propulsée par l’IA.", cat: "podcast" },
   { id: "SwQSffhe_jk", title: "Indépendance Artificielle (ép. 2) : l’IA nous rend-elle idiots ?", desc: "Nouvel épisode du podcast : sujets créatifs, tendances et production digitale par intelligence artificielle.", cat: "podcast" },
   { id: "-t3_OPVkmhg", title: "Les Pépites de Lylou : une collection chrétienne pour éveiller la foi des enfants", desc: "Histoire biblique mise en animation : narration épique, visuels immersifs, accessible à tous les âges.", cat: "biblique" },
