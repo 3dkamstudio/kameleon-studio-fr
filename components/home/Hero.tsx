@@ -38,7 +38,7 @@ export default function Hero() {
             <source media="(max-width: 760px)" srcSet={mobile} />
             <source media="(min-width: 761px)" srcSet={wide} />
             {/* eslint-disable-next-line jsx-a11y/alt-text */}
-            <img {...rest} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "64% 50%", display: "block", filter: "saturate(1.35) brightness(1.18) contrast(1.05)" }} />
+            <img {...rest} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "64% 50%", display: "block", filter: "saturate(1.35) brightness(1.08) contrast(1.05)" }} />
           </picture>
         </div>
         <div
@@ -104,10 +104,6 @@ export default function Hero() {
                 On crée ce que vous imaginez.
               </span>
             </h1>
-            <p className="tw-pretty" style={{ margin: 0, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.6, color: "#E4E6EE" }}>
-              Vidéos 3D, contenus pédagogiques et films de marque : Kaméléon Studio transforme vos idées en expériences visuelles grâce à l’IA.{" "}
-              <strong style={{ color: "#FFFFFF" }}>Demandez à Kame, il ne ment jamais !</strong>
-            </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, textShadow: "none" }}>
               <Link href="/#studio" className="btn btn-grad hv-up hv-bright" style={{ minHeight: 54, padding: "0 28px", borderRadius: 16, fontWeight: 700, fontSize: 16 }}>
                 Parler de mon projet →
