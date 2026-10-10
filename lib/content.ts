@@ -11,7 +11,7 @@ export type VideoCat = "clip" | "animation" | "biblique" | "recette" | "podcast"
 // dans /public (vignette YouTube 1280 × 720, i.ytimg.com/vi/<id>/maxresdefault.jpg). La vidéo doit rester
 // publique ou non répertoriée sur YouTube : une vidéo privée ne se lit plus sur le site.
 export const CLIP = {
-  id: "xGcvC_PWvRw",
+  id: "hwuGLO1fne0",
   title: "Corane Birthday",
   kind: "Clip officiel",
   duration: "3 min 35",
